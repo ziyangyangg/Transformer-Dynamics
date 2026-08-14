@@ -4,3 +4,4 @@ iteration	change	verify	decision	note
 2	analytic QK/content tangent decomposition	3/3 tangent tests pass	keep	Manual formula matches autograd JVP and centered finite difference
 3	causal Walsh and dictionary-capacity metrics	5/5 metric tests pass	keep	Parseval separates target main effect, distractors, and nonlinear interactions
 4	instrumented causal Transformer and patch replay	21/21 full tests pass	keep	Input and internal patches exactly recompute descendants; QK/OV orientations verified
+5	on-support patching and exhaustive causal spectrum	4/4 intervention tests pass	keep	Walsh kernel is exact; coherent patch caveat moved into analysis protocol
