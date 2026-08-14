@@ -30,6 +30,7 @@ class TrainingConfig:
     checkpoint_every: int
     optimizer: str
     learning_rate: float
+    momentum: float
     weight_decay: float
 
     def __post_init__(self) -> None:
@@ -43,6 +44,10 @@ class TrainingConfig:
             raise ValueError("learning_rate must be positive and weight_decay nonnegative")
         if self.optimizer.lower() not in {"adamw", "sgd"}:
             raise ValueError("optimizer must be 'adamw' or 'sgd'")
+        if not 0.0 <= self.momentum < 1.0:
+            raise ValueError("momentum must lie in [0,1)")
+        if self.optimizer.lower() == "adamw" and self.momentum != 0.0:
+            raise ValueError("momentum is an SGD-only hyperparameter")
 
 
 @dataclass(frozen=True)
@@ -81,10 +86,10 @@ def _make_optimizer(
             lr=config.learning_rate,
             weight_decay=config.weight_decay,
         )
-    # Momentum is deliberately absent: it would be an unrecorded hyperparameter.
     return torch.optim.SGD(
         model.parameters(),
         lr=config.learning_rate,
+        momentum=config.momentum,
         weight_decay=config.weight_decay,
     )
 

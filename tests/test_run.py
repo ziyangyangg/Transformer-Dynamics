@@ -41,6 +41,7 @@ class ExperimentRunnerContractTests(unittest.TestCase):
             "num_heads": 1,
             "optimizer": "adamw",
             "learning_rate": 2.0e-2,
+            "momentum": 0.0,
             "steps": 2,
             "batch_size": 32,
         }
@@ -81,6 +82,7 @@ class ExperimentRunnerContractTests(unittest.TestCase):
                 "ffn_width": None,
                 "optimizer": "adamw",
                 "learning_rate": 2.0e-2,
+                "momentum": 0.0,
                 "steps": 2,
                 "batch_size": 32,
             },
@@ -195,6 +197,7 @@ class ExperimentRunnerContractTests(unittest.TestCase):
                 "ffn_width",
                 "optimizer",
                 "learning_rate",
+                "momentum",
                 "weight_decay",
                 "steps",
                 "batch_size",

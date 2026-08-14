@@ -51,6 +51,7 @@ class OnlineTrainingContractTests(unittest.TestCase):
             checkpoint_every=max(1, steps // 2) if steps else 1,
             optimizer="adamw",
             learning_rate=2.0e-2,
+            momentum=0.0,
             weight_decay=0.0,
         )
 
@@ -69,6 +70,7 @@ class OnlineTrainingContractTests(unittest.TestCase):
                 "checkpoint_every": 6,
                 "optimizer": "adamw",
                 "learning_rate": 2.0e-2,
+                "momentum": 0.0,
                 "weight_decay": 0.0,
             },
         )

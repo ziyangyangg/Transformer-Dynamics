@@ -50,6 +50,7 @@ class GridCell:
     ffn_width: int | None
     optimizer: str
     learning_rate: float
+    momentum: float
     steps: int
     batch_size: int
 
@@ -68,6 +69,10 @@ class GridCell:
             raise ValueError("steps, batch_size, and learning_rate are invalid")
         if self.optimizer.lower() not in {"adamw", "sgd"}:
             raise ValueError("optimizer must be 'adamw' or 'sgd'")
+        if not 0.0 <= self.momentum < 1.0:
+            raise ValueError("momentum must lie in [0,1)")
+        if self.optimizer.lower() == "adamw" and self.momentum != 0.0:
+            raise ValueError("momentum is an SGD-only hyperparameter")
 
 
 @dataclass(frozen=True)
@@ -271,6 +276,7 @@ def _train_planned_seed(
         checkpoint_every=checkpoint_every,
         optimizer=cell.optimizer,
         learning_rate=cell.learning_rate,
+        momentum=cell.momentum,
         weight_decay=config.weight_decay,
     )
 
