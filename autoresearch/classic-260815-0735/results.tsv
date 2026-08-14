@@ -2,3 +2,4 @@ iteration	change	verify	decision	note
 0	baseline specification	pending	keep	Estimands fixed before implementation
 1	on-support data law and paired swap	7/7 data tests pass	keep	Swap endpoints preserve support, query, value vector, target, and label
 2	analytic QK/content tangent decomposition	3/3 tangent tests pass	keep	Manual formula matches autograd JVP and centered finite difference
+3	causal Walsh and dictionary-capacity metrics	5/5 metric tests pass	keep	Parseval separates target main effect, distractors, and nonlinear interactions
