@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import torch
 
@@ -154,6 +154,7 @@ def train_one_seed(
     training_config: TrainingConfig,
     seed: int,
     device: torch.device | str,
+    checkpoint_callback: Callable[[int, RetrievalTransformer], None] | None = None,
 ) -> tuple[RetrievalTransformer, TrainingHistory]:
     """Train one deterministic seed using fresh episodes at every update.
 
@@ -186,6 +187,10 @@ def train_one_seed(
     observations: list[TrainingCheckpoint] = [
         _observe(model, evaluation_batch, step=0)
     ]
+    if checkpoint_callback is not None:
+        # The observer sees the exact state used for the metric above.  It must not
+        # mutate the model; the runner uses it only to copy content-addressed states.
+        checkpoint_callback(0, model)
 
     model.train()
     for step in range(1, training_config.steps + 1):
@@ -204,6 +209,8 @@ def train_one_seed(
 
         if step in checkpoint_steps:
             observations.append(_observe(model, evaluation_batch, step=step))
+            if checkpoint_callback is not None:
+                checkpoint_callback(step, model)
 
     history = TrainingHistory(
         seed=seed,

@@ -237,6 +237,10 @@ class ExperimentRunnerContractTests(unittest.TestCase):
                 self.assertTrue((seed_directory / "checkpoint.pt").is_file())
                 self.assertTrue((seed_directory / "history.json").is_file())
                 self.assertTrue((seed_directory / "_SUCCESS").is_file())
+                self.assertEqual(
+                    [path.name for path in sorted((seed_directory / "snapshots").glob("*.pt"))],
+                    ["step-000000.pt", "step-000001.pt", "step-000002.pt"],
+                )
             self.assertEqual(failures_path.read_text(encoding="utf-8"), "")
             self.assertFalse(
                 any(".tmp" in path.name for path in run_directory.rglob("*")),

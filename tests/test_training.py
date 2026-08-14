@@ -209,6 +209,27 @@ class OnlineTrainingContractTests(unittest.TestCase):
                 atol=0.0,
             )
 
+    def test_checkpoint_callback_observes_exact_scheduled_parameter_states(self) -> None:
+        """Advanced dynamics can inspect a model without duplicating the train loop."""
+
+        observed_steps: list[int] = []
+        observed_readouts: list[torch.Tensor] = []
+
+        def remember(step: int, model: RetrievalTransformer) -> None:
+            observed_steps.append(step)
+            observed_readouts.append(model.readout.weight.detach().cpu().clone())
+
+        train_one_seed(
+            model_config=self._model_config(),
+            training_config=self._training_config(steps=4),
+            seed=37,
+            device="cpu",
+            checkpoint_callback=remember,
+        )
+
+        self.assertEqual(observed_steps, [0, 2, 4])
+        self.assertFalse(torch.equal(observed_readouts[0], observed_readouts[-1]))
+
 
 if __name__ == "__main__":
     unittest.main()

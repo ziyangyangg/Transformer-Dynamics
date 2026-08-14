@@ -243,6 +243,11 @@ def _train_planned_seed(
     """Build one seed in a sibling directory and atomically commit the directory."""
 
     cell = config.cells[run.cell_index]
+    temporary = seed_directory.with_name(f".{seed_directory.name}.tmp")
+    if temporary.exists():
+        shutil.rmtree(temporary)
+    snapshot_directory = temporary / "snapshots"
+    snapshot_directory.mkdir(parents=True)
     positive_steps = [
         later - earlier
         for earlier, later in zip(
@@ -268,18 +273,37 @@ def _train_planned_seed(
         learning_rate=cell.learning_rate,
         weight_decay=config.weight_decay,
     )
+
+    scheduled_steps = set(run.checkpoint_steps)
+
+    def save_snapshot(step: int, model: Any) -> None:
+        """Copy a scheduled state to CPU while the exact training state is live."""
+
+        if step not in scheduled_steps:
+            return
+        portable_state = {
+            name: tensor.detach().cpu().clone()
+            for name, tensor in model.state_dict().items()
+        }
+        torch.save(
+            {
+                "format_version": 1,
+                "step": step,
+                "model_config": asdict(model_config),
+                "state_dict": portable_state,
+            },
+            snapshot_directory / f"step-{step:06d}.pt",
+        )
+
     model, complete_history = train_one_seed(
         model_config=model_config,
         training_config=training_config,
         seed=run.seed,
         device=device,
+        checkpoint_callback=save_snapshot,
     )
     history = _scheduled_history(complete_history, run.checkpoint_steps)
 
-    temporary = seed_directory.with_name(f".{seed_directory.name}.tmp")
-    if temporary.exists():
-        shutil.rmtree(temporary)
-    temporary.mkdir(parents=True)
     save_training_checkpoint(
         temporary / "checkpoint.pt", model=model, history=history
     )
@@ -338,6 +362,13 @@ def _rows_from_committed_seeds(
                 "ov_frobenius_norms": point["ov_frobenius_norms"],
                 "checkpoint_path": str(
                     (seed_directory / "checkpoint.pt").relative_to(output_directory)
+                ),
+                "snapshot_path": str(
+                    (
+                        seed_directory
+                        / "snapshots"
+                        / f"step-{int(point['step']):06d}.pt"
+                    ).relative_to(output_directory)
                 ),
             }
             rows.append(row)
