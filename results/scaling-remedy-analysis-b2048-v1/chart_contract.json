@@ -1,0 +1,23 @@
+[
+  {
+    "encoding": "seed lines + raw points + mean diamonds + threshold",
+    "figure": "paired_swap_mse",
+    "n_per_panel": 10,
+    "question": "How does each seed's on-manifold swap MSE change?",
+    "sample_unit": "paired training seed"
+  },
+  {
+    "encoding": "endpoint marker shapes + 20k seed-bootstrap intervals",
+    "figure": "paired_error_effects",
+    "n_per_panel": 10,
+    "question": "Which registered error endpoints change under each schedule?",
+    "sample_unit": "paired training seed"
+  },
+  {
+    "encoding": "open circles for baseline + filled squares for follow-up",
+    "figure": "full_gate_counts",
+    "n_per_row": 10,
+    "question": "How many seeds pass all five exact checks before and after?",
+    "sample_unit": "paired training seed"
+  }
+]
