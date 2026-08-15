@@ -64,8 +64,8 @@ R(theta) = 1/2 E[(f_theta(X)-Y)^2],    d theta / ds = -grad R(theta).
 ```
 
 Experiments approximate the expectation with fresh online batches.  AdamW uses zero
-weight decay.  A tuned momentum-SGD control is treated as a discrete approximation to
-gradient flow; optimizer agreement is a robustness check, not an identity of dynamics.
+weight decay.  Momentum is an explicit saved hyperparameter for the tuned SGD control;
+optimizer agreement is a robustness check, not an identity with gradient flow.
 
 ## Causal estimands
 
@@ -268,4 +268,3 @@ global RNG and no silent metric fallback.
    unidentified.
 5. The final report states the exact model, formulas, statistical estimands, observed
    numbers, literature boundary, and theorem/counterexample targets.
-
