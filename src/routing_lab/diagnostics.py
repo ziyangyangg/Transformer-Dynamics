@@ -190,36 +190,49 @@ def attention_finite_chord_decomposition(
     the on-support swap endpoints are reversed and has no interaction remainder.
     """
 
-    if z_start.ndim != 2 or z_end.shape != z_start.shape:
-        raise ValueError("chord endpoints must share shape [tokens,width]")
-    tokens, width = z_start.shape
+    if z_start.ndim not in {2, 3} or z_end.shape != z_start.shape:
+        raise ValueError(
+            "chord endpoints must share shape [tokens,width] or [batch,tokens,width]"
+        )
+    squeeze_batch = z_start.ndim == 2
+    if squeeze_batch:
+        z_start = z_start[None, :, :]
+        z_end = z_end[None, :, :]
+    batch_size, tokens, width = z_start.shape
     if B.shape != (width, width) or C.shape != (width, width):
         raise ValueError("B and C must have shape [width,width]")
     if not 0 <= query_index < tokens or d_head < 1:
         raise ValueError("query_index or d_head is invalid")
-    visible_start = z_start[: query_index + 1]
-    visible_end = z_end[: query_index + 1]
+    visible_start = z_start[:, : query_index + 1]
+    visible_end = z_end[:, : query_index + 1]
     scale = beta / sqrt(d_head)
 
     def attention(z: torch.Tensor, visible: torch.Tensor) -> torch.Tensor:
-        scores = scale * ((z[query_index] @ B) @ visible.T)
-        return torch.softmax(scores, dim=0)
+        scores = scale * torch.einsum(
+            "bd,df,bsf->bs", z[:, query_index], B, visible
+        )
+        return torch.softmax(scores, dim=-1)
 
     start_attention = attention(z_start, visible_start)
     end_attention = attention(z_end, visible_end)
     content_mixture = torch.sum(
-        0.5 * (start_attention + end_attention)[:, None]
+        0.5 * (start_attention + end_attention)[:, :, None]
         * (visible_end - visible_start),
-        dim=0,
+        dim=1,
     )
     route_mixture = torch.sum(
-        (end_attention - start_attention)[:, None]
+        (end_attention - start_attention)[:, :, None]
         * 0.5
         * (visible_end + visible_start),
-        dim=0,
+        dim=1,
     )
-    content = C @ content_mixture
-    route = C @ route_mixture
+    content = torch.einsum("od,bd->bo", C, content_mixture)
+    route = torch.einsum("od,bd->bo", C, route_mixture)
+    if squeeze_batch:
+        content = content[0]
+        route = route[0]
+        start_attention = start_attention[0]
+        end_attention = end_attention[0]
     return AttentionFiniteChord(
         content=content,
         route=route,

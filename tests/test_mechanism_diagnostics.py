@@ -324,6 +324,36 @@ class ExactAttentionChordDecompositionTests(unittest.TestCase):
             finite.total / epsilon, tangent.total, atol=2.0e-7, rtol=2.0e-7
         )
 
+    def test_batched_finite_chords_equal_independent_examples(self) -> None:
+        """Mechanism studies vectorize episodes without changing the estimand."""
+
+        api = _diagnostics_api()
+        starts = torch.stack((self.z_start, self.z_start + 0.1))
+        ends = torch.stack((self.z_end, self.z_end - 0.2))
+        batched = api.attention_finite_chord_decomposition(
+            starts,
+            ends,
+            self.B,
+            self.C,
+            beta=self.beta,
+            d_head=self.d_head,
+            query_index=self.query_index,
+        )
+        for example_index in range(2):
+            independent = api.attention_finite_chord_decomposition(
+                starts[example_index],
+                ends[example_index],
+                self.B,
+                self.C,
+                beta=self.beta,
+                d_head=self.d_head,
+                query_index=self.query_index,
+            )
+            for field in ("content", "route", "total", "start_attention", "end_attention"):
+                torch.testing.assert_close(
+                    getattr(batched, field)[example_index], getattr(independent, field)
+                )
+
 
 class OVDirectionalSelectivityTests(unittest.TestCase):
     """OV compensation is a relative gain claim in two preregistered directions."""

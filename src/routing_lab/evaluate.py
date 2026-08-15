@@ -320,33 +320,27 @@ def evaluate_seed_mechanisms(
                 )
                 downstream_adjoint = adjoint_by_site[post_attention_site][:, -1, :]
                 for head_index in range(model.config.num_heads):
-                    content_values: list[torch.Tensor] = []
-                    route_values: list[torch.Tensor] = []
-                    for example_index in range(evaluation_batch.batch_size):
-                        chord = attention_finite_chord_decomposition(
-                            base_z[example_index],
-                            swap_z[example_index],
-                            model.qk_composite(
-                                layer_index=layer_index,
-                                head_index=head_index,
-                            ),
-                            model.ov_composite(
-                                layer_index=layer_index,
-                                head_index=head_index,
-                            ),
-                            beta=model.config.beta,
-                            d_head=model.config.d_head,
-                            query_index=model.config.sequence_length - 1,
-                        )
-                        adjoint = downstream_adjoint[example_index]
-                        content_values.append(
-                            residual_scale * torch.dot(adjoint, chord.content)
-                        )
-                        route_values.append(
-                            residual_scale * torch.dot(adjoint, chord.route)
-                        )
-                    content_signed = torch.stack(content_values)
-                    route_signed = torch.stack(route_values)
+                    chord = attention_finite_chord_decomposition(
+                        base_z,
+                        swap_z,
+                        model.qk_composite(
+                            layer_index=layer_index,
+                            head_index=head_index,
+                        ),
+                        model.ov_composite(
+                            layer_index=layer_index,
+                            head_index=head_index,
+                        ),
+                        beta=model.config.beta,
+                        d_head=model.config.d_head,
+                        query_index=model.config.sequence_length - 1,
+                    )
+                    content_signed = residual_scale * (
+                        downstream_adjoint * chord.content
+                    ).sum(dim=-1)
+                    route_signed = residual_scale * (
+                        downstream_adjoint * chord.route
+                    ).sum(dim=-1)
                     total_signed = content_signed + route_signed
                     denominator = content_signed.abs() + route_signed.abs()
                     cancellation = torch.where(
