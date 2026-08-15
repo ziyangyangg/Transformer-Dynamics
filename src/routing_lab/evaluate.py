@@ -8,7 +8,7 @@ without treating those sites as independent samples.
 
 The evaluator combines three kinds of evidence which should not be conflated:
 
-* attention and embedding measurements are descriptive geometry;
+* attention, embedding, and residual-stream measurements are descriptive geometry;
 * the distractor swap and exhaustive Walsh spectrum are finite functional effects;
 * OV gains and FFN adjoint projections are module-local mechanism diagnostics.
 
@@ -33,7 +33,11 @@ from .diagnostics import (
     walsh_routing_energies,
 )
 from .interventions import exhaustive_value_spectrum, target_key_path_effect
-from .metrics import feature_geometry, value_flip_effect
+from .metrics import (
+    feature_geometry,
+    token_representation_geometry,
+    value_flip_effect,
+)
 from .model import RetrievalTransformer
 
 # Keeping this type local makes it hard to accidentally return a Tensor, list, or
@@ -131,6 +135,29 @@ def evaluate_seed_mechanisms(
             geometry = feature_geometry(model.concept_embedding.weight)
             key_path = target_key_path_effect(model, evaluation_batch)
 
+            # The retrieval sequence has exactly m memory cards followed by one query;
+            # there is no padding.  We therefore include every token at the input and
+            # after both residual additions in every layer.  Site-local summaries
+            # distinguish task-selective query--target alignment from global token
+            # clustering/collapse.
+            representation_sites = {
+                "input_embeddings": "input_embeddings",
+            }
+            for layer_index in range(model.config.num_layers):
+                representation_sites[
+                    f"l{layer_index}.post_attention_residual"
+                ] = f"layers.{layer_index}.post_attention_residual"
+                representation_sites[
+                    f"l{layer_index}.post_ffn_residual"
+                ] = f"layers.{layer_index}.post_ffn_residual"
+            representation_geometry = {
+                output_site: token_representation_geometry(
+                    base_trace[trace_site].detach(),
+                    target_index=evaluation_batch.target_index,
+                )
+                for output_site, trace_site in representation_sites.items()
+            }
+
         base_prediction_detached = base_prediction.detach()
         base_accuracy = (
             (base_prediction_detached >= 0) == (evaluation_batch.label >= 0)
@@ -140,7 +167,7 @@ def evaluate_seed_mechanisms(
         ).to(torch.float32)
 
         metrics: dict[str, JsonAtom] = {
-            "schema_version": "seed-mechanisms-v1",
+            "schema_version": "seed-mechanisms-v2",
             "evaluation_batch_size": evaluation_batch.batch_size,
             "num_layers": model.config.num_layers,
             "num_heads": model.config.num_heads,
@@ -203,6 +230,31 @@ def evaluate_seed_mechanisms(
             ),
             "embedding.welch_bound": float(geometry.welch_bound),
         }
+
+        # Each field is first formed per episode, then averaged exactly once at this
+        # seed-level boundary.  The target-minus-distractor contrast is the relevant
+        # task-selective order parameter; a high global cosine alone is only generic
+        # clustering and need not imply correct causal routing.
+        for site, site_geometry in representation_geometry.items():
+            prefix = f"representation.{site}"
+            metrics[f"{prefix}.query_target_cosine_mean"] = _mean(
+                site_geometry.query_target_cosine
+            )
+            metrics[f"{prefix}.query_distractor_cosine_mean"] = _mean(
+                site_geometry.query_distractor_mean_cosine
+            )
+            metrics[
+                f"{prefix}.query_target_minus_distractor_cosine_mean"
+            ] = _mean(
+                site_geometry.query_target_cosine
+                - site_geometry.query_distractor_mean_cosine
+            )
+            metrics[
+                f"{prefix}.global_offdiagonal_token_cosine_mean"
+            ] = _mean(site_geometry.global_offdiagonal_token_cosine)
+            metrics[
+                f"{prefix}.token_covariance_participation_rank_mean"
+            ] = _mean(site_geometry.token_covariance_participation_rank)
 
         # Shape is [episode, layer, head].  Only the episode dimension is averaged;
         # preserving each layer/head is essential for localization and multiplicity

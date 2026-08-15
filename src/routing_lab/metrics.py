@@ -109,9 +109,13 @@ def token_representation_geometry(
     )
 
     centered = states - states.mean(dim=1, keepdim=True)
-    covariance_eigenvalue_power = torch.linalg.svdvals(centered).square()
-    total_power = covariance_eigenvalue_power.sum(dim=1)
-    squared_power = covariance_eigenvalue_power.square().sum(dim=1)
+    # If lambda_j are the eigenvalues of Sigma, the common 1/T factor cancels:
+    # sum_j lambda_j is ||X_centered||_F^2/T and sum_j lambda_j^2 is
+    # ||X_centered X_centered^T||_F^2/T^2.  This Gram identity avoids an SVD and
+    # remains exact even when d is much larger than the short sequence length.
+    total_power = centered.square().sum(dim=(1, 2))
+    centered_gram = torch.bmm(centered, centered.transpose(1, 2))
+    squared_power = centered_gram.square().sum(dim=(1, 2))
     covariance_rank = torch.where(
         squared_power > 0,
         total_power.square() / squared_power,

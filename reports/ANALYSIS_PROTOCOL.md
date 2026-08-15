@@ -186,6 +186,53 @@ D_{c,r}=\frac{\|E_c\|_2^2}{\sum_{c'}(u_c^\top E_{c'})^2}.
 第 5 节的 on-support functional cross-talk 显著，并且第 6 节定位出下游抑制时，才进入
 “learned superposition with downstream compensation”的候选证据层级。
 
+### 4.1 与 fixed-parameter clustering 对照的逐层表示量
+
+在注册 site \(s\) 记一个 episode 的 residual states 为
+\(X^{s}_{b}=(x^{s}_{b1},\ldots,x^{s}_{bT})\in\mathbb R^{T\times d}\)，其中
+\(T=m+1\)。本任务**没有 padding**：\(1,\ldots,m\) 全部是真实 memory card，\(T\) 固定是
+query。因此任何全 token 统计都使用全部 \(T\) 行，不进行 mask、长度加权或跨 episode
+pooling。令
+
+\[
+u^s_{bi}=\frac{x^s_{bi}}{\|x^s_{bi}\|_2},\qquad
+G^s_{b,ij}=(u^s_{bi})^\top u^s_{bj},
+\]
+
+并约定精确零向量的 \(u=0\)。在每个 seed 的固定 evaluation batch 内记录
+
+\[
+\rho^s_{target}=\mathbb E_b G^s_{b,TJ_b},\qquad
+\rho^s_{distractor}=\mathbb E_b\frac1{m-1}\sum_{i\ne J_b}G^s_{b,Ti},
+\]
+
+\[
+\Delta\rho^s=\rho^s_{target}-\rho^s_{distractor},\qquad
+\rho^s_{global}=\mathbb E_b\frac1{T(T-1)}\sum_{i\ne j}G^s_{b,ij}. \tag{R1}
+\]
+
+token covariance 必须先在每个 episode 内中心化：
+
+\[
+\widetilde X^s_b=X^s_b-\mathbf1_T\bar x_b^{s\top},\qquad
+\Sigma^s_b=T^{-1}\widetilde X_b^{s\top}\widetilde X^s_b,
+\]
+
+\[
+r^s_{token}=\mathbb E_b
+\frac{\operatorname{tr}(\Sigma^s_b)^2}
+{\operatorname{tr}((\Sigma^s_b)^2)}, \tag{R2}
+\]
+
+其中 \(\Sigma=0\) 时该 episode 的 rank 约定为 0。不能先把不同 episode 的 token pool
+起来再求 covariance；那会把不同 concept identities 的变化误当成单个序列内部的维度。
+
+这些量在 `input_embeddings` 以及每层的 `post_attention_residual`、
+`post_ffn_residual` 都记录。较高的 \(\rho_{global}\) 配合较低的 \(r_{token}\) 是全局
+clustering/collapse 的描述证据；较高的 \(\Delta\rho\) 才是 target-selective geometry。
+二者都不是因果 routing 结论，仍须由第 3 节的 value/key intervention 和第 5--6 节的
+on-support swap/localization 验证。
+
 ## 5. On-support swap 与内部 patch 量
 
 从 base episode \(X\) 选 \(K\ne J\)，再选不在 \(c_{1:m}\) 中的 \(c_{new}\)，构造

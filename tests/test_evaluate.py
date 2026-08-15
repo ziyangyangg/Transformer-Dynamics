@@ -32,7 +32,7 @@ from routing_lab.diagnostics import (
     walsh_routing_energies,
 )
 from routing_lab.interventions import exhaustive_value_spectrum
-from routing_lab.metrics import feature_geometry
+from routing_lab.metrics import feature_geometry, token_representation_geometry
 from routing_lab.model import ModelConfig, RetrievalTransformer
 
 
@@ -101,7 +101,7 @@ class SeedMechanismEvaluationContractTests(unittest.TestCase):
 
         self.assertEqual(first, second)
         self.assertTrue(model.training, "evaluation must restore the caller's mode")
-        self.assertEqual(first["schema_version"], "seed-mechanisms-v1")
+        self.assertEqual(first["schema_version"], "seed-mechanisms-v2")
         self.assertEqual(first["evaluation_batch_size"], batch.batch_size)
         self.assertEqual(first["num_layers"], model.config.num_layers)
         self.assertEqual(first["num_heads"], model.config.num_heads)
@@ -165,6 +165,67 @@ class SeedMechanismEvaluationContractTests(unittest.TestCase):
                     + metrics[f"{prefix}.self_mass_mean"]
                 )
                 self.assertAlmostEqual(partition, 1.0, places=7)
+
+    def test_representation_fields_match_every_registered_residual_site(self) -> None:
+        """Depth clustering and task-selective geometry remain distinct estimands.
+
+        At input and after each attention/FFN residual, the evaluator reports: query
+        cosine to the target memory, its mean cosine to distractors, their difference,
+        global off-diagonal token cosine, and the centered within-episode covariance
+        participation rank.  The sequence has no padding, so all ``m+1`` trace rows
+        enter the global and covariance summaries.
+        """
+
+        model = self._model().eval()
+        batch = self._batch()
+        metrics = self._evaluate(model, batch, swap_seed=820)
+        with torch.no_grad():
+            _, trace = model(batch, return_trace=True)
+
+        registered_sites = [("input_embeddings", "input_embeddings")]
+        for layer_index in range(model.config.num_layers):
+            registered_sites.extend(
+                (
+                    (
+                        f"l{layer_index}.post_attention_residual",
+                        f"layers.{layer_index}.post_attention_residual",
+                    ),
+                    (
+                        f"l{layer_index}.post_ffn_residual",
+                        f"layers.{layer_index}.post_ffn_residual",
+                    ),
+                )
+            )
+
+        for output_site, trace_site in registered_sites:
+            geometry = token_representation_geometry(
+                trace[trace_site],
+                target_index=batch.target_index,
+            )
+            expected = {
+                "query_target_cosine_mean": geometry.query_target_cosine.mean(),
+                "query_distractor_cosine_mean": (
+                    geometry.query_distractor_mean_cosine.mean()
+                ),
+                "query_target_minus_distractor_cosine_mean": (
+                    geometry.query_target_cosine
+                    - geometry.query_distractor_mean_cosine
+                ).mean(),
+                "global_offdiagonal_token_cosine_mean": (
+                    geometry.global_offdiagonal_token_cosine.mean()
+                ),
+                "token_covariance_participation_rank_mean": (
+                    geometry.token_covariance_participation_rank.mean()
+                ),
+            }
+            for suffix, expected_value in expected.items():
+                field = f"representation.{output_site}.{suffix}"
+                self.assertIn(field, metrics)
+                self.assertAlmostEqual(
+                    float(metrics[field]),
+                    float(expected_value),
+                    places=6,
+                )
 
     def test_swap_walsh_and_embedding_fields_equal_registered_estimands(self) -> None:
         """The row integrates existing causal/function/geometry diagnostics exactly.
