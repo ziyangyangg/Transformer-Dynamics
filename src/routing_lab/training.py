@@ -159,6 +159,7 @@ def train_one_seed(
     training_config: TrainingConfig,
     seed: int,
     device: torch.device | str,
+    checkpoint_steps: tuple[int, ...] | None = None,
     checkpoint_callback: Callable[[int, RetrievalTransformer], None] | None = None,
 ) -> tuple[RetrievalTransformer, TrainingHistory]:
     """Train one deterministic seed using fresh episodes at every update.
@@ -185,10 +186,24 @@ def train_one_seed(
         device=device,
     )
 
-    checkpoint_steps = set(
-        range(0, training_config.steps + 1, training_config.checkpoint_every)
-    )
-    checkpoint_steps.add(training_config.steps)
+    if checkpoint_steps is None:
+        schedule = tuple(
+            range(0, training_config.steps + 1, training_config.checkpoint_every)
+        )
+        if schedule[-1] != training_config.steps:
+            schedule = (*schedule, training_config.steps)
+    else:
+        schedule = checkpoint_steps
+        if (
+            not schedule
+            or schedule[0] != 0
+            or schedule[-1] != training_config.steps
+            or tuple(sorted(set(schedule))) != schedule
+        ):
+            raise ValueError(
+                "checkpoint_steps must be strictly increasing from zero to steps"
+            )
+    scheduled_step_set = set(schedule)
     observations: list[TrainingCheckpoint] = [
         _observe(model, evaluation_batch, step=0)
     ]
@@ -212,7 +227,7 @@ def train_one_seed(
         loss.backward()
         optimizer.step()
 
-        if step in checkpoint_steps:
+        if step in scheduled_step_set:
             observations.append(_observe(model, evaluation_batch, step=step))
             if checkpoint_callback is not None:
                 checkpoint_callback(step, model)

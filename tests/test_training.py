@@ -226,10 +226,11 @@ class OnlineTrainingContractTests(unittest.TestCase):
             training_config=self._training_config(steps=4),
             seed=37,
             device="cpu",
+            checkpoint_steps=(0, 1, 4),
             checkpoint_callback=remember,
         )
 
-        self.assertEqual(observed_steps, [0, 2, 4])
+        self.assertEqual(observed_steps, [0, 1, 4])
         self.assertFalse(torch.equal(observed_readouts[0], observed_readouts[-1]))
 
 

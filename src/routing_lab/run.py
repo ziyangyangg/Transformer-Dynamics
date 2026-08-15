@@ -306,6 +306,7 @@ def _train_planned_seed(
         training_config=training_config,
         seed=run.seed,
         device=device,
+        checkpoint_steps=run.checkpoint_steps,
         checkpoint_callback=save_snapshot,
     )
     history = _scheduled_history(complete_history, run.checkpoint_steps)
