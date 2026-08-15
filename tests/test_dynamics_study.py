@@ -40,6 +40,14 @@ class DynamicsStudyConfigTests(unittest.TestCase):
             DynamicsStudyConfig(**{**common, "landscape_coordinates": ()})
         with self.assertRaisesRegex(ValueError, "probe_batch_size"):
             DynamicsStudyConfig(**{**common, "probe_batch_size": 0})
+        with self.assertRaisesRegex(ValueError, "cannot exceed"):
+            DynamicsStudyConfig(
+                **{
+                    **common,
+                    "num_lanczos_steps": 2,
+                    "num_top_eigenvalues": 3,
+                }
+            )
 
 
 class DynamicsStudyEndToEndTests(unittest.TestCase):
@@ -201,6 +209,25 @@ class DynamicsStudyEndToEndTests(unittest.TestCase):
                     config=changed,
                     run_directory=run_directory,
                     output_directory=output_directory,
+                    device="cpu",
+                )
+
+    def test_unregistered_step_is_rejected_before_searching_for_a_file(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            run_directory = self._make_training_run(root)
+            config = DynamicsStudyConfig(
+                **{
+                    **self._study_config().__dict__,
+                    "selected_steps": (0, 2),
+                }
+            )
+
+            with self.assertRaisesRegex(ValueError, "checkpoint schedule"):
+                run_dynamics_study(
+                    config=config,
+                    run_directory=run_directory,
+                    output_directory=root / "dynamics",
                     device="cpu",
                 )
 
