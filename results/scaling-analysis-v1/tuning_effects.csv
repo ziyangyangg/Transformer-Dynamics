@@ -1,0 +1,5 @@
+endpoint,contrast,n_pairs,paired_seeds,estimate,standard_deviation,standardized_paired_effect,confidence_level,interval_method,n_resamples,rng_seed,ci_lower,ci_upper
+risk,tuned-minus-high-lr-stress,10,"[0,1,2,3,4,5,6,7,8,9]",-0.008836579552712465,0.01919791883735603,-0.4602884108207561,0.95,paired-seed-percentile-bootstrap,20000,20260815,-0.02126965324522473,0.00013731612623558875
+accuracy,tuned-minus-high-lr-stress,10,"[0,1,2,3,4,5,6,7,8,9]",0.008376312255859376,0.018096829997193434,0.4628607472777511,0.95,paired-seed-percentile-bootstrap,20000,20260815,-5.4168701171875e-05,0.0201225471496582
+value_flip_effect,tuned-minus-high-lr-stress,10,"[0,1,2,3,4,5,6,7,8,9]",0.01753286580706117,0.03806652866337527,0.46058483456964033,0.95,paired-seed-percentile-bootstrap,20000,20260815,-0.00046217340044677255,0.042295870241323426
+normalized_rank,tuned-minus-high-lr-stress,10,"[0,1,2,3,4,5,6,7,8,9]",0.057183445803821085,0.011452176680679155,4.993238176310593,0.95,paired-seed-percentile-bootstrap,20000,20260815,0.05085547491209581,0.06416123393224551
