@@ -8,6 +8,6 @@
 - [x] Seed-level mechanism, scaling, clustering, and optimization-dynamics analyses complete.
 - [x] Loss-landscape, grouped NTK, linearization, Hessian, superposition-geometry, and
   causal-intervention figures complete.
-- [ ] Independent review findings resolved.
-- [ ] Portable reproduction report validated.
-- [ ] Curated code/results snapshot published and verified on GitHub.
+- [x] Independent review findings resolved.
+- [x] Portable reproduction report validated.
+- [x] Curated code/results snapshot published and verified on GitHub.

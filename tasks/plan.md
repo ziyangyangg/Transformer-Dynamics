@@ -8,6 +8,6 @@
    clustering reproduction, and controlled dynamics studies.
 6. [complete] Analyze at seed level, render static figures, audit the literature boundary,
    and formalize the two theorem/anti-theorem targets.
-7. [in progress] Freeze the high-precision remedy analysis, independently review code and
+7. [complete] Freeze the high-precision remedy analysis, independently review code and
    mathematics, rerun all verification gates, build the portable final report, and publish
    the curated reproducibility snapshot to GitHub.
