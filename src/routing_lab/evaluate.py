@@ -25,14 +25,15 @@ import torch
 
 from .data import RetrievalBatch, flip_target_value, swap_distractor_concept
 from .diagnostics import (
+    attention_finite_chord_decomposition,
     natural_distractor_crosstalk,
     ov_directional_selectivity,
     query_attention_routing_statistics,
     residual_branch_cancellation,
     walsh_routing_energies,
 )
-from .interventions import exhaustive_value_spectrum
-from .metrics import feature_geometry
+from .interventions import exhaustive_value_spectrum, target_key_path_effect
+from .metrics import feature_geometry, value_flip_effect
 from .model import RetrievalTransformer
 
 # Keeping this type local makes it hard to accidentally return a Tensor, list, or
@@ -110,8 +111,8 @@ def evaluate_seed_mechanisms(
         # traces are finite chord endpoints and therefore need no gradient graph.
         base_prediction, base_trace = model(evaluation_batch, return_trace=True)
         with torch.no_grad():
-            _, swap_trace = model(swap.batch, return_trace=True)
-            _, flipped_trace = model(flipped, return_trace=True)
+            swapped_prediction, swap_trace = model(swap.batch, return_trace=True)
+            flipped_prediction, flipped_trace = model(flipped, return_trace=True)
 
             attention = query_attention_routing_statistics(
                 base_trace,
@@ -128,12 +129,38 @@ def evaluate_seed_mechanisms(
                 memory_size=evaluation_batch.memory_size,
             )
             geometry = feature_geometry(model.concept_embedding.weight)
+            key_path = target_key_path_effect(model, evaluation_batch)
+
+        base_prediction_detached = base_prediction.detach()
+        base_accuracy = (
+            (base_prediction_detached >= 0) == (evaluation_batch.label >= 0)
+        ).to(torch.float32)
+        donor_accuracy = (
+            (swapped_prediction >= 0) == (evaluation_batch.label >= 0)
+        ).to(torch.float32)
 
         metrics: dict[str, JsonAtom] = {
             "schema_version": "seed-mechanisms-v1",
             "evaluation_batch_size": evaluation_batch.batch_size,
             "num_layers": model.config.num_layers,
             "num_heads": model.config.num_heads,
+            "function.base_accuracy": _mean(base_accuracy),
+            "function.donor_accuracy": _mean(donor_accuracy),
+            "function.base_mse": _mean(
+                (base_prediction_detached - evaluation_batch.label).square()
+            ),
+            "function.donor_mse": _mean(
+                (swapped_prediction - evaluation_batch.label).square()
+            ),
+            "causal.value_flip_effect": _as_float(
+                value_flip_effect(
+                    base_prediction_detached,
+                    flipped_prediction,
+                    evaluation_batch.label,
+                )
+            ),
+            "causal.target_key_effect": _as_float(key_path.signed_effect),
+            "causal.target_key_delta_mse": _as_float(key_path.delta_mse),
             "swap.mean_squared_crosstalk": _as_float(
                 natural.mean_squared_crosstalk
             ),
@@ -202,6 +229,9 @@ def evaluate_seed_mechanisms(
                     metrics[f"{prefix}.{suffix}"] = _mean(
                         values[:, layer_index, head_index]
                     )
+        metrics["attention.key_selectivity_mean"] = _mean(
+            attention.target_mass - attention.mean_distractor_mass
+        )
 
         # OV maps the normalized attention input, so both comparison directions are
         # measured at that exact layer-local coordinate system rather than reusing the
@@ -253,6 +283,99 @@ def evaluate_seed_mechanisms(
             and layer.ffn_out is not None
             and layer.ffn_norm is not None
         ]
+
+        # A single reverse pass yields every requested downstream adjoint.  This is
+        # both faster and less error-prone than repeatedly retaining and consuming the
+        # same graph in separate QK and FFN loops.
+        attention_adjoint_sites = [
+            f"layers.{layer_index}.post_attention_residual"
+            for layer_index in range(model.config.num_layers)
+        ]
+        ffn_adjoint_sites = [
+            f"layers.{layer_index}.post_ffn_residual"
+            for layer_index in ffn_layer_indices
+        ]
+        adjoint_sites = attention_adjoint_sites + ffn_adjoint_sites
+        adjoint_values = torch.autograd.grad(
+            base_prediction.sum(),
+            [base_trace[site] for site in adjoint_sites],
+            retain_graph=False,
+            create_graph=False,
+        )
+        adjoint_by_site = {
+            site: value.detach() for site, value in zip(adjoint_sites, adjoint_values)
+        }
+
+        # The finite route/content identity is evaluated along the actual on-support
+        # distractor chord.  Each mapped head update is then projected onto the
+        # output-relevant adjoint; probability changes alone would not reveal whether
+        # the QK route counteracts or reinforces content cross-talk.
+        with torch.no_grad():
+            for layer_index, layer in enumerate(model.layers):
+                incoming_site = _attention_input_site(layer_index)
+                base_z = layer.attention_norm(base_trace[incoming_site].detach())
+                swap_z = layer.attention_norm(swap_trace[incoming_site])
+                post_attention_site = (
+                    f"layers.{layer_index}.post_attention_residual"
+                )
+                downstream_adjoint = adjoint_by_site[post_attention_site][:, -1, :]
+                for head_index in range(model.config.num_heads):
+                    content_values: list[torch.Tensor] = []
+                    route_values: list[torch.Tensor] = []
+                    for example_index in range(evaluation_batch.batch_size):
+                        chord = attention_finite_chord_decomposition(
+                            base_z[example_index],
+                            swap_z[example_index],
+                            model.qk_composite(
+                                layer_index=layer_index,
+                                head_index=head_index,
+                            ),
+                            model.ov_composite(
+                                layer_index=layer_index,
+                                head_index=head_index,
+                            ),
+                            beta=model.config.beta,
+                            d_head=model.config.d_head,
+                            query_index=model.config.sequence_length - 1,
+                        )
+                        adjoint = downstream_adjoint[example_index]
+                        content_values.append(
+                            residual_scale * torch.dot(adjoint, chord.content)
+                        )
+                        route_values.append(
+                            residual_scale * torch.dot(adjoint, chord.route)
+                        )
+                    content_signed = torch.stack(content_values)
+                    route_signed = torch.stack(route_values)
+                    total_signed = content_signed + route_signed
+                    denominator = content_signed.abs() + route_signed.abs()
+                    cancellation = torch.where(
+                        denominator > 0,
+                        1.0 - total_signed.abs() / denominator,
+                        torch.zeros_like(denominator),
+                    )
+                    prefix = f"qk.l{layer_index}.h{head_index}"
+                    metrics[f"{prefix}.content_signed_mean"] = _mean(
+                        content_signed
+                    )
+                    metrics[f"{prefix}.route_signed_mean"] = _mean(route_signed)
+                    metrics[f"{prefix}.total_signed_mean"] = _mean(total_signed)
+                    metrics[f"{prefix}.opposite_sign_fraction"] = _mean(
+                        (content_signed * route_signed < 0).to(torch.float32)
+                    )
+                    metrics[f"{prefix}.cancellation_fraction_mean"] = _mean(
+                        cancellation
+                    )
+                    metrics[f"{prefix}.content_energy_mean"] = _mean(
+                        content_signed.square()
+                    )
+                    metrics[f"{prefix}.suppression_log_ratio_mean"] = _mean(
+                        torch.log(
+                            (content_signed.square() + 1.0e-12)
+                            / (total_signed.square() + 1.0e-12)
+                        )
+                    )
+
         numeric_ffn_suffixes = (
             "skip_signed_mean",
             "branch_signed_mean",
@@ -271,13 +394,7 @@ def evaluate_seed_mechanisms(
                 continue
 
             post_ffn_site = f"layers.{layer_index}.post_ffn_residual"
-            downstream_adjoint = torch.autograd.grad(
-                base_prediction.sum(),
-                base_trace[post_ffn_site],
-                # Earlier layer adjoints and later layer adjoints share the same graph.
-                retain_graph=layer_index != ffn_layer_indices[-1],
-                create_graph=False,
-            )[0][:, -1, :]
+            downstream_adjoint = adjoint_by_site[post_ffn_site][:, -1, :]
             skip_chord = (
                 swap_trace[f"layers.{layer_index}.post_attention_residual"][
                     :, -1, :

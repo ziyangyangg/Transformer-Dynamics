@@ -25,6 +25,7 @@ from routing_lab.data import (
     swap_distractor_concept,
 )
 from routing_lab.diagnostics import (
+    attention_finite_chord_decomposition,
     natural_distractor_crosstalk,
     ov_directional_selectivity,
     residual_branch_cancellation,
@@ -194,6 +195,16 @@ class SeedMechanismEvaluationContractTests(unittest.TestCase):
         geometry = feature_geometry(model.concept_embedding.weight)
 
         expected = {
+            "function.base_accuracy": (
+                (natural.base_prediction >= 0) == (batch.label >= 0)
+            ).float().mean(),
+            "function.donor_accuracy": (
+                (natural.swapped_prediction >= 0) == (batch.label >= 0)
+            ).float().mean(),
+            "function.base_mse": (natural.base_prediction - batch.label).square().mean(),
+            "function.donor_mse": (
+                natural.swapped_prediction - batch.label
+            ).square().mean(),
             "swap.mean_squared_crosstalk": natural.mean_squared_crosstalk,
             "swap.mean_absolute_crosstalk": natural.mean_absolute_crosstalk,
             "walsh.target_direct_coefficient_mean": energies.target_direct_coefficient.mean(),
@@ -220,6 +231,86 @@ class SeedMechanismEvaluationContractTests(unittest.TestCase):
             self.assertAlmostEqual(
                 float(metrics[field]), float(expected_value.detach().cpu()), places=6
             )
+
+    def test_qk_fields_are_output_relevant_finite_route_content_terms(self) -> None:
+        """QK localization uses an exact on-support chord at each layer/head.
+
+        The symmetric finite identity separates the change in mixed content from the
+        change in attention weights.  Both vectors are mapped through that head's OV,
+        multiplied by the residual scale, and dotted with the base downstream adjoint
+        at the post-attention residual.  Head/layer means must match this direct
+        construction; an attention probability change alone is not the estimand.
+        """
+
+        model = self._model(ffn_width=7).eval()
+        batch = self._batch()
+        swap_seed = 818
+        metrics = self._evaluate(model, batch, swap_seed=swap_seed)
+        swap = swap_distractor_concept(
+            batch,
+            num_concepts=model.config.num_concepts,
+            generator=self._generator(swap_seed),
+        )
+        base_prediction, base_trace = model(batch, return_trace=True)
+        _, swap_trace = model(swap.batch, return_trace=True)
+        residual_scale = 1.0 / math.sqrt(model.config.num_layers)
+
+        for layer_index, layer in enumerate(model.layers):
+            incoming_site = (
+                "input_embeddings"
+                if layer_index == 0
+                else f"layers.{layer_index - 1}.post_ffn_residual"
+            )
+            base_z = layer.attention_norm(base_trace[incoming_site])
+            swap_z = layer.attention_norm(swap_trace[incoming_site])
+            post_site = f"layers.{layer_index}.post_attention_residual"
+            adjoint = torch.autograd.grad(
+                base_prediction.sum(),
+                base_trace[post_site],
+                retain_graph=True,
+            )[0][:, -1, :]
+            for head_index in range(model.config.num_heads):
+                content_signed = []
+                route_signed = []
+                for example_index in range(batch.batch_size):
+                    chord = attention_finite_chord_decomposition(
+                        base_z[example_index],
+                        swap_z[example_index],
+                        model.qk_composite(
+                            layer_index=layer_index, head_index=head_index
+                        ),
+                        model.ov_composite(
+                            layer_index=layer_index, head_index=head_index
+                        ),
+                        beta=model.config.beta,
+                        d_head=model.config.d_head,
+                        query_index=model.config.sequence_length - 1,
+                    )
+                    content_signed.append(
+                        residual_scale
+                        * torch.dot(adjoint[example_index], chord.content)
+                    )
+                    route_signed.append(
+                        residual_scale * torch.dot(adjoint[example_index], chord.route)
+                    )
+                content = torch.stack(content_signed)
+                route = torch.stack(route_signed)
+                total = content + route
+                denominator = content.abs() + route.abs()
+                cancellation = torch.where(
+                    denominator > 0,
+                    1.0 - total.abs() / denominator,
+                    torch.zeros_like(denominator),
+                )
+                prefix = f"qk.l{layer_index}.h{head_index}"
+                for suffix, expected in (
+                    ("content_signed_mean", content.mean()),
+                    ("route_signed_mean", route.mean()),
+                    ("total_signed_mean", total.mean()),
+                    ("opposite_sign_fraction", ((content * route) < 0).float().mean()),
+                    ("cancellation_fraction_mean", cancellation.mean()),
+                ):
+                    self.assertAlmostEqual(metrics[f"{prefix}.{suffix}"], float(expected), places=6)
 
     def test_ov_selectivity_uses_local_normalized_target_and_swap_chords(self) -> None:
         """Each OV head is tested on the two directions it actually receives.
