@@ -54,6 +54,18 @@ class ClusteringUpdateIdentityTests(unittest.TestCase):
 
 
 class ClusteringSimulationTests(unittest.TestCase):
+    def test_initialization_matches_seeded_legacy_numpy_randn_used_by_sphere_code(
+        self,
+    ) -> None:
+        """Seeding ``np.random.randn`` should reproduce our first state exactly."""
+
+        config = ClusteringConfig(n_particles=6, dimension=3, T=0.0, dt=0.1, seed=11)
+        expected = np.random.RandomState(11).randn(6, 3)
+        expected /= np.linalg.norm(expected, axis=1, keepdims=True)
+
+        actual = run_clustering_baseline(config).states[0]
+        np.testing.assert_array_equal(actual, expected)
+
     def test_seeded_run_is_deterministic_and_metrics_obey_gram_identities(self) -> None:
         config = ClusteringConfig(n_particles=12, dimension=3, beta=1.0, T=0.3, dt=0.1, seed=19)
 
@@ -109,6 +121,7 @@ class ClusteringSimulationTests(unittest.TestCase):
             self.assertEqual(payload["config"]["seed"], 7)
             self.assertEqual(len(payload["trajectory"]), 3)
             self.assertEqual(len(rows), 3)
+            self.assertNotIn(b"\r\n", csv_path.read_bytes())
             self.assertAlmostEqual(
                 float(rows[-1]["mean_offdiagonal_cosine"]),
                 payload["trajectory"][-1]["mean_offdiagonal_cosine"],
@@ -123,15 +136,26 @@ class ClusteringSimulationTests(unittest.TestCase):
             ClusteringConfig(n_particles=8, dimension=3, beta=1.0, T=0.2, dt=0.1, seed=5)
         )
 
-        with TemporaryDirectory() as temporary_directory:
+        with (
+            TemporaryDirectory() as temporary_directory,
+            TemporaryDirectory() as replay_directory,
+        ):
             svg_path, png_path = render_clustering_figure(
                 run, Path(temporary_directory)
+            )
+            replay_svg_path, replay_png_path = render_clustering_figure(
+                run, Path(replay_directory)
             )
 
             self.assertTrue(svg_path.read_text(encoding="utf-8").lstrip().startswith("<?xml"))
             self.assertEqual(png_path.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
             self.assertGreater(svg_path.stat().st_size, 10_000)
             self.assertGreater(png_path.stat().st_size, 10_000)
+            self.assertTrue(
+                all(line == line.rstrip() for line in svg_path.read_text().splitlines())
+            )
+            self.assertEqual(svg_path.read_bytes(), replay_svg_path.read_bytes())
+            self.assertEqual(png_path.read_bytes(), replay_png_path.read_bytes())
 
 
 if __name__ == "__main__":

@@ -68,10 +68,15 @@ class ClusteringRun:
 
 
 def sample_unit_sphere(config: ClusteringConfig) -> np.ndarray:
-    """Sample the seeded Gaussian initialization used by ``sphere.py``."""
+    """Sample the seeded Gaussian initialization used by ``sphere.py``.
 
-    generator = np.random.default_rng(config.seed)
-    particles = generator.standard_normal((config.n_particles, config.dimension))
+    ``RandomState`` is deliberate: it is the generator behind the official
+    script's ``np.random.randn``.  A modern ``default_rng`` has the same target
+    distribution but would not reproduce the same points from an equal seed.
+    """
+
+    generator = np.random.RandomState(config.seed)
+    particles = generator.randn(config.n_particles, config.dimension)
     return particles / np.linalg.norm(particles, axis=1, keepdims=True)
 
 
@@ -225,7 +230,11 @@ def write_trajectory_data(
     )
 
     buffer = io.StringIO(newline="")
-    writer = csv.DictWriter(buffer, fieldnames=list(run.metrics[0]))
+    writer = csv.DictWriter(
+        buffer,
+        fieldnames=list(run.metrics[0]),
+        lineterminator="\n",
+    )
     writer.writeheader()
     writer.writerows(run.metrics)
     csv_path = output_directory / "trajectory.csv"
@@ -294,6 +303,8 @@ def render_clustering_figure(
             "axes.spines.right": False,
             "axes.titleweight": "bold",
             "figure.facecolor": "white",
+            # Stable element IDs make the vector artifact byte-reproducible.
+            "svg.hashsalt": "routing-lab-clustering-v1",
         }
     ):
         figure = plt.figure(figsize=(11.6, 8.3), constrained_layout=True)
@@ -339,7 +350,7 @@ def render_clustering_figure(
             label=r"Gram participation rank $r_{\mathrm{PR}}$",
         )[0]
         spectral_ax.set(
-            title="B. Spectral collapse and attention concentration",
+            title="B. Spectral collapse and interaction entropy",
             xlabel="continuum-depth time $t$",
             ylabel="participation rank (1 = complete collapse)",
         )
@@ -389,6 +400,15 @@ def render_clustering_figure(
                 alpha=0.92,
             )
             sphere_ax.set_title(f"{title} ($t={panel_index * run.config.T:g}$)", pad=2)
+            if panel_index == 1:
+                sphere_ax.text2D(
+                    0.02,
+                    0.03,
+                    f"all {run.config.n_particles} particles overlap",
+                    transform=sphere_ax.transAxes,
+                    color="#334155",
+                    fontsize=9,
+                )
 
         figure.suptitle(
             (
@@ -410,7 +430,10 @@ def render_clustering_figure(
             temporary_svg,
             format="svg",
             bbox_inches="tight",
-            metadata={"Creator": "transformer-routing-superposition-lab"},
+            metadata={
+                "Creator": "transformer-routing-superposition-lab",
+                "Date": None,
+            },
         )
         figure.savefig(
             temporary_png,
@@ -420,6 +443,14 @@ def render_clustering_figure(
             metadata={"Software": "transformer-routing-superposition-lab"},
         )
         plt.close(figure)
+        # Matplotlib intentionally leaves spaces at the end of multiline SVG path
+        # records.  They are semantically inert, so strip them to keep generated
+        # artifacts friendly to Git's whitespace checks and textual review.
+        svg_without_trailing_space = "\n".join(
+            line.rstrip()
+            for line in temporary_svg.read_text(encoding="utf-8").splitlines()
+        )
+        temporary_svg.write_text(svg_without_trailing_space + "\n", encoding="utf-8")
         temporary_svg.replace(svg_path)
         temporary_png.replace(png_path)
     return svg_path, png_path
