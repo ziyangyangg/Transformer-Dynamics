@@ -1,7 +1,7 @@
 - [x] Data distribution and on-support swap tests pass.
 - [x] Instrumented model and causal-path patch tests pass.
 - [x] Tangent decomposition matches JVP and finite differences.
-- [ ] Smoke training reaches the registered accuracy gate.
+- [x] Smoke training reaches the registered accuracy gate (4/4 hardest-cell seeds).
 - [ ] Primary multi-seed grid completes with raw observations.
 - [ ] Seed-level analysis and figures complete.
 - [ ] Independent review findings resolved.
