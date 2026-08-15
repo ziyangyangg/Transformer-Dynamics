@@ -1,0 +1,202 @@
+{
+  "cell": {
+    "batch_size": 512,
+    "d_model": 16,
+    "ffn_width": null,
+    "learning_rate": 0.01,
+    "memory_size": 4,
+    "momentum": 0.0,
+    "num_concepts": 64,
+    "num_heads": 1,
+    "num_layers": 2,
+    "optimizer": "adamw",
+    "steps": 400
+  },
+  "cell_id": "cell-002-485eaf8ffa27",
+  "cell_index": 2,
+  "checkpoints": [
+    {
+      "accuracy": 0.47802734375,
+      "embedding_effective_rank": 12.932114601135254,
+      "loss": 2.5692124366760254,
+      "ov_frobenius_norms": [
+        3.6906182765960693,
+        3.6892940998077393
+      ],
+      "qk_frobenius_norms": [
+        3.3399999141693115,
+        3.844196081161499
+      ],
+      "step": 0,
+      "target_key_effect": -0.049739718437194824,
+      "value_flip_effect": -0.07780265808105469
+    },
+    {
+      "accuracy": 0.664306640625,
+      "embedding_effective_rank": 12.849129676818848,
+      "loss": 0.8427554965019226,
+      "ov_frobenius_norms": [
+        4.009218692779541,
+        4.043902397155762
+      ],
+      "qk_frobenius_norms": [
+        3.603665590286255,
+        3.960763692855835
+      ],
+      "step": 10,
+      "target_key_effect": 0.12517376244068146,
+      "value_flip_effect": 0.1663554161787033
+    },
+    {
+      "accuracy": 0.7271728515625,
+      "embedding_effective_rank": 12.517450332641602,
+      "loss": 0.7078826427459717,
+      "ov_frobenius_norms": [
+        4.15114164352417,
+        4.3417439460754395
+      ],
+      "qk_frobenius_norms": [
+        3.727984666824341,
+        4.160512447357178
+      ],
+      "step": 25,
+      "target_key_effect": 0.2763773798942566,
+      "value_flip_effect": 0.29231685400009155
+    },
+    {
+      "accuracy": 0.9114990234375,
+      "embedding_effective_rank": 10.466208457946777,
+      "loss": 0.3130949139595032,
+      "ov_frobenius_norms": [
+        4.1501383781433105,
+        4.446772575378418
+      ],
+      "qk_frobenius_norms": [
+        4.875729560852051,
+        5.17722225189209
+      ],
+      "step": 50,
+      "target_key_effect": 0.6906660199165344,
+      "value_flip_effect": 0.7014358043670654
+    },
+    {
+      "accuracy": 0.994140625,
+      "embedding_effective_rank": 9.723771095275879,
+      "loss": 0.03696386516094208,
+      "ov_frobenius_norms": [
+        3.979656934738159,
+        4.72257137298584
+      ],
+      "qk_frobenius_norms": [
+        6.560532093048096,
+        6.533344745635986
+      ],
+      "step": 75,
+      "target_key_effect": 0.9546428918838501,
+      "value_flip_effect": 0.9654232263565063
+    },
+    {
+      "accuracy": 0.998779296875,
+      "embedding_effective_rank": 9.65340805053711,
+      "loss": 0.006401170045137405,
+      "ov_frobenius_norms": [
+        3.856534242630005,
+        5.02916145324707
+      ],
+      "qk_frobenius_norms": [
+        7.167476654052734,
+        7.048233985900879
+      ],
+      "step": 100,
+      "target_key_effect": 1.0011076927185059,
+      "value_flip_effect": 1.0022461414337158
+    },
+    {
+      "accuracy": 1.0,
+      "embedding_effective_rank": 9.623838424682617,
+      "loss": 0.0010223339777439833,
+      "ov_frobenius_norms": [
+        3.7714483737945557,
+        5.276830673217773
+      ],
+      "qk_frobenius_norms": [
+        7.459569931030273,
+        7.291181564331055
+      ],
+      "step": 150,
+      "target_key_effect": 1.0068590641021729,
+      "value_flip_effect": 1.0025558471679688
+    },
+    {
+      "accuracy": 1.0,
+      "embedding_effective_rank": 9.590971946716309,
+      "loss": 0.0006016458501107991,
+      "ov_frobenius_norms": [
+        3.762664794921875,
+        5.377054691314697
+      ],
+      "qk_frobenius_norms": [
+        7.605721950531006,
+        7.368724346160889
+      ],
+      "step": 200,
+      "target_key_effect": 1.0090930461883545,
+      "value_flip_effect": 1.0034992694854736
+    },
+    {
+      "accuracy": 1.0,
+      "embedding_effective_rank": 9.557827949523926,
+      "loss": 0.0002304877998540178,
+      "ov_frobenius_norms": [
+        3.7437515258789062,
+        5.493843078613281
+      ],
+      "qk_frobenius_norms": [
+        7.662967205047607,
+        7.400393486022949
+      ],
+      "step": 300,
+      "target_key_effect": 1.0069820880889893,
+      "value_flip_effect": 0.9995183944702148
+    },
+    {
+      "accuracy": 1.0,
+      "embedding_effective_rank": 9.533681869506836,
+      "loss": 0.00014553082291968167,
+      "ov_frobenius_norms": [
+        3.7354514598846436,
+        5.566901206970215
+      ],
+      "qk_frobenius_norms": [
+        7.708045959472656,
+        7.423840045928955
+      ],
+      "step": 400,
+      "target_key_effect": 1.008070468902588,
+      "value_flip_effect": 0.9998576045036316
+    }
+  ],
+  "config_hash": "485eaf8ffa2741e5594c804c6f3cb97308e154d4a4c55874f68345495fd84547",
+  "model_config": {
+    "beta": 1.0,
+    "d_model": 16,
+    "ffn_width": null,
+    "memory_size": 4,
+    "num_concepts": 64,
+    "num_heads": 1,
+    "num_layers": 2,
+    "rms_epsilon": 1e-06
+  },
+  "schema_version": 1,
+  "seed": 2,
+  "training_config": {
+    "batch_size": 512,
+    "checkpoint_every": 5,
+    "eval_batch_size": 8192,
+    "learning_rate": 0.01,
+    "momentum": 0.0,
+    "optimizer": "adamw",
+    "steps": 400,
+    "weight_decay": 0.0
+  }
+}
