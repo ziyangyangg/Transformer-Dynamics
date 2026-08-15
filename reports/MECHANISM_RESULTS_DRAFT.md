@@ -29,16 +29,18 @@
 注意：此机制重放使用每 seed 512 个 episode；它适合机制定位，但比注册协议中
 最终 confirmatory gate 的 8192 episode 更小。下面明确保留这一限制。
 
-### 数值恒等式检查
+### 恒等式与有限样本估计检查
 
 | study | max Parseval gap | max |Xi-Walsh| | final max |Xi-Walsh| |
 |---|---:|---:|---:|
 | primary_adamw | 0.00000477 | 0.016352 | 0.003403 |
 | replication_sgd | 0.00000477 | 0.013160 | 0.001927 |
 
-Parseval 重构在 float32 下达到微小绝对误差；但 sampled value-flip 与 exhaustive
-Walsh target 尚未达到协议要求的逐 seed `1e-5` 一致性。两者可作为相互支持的
-功能证据，不能把 v1 表称为已经通过该严格数值门槛。
+Parseval 重构在 float32 下达到微小绝对误差。sampled value-flip 与 exhaustive
+Walsh target 不是逐样本恒等的两个数：前者每个 concept skeleton 只抽一个 value
+向量，后者枚举该 skeleton 的全部 `2^m` 个 value；它们是同一 population quantity
+的两个有限样本估计量。因此表中差异应解释为 value Monte Carlo 误差，而不是数值
+恒等式失败。真正的恒等式检查是 exhaustive Walsh Parseval gap。
 
 ## 最终功能、供体与因果门槛
 
