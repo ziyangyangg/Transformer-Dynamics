@@ -1,7 +1,7 @@
 # Autoresearch classic loop
 
 Mode: classic
-Iterations: 8
+Iterations: 15
 
 Metric: evidence completeness, measured by the count of validated intervention
 contracts (support-preserving swap, exact patch replay, JVP/finite-difference tangent,
@@ -18,4 +18,3 @@ PYTHONPATH=src /home/zion/miniforge3/envs/llm4rec/bin/python3.11 \
 Keep an iteration only if it adds a registered contract or improves numerical agreement
 without changing an estimand after seeing the result.  Preserve negative findings and
 all failed configurations in the ledger.
-
