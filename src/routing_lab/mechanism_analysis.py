@@ -24,10 +24,10 @@ import json
 import math
 import re
 from collections import defaultdict
+from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from statistics import mean, stdev
-from typing import Iterable, Mapping, Sequence
 
 from .statistics import (
     BootstrapSpec,
@@ -36,7 +36,6 @@ from .statistics import (
     paired_bootstrap_summary,
     paired_endpoint_family,
 )
-
 
 JsonScalar = str | int | float | bool | None
 WideRow = Mapping[str, object]
@@ -64,7 +63,7 @@ DIRECT_METRICS: tuple[tuple[str, str, float], ...] = (
     ("donor_risk", "function.donor_mse", 0.5),
     ("value_flip_effect", "causal.value_flip_effect", 1.0),
     ("target_key_effect", "causal.target_key_effect", 1.0),
-    ("key_selectivity", "attention.key_selectivity_mean", 1.0),
+    ("attention_key_selectivity", "attention.key_selectivity_mean", 1.0),
     ("natural_swap_mse", "swap.mean_squared_crosstalk", 1.0),
     ("natural_swap_mae", "swap.mean_absolute_crosstalk", 1.0),
     (
@@ -162,9 +161,7 @@ SITE_PATTERN = re.compile(
 
 
 AGGREGATE_SITE_METRICS: tuple[str, ...] = tuple(
-    alias
-    for module_fields in SITE_METRICS.values()
-    for _, alias in module_fields
+    alias for module_fields in SITE_METRICS.values() for _, alias in module_fields
 )
 
 
@@ -175,7 +172,7 @@ DESIRED_DIRECTIONS: dict[str, str] = {
     "donor_risk": "decrease",
     "value_flip_effect": "increase",
     "target_key_effect": "increase",
-    "key_selectivity": "increase",
+    "attention_key_selectivity": "increase",
     "natural_swap_mse": "decrease",
     "natural_swap_mae": "decrease",
     "walsh_target_coefficient": "increase",
@@ -270,9 +267,7 @@ def _site_rows_for_snapshot(
 ) -> list[dict[str, JsonScalar]]:
     """Extract every registered layer/head field from one wide row."""
 
-    suffix_aliases = {
-        module: dict(fields) for module, fields in SITE_METRICS.items()
-    }
+    suffix_aliases = {module: dict(fields) for module, fields in SITE_METRICS.items()}
     extracted: list[dict[str, JsonScalar]] = []
     for field, raw_value in sorted(row.items()):
         match = SITE_PATTERN.fullmatch(field)
@@ -462,7 +457,7 @@ def _eligibility_rule(metric: str) -> str:
     if metric.startswith(("walsh_", "attention_")) or metric in {
         "value_flip_effect",
         "target_key_effect",
-        "key_selectivity",
+        "attention_key_selectivity",
         "embedding_effective_rank",
         "embedding_coherence",
     }:
@@ -488,7 +483,9 @@ def _direction(value: float) -> str:
     return "zero"
 
 
-def _supports_desired_direction(metric: str, estimate: float, excludes_zero: bool) -> bool:
+def _supports_desired_direction(
+    metric: str, estimate: float, excludes_zero: bool
+) -> bool:
     desired = DESIRED_DIRECTIONS.get(metric, "descriptive")
     if not excludes_zero:
         return False
@@ -601,18 +598,14 @@ def _endpoints_from_family(
                 "final_mean": float(mean(final_values)),
                 "estimate": estimate,
                 "standard_deviation": float(summary["standard_deviation"]),
-                "standardized_paired_effect": summary[
-                    "standardized_paired_effect"
-                ],
+                "standardized_paired_effect": summary["standardized_paired_effect"],
                 "confidence_interval_low": lower,
                 "confidence_interval_high": upper,
                 "confidence_level": float(summary["confidence_level"]),
                 "n_resamples": int(summary["n_resamples"]),
                 "rng_seed": int(summary["rng_seed"]),
                 "direction": _direction(estimate),
-                "desired_direction": DESIRED_DIRECTIONS.get(
-                    str(metric), "descriptive"
-                ),
+                "desired_direction": DESIRED_DIRECTIONS.get(str(metric), "descriptive"),
                 "confidence_interval_excludes_zero": excludes_zero,
                 "confirmatory_sample_size_pass": int(summary["n_pairs"]) >= 10,
                 "supports_desired_direction": _supports_desired_direction(
@@ -695,7 +688,9 @@ def summarize_site_paired_deltas(
 
     seed_rows = list(seed_step_rows)
     gate_lookup: dict[tuple[str, str, int], Mapping[str, JsonScalar]] = {}
-    by_seed: dict[tuple[str, str, int], list[Mapping[str, JsonScalar]]] = defaultdict(list)
+    by_seed: dict[tuple[str, str, int], list[Mapping[str, JsonScalar]]] = defaultdict(
+        list
+    )
     for row in seed_rows:
         by_seed[(str(row["optimizer"]), str(row["cell"]), int(row["seed"]))].append(row)
     for key, checkpoints in by_seed.items():
@@ -743,13 +738,9 @@ def summarize_site_paired_deltas(
                 for (opt, cell_name, seed), final in gate_lookup.items()
                 if opt == optimizer
                 and cell_name == cell
-                and (
-                    population == "all_scheduled" or _eligible(final, rule)
-                )
+                and (population == "all_scheduled" or _eligible(final, rule))
             }
-            selected = [
-                row for row in site_rows if int(row["seed"]) in selected_seeds
-            ]
+            selected = [row for row in site_rows if int(row["seed"]) in selected_seeds]
             tidy = [
                 {
                     "seed": int(row["seed"]),
@@ -826,8 +817,7 @@ def summarize_site_paired_deltas(
                         "confidence_interval_excludes_zero": bool(
                             lower > 0.0 or upper < 0.0
                         ),
-                        "confirmatory_sample_size_pass": int(summary["n_pairs"])
-                        >= 10,
+                        "confirmatory_sample_size_pass": int(summary["n_pairs"]) >= 10,
                         "direction": _direction(estimate),
                         "desired_direction": DESIRED_DIRECTIONS.get(
                             str(metric), "descriptive"
@@ -844,10 +834,14 @@ def _seed_delta_lookup(
 ) -> dict[tuple[str, str, int], float]:
     """Index final-minus-initial values for one aggregate endpoint."""
 
-    grouped: dict[tuple[str, str, int], list[Mapping[str, JsonScalar]]] = defaultdict(list)
+    grouped: dict[tuple[str, str, int], list[Mapping[str, JsonScalar]]] = defaultdict(
+        list
+    )
     for row in rows:
         if row.get(metric) is not None:
-            grouped[(str(row["optimizer"]), str(row["cell"]), int(row["seed"]))].append(row)
+            grouped[(str(row["optimizer"]), str(row["cell"]), int(row["seed"]))].append(
+                row
+            )
     deltas: dict[tuple[str, str, int], float] = {}
     for key, checkpoints in grouped.items():
         initial = min(checkpoints, key=lambda item: int(item["step"]))
@@ -907,7 +901,9 @@ def summarize_optimizer_replication(
         & cells_by_optimizer[replication_optimizer]
     )
     final_lookup: dict[tuple[str, str, int], Mapping[str, JsonScalar]] = {}
-    grouped: dict[tuple[str, str, int], list[Mapping[str, JsonScalar]]] = defaultdict(list)
+    grouped: dict[tuple[str, str, int], list[Mapping[str, JsonScalar]]] = defaultdict(
+        list
+    )
     for row in rows:
         grouped[(str(row["optimizer"]), str(row["cell"]), int(row["seed"]))].append(row)
     for key, checkpoints in grouped.items():
@@ -990,7 +986,9 @@ def summarize_optimizer_replication(
             assert isinstance(primary_ci, Sequence)
             assert isinstance(replication_ci, Sequence)
             assert isinstance(difference_ci, Sequence)
-            primary_excludes = bool(float(primary_ci[0]) > 0 or float(primary_ci[1]) < 0)
+            primary_excludes = bool(
+                float(primary_ci[0]) > 0 or float(primary_ci[1]) < 0
+            )
             replication_excludes = bool(
                 float(replication_ci[0]) > 0 or float(replication_ci[1]) < 0
             )
@@ -1002,7 +1000,9 @@ def summarize_optimizer_replication(
             )
             n_common = len(common)
             primary_function_count = sum(
-                bool(final_lookup[(primary_optimizer, cell, seed)]["function_gate_pass"])
+                bool(
+                    final_lookup[(primary_optimizer, cell, seed)]["function_gate_pass"]
+                )
                 for seed in {
                     key[2]
                     for key in final_lookup
@@ -1010,7 +1010,11 @@ def summarize_optimizer_replication(
                 }
             )
             replication_function_count = sum(
-                bool(final_lookup[(replication_optimizer, cell, seed)]["function_gate_pass"])
+                bool(
+                    final_lookup[(replication_optimizer, cell, seed)][
+                        "function_gate_pass"
+                    ]
+                )
                 for seed in {
                     key[2]
                     for key in final_lookup
@@ -1041,9 +1045,7 @@ def summarize_optimizer_replication(
                     ),
                     "optimizer_delta_difference_ci_low": float(difference_ci[0]),
                     "optimizer_delta_difference_ci_high": float(difference_ci[1]),
-                    "desired_direction": DESIRED_DIRECTIONS.get(
-                        metric, "descriptive"
-                    ),
+                    "desired_direction": DESIRED_DIRECTIONS.get(metric, "descriptive"),
                     # This is a transparent finite-sample label, not a causal claim.
                     # Protocol-level compensation still needs practical-floor and
                     # finite-intervention validation not present in these v1 tables.
@@ -1145,7 +1147,7 @@ def summarize_function_gates(
                 "value_flip_effect": row["value_flip_effect"],
                 "donor_accuracy": row["donor_accuracy"],
                 "output_swap_sensitivity": row["natural_swap_mse"],
-                "key_selectivity": row["key_selectivity"],
+                "attention_key_selectivity": row["attention_key_selectivity"],
                 "target_key_effect": row["target_key_effect"],
             }
             for endpoint, value in endpoint_values.items():
@@ -1181,8 +1183,11 @@ def summarize_function_gates(
                     ),
                     "n_donor_success": donor_success,
                     "n_function_and_donor_success": joint_success,
-                    "direct_target_key_routing_gate_pass": bool(
-                        cell_gate["direct_target_key_routing_gate_pass"]
+                    "registered_s_key_evaluated": bool(
+                        cell_gate["registered_s_key_evaluated"]
+                    ),
+                    "target_edge_attention_screen_pass": bool(
+                        cell_gate["target_edge_attention_screen_pass"]
                     ),
                     "final_accuracy_mean": float(
                         mean(float(row["function_accuracy"]) for row in cell_source)
@@ -1200,7 +1205,10 @@ def summarize_function_gates(
                         mean(float(row["natural_swap_mse"]) for row in cell_source)
                     ),
                     "final_walsh_target_coefficient_mean": float(
-                        mean(float(row["walsh_target_coefficient"]) for row in cell_source)
+                        mean(
+                            float(row["walsh_target_coefficient"])
+                            for row in cell_source
+                        )
                     ),
                 }
             )
@@ -1282,10 +1290,10 @@ def render_markdown_report(
         "1. **功能级复合 routing 得到强支持。** 通过功能门槛的模型同时具有接近 1 的",
         "   queried-value flip effect 与 Walsh target coefficient；这说明输出函数选择了",
         "   queried value，而不是仅仅出现好看的 attention 图。",
-        "2. **聚合 QK 结果反对“QK route 抑制 content cross-talk”这一具体命题。**",
+        "2. **聚合 QK midpoint 结果探索性反对“route 抑制 content cross-talk”的简单故事。**",
         "   两个优化器的全部 cell 都得到负的终点 suppression log-ratio 和负的训练增量；",
-        "   虽然 opposition rate 略升到 0.5 以上，但 route 总体放大而非缩小 output-relevant",
-        "   chord。并且本表没有协议 6.4 的 finite output validation。",
+        "   但实现使用对称 midpoint split，而协议预注册非对称 content/route/interaction split。",
+        "   两者不等价并可能反号，因此本表没有检验预注册 QK 命题，也没有 finite output validation。",
         "3. **OV 结果是 target-vs-distractor 方向选择性，不是协议式 (9) 的",
         "   isotropic-vs-swap attenuation。** 它可以说明训练让 OV 更偏好任务 value",
         "   方向，但不能单独证明 OV 因果消除了 cross-talk。",
@@ -1338,13 +1346,19 @@ def render_markdown_report(
             "的两个有限样本估计量。因此表中差异应解释为 value Monte Carlo 误差，而不是数值",
             "恒等式失败。真正的恒等式检查是 exhaustive Walsh Parseval gap。",
             "",
-            "## 最终功能、供体与因果门槛",
+            "## 最终功能、供体门槛与探索性 target-edge screen",
             "",
-            "| optimizer | cell | function | donor | joint | acc | risk | Xi_value | swap MSE | Walsh target | direct-key gate |",
+            "注册的 $S_{key}$ 需要逐 episode 阻断 target 与每个 distractor edge。当前评估只",
+            "阻断 target edge；最后一列还结合了描述性的 attention mass selectivity，因此不是",
+            "causal key-selectivity gate，且注册的 $S_{key}$ 在本批实验中尚未评估。",
+            "",
+            "| optimizer | cell | function | donor | joint | acc | risk | Xi_value | swap MSE | Walsh target | target-edge + attention screen |",
             "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|",
         ]
     )
-    for row in sorted(gate_rows, key=lambda item: (str(item["optimizer"]), str(item["cell"]))):
+    for row in sorted(
+        gate_rows, key=lambda item: (str(item["optimizer"]), str(item["cell"]))
+    ):
         lines.append(
             f"| {row['optimizer']} | {row['cell']} | {row['n_function_success']}/"
             f"{row['n_scheduled_seeds']} | {row['n_donor_success']}/"
@@ -1353,7 +1367,7 @@ def render_markdown_report(
             f" {_fmt(row['final_risk_mean'], 4)} | {_fmt(row['final_value_flip_mean'])} |"
             f" {_fmt(row['final_natural_swap_mse_mean'], 5)} |"
             f" {_fmt(row['final_walsh_target_coefficient_mean'])} |"
-            f" {'pass' if row['direct_target_key_routing_gate_pass'] else 'fail'} |"
+            f" {'pass' if row['target_edge_attention_screen_pass'] else 'fail'} |"
         )
 
     # Final Walsh leakage and attention geometry answer different questions.  Put
@@ -1380,7 +1394,11 @@ def render_markdown_report(
     ):
         optimizer, cell = str(gate_row["optimizer"]), str(gate_row["cell"])
 
-        def final(metric: str) -> object:
+        def final(
+            metric: str,
+            optimizer: str = optimizer,
+            cell: str = cell,
+        ) -> object:
             return final_lookup[(optimizer, cell, metric)]["final_mean"]
 
         lines.append(
@@ -1419,7 +1437,11 @@ def render_markdown_report(
     )
     for row in sorted(
         claim_deltas,
-        key=lambda item: (str(item["optimizer"]), str(item["cell"]), str(item["metric"])),
+        key=lambda item: (
+            str(item["optimizer"]),
+            str(item["cell"]),
+            str(item["metric"]),
+        ),
     ):
         lines.append(
             f"| {row['optimizer']} | {row['cell']} | {row['metric']} | {row['n_pairs']} |"
@@ -1442,7 +1464,9 @@ def render_markdown_report(
             "|---|---|---:|---:|---:|---|---|---|---|---:|",
         ]
     )
-    for row in sorted(replication_key, key=lambda item: (str(item["cell"]), str(item["metric"]))):
+    for row in sorted(
+        replication_key, key=lambda item: (str(item["cell"]), str(item["metric"]))
+    ):
         lines.append(
             f"| {row['cell']} | {row['metric']} | {row['n_common_eligible_seeds']} |"
             f" {_fmt(row['primary_estimate'])} | {_fmt(row['replication_estimate'])} |"
@@ -1480,12 +1504,14 @@ def render_markdown_report(
             "- **确认性的 QK/OV/FFN compensation 数量仍为 0。** 原因不是把非显著结果",
             "  当成反证，而是 v1 estimand 本身尚未包含协议规定的 finite output validation；",
             "  FFN 还缺 practical floor，OV 指标也不是注册的 isotropic attenuation。",
-            "- `qk_suppression_log_ratio > 0` 表示在局部 output adjoint 上 route 比 content",
-            "  单独更小；本实验所有聚合终点与增量均小于 0，即 route 增强而非抑制。",
-            "  这会否定当前这个具体 QK-compensation 解释；只看 opposition rate 略高于",
-            "  0.5 不能挽救该命题。",
+            "- legacy 字段 `qk_suppression_log_ratio` 实际是对称 midpoint split；本实验",
+            "  所有聚合终点与增量均小于 0，只探索性反对 midpoint QK-compensation 故事。",
+            "  它没有保存独立 interaction 项，故不能检验预注册的非对称 contrast；",
+            "  下一轮必须重放三个 endpoint 项与 finite hybrid。",
             "- natural swap MSE 与 donor accuracy 是必要 gate：若某 seed 未通过，不能把其",
             "  下游局部抵消解释为成功保持函数不变。",
+            "- 注册的 $S_{key}$ 需要逐一阻断 distractor edges；当前只保存 target-edge effect，",
+            "  因而 target-edge + attention 列只是探索性 screen，不是 causal direct-key gate。",
             "",
             "## 可复现文件",
             "",
@@ -1495,7 +1521,8 @@ def render_markdown_report(
             "- `paired_delta_summary.csv`：all-scheduled 与 gate-qualified 配对增量；",
             "- `site_delta_summary.csv`：逐层/头配对增量；",
             "- `optimizer_replication.csv`：共同合格 seed 上的优化器方向复制；",
-            "- `functional_gates.json/csv`：注册门槛及成功 seed。",
+            "- `functional_gates.json/csv`：注册 function/donor 门槛、成功 seed，以及明确",
+            "  标记为非注册的 target-edge + attention screen。",
             "",
         ]
     )
@@ -1515,17 +1542,13 @@ def analyze_studies(
     primary_rows, primary_manifest = _load_study(primary_directory)
     replication_rows, replication_manifest = _load_study(replication_directory)
     reduced = reduce_snapshot_rows([*primary_rows, *replication_rows])
-    delta_rows = summarize_paired_deltas(
-        reduced.seed_step_rows, bootstrap=bootstrap
-    )
+    delta_rows = summarize_paired_deltas(reduced.seed_step_rows, bootstrap=bootstrap)
     site_delta_rows = summarize_site_paired_deltas(
         reduced.seed_step_rows,
         reduced.site_step_rows,
         bootstrap=bootstrap,
     )
-    optimizer_names = sorted(
-        {str(row["optimizer"]) for row in reduced.seed_step_rows}
-    )
+    optimizer_names = sorted({str(row["optimizer"]) for row in reduced.seed_step_rows})
     if "adamw" not in optimizer_names or len(optimizer_names) != 2:
         raise ValueError(
             "expected exactly AdamW plus one replication optimizer; observed "
@@ -1547,8 +1570,7 @@ def analyze_studies(
         rows: Sequence[Mapping[str, object]], manifest: Mapping[str, object]
     ) -> dict[str, object]:
         keys = {
-            (canonical_cell(row), _integer(row["seed"], field="seed"))
-            for row in rows
+            (canonical_cell(row), _integer(row["seed"], field="seed")) for row in rows
         }
         cells = {cell for cell, _ in keys}
         seeds_per_cell = sorted(
@@ -1569,18 +1591,25 @@ def analyze_studies(
             }
         )
         eval_sizes = sorted(
-            {_integer(row["evaluation_batch_size"], field="evaluation_batch_size") for row in rows}
+            {
+                _integer(row["evaluation_batch_size"], field="evaluation_batch_size")
+                for row in rows
+            }
         )
         return {
             "rows": len(rows),
             "cells": len(cells),
-            "seeds_per_cell": seeds_per_cell[0] if len(seeds_per_cell) == 1 else seeds_per_cell,
+            "seeds_per_cell": seeds_per_cell[0]
+            if len(seeds_per_cell) == 1
+            else seeds_per_cell,
             "checkpoints_per_seed": (
                 checkpoints_per_seed[0]
                 if len(checkpoints_per_seed) == 1
                 else checkpoints_per_seed
             ),
-            "evaluation_batch_size": eval_sizes[0] if len(eval_sizes) == 1 else eval_sizes,
+            "evaluation_batch_size": eval_sizes[0]
+            if len(eval_sizes) == 1
+            else eval_sizes,
             "failed_snapshot_rows": int(manifest.get("failed_snapshot_rows", 0)),
             "training_study_id": manifest.get("training_study_id"),
             "evaluation_contract_hash": manifest.get("evaluation_contract_hash"),
@@ -1653,6 +1682,8 @@ def analyze_studies(
             "finite_output_validation_available": False,
             "ffn_practical_floor_available": False,
             "ov_metric_matches_registered_isotropic_attenuation": False,
+            "qk_metric_endpoint_split": "symmetric_midpoint",
+            "qk_metric_matches_registered_endpoint_split": False,
             "confirmatory_compensator_claims": 0,
         },
     }
@@ -1662,9 +1693,7 @@ def analyze_studies(
     _write_csv(output_directory / "cell_step_summary.csv", cell_steps)
     _write_csv(output_directory / "paired_delta_summary.csv", delta_rows)
     _write_csv(output_directory / "site_delta_summary.csv", site_delta_rows)
-    _write_csv(
-        output_directory / "optimizer_replication.csv", optimizer_replication
-    )
+    _write_csv(output_directory / "optimizer_replication.csv", optimizer_replication)
     _write_csv(output_directory / "functional_gates.csv", gate_rows)
     _write_json(output_directory / "functional_gates.json", gate_json)
     _write_json(output_directory / "analysis_manifest.json", audit)

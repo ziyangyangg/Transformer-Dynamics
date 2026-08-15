@@ -1,0 +1,861 @@
+{
+  "artifacts": {
+    "arrays": {
+      "format": "NumPy NPZ; numeric arrays only; load with allow_pickle=False",
+      "keys": [
+        "landscape_coordinates",
+        "linearization_jacobian0",
+        "linearization_prediction0",
+        "linearization_theta0",
+        "probe_concepts",
+        "probe_label",
+        "probe_query",
+        "probe_target_index",
+        "probe_values",
+        "step_000000_hessian_ritz",
+        "step_000000_hessian_top",
+        "step_000000_hessian_trace_probes",
+        "step_000000_landscape_direction_1",
+        "step_000000_landscape_direction_2",
+        "step_000000_landscape_losses",
+        "step_000000_linearized_prediction",
+        "step_000000_ntk_E",
+        "step_000000_ntk_FFN",
+        "step_000000_ntk_OV",
+        "step_000000_ntk_QK",
+        "step_000000_ntk_full",
+        "step_000000_ntk_readout",
+        "step_000000_prediction",
+        "step_000100_hessian_ritz",
+        "step_000100_hessian_top",
+        "step_000100_hessian_trace_probes",
+        "step_000100_landscape_direction_1",
+        "step_000100_landscape_direction_2",
+        "step_000100_landscape_losses",
+        "step_000100_linearized_prediction",
+        "step_000100_ntk_E",
+        "step_000100_ntk_FFN",
+        "step_000100_ntk_OV",
+        "step_000100_ntk_QK",
+        "step_000100_ntk_full",
+        "step_000100_ntk_readout",
+        "step_000100_prediction",
+        "step_000400_hessian_ritz",
+        "step_000400_hessian_top",
+        "step_000400_hessian_trace_probes",
+        "step_000400_landscape_direction_1",
+        "step_000400_landscape_direction_2",
+        "step_000400_landscape_losses",
+        "step_000400_linearized_prediction",
+        "step_000400_ntk_E",
+        "step_000400_ntk_FFN",
+        "step_000400_ntk_OV",
+        "step_000400_ntk_QK",
+        "step_000400_ntk_full",
+        "step_000400_ntk_readout",
+        "step_000400_prediction",
+        "step_000800_hessian_ritz",
+        "step_000800_hessian_top",
+        "step_000800_hessian_trace_probes",
+        "step_000800_landscape_direction_1",
+        "step_000800_landscape_direction_2",
+        "step_000800_landscape_losses",
+        "step_000800_linearized_prediction",
+        "step_000800_ntk_E",
+        "step_000800_ntk_FFN",
+        "step_000800_ntk_OV",
+        "step_000800_ntk_QK",
+        "step_000800_ntk_full",
+        "step_000800_ntk_readout",
+        "step_000800_prediction"
+      ],
+      "path": "arrays.npz",
+      "sha256": "3dc848380eaf4574036d251f5ff592663df658964f7737d826e0494560ec45e4"
+    }
+  },
+  "configuration": {
+    "cell_index": 10,
+    "hessian_seed": 2026081503,
+    "landscape_coordinates": [
+      -0.6,
+      -0.55,
+      -0.5,
+      -0.45,
+      -0.4,
+      -0.35,
+      -0.3,
+      -0.25,
+      -0.2,
+      -0.15,
+      -0.1,
+      -0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6
+    ],
+    "landscape_seed": 2026081502,
+    "num_lanczos_steps": 16,
+    "num_top_eigenvalues": 5,
+    "num_trace_probes": 8,
+    "probe_batch_size": 32,
+    "probe_seed": 2026081501,
+    "seed": 0,
+    "selected_steps": [
+      0,
+      100,
+      400,
+      800
+    ]
+  },
+  "contract_hash": "bba5a3a301d565b6f925417da19dc2d9f32c7edaee1e9b69f50ed95127d00230",
+  "environment": {
+    "device": "cuda",
+    "git_commit": "518c3c51c4d6f2a73c50257bcc70c35347d841c5",
+    "numpy_version": "2.4.4",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
+    "torch_version": "2.11.0+cu128"
+  },
+  "estimands": {
+    "accuracy": "mean_b 1{sign(f_theta(x_b))=sign(y_b)}",
+    "hessian_ritz_order": "descending algebraic eigenvalues of the Lanczos tridiagonal",
+    "hessian_trace": "mean_r z_r^T H z_r for registered Rademacher probes",
+    "landscape": "L(theta_t+alpha*d1_t+beta*d2_t), with each parameter tensor direction Frobenius-normalized to that tensor's norm",
+    "linearization": "f_0+J_0(theta_t-theta_0)",
+    "linearization_relative_error": "||f_t-f_lin,t||_2/(||f_t-f_0||_2+1e-12)",
+    "loss": "mean_b (f_theta(x_b)-y_b)^2 on the shared probe",
+    "ntk": "K=J J^T/P; every block uses its own raw-factor count P_g",
+    "ntk_alignment": "<K_t,K_0>_F/(||K_t||_F ||K_0||_F+1e-12)",
+    "ntk_effective_rank": "tr(K_t)^2/(tr(K_t^2)+1e-12)",
+    "ntk_relative_drift": "||K_t-K_0||_F/(||K_0||_F+1e-12)"
+  },
+  "linearization_reference": {
+    "jacobian0_array": "linearization_jacobian0",
+    "prediction0_array": "linearization_prediction0",
+    "step": 0,
+    "theta0_array": "linearization_theta0"
+  },
+  "parameter_metadata": [
+    {
+      "dtype": "torch.float32",
+      "name": "value_direction",
+      "shape": [
+        32
+      ],
+      "start": 0,
+      "stop": 32
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "memory_type",
+      "shape": [
+        32
+      ],
+      "start": 32,
+      "stop": 64
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "query_type",
+      "shape": [
+        32
+      ],
+      "start": 64,
+      "stop": 96
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "position",
+      "shape": [
+        5,
+        32
+      ],
+      "start": 96,
+      "stop": 256
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "concept_embedding.weight",
+      "shape": [
+        128,
+        32
+      ],
+      "start": 256,
+      "stop": 4352
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.0.attention_norm.weight",
+      "shape": [
+        32
+      ],
+      "start": 4352,
+      "stop": 4384
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.0.q_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 4384,
+      "stop": 5408
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.0.k_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 5408,
+      "stop": 6432
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.0.v_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 6432,
+      "stop": 7456
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.0.o_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 7456,
+      "stop": 8480
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.1.attention_norm.weight",
+      "shape": [
+        32
+      ],
+      "start": 8480,
+      "stop": 8512
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.1.q_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 8512,
+      "stop": 9536
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.1.k_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 9536,
+      "stop": 10560
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.1.v_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 10560,
+      "stop": 11584
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "layers.1.o_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 11584,
+      "stop": 12608
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "final_norm.weight",
+      "shape": [
+        32
+      ],
+      "start": 12608,
+      "stop": 12640
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "readout.weight",
+      "shape": [
+        1,
+        32
+      ],
+      "start": 12640,
+      "stop": 12672
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "readout.bias",
+      "shape": [
+        1
+      ],
+      "start": 12672,
+      "stop": 12673
+    }
+  ],
+  "probe": {
+    "arrays": [
+      "probe_concepts",
+      "probe_values",
+      "probe_target_index",
+      "probe_query",
+      "probe_label"
+    ],
+    "batch_size": 32,
+    "distribution": "distinct concepts; iid Rademacher values; uniform target",
+    "seed": 2026081501,
+    "shared_across_steps": true
+  },
+  "schema_version": 1,
+  "source": {
+    "cell": {
+      "batch_size": 512,
+      "d_model": 32,
+      "ffn_width": null,
+      "learning_rate": 0.003,
+      "memory_size": 4,
+      "momentum": 0.0,
+      "num_concepts": 128,
+      "num_heads": 1,
+      "num_layers": 2,
+      "optimizer": "adamw",
+      "steps": 800
+    },
+    "cell_id": "cell-010-e2d6e09349f6",
+    "cell_index": 10,
+    "config_hash": "e2d6e09349f6de20013a19caf19ef8d3ad0d1a80e669a44bea66ae46a2682f80",
+    "model_config": {
+      "beta": 1.0,
+      "d_model": 32,
+      "ffn_width": null,
+      "memory_size": 4,
+      "num_concepts": 128,
+      "num_heads": 1,
+      "num_layers": 2,
+      "rms_epsilon": 1e-06
+    },
+    "run_directory": "results/scaling-tuned-adamw-10seeds-v1",
+    "seed": 0,
+    "snapshots": [
+      {
+        "path": "seeds/cell-010-e2d6e09349f6/seed-0/snapshots/step-000000.pt",
+        "role": "selected_and_initial",
+        "sha256": "9f55a1ad231f1df817952f29752572093838a30f714252b64f7f082fb090b4fd",
+        "step": 0
+      },
+      {
+        "path": "seeds/cell-010-e2d6e09349f6/seed-0/snapshots/step-000100.pt",
+        "role": "selected",
+        "sha256": "2609f7be283916a0767c92a7bd6f2d8aeab6859dcc3582631ae951a241076807",
+        "step": 100
+      },
+      {
+        "path": "seeds/cell-010-e2d6e09349f6/seed-0/snapshots/step-000400.pt",
+        "role": "selected",
+        "sha256": "38e794583c543e1d92be60c61637a150946e27309140f3f15586fdbea1af77e4",
+        "step": 400
+      },
+      {
+        "path": "seeds/cell-010-e2d6e09349f6/seed-0/snapshots/step-000800.pt",
+        "role": "selected",
+        "sha256": "2ebcb97f37e4fb0f4715d79b2c990939fc5ca5d81eb6947b5894fbdf3eea2d65",
+        "step": 800
+      }
+    ],
+    "study_config_hash": "7097b902cc3f3a43380d0b66433b0a90ecf3915af0cdb913b8b407b76daf38af",
+    "study_id": "scaling-tuned-adamw-10seeds-v1"
+  },
+  "steps": [
+    {
+      "accuracy": 0.46875,
+      "hessian": {
+        "lanczos_steps_completed": 16,
+        "parameter_count": 12673,
+        "ritz_array": "step_000000_hessian_ritz",
+        "ritz_eigenvalues": [
+          271.84295654296875,
+          50.10356903076172,
+          39.553768157958984,
+          38.43360900878906,
+          26.20646858215332,
+          20.819429397583008,
+          13.252266883850098,
+          6.699920177459717,
+          0.207530215382576,
+          -1.010175108909607,
+          -7.851980686187744,
+          -14.0110502243042,
+          -20.238374710083008,
+          -25.703556060791016,
+          -29.824914932250977,
+          -44.46562576293945
+        ],
+        "top_array": "step_000000_hessian_top",
+        "top_eigenvalues": [
+          271.84295654296875,
+          50.10356903076172,
+          39.553768157958984,
+          38.43360900878906,
+          26.20646858215332
+        ],
+        "trace_estimate": 75.21393585205078,
+        "trace_probe_array": "step_000000_hessian_trace_probes",
+        "trace_standard_error": 102.78744506835938
+      },
+      "landscape": {
+        "direction_1_array": "step_000000_landscape_direction_1",
+        "direction_2_array": "step_000000_landscape_direction_2",
+        "direction_vector_layout": "parameter_metadata[start:stop]",
+        "loss_array": "step_000000_landscape_losses",
+        "maximum_loss": 7.18382453918457,
+        "minimum_loss": 1.306010365486145,
+        "shape": [
+          25,
+          25
+        ]
+      },
+      "linearization": {
+        "absolute_error": 0.0,
+        "function_movement": 0.0,
+        "linearized_prediction_array": "step_000000_linearized_prediction",
+        "parameter_displacement_norm": 0.0,
+        "relative_error": 0.0,
+        "relative_parameter_displacement": 0.0
+      },
+      "loss": 1.6318551301956177,
+      "ntk": {
+        "E": {
+          "alignment": 1.0000001192092896,
+          "effective_rank": 3.902632236480713,
+          "frobenius_norm": 0.26853930950164795,
+          "kernel_array": "step_000000_ntk_E",
+          "parameter_count": 4352,
+          "relative_drift": 0.0,
+          "trace": 0.5305016040802002
+        },
+        "FFN": {
+          "alignment": 0.0,
+          "effective_rank": 0.0,
+          "frobenius_norm": 0.0,
+          "kernel_array": "step_000000_ntk_FFN",
+          "parameter_count": 0,
+          "relative_drift": 0.0,
+          "trace": 0.0
+        },
+        "OV": {
+          "alignment": 1.0,
+          "effective_rank": 3.3759288787841797,
+          "frobenius_norm": 0.6425473690032959,
+          "kernel_array": "step_000000_ntk_OV",
+          "parameter_count": 4096,
+          "relative_drift": 0.0,
+          "trace": 1.1805973052978516
+        },
+        "QK": {
+          "alignment": 0.9999999403953552,
+          "effective_rank": 5.960639476776123,
+          "frobenius_norm": 0.0751694068312645,
+          "kernel_array": "step_000000_ntk_QK",
+          "parameter_count": 4096,
+          "relative_drift": 0.0,
+          "trace": 0.18352174758911133
+        },
+        "full": {
+          "alignment": 1.0,
+          "effective_rank": 3.7764036655426025,
+          "frobenius_norm": 0.3699883222579956,
+          "kernel_array": "step_000000_ntk_full",
+          "parameter_count": 12673,
+          "relative_drift": 0.0,
+          "trace": 0.7189972400665283
+        },
+        "readout": {
+          "alignment": 1.0000001192092896,
+          "effective_rank": 2.5390079021453857,
+          "frobenius_norm": 10.597345352172852,
+          "kernel_array": "step_000000_ntk_readout",
+          "parameter_count": 65,
+          "relative_drift": 0.0,
+          "trace": 16.886091232299805
+        }
+      },
+      "prediction_array": "step_000000_prediction",
+      "step": 0
+    },
+    {
+      "accuracy": 1.0,
+      "hessian": {
+        "lanczos_steps_completed": 16,
+        "parameter_count": 12673,
+        "ritz_array": "step_000100_hessian_ritz",
+        "ritz_eigenvalues": [
+          63.43585968017578,
+          42.114437103271484,
+          27.89596939086914,
+          25.255414962768555,
+          17.193620681762695,
+          15.703839302062988,
+          10.803190231323242,
+          8.861411094665527,
+          6.1108269691467285,
+          3.87184739112854,
+          2.036083698272705,
+          0.20883949100971222,
+          -0.03273704648017883,
+          -1.2936660051345825,
+          -2.886914014816284,
+          -3.7799065113067627
+        ],
+        "top_array": "step_000100_hessian_top",
+        "top_eigenvalues": [
+          63.43585968017578,
+          42.114437103271484,
+          27.89596939086914,
+          25.255414962768555,
+          17.193620681762695
+        ],
+        "trace_estimate": 231.533447265625,
+        "trace_probe_array": "step_000100_hessian_trace_probes",
+        "trace_standard_error": 25.376914978027344
+      },
+      "landscape": {
+        "direction_1_array": "step_000100_landscape_direction_1",
+        "direction_2_array": "step_000100_landscape_direction_2",
+        "direction_vector_layout": "parameter_metadata[start:stop]",
+        "loss_array": "step_000100_landscape_losses",
+        "maximum_loss": 3.3881616592407227,
+        "minimum_loss": 0.04418788477778435,
+        "shape": [
+          25,
+          25
+        ]
+      },
+      "linearization": {
+        "absolute_error": 12.377544403076172,
+        "function_movement": 6.932170391082764,
+        "linearized_prediction_array": "step_000100_linearized_prediction",
+        "parameter_displacement_norm": 5.279027938842773,
+        "relative_error": 1.785522222518921,
+        "relative_parameter_displacement": 0.23871271312236786
+      },
+      "loss": 0.04418788477778435,
+      "ntk": {
+        "E": {
+          "alignment": 0.5039322376251221,
+          "effective_rank": 8.629338264465332,
+          "frobenius_norm": 0.041999701410532,
+          "kernel_array": "step_000100_ntk_E",
+          "parameter_count": 4352,
+          "relative_drift": 0.9310373067855835,
+          "trace": 0.12337721139192581
+        },
+        "FFN": {
+          "alignment": 0.0,
+          "effective_rank": 0.0,
+          "frobenius_norm": 0.0,
+          "kernel_array": "step_000100_ntk_FFN",
+          "parameter_count": 0,
+          "relative_drift": 0.0,
+          "trace": 0.0
+        },
+        "OV": {
+          "alignment": 0.7883375883102417,
+          "effective_rank": 6.8451924324035645,
+          "frobenius_norm": 0.1599149852991104,
+          "kernel_array": "step_000100_ntk_OV",
+          "parameter_count": 4096,
+          "relative_drift": 0.8182554841041565,
+          "trace": 0.418390691280365
+        },
+        "QK": {
+          "alignment": 0.18227311968803406,
+          "effective_rank": 5.74817419052124,
+          "frobenius_norm": 0.016111643984913826,
+          "kernel_array": "step_000100_ntk_QK",
+          "parameter_count": 4096,
+          "relative_drift": 0.9837705492973328,
+          "trace": 0.0386282317340374
+        },
+        "full": {
+          "alignment": 0.7509293556213379,
+          "effective_rank": 6.7671990394592285,
+          "frobenius_norm": 0.1061539500951767,
+          "kernel_array": "step_000100_ntk_full",
+          "parameter_count": 12673,
+          "relative_drift": 0.8071045279502869,
+          "trace": 0.27614718675613403
+        },
+        "readout": {
+          "alignment": 0.6343967914581299,
+          "effective_rank": 3.5406553745269775,
+          "frobenius_norm": 8.669897079467773,
+          "kernel_array": "step_000100_ntk_readout",
+          "parameter_count": 65,
+          "relative_drift": 0.7945407032966614,
+          "trace": 16.313823699951172
+        }
+      },
+      "prediction_array": "step_000100_prediction",
+      "step": 100
+    },
+    {
+      "accuracy": 1.0,
+      "hessian": {
+        "lanczos_steps_completed": 16,
+        "parameter_count": 12673,
+        "ritz_array": "step_000400_hessian_ritz",
+        "ritz_eigenvalues": [
+          70.56494140625,
+          18.97369384765625,
+          6.35981559753418,
+          4.788110733032227,
+          4.3287200927734375,
+          2.885666608810425,
+          2.444593667984009,
+          1.861602783203125,
+          1.34275221824646,
+          1.057729721069336,
+          0.679964005947113,
+          0.38560208678245544,
+          0.14818094670772552,
+          0.0006421541911549866,
+          -0.0401993989944458,
+          -0.17678946256637573
+        ],
+        "top_array": "step_000400_hessian_top",
+        "top_eigenvalues": [
+          70.56494140625,
+          18.97369384765625,
+          6.35981559753418,
+          4.788110733032227,
+          4.3287200927734375
+        ],
+        "trace_estimate": 83.39035034179688,
+        "trace_probe_array": "step_000400_hessian_trace_probes",
+        "trace_standard_error": 17.89952278137207
+      },
+      "landscape": {
+        "direction_1_array": "step_000400_landscape_direction_1",
+        "direction_2_array": "step_000400_landscape_direction_2",
+        "direction_vector_layout": "parameter_metadata[start:stop]",
+        "loss_array": "step_000400_landscape_losses",
+        "maximum_loss": 3.3664331436157227,
+        "minimum_loss": 0.0009249422582797706,
+        "shape": [
+          25,
+          25
+        ]
+      },
+      "linearization": {
+        "absolute_error": 13.980335235595703,
+        "function_movement": 7.193238258361816,
+        "linearized_prediction_array": "step_000400_linearized_prediction",
+        "parameter_displacement_norm": 6.463372230529785,
+        "relative_error": 1.9435384273529053,
+        "relative_parameter_displacement": 0.29226765036582947
+      },
+      "loss": 0.0009249422582797706,
+      "ntk": {
+        "E": {
+          "alignment": 0.805012583732605,
+          "effective_rank": 5.161462783813477,
+          "frobenius_norm": 0.0076466822065413,
+          "kernel_array": "step_000400_ntk_E",
+          "parameter_count": 4352,
+          "relative_drift": 0.97722327709198,
+          "trace": 0.017372384667396545
+        },
+        "FFN": {
+          "alignment": 0.0,
+          "effective_rank": 0.0,
+          "frobenius_norm": 0.0,
+          "kernel_array": "step_000400_ntk_FFN",
+          "parameter_count": 0,
+          "relative_drift": 0.0,
+          "trace": 0.0
+        },
+        "OV": {
+          "alignment": 0.6036874055862427,
+          "effective_rank": 4.280465602874756,
+          "frobenius_norm": 0.08861350268125534,
+          "kernel_array": "step_000400_ntk_OV",
+          "parameter_count": 4096,
+          "relative_drift": 0.9233149290084839,
+          "trace": 0.18333500623703003
+        },
+        "QK": {
+          "alignment": 0.14323189854621887,
+          "effective_rank": 3.636741876602173,
+          "frobenius_norm": 0.001049081445671618,
+          "kernel_array": "step_000400_ntk_QK",
+          "parameter_count": 4096,
+          "relative_drift": 0.9980965256690979,
+          "trace": 0.002000624779611826
+        },
+        "full": {
+          "alignment": 0.3743036091327667,
+          "effective_rank": 2.5493011474609375,
+          "frobenius_norm": 0.09306059777736664,
+          "kernel_array": "step_000400_ntk_full",
+          "parameter_count": 12673,
+          "relative_drift": 0.9353994131088257,
+          "trace": 0.1485854983329773
+        },
+        "readout": {
+          "alignment": 0.19744521379470825,
+          "effective_rank": 1.5770343542099,
+          "frobenius_norm": 12.781821250915527,
+          "kernel_array": "step_000400_ntk_readout",
+          "parameter_count": 65,
+          "relative_drift": 1.4065806865692139,
+          "trace": 16.051414489746094
+        }
+      },
+      "prediction_array": "step_000400_prediction",
+      "step": 400
+    },
+    {
+      "accuracy": 1.0,
+      "hessian": {
+        "lanczos_steps_completed": 16,
+        "parameter_count": 12673,
+        "ritz_array": "step_000800_hessian_ritz",
+        "ritz_eigenvalues": [
+          72.05047607421875,
+          13.517723083496094,
+          3.708676815032959,
+          3.2251174449920654,
+          2.6243059635162354,
+          1.6722198724746704,
+          1.3323866128921509,
+          0.9272592067718506,
+          0.7160676717758179,
+          0.5895904898643494,
+          0.4448627829551697,
+          0.33030104637145996,
+          0.14216682314872742,
+          0.03649338707327843,
+          -2.1288380594342016e-05,
+          -0.0280118640512228
+        ],
+        "top_array": "step_000800_hessian_top",
+        "top_eigenvalues": [
+          72.05047607421875,
+          13.517723083496094,
+          3.708676815032959,
+          3.2251174449920654,
+          2.6243059635162354
+        ],
+        "trace_estimate": 66.55403900146484,
+        "trace_probe_array": "step_000800_hessian_trace_probes",
+        "trace_standard_error": 16.043846130371094
+      },
+      "landscape": {
+        "direction_1_array": "step_000800_landscape_direction_1",
+        "direction_2_array": "step_000800_landscape_direction_2",
+        "direction_vector_layout": "parameter_metadata[start:stop]",
+        "loss_array": "step_000800_landscape_losses",
+        "maximum_loss": 3.5372395515441895,
+        "minimum_loss": 0.000231621103012003,
+        "shape": [
+          25,
+          25
+        ]
+      },
+      "linearization": {
+        "absolute_error": 14.399129867553711,
+        "function_movement": 7.2081403732299805,
+        "linearized_prediction_array": "step_000800_linearized_prediction",
+        "parameter_displacement_norm": 6.727023124694824,
+        "relative_error": 1.9976205825805664,
+        "relative_parameter_displacement": 0.3041897118091583
+      },
+      "loss": 0.000231621103012003,
+      "ntk": {
+        "E": {
+          "alignment": 0.8918527960777283,
+          "effective_rank": 4.002130031585693,
+          "frobenius_norm": 0.004336942452937365,
+          "kernel_array": "step_000800_ntk_E",
+          "parameter_count": 4352,
+          "relative_drift": 0.9856235384941101,
+          "trace": 0.008676194585859776
+        },
+        "FFN": {
+          "alignment": 0.0,
+          "effective_rank": 0.0,
+          "frobenius_norm": 0.0,
+          "kernel_array": "step_000800_ntk_FFN",
+          "parameter_count": 0,
+          "relative_drift": 0.0,
+          "trace": 0.0
+        },
+        "OV": {
+          "alignment": 0.5365375876426697,
+          "effective_rank": 3.598440408706665,
+          "frobenius_norm": 0.07321210950613022,
+          "kernel_array": "step_000800_ntk_OV",
+          "parameter_count": 4096,
+          "relative_drift": 0.9437774419784546,
+          "trace": 0.13888010382652283
+        },
+        "QK": {
+          "alignment": 0.17121946811676025,
+          "effective_rank": 4.817479133605957,
+          "frobenius_norm": 0.00028390210354700685,
+          "kernel_array": "step_000800_ntk_QK",
+          "parameter_count": 4096,
+          "relative_drift": 0.999360203742981,
+          "trace": 0.0006231336737982929
+        },
+        "full": {
+          "alignment": 0.29806986451148987,
+          "effective_rank": 1.9736353158950806,
+          "frobenius_norm": 0.09288153797388077,
+          "kernel_array": "step_000800_ntk_full",
+          "parameter_count": 12673,
+          "relative_drift": 0.9557020664215088,
+          "trace": 0.1304856836795807
+        },
+        "readout": {
+          "alignment": 0.15984484553337097,
+          "effective_rank": 1.3695224523544312,
+          "frobenius_norm": 13.693987846374512,
+          "kernel_array": "step_000800_ntk_readout",
+          "parameter_count": 65,
+          "relative_drift": 1.5022313594818115,
+          "trace": 16.025609970092773
+        }
+      },
+      "prediction_array": "step_000800_prediction",
+      "step": 800
+    }
+  ]
+}

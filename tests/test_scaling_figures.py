@@ -42,8 +42,8 @@ class StaticFigureExportTests(unittest.TestCase):
             self.assertTrue(svg.is_file())
             self.assertEqual(png.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
             svg_text = svg.read_text(encoding="utf-8")
-            self.assertIn("Normalized embedding-rank factorial effects", svg_text)
-            self.assertIn("n=10 paired training seeds", svg_text)
+            self.assertIn("Exploratory normalized embedding-rank contrasts", svg_text)
+            self.assertIn("unadjusted pointwise 95% bootstrap CIs", svg_text)
 
     def test_repeated_render_is_byte_stable(self) -> None:
         """A rerun must not change hashes because of SVG dates or random IDs."""

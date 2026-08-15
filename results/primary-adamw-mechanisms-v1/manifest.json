@@ -1,0 +1,27 @@
+{
+  "configuration": {
+    "evaluation_batch_size": 512,
+    "evaluation_seed_offset": 900000,
+    "selected_steps": [
+      0,
+      50,
+      100,
+      400
+    ]
+  },
+  "device": "cuda",
+  "evaluation_contract_hash": "aa23f33836a27cc04d292097b26ece4d78fe4e62b3c7f3ef024a24581991646f",
+  "failed_snapshot_rows": 0,
+  "last_invocation": {
+    "completed_snapshot_rows": 384,
+    "failed_snapshot_rows": 0,
+    "output_rows": 384,
+    "planned_snapshot_rows": 384,
+    "skipped_snapshot_rows": 0
+  },
+  "output_rows": 384,
+  "planned_snapshot_rows": 384,
+  "schema_version": 1,
+  "training_study_config_hash": "90f25d44730697fcd428fca6afac9f254a3ad500980f2eaa99d12549933b5fe0",
+  "training_study_id": "primary-adamw-12seeds-v1"
+}

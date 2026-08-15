@@ -232,6 +232,103 @@ class ReadOnlyStudyLoadingTests(unittest.TestCase):
         self.assertAlmostEqual(final[0]["normalized_rank"], 0.75)
         self.assertTrue(final[0]["gate_pass"])
 
+    def test_loader_accepts_checkpoint_free_published_aggregate_table(self) -> None:
+        """A public clone can rebuild analyses without model checkpoint directories."""
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = {
+                "schema_version": 1,
+                "study_id": "tiny-public",
+                "completed_seed_runs": 1,
+                "failed_seed_runs": 0,
+                "scheduled_seed_runs": 1,
+                "checkpoint_steps": [0, 10],
+            }
+            (root / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            common = {
+                "study_id": "tiny-public",
+                "cell_id": "cell-000-test",
+                "cell_index": 0,
+                "seed": 7,
+                "num_concepts": 8,
+                "memory_size": 4,
+                "d_model": 8,
+                "num_layers": 2,
+                "num_heads": 1,
+                "ffn_width": None,
+                "optimizer": "adamw",
+                "learning_rate": 0.003,
+                "steps": 10,
+                "batch_size": 16,
+            }
+            rows = [
+                {
+                    **common,
+                    "step": step,
+                    "loss": loss,
+                    "accuracy": accuracy,
+                    "value_flip_effect": effect,
+                    "target_key_effect": effect,
+                    "embedding_effective_rank": rank,
+                }
+                for step, loss, accuracy, effect, rank in (
+                    (0, 1.0, 0.5, 0.0, 4.0),
+                    (10, 0.01, 1.0, 1.0, 6.0),
+                )
+            ]
+            (root / "trajectory_metrics.json").write_text(
+                json.dumps(rows), encoding="utf-8"
+            )
+
+            loaded = load_history_study(root, expected_seed_runs=1)
+
+        self.assertEqual(loaded["audit"]["source_layout"], "aggregate_table")
+        self.assertEqual(loaded["audit"]["history_files"], 0)
+        self.assertEqual(len(loaded["trajectory_rows"]), 2)
+        self.assertTrue(final_seed_rows(loaded["trajectory_rows"])[0]["gate_pass"])
+
+    def test_loader_verifies_retained_dynamics_history_against_aggregate(self) -> None:
+        """A minimal dynamics source chain may coexist with a complete public table."""
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._write_minimal_study(root)
+            manifest_path = root / "manifest.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["completed_seed_runs"] = 2
+            manifest["scheduled_seed_runs"] = 2
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            history_path = root / "seeds" / "cell-000-test" / "seed-7" / "history.json"
+            history = json.loads(history_path.read_text(encoding="utf-8"))
+            common = {
+                "study_id": "tiny",
+                "cell_id": "cell-000-test",
+                "cell_index": 0,
+                **history["cell"],
+            }
+            aggregate = [
+                {**common, "seed": seed, **checkpoint}
+                for seed in (7, 8)
+                for checkpoint in history["checkpoints"]
+            ]
+            aggregate_path = root / "trajectory_metrics.json"
+            aggregate_path.write_text(json.dumps(aggregate), encoding="utf-8")
+
+            loaded = load_history_study(root, expected_seed_runs=2)
+            self.assertEqual(
+                loaded["audit"]["source_layout"],
+                "aggregate_table_with_verified_partial_histories",
+            )
+            self.assertEqual(loaded["audit"]["partial_history_rows_validated"], 2)
+            self.assertEqual(len(loaded["trajectory_rows"]), 4)
+
+            aggregate[0]["loss"] = 2.0
+            aggregate_path.write_text(json.dumps(aggregate), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "conflicts with aggregate"):
+                load_history_study(root, expected_seed_runs=2)
+
     def test_loader_rejects_manifest_that_claims_failed_runs(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

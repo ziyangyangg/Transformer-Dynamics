@@ -516,11 +516,12 @@ def _chart_contracts() -> list[dict[str, object]]:
         },
         {
             "figure": "factorial_rank_effects",
-            "question": "How do width, load, heads, FFN and registered interactions change r_eff/d?",
+            "question": "What exploratory scale, load, heads, FFN, and selected-interaction patterns appear in r_eff/d?",
             "family": "uncertainty / paired dot and interval",
             "sample_unit": "training seed",
             "n": 10,
             "non_color_encoding": "filled circles for main effects; open diamonds for interactions",
+            "inference_status": "secondary exploratory contrasts; unadjusted pointwise intervals",
         },
         {
             "figure": "high_lr_stress_vs_remedy",
@@ -570,7 +571,7 @@ def _readme(
 
     return rf"""# Tuned scaling analysis v1
 
-这是一份只读派生分析；原始训练与 mechanism 结果没有被修改。统计单位始终是 training seed，所有主效应和交互先在同一 seed 的完整 16-cell 网格内形成 contrast，再进行 20,000 次 whole-seed bootstrap。
+这是一份只读派生分析；原始训练与 mechanism 结果没有被修改。统计单位始终是 training seed，所有主效应和交互先在同一 seed 的完整 16-cell 网格内形成 contrast，再进行 20,000 次 whole-seed bootstrap。normalized rank 与未注册 interactions 属于 secondary family；下列 7 个选择后 contrasts 只报告未做 BH/family correction 的 pointwise percentile intervals，因此是 exploratory pattern discovery，不是 confirmatory factorial inference。
 
 ## 精确 estimand
 
@@ -585,7 +586,7 @@ $$\Delta_A(s)=2\,16^{{-1}}\sum_x x_Ay_s(x),\qquad
 - 含 donor 与 on-manifold swap 的 full causal-robustness gate：{full_gate["passed_seed_runs"]}/{full_gate["total_seed_runs"]} seed-runs，{full_gate["passed_architecture_cells"]}/{full_gate["total_architecture_cells"]} architecture cells。
 - high-LR stress → tuned 的 gate transitions：fail→pass={transition["fail_to_pass"]}，pass→pass={transition["pass_to_pass"]}，pass→fail={transition["pass_to_fail"]}。
 
-Normalized-rank contrasts：
+Exploratory normalized-rank contrasts（unadjusted pointwise intervals）：
 
 {chr(10).join(effect_line(term) for term in ("width", "load", "heads", "ffn", "heads:load", "heads:width", "ffn:load"))}
 
@@ -600,7 +601,7 @@ Normalized-rank contrasts：
 ## 复现
 
 ```bash
-MPLCONFIGDIR=/tmp/transformer-dynamics-mpl PYTHONPATH=src /home/zion/miniforge3/envs/llm4rec/bin/python -m routing_lab.scaling_study
+MPLCONFIGDIR=/tmp/transformer-dynamics-mpl PYTHONPATH=src python -m routing_lab.scaling_study
 ```
 
 精确数值见同目录 CSV/JSON；`figures/` 同时提供 PNG 与 searchable SVG。
@@ -803,8 +804,17 @@ def run_scaling_study(
         "factorial_effects": {
             "normalized_rank": rank_family,
             "embedding_coherence": coherence_family,
+            "inference_status": {
+                "classification": "secondary_exploratory_unadjusted",
+                "selected_contrasts": 7,
+                "pointwise_intervals": True,
+                "bh_q_0_10_applied": False,
+            },
             "inference_scope": (
-                "All 160 runs pass the base routing gate. Because only 12/16 cells "
+                "Normalized rank and unregistered interactions are secondary; the "
+                "seven displayed percentile intervals are pointwise and unadjusted, "
+                "so they are exploratory. All 160 runs pass the base routing gate. "
+                "Because only 12/16 cells "
                 "pass the stricter swap gate, rank effects are not yet a strict "
                 "functional-equivalence capacity law."
             ),

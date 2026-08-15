@@ -108,13 +108,13 @@ class PairedBootstrapContractTests(unittest.TestCase):
                 ]
             )
 
-        arguments = dict(
-            endpoint="metric",
-            condition_key="cell",
-            reference="a",
-            treatment="b",
-            bootstrap=self.bootstrap,
-        )
+        arguments = {
+            "endpoint": "metric",
+            "condition_key": "cell",
+            "reference": "a",
+            "treatment": "b",
+            "bootstrap": self.bootstrap,
+        }
         first = paired_bootstrap_summary(records, **arguments)
         second = paired_bootstrap_summary(list(reversed(records)), **arguments)
         self.assertEqual(first, second)
@@ -129,7 +129,9 @@ class PairedBootstrapContractTests(unittest.TestCase):
         self.assertEqual(first["rng_seed"], 1701)
         self.assertEqual(changed_seed["rng_seed"], 1702)
 
-    def test_duplicate_tidy_keys_are_rejected_instead_of_averaged_silently(self) -> None:
+    def test_duplicate_tidy_keys_are_rejected_instead_of_averaged_silently(
+        self,
+    ) -> None:
         records = [
             _record(1, "a", "metric", 1.0),
             _record(1, "a", "metric", 2.0),
@@ -225,9 +227,7 @@ class InteractionAndEndpointFamilyTests(unittest.TestCase):
                 )
         # This seed is complete for rank but incomplete for route_error.  The family
         # must remove it from *both* endpoints to preserve joint seed resampling.
-        records.extend(
-            [_record(8, "a", "rank", 1.0), _record(8, "b", "rank", 8.0)]
-        )
+        records.extend([_record(8, "a", "rank", 1.0), _record(8, "b", "rank", 8.0)])
 
         result = paired_endpoint_family(
             records,
@@ -280,14 +280,14 @@ class SimultaneousBandAndEquivalenceTests(unittest.TestCase):
                 if not (endpoint == "routing" and step == 20):
                     records.append(_record(9, "b", endpoint, 0.1, step=step))
 
-        arguments = dict(
-            endpoints=("rank", "routing"),
-            condition_key="cell",
-            reference="a",
-            treatment="b",
-            time_key="step",
-            bootstrap=self.bootstrap,
-        )
+        arguments = {
+            "endpoints": ("rank", "routing"),
+            "condition_key": "cell",
+            "reference": "a",
+            "treatment": "b",
+            "time_key": "step",
+            "bootstrap": self.bootstrap,
+        }
         result = paired_max_t_simultaneous_bands(records, **arguments)
 
         self.assertEqual(result["paired_seeds"], list(range(6)))
@@ -316,7 +316,9 @@ class SimultaneousBandAndEquivalenceTests(unittest.TestCase):
         )
         json.dumps(result, allow_nan=False)
 
-    def test_tost_requires_the_paired_ninety_percent_ci_inside_both_margins(self) -> None:
+    def test_tost_requires_the_paired_ninety_percent_ci_inside_both_margins(
+        self,
+    ) -> None:
         close_records: list[dict[str, object]] = []
         far_records: list[dict[str, object]] = []
         for seed, noise in enumerate((-0.003, 0.002, -0.001, 0.003, 0.0, -0.002)):
@@ -333,14 +335,14 @@ class SimultaneousBandAndEquivalenceTests(unittest.TestCase):
                 ]
             )
 
-        arguments = dict(
-            endpoint="accuracy",
-            condition_key="cell",
-            reference="a",
-            treatment="b",
-            margin=0.02,
-            bootstrap=self.bootstrap,
-        )
+        arguments = {
+            "endpoint": "accuracy",
+            "condition_key": "cell",
+            "reference": "a",
+            "treatment": "b",
+            "margin": 0.02,
+            "bootstrap": self.bootstrap,
+        }
         equivalent = paired_tost(close_records, **arguments)
         non_equivalent = paired_tost(far_records, **arguments)
 
@@ -353,7 +355,9 @@ class SimultaneousBandAndEquivalenceTests(unittest.TestCase):
         self.assertLess(upper, 0.02)
         json.dumps(equivalent, allow_nan=False)
 
-    def test_functional_matching_applies_all_three_registered_tost_margins(self) -> None:
+    def test_functional_matching_applies_all_three_registered_tost_margins(
+        self,
+    ) -> None:
         records: list[dict[str, object]] = []
         endpoint_changes = {
             "accuracy": 0.005,
@@ -407,7 +411,7 @@ class RegisteredGateTests(unittest.TestCase):
         self.assertEqual(thresholds.min_successful_seeds, 10)
         self.assertEqual(thresholds.min_success_rate, 0.80)
 
-    def test_function_donor_and_direct_key_causal_gates_are_kept_distinct(self) -> None:
+    def test_function_donor_and_target_edge_attention_screen_are_distinct(self) -> None:
         records: list[dict[str, object]] = []
         metrics = {
             "accuracy": 0.98,
@@ -422,7 +426,12 @@ class RegisteredGateTests(unittest.TestCase):
             # Seed variability prevents a degenerate standard error while leaving the
             # entire percentile interval strictly above zero.
             records.append(
-                _record(seed, "good", "key_selectivity", 0.08 + 0.002 * seed)
+                _record(
+                    seed,
+                    "good",
+                    "attention_key_selectivity",
+                    0.08 + 0.002 * seed,
+                )
             )
             records.append(
                 _record(seed, "good", "target_key_effect", 0.12 + 0.003 * seed)
@@ -434,9 +443,7 @@ class RegisteredGateTests(unittest.TestCase):
         )
 
         self.assertEqual(len(result["per_seed"]), 10)
-        self.assertTrue(
-            all(row["function_gate_pass"] for row in result["per_seed"])
-        )
+        self.assertTrue(all(row["function_gate_pass"] for row in result["per_seed"]))
         self.assertTrue(
             all(row["compensation_donor_gate_pass"] for row in result["per_seed"])
         )
@@ -446,9 +453,10 @@ class RegisteredGateTests(unittest.TestCase):
         self.assertEqual(cell["function_pass_rate"], 1.0)
         self.assertTrue(cell["function_cell_gate_pass"])
         self.assertTrue(cell["queried_value_causal_gate_pass"])
-        self.assertGreater(cell["key_selectivity_ci"][0], 0.0)
-        self.assertGreater(cell["target_key_effect_ci"][0], 0.0)
-        self.assertTrue(cell["direct_target_key_routing_gate_pass"])
+        self.assertGreater(cell["attention_key_selectivity_ci"][0], 0.0)
+        self.assertGreater(cell["target_edge_effect_ci"][0], 0.0)
+        self.assertFalse(cell["registered_s_key_evaluated"])
+        self.assertTrue(cell["target_edge_attention_screen_pass"])
         json.dumps(result, allow_nan=False)
 
     def test_ten_successes_and_eighty_percent_are_both_required(self) -> None:
@@ -461,7 +469,7 @@ class RegisteredGateTests(unittest.TestCase):
                 "value_flip_effect": 0.96 if passes else 0.50,
                 "donor_accuracy": 0.97,
                 "output_swap_sensitivity": 1.0e-3,
-                "key_selectivity": 0.10,
+                "attention_key_selectivity": 0.10,
                 "target_key_effect": 0.15,
             }
             for endpoint, value in metrics.items():
@@ -477,7 +485,7 @@ class RegisteredGateTests(unittest.TestCase):
         self.assertTrue(cell["function_cell_gate_pass"])
 
         # Crossing either threshold downward must fail the cell even though the
-        # positive direct-key effects themselves are unchanged.
+        # Positive target-edge and attention screen inputs themselves are unchanged.
         reduced = [row for row in records if row["seed"] != 9]
         reduced_result = evaluate_function_causal_gates(
             reduced,
@@ -486,7 +494,7 @@ class RegisteredGateTests(unittest.TestCase):
         reduced_cell = reduced_result["per_cell"]["ten-of-twelve"]
         self.assertEqual(reduced_cell["n_successful_seeds"], 9)
         self.assertFalse(reduced_cell["function_cell_gate_pass"])
-        self.assertFalse(reduced_cell["direct_target_key_routing_gate_pass"])
+        self.assertFalse(reduced_cell["target_edge_attention_screen_pass"])
 
 
 if __name__ == "__main__":

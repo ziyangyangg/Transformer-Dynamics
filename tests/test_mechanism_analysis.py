@@ -8,7 +8,9 @@ model or touching the original experiment directories.
 
 from __future__ import annotations
 
+import json
 import unittest
+from pathlib import Path
 
 from routing_lab.mechanism_analysis import (
     reduce_snapshot_rows,
@@ -16,6 +18,8 @@ from routing_lab.mechanism_analysis import (
     summarize_paired_deltas,
 )
 from routing_lab.statistics import BootstrapSpec
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _wide_row(
@@ -86,7 +90,9 @@ def _wide_row(
     }
 
 
-def _optimizer_rows(optimizer: str, final_shift: float = 0.0) -> list[dict[str, object]]:
+def _optimizer_rows(
+    optimizer: str, final_shift: float = 0.0
+) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     for seed in (0, 1, 2):
         rows.append(
@@ -179,6 +185,20 @@ class ReplicationTests(unittest.TestCase):
         self.assertFalse(qk["two_optimizer_support_desired_direction"])
         self.assertEqual(qk["n_common_eligible_seeds"], 3)
         self.assertAlmostEqual(qk["optimizer_delta_difference"], 0.1)
+
+
+class ClaimLimitTests(unittest.TestCase):
+    def test_published_qk_metric_is_marked_as_midpoint_protocol_deviation(self) -> None:
+        """A legacy field name must never be promoted to the registered estimand."""
+
+        summary = json.loads(
+            (
+                PROJECT_ROOT / "results/mechanism-analysis-v1/mechanism_summary.json"
+            ).read_text(encoding="utf-8")
+        )
+        limits = summary["claim_limits"]
+        self.assertEqual(limits["qk_metric_endpoint_split"], "symmetric_midpoint")
+        self.assertFalse(limits["qk_metric_matches_registered_endpoint_split"])
 
 
 if __name__ == "__main__":

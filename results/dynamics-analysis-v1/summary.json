@@ -25,7 +25,7 @@
     {
       "bytes": 2425,
       "path": "results/dynamics-analysis-v1/provenance.csv",
-      "sha256": "d73651e37e3aa55b64875c94b51887c04ee5491d259b3fd9a5c5b2a41f166bf5"
+      "sha256": "a0cd076f96cd50e98816934b55b117dfabc2010cdfc5a17ea4412f5188c5ddcc"
     },
     {
       "bytes": 955536,
@@ -68,9 +68,9 @@
       "sha256": "9afdcbb4c18cfc6a898196786ceb26c770c6137673687469e75fed3983346909"
     },
     {
-      "bytes": 10707,
+      "bytes": 11133,
       "path": "reports/DYNAMICS_RESULTS.md",
-      "sha256": "a207e734cbbc001dc837a1072f9e0e53d78008286d87e5e72d43a3b9bb7e163e"
+      "sha256": "a4c41bb61c0c0ae69a01034dc70fae6901bbb6773c1e049d446c3b105d181278"
     }
   ],
   "interpretation_limits": [
@@ -201,7 +201,7 @@
       "dynamics_arrays_sha256": "b2d06a8f6b7900434a769de6f58186686ab85562d32508fd51bc8966bf5be5d6",
       "dynamics_contract_hash": "a48877d9052e8bce3c808eb66fe94f0892c48959b3d9c1ffaa0e695fcbb7ffe6",
       "dynamics_directory": "results/dynamics-primary-c64-h4-noffn-seed0-v1",
-      "dynamics_manifest_sha256": "39ff4b831569f8b0fa9b63b008f1ef1fab1b63c038bc1ea1b7653901acb4aa38",
+      "dynamics_manifest_sha256": "3c12988b468dbcfc4622c294fcfaf38b7dec6c70dc17b2f213cb7e004738f24c",
       "numeric_metrics_recomputed": true,
       "run_key": "primary_noffn",
       "run_label": "Primary: C64, d16, H4, no FFN",
@@ -219,7 +219,7 @@
       "dynamics_arrays_sha256": "3859933dda2d784894e9c4c25051be12220edf6f13095a6c682986581c209e90",
       "dynamics_contract_hash": "d6dd7d2c762646bc75bcfb4acde06a76621621f56d46ef95d4a8002f0f16e33b",
       "dynamics_directory": "results/dynamics-primary-c64-h4-ffn-seed0-v1",
-      "dynamics_manifest_sha256": "cbab8a07d911dbfc7600b83f5a434c004c5b1ab5879e1cc41dd205ebf3da634a",
+      "dynamics_manifest_sha256": "7fc8d5479b9fa8825c36073bf62a06d91a70380bfb9880a1aae825ca7d220af8",
       "numeric_metrics_recomputed": true,
       "run_key": "primary_ffn",
       "run_label": "Primary: C64, d16, H4, FFN32",
@@ -237,7 +237,7 @@
       "dynamics_arrays_sha256": "38ad15d9f68f1a402ba8c0ad8d00098136087bf1df06feb75e717e3a3c4dd5e7",
       "dynamics_contract_hash": "56ac9a4ae95c1ad6fa2c7c7f3b40ffa4a382c2db55e4a244d2dfa8fae361fa68",
       "dynamics_directory": "results/dynamics-highlr-plateau-c128-d32-h1-noffn-seed0-v1",
-      "dynamics_manifest_sha256": "eedb4de6b40ffe4a49b79546f1e9c9ad10dab3adb49d009f2d8e7eea2b0d5815",
+      "dynamics_manifest_sha256": "ecad8e2c3ad9c99995f081594ea86b6118393c9d36455f04756a64cd95677b62",
       "numeric_metrics_recomputed": true,
       "run_key": "highlr_plateau",
       "run_label": "High LR plateau: C128, d32, H1",
@@ -255,7 +255,7 @@
       "dynamics_arrays_sha256": "3dc848380eaf4574036d251f5ff592663df658964f7737d826e0494560ec45e4",
       "dynamics_contract_hash": "bba5a3a301d565b6f925417da19dc2d9f32c7edaee1e9b69f50ed95127d00230",
       "dynamics_directory": "results/dynamics-tuned-c128-d32-h1-noffn-seed0-v1",
-      "dynamics_manifest_sha256": "4a7c3bfc9bedb4d7ab7ac99f05359e5242b3ec00ce024974462b6ebb77e729b0",
+      "dynamics_manifest_sha256": "6aa2fed9628e2ad2e7e10530a03a941df71dd710533a61ad1e16223b50f6353d",
       "numeric_metrics_recomputed": true,
       "run_key": "tuned",
       "run_label": "Tuned: C128, d32, H1",

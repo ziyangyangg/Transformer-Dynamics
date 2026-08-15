@@ -131,14 +131,6 @@ def load_history_study(
 
     success_paths = sorted(root.glob("seeds/*/seed-*/_SUCCESS"))
     history_paths = sorted(root.glob("seeds/*/seed-*/history.json"))
-    if len(success_paths) != completed:
-        raise ValueError(
-            f"found {len(success_paths)} _SUCCESS markers for {completed} completed runs"
-        )
-    if len(history_paths) != completed:
-        raise ValueError(
-            f"found {len(history_paths)} histories for {completed} completed runs"
-        )
     expected_steps = [
         _integer(step, field="checkpoint_step")
         for step in manifest.get("checkpoint_steps", [])
@@ -148,7 +140,20 @@ def load_history_study(
 
     rows: list[dict[str, object]] = []
     seen: set[tuple[str, int, int]] = set()
-    for history_path in history_paths:
+    source_layout: str
+
+    def append_row(row: dict[str, object]) -> None:
+        # A remedy study may intentionally repeat one architecture at different
+        # learning rates, so cell_id—not the optimizer-free cell_key—is unique.
+        key = (str(row["cell_id"]), int(row["seed"]), int(row["step"]))
+        if key in seen:
+            raise ValueError(f"duplicate trajectory row {key!r}")
+        seen.add(key)
+        rows.append(row)
+
+    def history_rows(history_path: Path) -> list[dict[str, object]]:
+        """Parse one source history without mutating the aggregate row set."""
+
         if not (history_path.parent / "_SUCCESS").is_file():
             raise ValueError(f"history lacks sibling _SUCCESS marker: {history_path}")
         history = json.loads(history_path.read_text(encoding="utf-8"))
@@ -168,22 +173,105 @@ def load_history_study(
                 f"checkpoint schedule mismatch in {history_path}: "
                 f"{observed_steps} != {expected_steps}"
             )
+        parsed: list[dict[str, object]] = []
         for checkpoint in checkpoints:
             if not isinstance(checkpoint, dict):
                 raise TypeError(f"checkpoint must be an object: {history_path}")
-            row = _history_checkpoint_row(
-                study_id=study_id,
-                history=history,
-                cell=cell,
-                checkpoint=checkpoint,
+            parsed.append(
+                _history_checkpoint_row(
+                    study_id=study_id,
+                    history=history,
+                    cell=cell,
+                    checkpoint=checkpoint,
+                )
             )
-            # A remedy study may intentionally repeat one architecture at different
-            # learning rates, so cell_id—not the optimizer-free cell_key—is unique.
-            key = (str(row["cell_id"]), int(row["seed"]), int(row["step"]))
-            if key in seen:
-                raise ValueError(f"duplicate trajectory row {key!r}")
-            seen.add(key)
-            rows.append(row)
+        return parsed
+
+    def append_aggregate_rows() -> None:
+        """Load the canonical publication table and validate every run schedule."""
+
+        aggregate_path = root / "trajectory_metrics.json"
+        if not aggregate_path.is_file():
+            raise ValueError(
+                "per-seed histories are not a complete publication and the "
+                f"aggregate table is missing: {aggregate_path}"
+            )
+        aggregate = json.loads(aggregate_path.read_text(encoding="utf-8"))
+        if not isinstance(aggregate, list) or not all(
+            isinstance(row, dict) for row in aggregate
+        ):
+            raise TypeError("trajectory_metrics.json must contain a list of objects")
+        grouped_steps: dict[tuple[str, int], list[int]] = {}
+        for flat in aggregate:
+            if str(flat.get("study_id")) != study_id:
+                raise ValueError("aggregate row study_id conflicts with its manifest")
+            append_row(
+                _history_checkpoint_row(
+                    study_id=study_id,
+                    history=flat,
+                    cell=flat,
+                    checkpoint=flat,
+                )
+            )
+            group = (str(flat.get("cell_id")), _integer(flat.get("seed"), field="seed"))
+            grouped_steps.setdefault(group, []).append(
+                _integer(flat.get("step"), field="step")
+            )
+        if len(grouped_steps) != completed:
+            raise ValueError(
+                f"aggregate table contains {len(grouped_steps)} seed runs, expected {completed}"
+            )
+        for group, steps in grouped_steps.items():
+            if sorted(steps) != expected_steps:
+                raise ValueError(
+                    f"aggregate checkpoint schedule mismatch for {group!r}: "
+                    f"{sorted(steps)} != {expected_steps}"
+                )
+
+    if len(success_paths) == completed and len(history_paths) == completed:
+        source_layout = "per_seed_histories"
+        for history_path in history_paths:
+            for row in history_rows(history_path):
+                append_row(row)
+    else:
+        # Public bundles may retain a small, explicitly registered subset of source
+        # histories for dynamics provenance while omitting the remaining checkpoint
+        # trees.  The complete aggregate table remains canonical for scaling, and
+        # every retained history must agree row-for-row with that table.
+        if len(success_paths) != len(history_paths):
+            raise ValueError(
+                "partial per-seed evidence has mismatched markers/histories: "
+                f"{len(success_paths)} _SUCCESS versus {len(history_paths)} histories"
+            )
+        if len(history_paths) >= completed:
+            raise ValueError(
+                f"invalid partial history count {len(history_paths)} for {completed} runs"
+            )
+        source_layout = (
+            "aggregate_table"
+            if not history_paths
+            else "aggregate_table_with_verified_partial_histories"
+        )
+        append_aggregate_rows()
+        aggregate_by_key = {
+            (str(row["cell_id"]), int(row["seed"]), int(row["step"])): row
+            for row in rows
+        }
+        for history_path in history_paths:
+            for retained in history_rows(history_path):
+                key = (
+                    str(retained["cell_id"]),
+                    int(retained["seed"]),
+                    int(retained["step"]),
+                )
+                if key not in aggregate_by_key:
+                    raise ValueError(
+                        f"retained source history row is absent from aggregate: {key!r}"
+                    )
+                if retained != aggregate_by_key[key]:
+                    raise ValueError(
+                        f"retained source history conflicts with aggregate row: {key!r}"
+                    )
     rows.sort(
         key=lambda row: (
             int(row["cell_index"]),
@@ -201,6 +289,12 @@ def load_history_study(
             "failed_seed_runs": failed,
             "success_markers": len(success_paths),
             "history_files": len(history_paths),
+            "source_layout": source_layout,
+            "partial_history_rows_validated": (
+                0
+                if source_layout == "per_seed_histories"
+                else len(history_paths) * len(expected_steps)
+            ),
             "checkpoint_rows": len(rows),
             "checkpoint_steps": expected_steps,
             "read_only_source": True,

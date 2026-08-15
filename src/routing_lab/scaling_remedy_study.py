@@ -8,7 +8,6 @@ import hashlib
 import json
 import math
 import platform
-import subprocess
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
@@ -126,18 +125,24 @@ def _source_descriptor(
     }
 
 
-def _git_commit() -> str:
-    """Resolve the exact checked-out code commit used for the analysis."""
+def _analysis_code_provenance() -> dict[str, object]:
+    """Fingerprint exact generator sources without commit-hash self-reference."""
 
     repository = Path(__file__).resolve().parents[2]
-    completed = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=repository,
-        check=True,
-        capture_output=True,
-        text=True,
+    relative_sources = (
+        "src/routing_lab/scaling_remedy_study.py",
+        "src/routing_lab/scaling_remedy.py",
+        "src/routing_lab/scaling_remedy_figures.py",
+        "src/routing_lab/scaling_io.py",
+        "src/routing_lab/scaling_analysis.py",
+        "src/routing_lab/statistics.py",
     )
-    return completed.stdout.strip()
+    return {
+        "method": "sha256_of_generator_sources",
+        "source_sha256": {
+            relative: _sha256(repository / relative) for relative in relative_sources
+        },
+    }
 
 
 def _delta_direction(row: Row, endpoint: str) -> str:
@@ -284,6 +289,12 @@ def _readme(
 
     return rf"""# Scaling remedy analysis (b=2048)
 
+> **Inference status: targeted exploratory follow-up.** Cells were selected after the
+> earlier screen and training seeds 0--9 were reused. The 20,000-resample intervals
+> below are unadjusted pointwise paired intervals; this run did not supply the
+> independently sampled remedy and never-tuned confirmatory seeds required by
+> `reports/ANALYSIS_PROTOCOL.md` for a confirmatory phase-boundary claim.
+
 这份 follow-up 不把不同 evaluation stream 混进同一个训练效果估计。主分析的 baseline、low-LR remedy 与 same-LR extension 全部使用 `evaluation_batch_size=2048`、`evaluation_seed_offset=910000`；同一 cell 与 seed 因此共享 evaluation RNG contract。
 
 ## Estimand
@@ -316,7 +327,7 @@ $$
 |---|---:|---:|---:|---:|---:|---:|
 {chr(10).join(lines)}
 
-最重要的区分：same-LR extension 使 cells 3/7 的 swap error 显著下降，但仍未达到 10/10。lower-LR + longer-training schedule 下，两者的 sample mean 都上升；cell 3 的 paired CI 完全高于零，cell 7 的 swap CI 跨零（但其 base、donor 和 Walsh-leakage CI 均显示上升），所以不能把 cell 7 的 swap 变化写成确定恶化。Cell 11 在 low-LR schedule 下达到 10/10，但 same-LR extension 只有 8/10。Cell 6 在 b=2048 下是 9/10→9/10，不是稳健解决。
+最重要的区分：在这批定向复用的 seeds 上，same-LR extension 使 cells 3/7 的 swap error 的未校正 pointwise CI 完全低于零，但仍未达到 10/10；这是探索性支持而不是新样本确认。lower-LR + longer-training schedule 下，两者的 sample mean 都上升；cell 3 的 pointwise paired CI 完全高于零，cell 7 的 swap CI 跨零（但其 base、donor 和 Walsh-leakage CI 均显示上升），所以不能把 cell 7 的 swap 变化写成确定恶化。Cell 11 在 low-LR schedule 下达到 10/10，但 same-LR extension 只有 8/10。Cell 6 在 b=2048 下是 9/10→9/10，不是稳健解决。
 
 这些是 schedule-level function effects，不能自动定位为 QK、OV 或 FFN 补偿。要做机制结论，下一步必须把 paired seed 的 attention/path、OV selectivity、FFN signed contribution 与 swap/Walsh change 联合起来。
 
@@ -328,7 +339,7 @@ $$
 
 ```bash
 MPLCONFIGDIR=/tmp/transformer-dynamics-mpl PYTHONPATH=src \\
-  /home/zion/miniforge3/envs/llm4rec/bin/python -m routing_lab.scaling_remedy_study
+  python -m routing_lab.scaling_remedy_study
 ```
 
 精确 seed rows、endpoint CIs、source hashes 和图表合同均在本目录中。
@@ -345,7 +356,7 @@ def run_remedy_study(
     output_directory: str | Path,
     bootstrap: BootstrapSpec = DEFAULT_BOOTSTRAP,
 ) -> dict[str, object]:
-    """Run all paired confirmatory and evaluation-sensitivity analyses."""
+    """Run targeted paired remedy and evaluation-sensitivity analyses."""
 
     output = Path(output_directory)
     output.mkdir(parents=True, exist_ok=True)
@@ -465,7 +476,7 @@ def run_remedy_study(
     summary = {
         "schema_version": 1,
         "analysis_id": ANALYSIS_ID,
-        "analysis_code_commit": _git_commit(),
+        "analysis_code_provenance": _analysis_code_provenance(),
         "runtime": {
             "python": platform.python_version(),
             "numpy": np.__version__,
@@ -478,6 +489,14 @@ def run_remedy_study(
             "n_resamples": bootstrap.n_resamples,
             "confidence_level": bootstrap.confidence_level,
             "rng_seed": bootstrap.rng_seed,
+        },
+        "inference_status": {
+            "classification": "targeted_exploratory_followup",
+            "selected_cells": True,
+            "reused_training_seeds": True,
+            "familywise_correction": False,
+            "independent_remedy_seeds": False,
+            "never_tuned_confirmatory_seeds": False,
         },
         "estimand": ("within-cell, within-seed followup-minus-step800-baseline mean"),
         "baseline_gate_overview": baseline_overview,
@@ -497,7 +516,9 @@ def run_remedy_study(
         "figures": figures,
         "claim_guardrail": (
             "Schedule effects do not by themselves localize compensation to QK, "
-            "OV, FFN, or readout and are not an open-problem claim."
+            "OV, FFN, or readout; pointwise intervals are targeted exploratory "
+            "evidence, not independent-seed confirmatory inference or an "
+            "open-problem claim."
         ),
     }
     _write_json(output / "summary.json", summary)
@@ -520,7 +541,7 @@ def run_remedy_study(
     manifest = {
         "schema_version": 1,
         "analysis_id": ANALYSIS_ID,
-        "analysis_code_commit": summary["analysis_code_commit"],
+        "analysis_code_provenance": summary["analysis_code_provenance"],
         "sampling_unit": "training_seed",
         "bootstrap_resamples": bootstrap.n_resamples,
         "source_directories_read_only": True,

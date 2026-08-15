@@ -10,9 +10,10 @@
   {
     "family": "uncertainty / paired dot and interval",
     "figure": "factorial_rank_effects",
+    "inference_status": "secondary exploratory contrasts; unadjusted pointwise intervals",
     "n": 10,
     "non_color_encoding": "filled circles for main effects; open diamonds for interactions",
-    "question": "How do width, load, heads, FFN and registered interactions change r_eff/d?",
+    "question": "What exploratory scale, load, heads, FFN, and selected-interaction patterns appear in r_eff/d?",
     "sample_unit": "training seed"
   },
   {

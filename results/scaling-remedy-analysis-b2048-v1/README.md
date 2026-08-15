@@ -1,5 +1,11 @@
 # Scaling remedy analysis (b=2048)
 
+> **Inference status: targeted exploratory follow-up.** Cells were selected after the
+> earlier screen and training seeds 0--9 were reused. The 20,000-resample intervals
+> below are unadjusted pointwise paired intervals; this run did not supply the
+> independently sampled remedy and never-tuned confirmatory seeds required by
+> `reports/ANALYSIS_PROTOCOL.md` for a confirmatory phase-boundary claim.
+
 这份 follow-up 不把不同 evaluation stream 混进同一个训练效果估计。主分析的 baseline、low-LR remedy 与 same-LR extension 全部使用 `evaluation_batch_size=2048`、`evaluation_seed_offset=910000`；同一 cell 与 seed 因此共享 evaluation RNG contract。
 
 ## Estimand
@@ -38,7 +44,7 @@ $$
 | low_lr_1600 | 7 | 0/10 | 0/10 | 0.021428 | 0.028428 | +0.007000 [-0.000065, +0.014697] |
 | low_lr_1600 | 11 | 7/10 | 10/10 | 0.000955 | 0.000220 | -0.000735 [-0.001588, +0.000060] |
 
-最重要的区分：same-LR extension 使 cells 3/7 的 swap error 显著下降，但仍未达到 10/10。lower-LR + longer-training schedule 下，两者的 sample mean 都上升；cell 3 的 paired CI 完全高于零，cell 7 的 swap CI 跨零（但其 base、donor 和 Walsh-leakage CI 均显示上升），所以不能把 cell 7 的 swap 变化写成确定恶化。Cell 11 在 low-LR schedule 下达到 10/10，但 same-LR extension 只有 8/10。Cell 6 在 b=2048 下是 9/10→9/10，不是稳健解决。
+最重要的区分：在这批定向复用的 seeds 上，same-LR extension 使 cells 3/7 的 swap error 的未校正 pointwise CI 完全低于零，但仍未达到 10/10；这是探索性支持而不是新样本确认。lower-LR + longer-training schedule 下，两者的 sample mean 都上升；cell 3 的 pointwise paired CI 完全高于零，cell 7 的 swap CI 跨零（但其 base、donor 和 Walsh-leakage CI 均显示上升），所以不能把 cell 7 的 swap 变化写成确定恶化。Cell 11 在 low-LR schedule 下达到 10/10，但 same-LR extension 只有 8/10。Cell 6 在 b=2048 下是 9/10→9/10，不是稳健解决。
 
 这些是 schedule-level function effects，不能自动定位为 QK、OV 或 FFN 补偿。要做机制结论，下一步必须把 paired seed 的 attention/path、OV selectivity、FFN signed contribution 与 swap/Walsh change 联合起来。
 
@@ -50,7 +56,7 @@ $$
 
 ```bash
 MPLCONFIGDIR=/tmp/transformer-dynamics-mpl PYTHONPATH=src \\
-  /home/zion/miniforge3/envs/llm4rec/bin/python -m routing_lab.scaling_remedy_study
+  python -m routing_lab.scaling_remedy_study
 ```
 
 精确 seed rows、endpoint CIs、source hashes 和图表合同均在本目录中。

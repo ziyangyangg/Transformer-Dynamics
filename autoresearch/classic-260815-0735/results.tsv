@@ -10,7 +10,7 @@ iteration	change	verify	decision	note
 8	official GPU smoke study	4/4 seed runs pass all function gates	keep	Both attention-only and FFN hardest cells reach loss<0.05, accuracy>0.99, and Xi_value>0.96 by step 150
 9	primary AdamW 2x2x2 grid	96/96 runs complete; 12 seeds per cell	keep	All cells pass the function gate; retain every seed and checkpoint for paired architecture contrasts
 10	momentum-SGD replication and stuck-seed extension	96/96 runs plus one 1600-step extension complete	keep	Optimizer replication is strong, while the retained C64-H1-noFFN seed-10 plateau shows that endpoint failures must be audited
-11	module-local mechanism replay	768 seed-snapshot rows; Parseval gap <=4.77e-6	keep	Function-level causal routing is strong; registered QK suppression has the wrong sign and is retained as a falsified mechanism hypothesis
+11	module-local mechanism replay	768 seed-snapshot rows; Parseval gap <=4.77e-6	keep	Function-level causal routing is strong; the exploratory midpoint QK statistic points opposite the simple suppression story, while the registered asymmetric estimand was not evaluated
 12	high-learning-rate width/load/head/FFN scaling	160/160 runs complete; 153 strict endpoint successes	keep	The complete factorial grid reveals both representation interactions and a concentrated d32-H1 optimization failure mode
 13	plateau remedy pilot	learning rates 0.003 and 0.001 recover all selected d32-H1 cases by 1600 steps	keep	Known optimizer remedies work, so the plateau is not promoted to a new capacity open problem
 14	tuned width/load/head/FFN scaling	160/160 runs complete; no execution failures	keep	The preregistered low-learning-rate rerun separates stable scaling phenomena from high-step-size artifacts

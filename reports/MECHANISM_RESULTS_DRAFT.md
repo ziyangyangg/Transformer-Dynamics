@@ -9,10 +9,10 @@
 1. **功能级复合 routing 得到强支持。** 通过功能门槛的模型同时具有接近 1 的
    queried-value flip effect 与 Walsh target coefficient；这说明输出函数选择了
    queried value，而不是仅仅出现好看的 attention 图。
-2. **聚合 QK 结果反对“QK route 抑制 content cross-talk”这一具体命题。**
+2. **聚合 QK midpoint 结果探索性反对“route 抑制 content cross-talk”的简单故事。**
    两个优化器的全部 cell 都得到负的终点 suppression log-ratio 和负的训练增量；
-   虽然 opposition rate 略升到 0.5 以上，但 route 总体放大而非缩小 output-relevant
-   chord。并且本表没有协议 6.4 的 finite output validation。
+   但实现使用对称 midpoint split，而协议预注册非对称 content/route/interaction split。
+   两者不等价并可能反号，因此本表没有检验预注册 QK 命题，也没有 finite output validation。
 3. **OV 结果是 target-vs-distractor 方向选择性，不是协议式 (9) 的
    isotropic-vs-swap attenuation。** 它可以说明训练让 OV 更偏好任务 value
    方向，但不能单独证明 OV 因果消除了 cross-talk。
@@ -42,9 +42,13 @@ Walsh target 不是逐样本恒等的两个数：前者每个 concept skeleton �
 的两个有限样本估计量。因此表中差异应解释为 value Monte Carlo 误差，而不是数值
 恒等式失败。真正的恒等式检查是 exhaustive Walsh Parseval gap。
 
-## 最终功能、供体与因果门槛
+## 最终功能、供体门槛与探索性 target-edge screen
 
-| optimizer | cell | function | donor | joint | acc | risk | Xi_value | swap MSE | Walsh target | direct-key gate |
+注册的 $S_{key}$ 需要逐 episode 阻断 target 与每个 distractor edge。当前评估只
+阻断 target edge；最后一列还结合了描述性的 attention mass selectivity，因此不是
+causal key-selectivity gate，且注册的 $S_{key}$ 在本批实验中尚未评估。
+
+| optimizer | cell | function | donor | joint | acc | risk | Xi_value | swap MSE | Walsh target | target-edge + attention screen |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | adamw | C16-d16-L2-H1-m4-ffn32 | 12/12 | 12/12 | 12/12 | 1.000 | 0.0001 | 1.000 | 0.00004 | 1.000 | pass |
 | adamw | C16-d16-L2-H1-m4-ffnnone | 12/12 | 12/12 | 12/12 | 1.000 | 0.0001 | 1.000 | 0.00006 | 1.000 | pass |
@@ -210,12 +214,14 @@ intervention 或 practical-floor gate。
 - **确认性的 QK/OV/FFN compensation 数量仍为 0。** 原因不是把非显著结果
   当成反证，而是 v1 estimand 本身尚未包含协议规定的 finite output validation；
   FFN 还缺 practical floor，OV 指标也不是注册的 isotropic attenuation。
-- `qk_suppression_log_ratio > 0` 表示在局部 output adjoint 上 route 比 content
-  单独更小；本实验所有聚合终点与增量均小于 0，即 route 增强而非抑制。
-  这会否定当前这个具体 QK-compensation 解释；只看 opposition rate 略高于
-  0.5 不能挽救该命题。
+- legacy 字段 `qk_suppression_log_ratio` 实际是对称 midpoint split；本实验
+  所有聚合终点与增量均小于 0，只探索性反对 midpoint QK-compensation 故事。
+  它没有保存独立 interaction 项，故不能检验预注册的非对称 contrast；
+  下一轮必须重放三个 endpoint 项与 finite hybrid。
 - natural swap MSE 与 donor accuracy 是必要 gate：若某 seed 未通过，不能把其
   下游局部抵消解释为成功保持函数不变。
+- 注册的 $S_{key}$ 需要逐一阻断 distractor edges；当前只保存 target-edge effect，
+  因而 target-edge + attention 列只是探索性 screen，不是 causal direct-key gate。
 
 ## 可复现文件
 
@@ -225,4 +231,5 @@ intervention 或 practical-floor gate。
 - `paired_delta_summary.csv`：all-scheduled 与 gate-qualified 配对增量；
 - `site_delta_summary.csv`：逐层/头配对增量；
 - `optimizer_replication.csv`：共同合格 seed 上的优化器方向复制；
-- `functional_gates.json/csv`：注册门槛及成功 seed。
+- `functional_gates.json/csv`：注册 function/donor 门槛、成功 seed，以及明确
+  标记为非注册的 target-edge + attention screen。

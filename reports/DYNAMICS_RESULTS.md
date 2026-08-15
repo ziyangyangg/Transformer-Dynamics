@@ -136,6 +136,11 @@ PYTHONPATH=src python -m routing_lab.dynamics_analysis
 PYTHONPATH=src python -m unittest -v tests/test_dynamics_analysis.py
 ```
 
+公开仓库只保留这四个 dynamics cases 所引用的 15 个最小 source snapshots，而不是全部
+5,103 个训练快照；较大 held-out 功能指标来自发布的 aggregate trajectory tables。默认命令
+会验证 15 个 snapshots 的 SHA-256、source manifest、cell/seed/step 身份以及派生 NPZ，
+并从 aggregate table 读取对应 source evaluations；缺少任一注册 snapshot 时会 fail closed。
+
 输出目录 `results/dynamics-analysis-v1` 包含：
 
 - `run_steps.csv`：run/checkpoint 级 task、linearization、landscape、Hessian 摘要；

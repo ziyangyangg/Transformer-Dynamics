@@ -766,8 +766,10 @@ f(\operatorname{do}(m=m'))
 
 \[
 \delta x_{\rm ffn}
-=F_\ell(\operatorname{RMSNorm}(x'))
--F_\ell(\operatorname{RMSNorm}(x)),
+=L^{-1/2}\left[
+F_\ell(\operatorname{RMSNorm}(x'))
+-F_\ell(\operatorname{RMSNorm}(x))
+\right],
 \]
 
 \[
@@ -801,7 +803,7 @@ C_{FFN}
 
 否则极小分母可以制造虚假的大 log ratio。
 
-令 $z=x+F_\ell(\operatorname{RMSNorm}(x))$ 是 base episode 在该 FFN residual 后的状态。
+令 $z=x+L^{-1/2}F_\ell(\operatorname{RMSNorm}(x))$ 是 base episode 在该 FFN residual 后的状态。
 finite suffix map $G_\ell$ 给
 
 \[
@@ -847,11 +849,18 @@ p_{\rm joint}
 要证明的不是 $C>d$，而是某个已注册内部 site $r$ 满足
 
 \[
-\mathbb E I_r^{\rm final}\ge\tau>0
+I_r(\theta_{\rm final})\ge\tau>0
 \quad\text{同时}\quad
-\mathbb E I_{\rm out}^{\rm final}\le\varepsilon.
+I_{\rm out}(\theta_{\rm final})\le\varepsilon.
 \tag{49}
 \]
+
+这里 (37)--(38) 中的 $I_r$ 与 $I_{\rm out}$ 本身已经对 episode 与注册 swap law
+取过期望，所以 (49) 不再重复套一层未定义的期望。如果要陈述随机初始化/训练的高概率
+定理，应另写为
+$\Pr_{\theta_0,\mathcal A}\{I_r(\theta_{\rm final})\ge\tau,
+I_{\rm out}(\theta_{\rm final})\le\varepsilon\}\ge1-\delta$，其中 $\mathcal A$
+明确表示训练随机性。
 
 若所有 upstream $I_r$ 都接近 0，则网络可能在进入共享 residual stream 前已经做了无串扰
 的 query-conditioned hashing；这会反驳“压缩几何必然需要下游补偿”。
@@ -940,6 +949,8 @@ intervention 判断消噪器究竟是“先选对人”的 QK、“只放大有�
   composite routing；
 - attention target mass、direct-key intervention、表示几何和 Walsh kernel 分开记录，
   没有从 attention 图跳到因果结论；
+- 当前实验只执行 target-edge blocking，没有逐个阻断 distractor edges；因此它记录的是
+  target path effect 与描述性 attention screen，而不是式 (13) 的注册 \(S_{\rm key}\)；
 - 一个延长训练仍未逃出的 SGD seed 先按已有 plateau/local-solution 文献处理，不命名为
   新 open problem；
 - 参数级早期 closure、收敛和 factor selection 仍未证明。
@@ -949,15 +960,18 @@ intervention 判断消噪器究竟是“先选对人”的 QK、“只放大有�
 - learned $E$ 的 effective rank 随 load、head、FFN 改变；这证明表示选择不同，不证明
   activation superposition；
 - natural distractor swap 的输出 MSE 多数很小，说明最终函数大致保持任务不变量；
-- **QK 特定 suppression 命题被当前聚合实验反对**：两个优化器的所有 cell 中，
-  (42) 的终点和 init-to-final 方向均为负，route 净放大而不是缩小 content chord；
+- **当前对称 midpoint QK suppression 故事被探索性聚合结果反对**：两个优化器的所有
+  cell 中，实现的对称统计量（不是 (42)）的终点和 init-to-final 方向均为负。由于 finite
+  interaction 在 midpoint split 中被各分一半给 content 与 route，这一结果**没有检验式
+  (42)**，不能称为预注册反证；
 - 当前 OV 指标主要是 target-vs-distractor gain，方向一致，是候选，但还不是 (43) 的
   isotropic-vs-swap finite compensation；
 - FFN tangent cancellation 只在部分 cell/优化器复制；在 practical floor 与 finite
   validation 完成前，不能确认；
-- 所以当前“已确认 compensator”数量是 **0**。这不是失败：它排除了一个宽泛 QK 故事，
-  并把下一步集中到 OV direction filtering、FFN finite residual cancellation，或“上游根本
-  没有足够 cross-talk”这一反例。
+- 所以当前“已确认 compensator”数量是 **0**。探索性 midpoint 统计只是不支持一个特定的
+  simple-QK story，不能排除宽泛 QK 机制；它把下一步集中到真正预注册的非对称 QK
+  estimand、OV direction filtering、FFN finite residual cancellation，或“上游根本没有
+  足够 cross-talk”这一反例。
 
 ---
 
@@ -1004,8 +1018,8 @@ order-parameter 轨迹、NTK drift、loss landscape 与架构分岔。
 
 **Does Learned Compression Require Downstream Compensation in Episodic Retrieval?**
 
-最小论文闭环：证明或反驳 compressed $E$ 会产生 upstream functional cross-talk；接受当前
-QK suppression 反证；用 finite on-support tests 区分 OV filtering、FFN cancellation 与
+最小论文闭环：证明或反驳 compressed $E$ 会产生 upstream functional cross-talk；把当前
+QK midpoint 结果保留为探索性候选并重新计算式 (42)；用 finite on-support tests 区分 OV filtering、FFN cancellation 与
 “no compensation needed”；最后给出至少一个可证明简化模型或容量/反例边界。
 
 这两个标题都比“解释 Transformer clustering”或“解释 superposition”窄，但每个变量、

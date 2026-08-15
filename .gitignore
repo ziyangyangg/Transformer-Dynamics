@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 results/**/checkpoints/
+results/**/seeds/
+results/**/records/
 results/**/*.pt
 results/**/*.pth
-

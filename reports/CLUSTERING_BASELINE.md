@@ -17,7 +17,8 @@ routing，也不是 learned superposition。
 [论文](https://arxiv.org/abs/2312.10794)和作者的
 [官方仓库](https://github.com/borjanG/2023-transformers-rotf)。本项目把官方仓库固定在
 commit `538ba839f7fc03d042e03ad7b557c220defc4148`，并保留
-[`sphere.py`](../third_party/2023-transformers-rotf/sphere.py) 原文件。
+官方 [`sphere.py`](https://github.com/borjanG/2023-transformers-rotf/blob/538ba839f7fc03d042e03ad7b557c220defc4148/sphere.py)
+原文件；仓库中的 submodule 同样固定在 commit `538ba839f7fc03d042e03ad7b557c220defc4148`。
 
 官方脚本同时做数值积分、三次插值、151 帧绘图和未设种子的随机初始化。这里没有直接
 运行它，而是只抽出其数学循环，固定随机种子，并一次生成可审计的轨迹和图。默认配置为

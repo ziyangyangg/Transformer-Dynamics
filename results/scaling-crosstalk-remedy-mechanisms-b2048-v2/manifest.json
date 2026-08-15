@@ -1,0 +1,24 @@
+{
+  "configuration": {
+    "evaluation_batch_size": 2048,
+    "evaluation_seed_offset": 910000,
+    "selected_steps": [
+      1600
+    ]
+  },
+  "device": "cuda",
+  "evaluation_contract_hash": "169c0bbf56b5f4088f1a719487616d28252b94a28c8e6273f00770ecc1743bdc",
+  "failed_snapshot_rows": 0,
+  "last_invocation": {
+    "completed_snapshot_rows": 40,
+    "failed_snapshot_rows": 0,
+    "output_rows": 40,
+    "planned_snapshot_rows": 40,
+    "skipped_snapshot_rows": 0
+  },
+  "output_rows": 40,
+  "planned_snapshot_rows": 40,
+  "schema_version": 1,
+  "training_study_config_hash": "171480eaba9815827e2e0b692ce6b8646ce66d84079922ce55597f50b4176a5b",
+  "training_study_id": "scaling-crosstalk-remedy-adamw-10seeds-v1"
+}

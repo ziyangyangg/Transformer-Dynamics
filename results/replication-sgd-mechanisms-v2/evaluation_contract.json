@@ -1,0 +1,16 @@
+{
+  "configuration": {
+    "evaluation_batch_size": 512,
+    "evaluation_seed_offset": 900000,
+    "selected_steps": [
+      0,
+      200,
+      400,
+      800
+    ]
+  },
+  "evaluation_contract_hash": "636491adb118227c55747c1ac2e7d79f9905e05dbe58699c1803bfbd5a8d893f",
+  "schema_version": 1,
+  "training_study_config_hash": "acac69fd0fb0eb72c223dcdbd380b2cff3f020d29c0cefc2e02ac2c1212afe00",
+  "training_study_id": "replication-momentum-sgd-12seeds-v1"
+}

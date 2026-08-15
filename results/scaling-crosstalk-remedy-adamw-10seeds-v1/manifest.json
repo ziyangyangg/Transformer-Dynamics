@@ -1,0 +1,111 @@
+{
+  "checkpoint_steps": [
+    0,
+    100,
+    200,
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "completed_seed_runs": 40,
+  "configuration": {
+    "cells": [
+      {
+        "batch_size": 512,
+        "d_model": 8,
+        "ffn_width": null,
+        "learning_rate": 0.001,
+        "memory_size": 4,
+        "momentum": 0.0,
+        "num_concepts": 32,
+        "num_heads": 4,
+        "num_layers": 2,
+        "optimizer": "adamw",
+        "steps": 1600
+      },
+      {
+        "batch_size": 512,
+        "d_model": 8,
+        "ffn_width": 16,
+        "learning_rate": 0.001,
+        "memory_size": 4,
+        "momentum": 0.0,
+        "num_concepts": 32,
+        "num_heads": 1,
+        "num_layers": 2,
+        "optimizer": "adamw",
+        "steps": 1600
+      },
+      {
+        "batch_size": 512,
+        "d_model": 8,
+        "ffn_width": 16,
+        "learning_rate": 0.001,
+        "memory_size": 4,
+        "momentum": 0.0,
+        "num_concepts": 32,
+        "num_heads": 4,
+        "num_layers": 2,
+        "optimizer": "adamw",
+        "steps": 1600
+      },
+      {
+        "batch_size": 512,
+        "d_model": 32,
+        "ffn_width": null,
+        "learning_rate": 0.001,
+        "memory_size": 4,
+        "momentum": 0.0,
+        "num_concepts": 128,
+        "num_heads": 4,
+        "num_layers": 2,
+        "optimizer": "adamw",
+        "steps": 1600
+      }
+    ],
+    "checkpoint_steps": [
+      0,
+      100,
+      200,
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "eval_batch_size": 8192,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "study_id": "scaling-crosstalk-remedy-adamw-10seeds-v1",
+    "weight_decay": 0.0
+  },
+  "environment": {
+    "device": "cuda",
+    "git_commit": "300a985612969cf00e63844536727df37470c286",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
+    "torch_version": "2.11.0+cu128"
+  },
+  "failed_seed_runs": 0,
+  "last_invocation": {
+    "checkpoint_rows": 280,
+    "completed_seed_runs": 40,
+    "failed_seed_runs": 0,
+    "planned_seed_runs": 40,
+    "skipped_seed_runs": 0
+  },
+  "scheduled_seed_runs": 40,
+  "schema_version": 1,
+  "study_config_hash": "171480eaba9815827e2e0b692ce6b8646ce66d84079922ce55597f50b4176a5b",
+  "study_id": "scaling-crosstalk-remedy-adamw-10seeds-v1"
+}

@@ -1,6 +1,6 @@
 # Tuned scaling analysis v1
 
-这是一份只读派生分析；原始训练与 mechanism 结果没有被修改。统计单位始终是 training seed，所有主效应和交互先在同一 seed 的完整 16-cell 网格内形成 contrast，再进行 20,000 次 whole-seed bootstrap。
+这是一份只读派生分析；原始训练与 mechanism 结果没有被修改。统计单位始终是 training seed，所有主效应和交互先在同一 seed 的完整 16-cell 网格内形成 contrast，再进行 20,000 次 whole-seed bootstrap。normalized rank 与未注册 interactions 属于 secondary family；下列 7 个选择后 contrasts 只报告未做 BH/family correction 的 pointwise percentile intervals，因此是 exploratory pattern discovery，不是 confirmatory factorial inference。
 
 ## 精确 estimand
 
@@ -15,7 +15,7 @@ $$\Delta_A(s)=2\,16^{-1}\sum_x x_Ay_s(x),\qquad
 - 含 donor 与 on-manifold swap 的 full causal-robustness gate：136/160 seed-runs，12/16 architecture cells。
 - high-LR stress → tuned 的 gate transitions：fail→pass=3，pass→pass=157，pass→fail=0。
 
-Normalized-rank contrasts：
+Exploratory normalized-rank contrasts（unadjusted pointwise intervals）：
 
 - `width`: -0.0298，95% CI [-0.0359, -0.0231]
 - `load`: +0.1404，95% CI [+0.1152, +0.1636]
@@ -36,7 +36,7 @@ Normalized-rank contrasts：
 ## 复现
 
 ```bash
-MPLCONFIGDIR=/tmp/transformer-dynamics-mpl PYTHONPATH=src /home/zion/miniforge3/envs/llm4rec/bin/python -m routing_lab.scaling_study
+MPLCONFIGDIR=/tmp/transformer-dynamics-mpl PYTHONPATH=src python -m routing_lab.scaling_study
 ```
 
 精确数值见同目录 CSV/JSON；`figures/` 同时提供 PNG 与 searchable SVG。

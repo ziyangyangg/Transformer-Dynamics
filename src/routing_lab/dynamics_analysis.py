@@ -22,22 +22,22 @@ from __future__ import annotations
 
 import argparse
 import csv
-from dataclasses import dataclass
 import hashlib
 import json
 import math
 import os
-from pathlib import Path
 import subprocess
-from typing import Any, Iterable, Mapping, Sequence
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
 
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.colors import LinearSegmentedColormap, LogNorm
 import numpy as np
-
+from matplotlib.colors import LinearSegmentedColormap, LogNorm
 
 SCHEMA_VERSION = 1
 ANALYSIS_SCHEMA_VERSION = 1
@@ -203,8 +203,7 @@ def compute_ntk_metrics(
         np.linalg.norm(current - reference) / (reference_norm + epsilon)
     )
     alignment = float(
-        np.sum(current * reference)
-        / (current_norm * reference_norm + epsilon)
+        np.sum(current * reference) / (current_norm * reference_norm + epsilon)
     )
     trace = float(np.trace(current))
     effective_rank = float(trace**2 / (np.sum(current * current) + epsilon))
@@ -334,12 +333,11 @@ def _load_source_evaluations(
         return {}
     payload = json.loads(json_path.read_text(encoding="utf-8"))
     if not isinstance(payload, list):
-        raise RuntimeError(f"source trajectory table is not a list: {json_path}")
+        raise TypeError(f"source trajectory table is not a list: {json_path}")
     selected: dict[int, Mapping[str, Any]] = {}
     for row in payload:
-        if (
-            row.get("cell_id") == source["cell_id"]
-            and int(row.get("seed", -1)) == int(source["seed"])
+        if row.get("cell_id") == source["cell_id"] and int(row.get("seed", -1)) == int(
+            source["seed"]
         ):
             step = int(row["step"])
             if step in selected:
@@ -371,14 +369,18 @@ def _verify_source_provenance(
     if source_manifest.get("study_id") != source["study_id"]:
         raise RuntimeError("source study_id conflicts with dynamics provenance")
     if source_manifest.get("study_config_hash") != source["study_config_hash"]:
-        raise RuntimeError("source study_config_hash conflicts with dynamics provenance")
+        raise RuntimeError(
+            "source study_config_hash conflicts with dynamics provenance"
+        )
 
     configuration = source_manifest.get("configuration", {})
     cells = configuration.get("cells", [])
     cell_index = int(source["cell_index"])
     if not 0 <= cell_index < len(cells) or cells[cell_index] != source["cell"]:
         raise RuntimeError("source cell config conflicts with dynamics provenance")
-    if int(source["seed"]) not in [int(seed) for seed in configuration.get("seeds", [])]:
+    if int(source["seed"]) not in [
+        int(seed) for seed in configuration.get("seeds", [])
+    ]:
         raise RuntimeError("source seed is absent from the registered study")
 
     for snapshot in source["snapshots"]:
@@ -464,9 +466,9 @@ def _verify_numeric_content(
                 field=f"{prefix} {group} trace",
             )
 
-        linearized = arrays[record["linearization"]["linearized_prediction_array"]].astype(
-            np.float64
-        )
+        linearized = arrays[
+            record["linearization"]["linearized_prediction_array"]
+        ].astype(np.float64)
         absolute_error = float(np.linalg.norm(prediction - linearized))
         movement = float(np.linalg.norm(prediction - prediction0))
         relative_error = absolute_error / (movement + 1.0e-12)
@@ -496,7 +498,11 @@ def _verify_numeric_content(
         if not np.allclose(top, hessian["top_eigenvalues"], rtol=2.0e-6, atol=2.0e-6):
             raise RuntimeError(f"{prefix} top Ritz array conflicts with manifest")
         trace_estimate = float(probes.mean())
-        trace_se = float(probes.std(ddof=1) / math.sqrt(probes.size)) if probes.size > 1 else 0.0
+        trace_se = (
+            float(probes.std(ddof=1) / math.sqrt(probes.size))
+            if probes.size > 1
+            else 0.0
+        )
         _assert_close(
             hessian["trace_estimate"], trace_estimate, field=f"{prefix} Hessian trace"
         )
@@ -543,7 +549,9 @@ def load_verified_run(
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if manifest.get("schema_version") != SCHEMA_VERSION:
-        raise RuntimeError(f"unsupported dynamics schema: {manifest.get('schema_version')}")
+        raise RuntimeError(
+            f"unsupported dynamics schema: {manifest.get('schema_version')}"
+        )
     contract_hash = _hash_json(_contract_from_manifest(manifest))
     if manifest.get("contract_hash") != contract_hash:
         raise RuntimeError("manifest contract hash is invalid")
@@ -641,7 +649,9 @@ def _run_step_rows(runs: Sequence[VerifiedDynamicsRun]) -> list[dict[str, Any]]:
                         run.provenance.get("source_eval_batch_size", 0)
                     ),
                     "source_eval_loss": (
-                        None if "loss" not in source_eval else float(source_eval["loss"])
+                        None
+                        if "loss" not in source_eval
+                        else float(source_eval["loss"])
                     ),
                     "source_eval_accuracy": (
                         None
@@ -836,7 +846,7 @@ def _write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
 def _write_json(path: Path, value: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.tmp")
-    encoded = (json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n")
+    encoded = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
     temporary.write_text(encoded, encoding="utf-8")
     os.replace(temporary, path)
 
@@ -908,16 +918,17 @@ def _paired_control_summary(
         "num_trace_probes",
     )
     for field in diagnostic_fields:
-        if high.manifest["configuration"][field] != tuned.manifest["configuration"][field]:
+        if (
+            high.manifest["configuration"][field]
+            != tuned.manifest["configuration"][field]
+        ):
             raise RuntimeError(f"plateau/tuned diagnostic field differs: {field}")
 
     initial_and_probe_keys = sorted(
         key
         for key in set(high.arrays).intersection(tuned.arrays)
-        if key.startswith("probe_")
-        or key.startswith("linearization_")
+        if key.startswith(("probe_", "linearization_", "step_000000_"))
         or key == "landscape_coordinates"
-        or key.startswith("step_000000_")
     )
     unequal_arrays = [
         key
@@ -926,8 +937,7 @@ def _paired_control_summary(
     ]
     if unequal_arrays:
         raise RuntimeError(
-            "plateau/tuned initial diagnostics are not bitwise equal: "
-            f"{unequal_arrays}"
+            f"plateau/tuned initial diagnostics are not bitwise equal: {unequal_arrays}"
         )
 
     high_by_step = {int(record["step"]): record for record in high.steps}
@@ -956,10 +966,14 @@ def _paired_control_summary(
                     None if "loss" not in tuned_eval else float(tuned_eval["loss"])
                 ),
                 "source_eval_accuracy_highlr": (
-                    None if "accuracy" not in high_eval else float(high_eval["accuracy"])
+                    None
+                    if "accuracy" not in high_eval
+                    else float(high_eval["accuracy"])
                 ),
                 "source_eval_accuracy_tuned": (
-                    None if "accuracy" not in tuned_eval else float(tuned_eval["accuracy"])
+                    None
+                    if "accuracy" not in tuned_eval
+                    else float(tuned_eval["accuracy"])
                 ),
                 "source_eval_value_flip_highlr": (
                     None
@@ -1159,7 +1173,9 @@ def _plot_loss_landscapes(
             else:
                 axis.set_ylabel(r"$\alpha$")
     if mesh is not None:
-        colorbar = figure.colorbar(mesh, ax=axes, location="right", shrink=0.88, pad=0.015)
+        colorbar = figure.colorbar(
+            mesh, ax=axes, location="right", shrink=0.88, pad=0.015
+        )
         colorbar.set_label("fixed-probe MSE (log color scale)")
     figure.suptitle(
         "Filter-normalized two-direction loss slices",
@@ -1395,9 +1411,7 @@ def _plot_hessian_diagnostics(
             **common,
         )
         final_ritz = ritz_values[-1]
-        axes[1, 1].plot(
-            np.arange(1, final_ritz.size + 1), final_ritz, **common
-        )
+        axes[1, 1].plot(np.arange(1, final_ritz.size + 1), final_ritz, **common)
     axes[0, 0].set_title("Largest Lanczos Ritz value")
     axes[0, 0].set_ylabel("Ritz value")
     axes[0, 0].set_yscale("log")
@@ -1529,10 +1543,10 @@ def _report_markdown(
 
 最强的机制对照是 `highlr_plateau` 与 `tuned`。两者都是 seed 0，模型结构、AdamW、batch size、momentum、weight decay、初始化 checkpoint、训练数据随机数设计和诊断 probe 相同；注册的 step-0 数组逐字节相等。差别是 learning rate `0.01` 对 `0.003`，以及总训练时长 `400` 对 `800`。在共同的 step 400：
 
-- 大评估集（`B=8192`）上，high-LR 的 MSE/accuracy 是 `{float(high_eval400['loss']):.6g}` / `{float(high_eval400['accuracy']):.4f}`；tuned 是 `{float(tuned_eval400['loss']):.6g}` / `{float(tuned_eval400['accuracy']):.4f}`。
-- high-LR 的 value-flip effect 和 target-key effect 是 `{float(high_eval400['value_flip_effect']):.3g}`、`{float(high_eval400['target_key_effect']):.3g}`，接近零；tuned 是 `{float(tuned_eval400['value_flip_effect']):.4f}`、`{float(tuned_eval400['target_key_effect']):.4f}`。因此这里观测到的不只是 loss 差异，而是“是否形成任务相关 causal routing”的功能差异。
-- high-LR 的 QK 经验核 Frobenius norm 从 `{float(high.steps[0]['ntk']['QK']['frobenius_norm']):.4g}` 降到 `{float(high400['ntk']['QK']['frobenius_norm']):.4g}`；tuned 在 step 400 为 `{float(tuned400['ntk']['QK']['frobenius_norm']):.4g}`。前者的 QK tangent sensitivity 在这个 probe 上几乎消失，后者仍可测。但这不能单独证明“QK collapse 导致失败”；两者都是训练结果。
-- 初始化的一阶模型在两条轨迹上都不够：step 400 的相对线性化误差分别为 `{float(high400['linearization']['relative_error']):.3f}` 与 `{float(tuned400['linearization']['relative_error']):.3f}`，均大于 1。只用固定初始 NTK 解释 routing selection 会漏掉主要的非线性特征学习。
+- 大评估集（`B=8192`）上，high-LR 的 MSE/accuracy 是 `{float(high_eval400["loss"]):.6g}` / `{float(high_eval400["accuracy"]):.4f}`；tuned 是 `{float(tuned_eval400["loss"]):.6g}` / `{float(tuned_eval400["accuracy"]):.4f}`。
+- high-LR 的 value-flip effect 和 target-key effect 是 `{float(high_eval400["value_flip_effect"]):.3g}`、`{float(high_eval400["target_key_effect"]):.3g}`，接近零；tuned 是 `{float(tuned_eval400["value_flip_effect"]):.4f}`、`{float(tuned_eval400["target_key_effect"]):.4f}`。因此这里观测到的不只是 loss 差异，而是“是否形成任务相关 causal routing”的功能差异。
+- high-LR 的 QK 经验核 Frobenius norm 从 `{float(high.steps[0]["ntk"]["QK"]["frobenius_norm"]):.4g}` 降到 `{float(high400["ntk"]["QK"]["frobenius_norm"]):.4g}`；tuned 在 step 400 为 `{float(tuned400["ntk"]["QK"]["frobenius_norm"]):.4g}`。前者的 QK tangent sensitivity 在这个 probe 上几乎消失，后者仍可测。但这不能单独证明“QK collapse 导致失败”；两者都是训练结果。
+- 初始化的一阶模型在两条轨迹上都不够：step 400 的相对线性化误差分别为 `{float(high400["linearization"]["relative_error"]):.3f}` 与 `{float(tuned400["linearization"]["relative_error"]):.3f}`，均大于 1。只用固定初始 NTK 解释 routing selection 会漏掉主要的非线性特征学习。
 
 这是一个**单 seed、共同初始化的机制个案**，不是 learning-rate 因果效应的多 seed 估计。它证明“这种失败/成功分化在受控个案中真实存在”，不证明它对初始化总体成立。
 
@@ -1593,7 +1607,7 @@ e_{{lin,t}}=\frac{{\|f_t-f_{{lin,t}}\|_2}}{{\|f_t-f_0\|_2+10^{{-12}}}}.
 |---|---:|---:|---|---|---:|
 {chr(10).join(provenance_lines)}
 
-分析脚本完成了六层检查：`_SUCCESS -> contract_hash`、重算 contract、`arrays.npz` SHA-256、NPZ key/dtype/finite 值、由数组重算 loss/accuracy/NTK/linearization/Hessian trace/landscape scalar、逐个回溯 source snapshot SHA-256。plateau/tuned 的 `{paired['bitwise_equal_array_count']}` 个 probe/initialization/step-0 数组逐字节相等。两个训练 artifact 记录的 git commit 不同，但 data/model/training/run 四个相关源文件在两 commit 间无 diff：`{paired['relevant_source_code_unchanged_between_recorded_commits']}`。
+分析脚本完成了六层检查：`_SUCCESS -> contract_hash`、重算 contract、`arrays.npz` SHA-256、NPZ key/dtype/finite 值、由数组重算 loss/accuracy/NTK/linearization/Hessian trace/landscape scalar、逐个回溯 source snapshot SHA-256。plateau/tuned 的 `{paired["bitwise_equal_array_count"]}` 个 probe/initialization/step-0 数组逐字节相等。两个训练 artifact 记录的 git commit 不同，但 data/model/training/run 四个相关源文件在两 commit 间无 diff：`{paired["relevant_source_code_unchanged_between_recorded_commits"]}`。
 
 训练 runner 的 private data generator 只由 seed 派生，所以该 pair 被设计为在共同的前 400 步消费相同随机 episode 流。**限制：训练 batch 本身没有逐批保存 hash**，因此这是代码与配置层面的 common-random-number provenance，不是逐 batch 字节审计。
 
@@ -1605,13 +1619,13 @@ e_{{lin,t}}=\frac{{\|f_t-f_{{lin,t}}\|_2}}{{\|f_t-f_0\|_2+10^{{-12}}}}.
 
 ### 3.1 Loss slice
 
-step 400 的 high-LR 中心 MSE 为 `{float(high_landscape['center_loss']):.6g}`，该 25 x 25 plane 的最小值为 `{float(high_landscape['grid_minimum_loss']):.6g}`，有 `{100.0*float(high_landscape['grid_fraction_below_center']):.1f}%` 网格点低于中心；中心并非此 plane 的 3 x 3 局部最小。tuned 的中心 MSE `{float(tuned_landscape['center_loss']):.6g}` 就是注册网格最小值，没有网格点更低。这个事实说明 plateau checkpoint 仍有某些随机组合下降方向，而不是说明存在通往 retrieval 解的全局低障碍路径。
+step 400 的 high-LR 中心 MSE 为 `{float(high_landscape["center_loss"]):.6g}`，该 25 x 25 plane 的最小值为 `{float(high_landscape["grid_minimum_loss"]):.6g}`，有 `{100.0 * float(high_landscape["grid_fraction_below_center"]):.1f}%` 网格点低于中心；中心并非此 plane 的 3 x 3 局部最小。tuned 的中心 MSE `{float(tuned_landscape["center_loss"]):.6g}` 就是注册网格最小值，没有网格点更低。这个事实说明 plateau checkpoint 仍有某些随机组合下降方向，而不是说明存在通往 retrieval 解的全局低障碍路径。
 
 ![loss landscapes]({relative_figure_root}/loss_landscapes.png)
 
 ### 3.2 NTK 与非线性移动
 
-high-LR 在 step 400 的 full-kernel drift/alignment/effective-rank 为 `{float(high400['ntk']['full']['relative_drift']):.3f}` / `{float(high400['ntk']['full']['alignment']):.3f}` / `{float(high400['ntk']['full']['effective_rank']):.3f}`；tuned 为 `{float(tuned400['ntk']['full']['relative_drift']):.3f}` / `{float(tuned400['ntk']['full']['alignment']):.3f}` / `{float(tuned400['ntk']['full']['effective_rank']):.3f}`。high-LR 的 full kernel 仍与初始化高度对齐，但 group kernel amplitudes 收缩且功能停在 chance；tuned 的 alignment 更低并学出 routing。它支持“成功训练伴随明显 feature/kernel reorganization”这一具体观察，但不把任何单个 NTK statistic 宣称为充分机制。
+high-LR 在 step 400 的 full-kernel drift/alignment/effective-rank 为 `{float(high400["ntk"]["full"]["relative_drift"]):.3f}` / `{float(high400["ntk"]["full"]["alignment"]):.3f}` / `{float(high400["ntk"]["full"]["effective_rank"]):.3f}`；tuned 为 `{float(tuned400["ntk"]["full"]["relative_drift"]):.3f}` / `{float(tuned400["ntk"]["full"]["alignment"]):.3f}` / `{float(tuned400["ntk"]["full"]["effective_rank"]):.3f}`。high-LR 的 full kernel 仍与初始化高度对齐，但 group kernel amplitudes 收缩且功能停在 chance；tuned 的 alignment 更低并学出 routing。它支持“成功训练伴随明显 feature/kernel reorganization”这一具体观察，但不把任何单个 NTK statistic 宣称为充分机制。
 
 ![NTK group dynamics]({relative_figure_root}/ntk_group_dynamics.png)
 
@@ -1619,16 +1633,16 @@ high-LR 在 step 400 的 full-kernel drift/alignment/effective-rank 为 `{float(
 
 ### 3.3 Hessian 近似
 
-共同的 step 400，plateau 的最小/最大 Ritz 值为 `{min(high400['hessian']['ritz_eigenvalues']):.4g}` / `{max(high400['hessian']['ritz_eigenvalues']):.4g}`；tuned 是 `{min(tuned400['hessian']['ritz_eigenvalues']):.4g}` / `{max(tuned400['hessian']['ritz_eigenvalues']):.4g}`。trace 估计分别为 `{float(high400['hessian']['trace_estimate']):.3f} ± {float(high400['hessian']['trace_standard_error']):.3f}` 与 `{float(tuned400['hessian']['trace_estimate']):.3f} ± {float(tuned400['hessian']['trace_standard_error']):.3f}`。8-probe Monte Carlo error 很宽，不能据此声称 trace 有显著差异；可复现的较稳事实是 plateau 保留了更负的极端 Ritz 近似，而 tuned 到 step 800 的最小 Ritz 近似收缩到 `{min(_step_record(tuned, 800)['hessian']['ritz_eigenvalues']):.4g}`。
+共同的 step 400，plateau 的最小/最大 Ritz 值为 `{min(high400["hessian"]["ritz_eigenvalues"]):.4g}` / `{max(high400["hessian"]["ritz_eigenvalues"]):.4g}`；tuned 是 `{min(tuned400["hessian"]["ritz_eigenvalues"]):.4g}` / `{max(tuned400["hessian"]["ritz_eigenvalues"]):.4g}`。trace 估计分别为 `{float(high400["hessian"]["trace_estimate"]):.3f} ± {float(high400["hessian"]["trace_standard_error"]):.3f}` 与 `{float(tuned400["hessian"]["trace_estimate"]):.3f} ± {float(tuned400["hessian"]["trace_standard_error"]):.3f}`。8-probe Monte Carlo error 很宽，不能据此声称 trace 有显著差异；可复现的较稳事实是 plateau 保留了更负的极端 Ritz 近似，而 tuned 到 step 800 的最小 Ritz 近似收缩到 `{min(_step_record(tuned, 800)["hessian"]["ritz_eigenvalues"]):.4g}`。
 
 ![Hessian diagnostics]({relative_figure_root}/hessian_diagnostics.png)
 
 ## 4. Primary FFN / no-FFN 个案说明什么
 
-两个 `C=64,d=16,H=4` primary 个案在 step 400 的固定-probe MSE 都约为 `6e-4`：no-FFN `{float(noffn400['loss']):.6g}`，FFN `{float(ffn400['loss']):.6g}`，accuracy 均为 1。与此同时：
+两个 `C=64,d=16,H=4` primary 个案在 step 400 的固定-probe MSE 都约为 `6e-4`：no-FFN `{float(noffn400["loss"]):.6g}`，FFN `{float(ffn400["loss"]):.6g}`，accuracy 均为 1。与此同时：
 
-- no-FFN 的 full-NTK drift/alignment 为 `{float(noffn400['ntk']['full']['relative_drift']):.3f}` / `{float(noffn400['ntk']['full']['alignment']):.3f}`；FFN 为 `{float(ffn400['ntk']['full']['relative_drift']):.3f}` / `{float(ffn400['ntk']['full']['alignment']):.3f}`。
-- 初始化线性化相对误差仍为 `{float(noffn400['linearization']['relative_error']):.3f}` 和 `{float(ffn400['linearization']['relative_error']):.3f}`，所以“最终低 loss”并不意味着训练留在 lazy/NTK 近似内。
+- no-FFN 的 full-NTK drift/alignment 为 `{float(noffn400["ntk"]["full"]["relative_drift"]):.3f}` / `{float(noffn400["ntk"]["full"]["alignment"]):.3f}`；FFN 为 `{float(ffn400["ntk"]["full"]["relative_drift"]):.3f}` / `{float(ffn400["ntk"]["full"]["alignment"]):.3f}`。
+- 初始化线性化相对误差仍为 `{float(noffn400["linearization"]["relative_error"]):.3f}` 和 `{float(ffn400["linearization"]["relative_error"]):.3f}`，所以“最终低 loss”并不意味着训练留在 lazy/NTK 近似内。
 - 两个最终 checkpoint 都是各自 25 x 25 随机 plane 的网格最小值；这只说明被抽到的两个方向，没有证明全参数局部极小。
 
 FFN 与 no-FFN 在这里都能解任务，因此这些 seed-zero 图不能证明 FFN 是必要补偿器。FFN 是否对 learned superposition cross-talk 进行补偿，必须回到 on-manifold swap、tangent intervention 和 branch-residual cancellation 的多 seed 定位结果，而不能由 Hessian/landscape 反推。
@@ -1655,6 +1669,11 @@ PYTHONPATH=src python -m routing_lab.dynamics_analysis
 PYTHONPATH=src python -m unittest -v tests/test_dynamics_analysis.py
 ```
 
+公开仓库只保留这四个 dynamics cases 所引用的 15 个最小 source snapshots，而不是全部
+5,103 个训练快照；较大 held-out 功能指标来自发布的 aggregate trajectory tables。默认命令
+会验证 15 个 snapshots 的 SHA-256、source manifest、cell/seed/step 身份以及派生 NPZ，
+并从 aggregate table 读取对应 source evaluations；缺少任一注册 snapshot 时会 fail closed。
+
 输出目录 `{output_directory}` 包含：
 
 - `run_steps.csv`：run/checkpoint 级 task、linearization、landscape、Hessian 摘要；
@@ -1679,7 +1698,9 @@ def run_analysis(
         raise ValueError("dynamics run keys must be unique")
     required_keys = {"primary_noffn", "primary_ffn", "highlr_plateau", "tuned"}
     if {spec.key for spec in specs} != required_keys:
-        raise ValueError(f"analysis requires exactly these run keys: {sorted(required_keys)}")
+        raise ValueError(
+            f"analysis requires exactly these run keys: {sorted(required_keys)}"
+        )
     destination = Path(output_directory)
     destination.mkdir(parents=True, exist_ok=True)
     runs = tuple(load_verified_run(spec, verify_source=verify_source) for spec in specs)
@@ -1703,9 +1724,7 @@ def run_analysis(
     figure_paths.extend(_plot_linearization(runs, destination))
     figure_paths.extend(_plot_hessian_diagnostics(runs, destination))
 
-    paired = _paired_control_summary(
-        by_key["highlr_plateau"], by_key["tuned"]
-    )
+    paired = _paired_control_summary(by_key["highlr_plateau"], by_key["tuned"])
     report = Path(report_path)
     report.parent.mkdir(parents=True, exist_ok=True)
     report_text = _report_markdown(runs, paired=paired, output_directory=destination)
@@ -1737,7 +1756,11 @@ def run_analysis(
         "source_artifacts": provenance,
         "paired_highlr_tuned_control": paired,
         "registered_estimands": {
-            "task": ["probe_loss", "probe_accuracy", "source evaluation routing effects"],
+            "task": [
+                "probe_loss",
+                "probe_accuracy",
+                "source evaluation routing effects",
+            ],
             "ntk": ["relative_drift", "alignment", "effective_rank", "frobenius_norm"],
             "linearization": ["relative_error", "relative_parameter_displacement"],
             "landscape": [

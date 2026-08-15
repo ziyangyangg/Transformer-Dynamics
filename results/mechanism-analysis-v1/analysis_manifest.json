@@ -8,7 +8,9 @@
     "confirmatory_compensator_claims": 0,
     "ffn_practical_floor_available": false,
     "finite_output_validation_available": false,
-    "ov_metric_matches_registered_isotropic_attenuation": false
+    "ov_metric_matches_registered_isotropic_attenuation": false,
+    "qk_metric_endpoint_split": "symmetric_midpoint",
+    "qk_metric_matches_registered_endpoint_split": false
   },
   "derived_row_counts": {
     "cell_step_summary": 2144,

@@ -13,11 +13,10 @@ they can be written with ``json.dumps(..., allow_nan=False)`` without a custom e
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
-from typing import Any, Iterable, Mapping, Sequence
 
 import numpy as np
-
 
 Record = Mapping[str, object]
 
@@ -195,9 +194,7 @@ def _sample_summary(
 
     n = int(differences.size)
     estimate = float(np.mean(differences))
-    standard_deviation = (
-        float(np.std(differences, ddof=1)) if n >= 2 else 0.0
-    )
+    standard_deviation = float(np.std(differences, ddof=1)) if n >= 2 else 0.0
     standardized_effect: float | None
     if standard_deviation > 0.0:
         standardized_effect = estimate / standard_deviation
@@ -289,7 +286,9 @@ def paired_interaction_2x2(
     valid_b = {low_b, high_b}
     for record in _rows_for_endpoint(records, endpoint):
         if factor_a not in record or factor_b not in record:
-            raise KeyError(f"records require factor fields {factor_a!r} and {factor_b!r}")
+            raise KeyError(
+                f"records require factor fields {factor_a!r} and {factor_b!r}"
+            )
         level_a, level_b = record[factor_a], record[factor_b]
         if level_a not in valid_a or level_b not in valid_b:
             continue
@@ -316,14 +315,8 @@ def paired_interaction_2x2(
     incomplete = sorted(all_seeds - set(complete))
     interactions = np.asarray(
         [
-            (
-                indexed[(seed, high_a, high_b)]
-                - indexed[(seed, high_a, low_b)]
-            )
-            - (
-                indexed[(seed, low_a, high_b)]
-                - indexed[(seed, low_a, low_b)]
-            )
+            (indexed[(seed, high_a, high_b)] - indexed[(seed, high_a, low_b)])
+            - (indexed[(seed, low_a, high_b)] - indexed[(seed, low_a, low_b)])
             for seed in complete
         ],
         dtype=np.float64,
@@ -511,7 +504,9 @@ def _trajectory_difference_matrix(
         )
     )
     if not complete:
-        raise ValueError("no seed is complete across the simultaneous trajectory family")
+        raise ValueError(
+            "no seed is complete across the simultaneous trajectory family"
+        )
     excluded = sorted(all_seeds - set(complete))
     differences = np.asarray(
         [
@@ -734,15 +729,19 @@ def evaluate_function_causal_gates(
     records: Iterable[Record],
     *,
     bootstrap: BootstrapSpec,
-    thresholds: FunctionGateThresholds = FunctionGateThresholds(),
+    thresholds: FunctionGateThresholds | None = None,
 ) -> dict[str, object]:
-    """Evaluate function, donor, and direct-key gates without conflating them.
+    """Evaluate function/donor gates and an exploratory target-edge screen.
 
     The seed function gate implements Eq. (16) of the protocol.  The donor gate is
-    separately based on Eq. (17).  A cell receives the stronger direct-key label only
-    when its function gate passes *and* both the key-selectivity and direct target-key
-    bootstrap intervals are strictly positive.
+    separately based on Eq. (17).  The available evaluator blocks the target edge but
+    does not block every distractor edge, so it cannot estimate registered ``S_key``.
+    The final screen combines a positive target-edge effect with positive descriptive
+    attention-mass selectivity and is deliberately not a causal-selectivity gate.
     """
+
+    if thresholds is None:
+        thresholds = FunctionGateThresholds()
 
     indexed: dict[tuple[str, int, str], float] = {}
     cells_and_seeds: set[tuple[str, int]] = set()
@@ -806,19 +805,19 @@ def evaluate_function_causal_gates(
 
         # Mechanism inference is function-qualified: failed optimizations remain in
         # pass-rate accounting but do not define the mechanism's seed distribution.
-        key_values = [
-            indexed[(cell, seed, "key_selectivity")]
+        attention_values = [
+            indexed[(cell, seed, "attention_key_selectivity")]
             for seed in successful_seeds
-            if (cell, seed, "key_selectivity") in indexed
+            if (cell, seed, "attention_key_selectivity") in indexed
         ]
         target_values = [
             indexed[(cell, seed, "target_key_effect")]
             for seed in successful_seeds
             if (cell, seed, "target_key_effect") in indexed
         ]
-        key_ci = _one_sample_bootstrap_interval(key_values, bootstrap)
+        attention_ci = _one_sample_bootstrap_interval(attention_values, bootstrap)
         target_ci = _one_sample_bootstrap_interval(target_values, bootstrap)
-        positive_key = key_ci[0] is not None and key_ci[0] > 0.0
+        positive_attention = attention_ci[0] is not None and attention_ci[0] > 0.0
         positive_target = target_ci[0] is not None and target_ci[0] > 0.0
         per_cell[cell] = {
             "n_scheduled_seeds": n_scheduled,
@@ -829,10 +828,11 @@ def evaluate_function_causal_gates(
             # Eq. (16) already includes Xi_value >= .90, so this weaker functional
             # causal label follows exactly when the cell-level function gate passes.
             "queried_value_causal_gate_pass": function_cell_pass,
-            "key_selectivity_ci": key_ci,
-            "target_key_effect_ci": target_ci,
-            "direct_target_key_routing_gate_pass": bool(
-                function_cell_pass and positive_key and positive_target
+            "attention_key_selectivity_ci": attention_ci,
+            "target_edge_effect_ci": target_ci,
+            "registered_s_key_evaluated": False,
+            "target_edge_attention_screen_pass": bool(
+                function_cell_pass and positive_attention and positive_target
             ),
         }
 

@@ -833,7 +833,13 @@
         }
       ]
     },
-    "inference_scope": "All 160 runs pass the base routing gate. Because only 12/16 cells pass the stricter swap gate, rank effects are not yet a strict functional-equivalence capacity law.",
+    "inference_scope": "Normalized rank and unregistered interactions are secondary; the seven displayed percentile intervals are pointwise and unadjusted, so they are exploratory. All 160 runs pass the base routing gate. Because only 12/16 cells pass the stricter swap gate, rank effects are not yet a strict functional-equivalence capacity law.",
+    "inference_status": {
+      "bh_q_0_10_applied": false,
+      "classification": "secondary_exploratory_unadjusted",
+      "pointwise_intervals": true,
+      "selected_contrasts": 7
+    },
     "normalized_rank": {
       "confidence_level": 0.95,
       "effects": [
@@ -1811,6 +1817,7 @@
       "history_files": 160,
       "read_only_source": true,
       "source_directory": "results/scaling-width-load-adamw-10seeds-v1",
+      "source_layout": "per_seed_histories",
       "study_id": "scaling-width-load-adamw-10seeds-v1",
       "success_markers": 160
     },
@@ -1831,6 +1838,7 @@
       "history_files": 8,
       "read_only_source": true,
       "source_directory": "results/scaling-plateau-remedy-pilot-v1",
+      "source_layout": "per_seed_histories",
       "study_id": "scaling-plateau-remedy-pilot-v1",
       "success_markers": 8
     },
@@ -1864,6 +1872,7 @@
       "history_files": 160,
       "read_only_source": true,
       "source_directory": "results/scaling-tuned-adamw-10seeds-v1",
+      "source_layout": "per_seed_histories",
       "study_id": "scaling-tuned-adamw-10seeds-v1",
       "success_markers": 160
     }

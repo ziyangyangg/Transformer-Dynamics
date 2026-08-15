@@ -105,7 +105,7 @@ def render_factorial_effects(
     if not effects:
         raise ValueError("factorial effects table is empty")
     labels = {
-        "width": "Width (32 − 8)",
+        "width": "Scale d: 8→32 (fixed C/d)",
         "load": "Concept load (4 − 1)",
         "heads": "Heads (4 − 1)",
         "ffn": "FFN (2d − absent)",
@@ -149,12 +149,14 @@ def render_factorial_effects(
         y, [labels.get(str(row["term"]), str(row["term"])) for row in ordered]
     )
     axis.set_xlabel("Effect on effective rank / d_model")
-    axis.set_title("Normalized embedding-rank factorial effects", loc="left", pad=48)
+    axis.set_title(
+        "Exploratory normalized embedding-rank contrasts", loc="left", pad=48
+    )
     _quiet_axis(axis, grid_axis="x")
     n_pairs = min(int(row["n_pairs"]) for row in ordered)
     _subtitle(
         fig,
-        f"n={n_pairs} paired training seeds; dots are seed-mean contrasts, bars are 95% paired bootstrap CIs",
+        f"n={n_pairs} paired seeds; unadjusted pointwise 95% bootstrap CIs; no BH/family correction",
     )
     fig.subplots_adjust(left=0.25, right=0.92, top=0.82, bottom=0.14)
     return _export(fig, stem)

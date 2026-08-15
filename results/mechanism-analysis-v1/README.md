@@ -24,7 +24,9 @@ heads, and checkpoints are never counted as independent observations.
   intention-to-train and gate-qualified;
 - `site_delta_summary.csv`: the same paired changes for each layer/head site;
 - `optimizer_replication.csv`: AdamW/SGD direction agreement on common eligible seeds;
-- `functional_gates.csv` and `.json`: registered function, donor, and direct-key gates;
+- `functional_gates.csv` and `.json`: registered function/donor gates plus an explicitly
+  exploratory target-edge + attention screen. Registered causal `S_key` was not evaluated
+  because distractor edges were not blocked one by one;
 - `analysis_manifest.json`: sources, row-count audit, bootstrap contract, and numerical
   checks;
 - `mechanism_summary.json`: compact machine-readable gates and optimizer comparisons.

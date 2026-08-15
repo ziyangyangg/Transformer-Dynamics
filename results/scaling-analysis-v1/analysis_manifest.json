@@ -3,9 +3,9 @@
   "bootstrap_resamples": 20000,
   "files": [
     {
-      "bytes": 2651,
+      "bytes": 2918,
       "path": "README.md",
-      "sha256": "06e998b9744c361699f680974c8b96543ab541885f87f56ef513859c131c815c"
+      "sha256": "603ac2947c5a1412ec733635199f05936f0a14700ab3eae7aad82026f6addcc6"
     },
     {
       "bytes": 11523,
@@ -13,9 +13,9 @@
       "sha256": "40131177bb5069e782f8afb07313f80bd1ed136e751943374722d3a9b3a58055"
     },
     {
-      "bytes": 1753,
+      "bytes": 1864,
       "path": "chart_contract.json",
-      "sha256": "d0233a983a655ebade1b1b4d6f9f611f2c2888377ddc3ba16c4b6145c12167af"
+      "sha256": "18f2e6c0814e7053c126ef940997a90a6fe1621f4f2576d90be1e05a6529c37f"
     },
     {
       "bytes": 135913,
@@ -63,14 +63,14 @@
       "sha256": "2cc6943d675380ea6b81730beb249ec10e9eb6b8cd35374c7e5a77b0f00ef052"
     },
     {
-      "bytes": 99863,
+      "bytes": 102632,
       "path": "figures/factorial_rank_effects.png",
-      "sha256": "c4ba2b97043e1cf54b555a7a07f022c60e1bf043f33a3229fb7828478b346565"
+      "sha256": "11a37f231f23df02915aca858b94c2baf02a2120b23fe70ccec9aa3e18cca3de"
     },
     {
-      "bytes": 17451,
+      "bytes": 17599,
       "path": "figures/factorial_rank_effects.svg",
-      "sha256": "397ba94546ea71c1c8195b667d9114bc411f2be9bd8931b4e5f92583f2b279ab"
+      "sha256": "1f99485a8f7fa9fa9317b54b2dd1c623d6071ead3ce89ee4e0b17c0142dac5aa"
     },
     {
       "bytes": 285154,
@@ -143,9 +143,9 @@
       "sha256": "e672332d9a07c6b4a2066b27863d1ef04676a641c3c10ff55835d21d774d9cf5"
     },
     {
-      "bytes": 53219,
+      "bytes": 53703,
       "path": "summary.json",
-      "sha256": "37b0bfb139a069e43589de4ed9c8041305385cdc583378de3ce8be26cbed6308"
+      "sha256": "ed6a6b0de71c0bac9d543be0bef3e4bb4fbd421cc3d51549bf3617a52ad3055c"
     },
     {
       "bytes": 75636,

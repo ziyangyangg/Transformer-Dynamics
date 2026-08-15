@@ -10,13 +10,14 @@ from __future__ import annotations
 
 import hashlib
 import json
-from pathlib import Path
 import tempfile
 import unittest
+from pathlib import Path
 
 import numpy as np
 
 from routing_lab.dynamics_analysis import (
+    DEFAULT_SPECS,
     DynamicsRunSpec,
     compute_ntk_metrics,
     load_verified_run,
@@ -80,7 +81,9 @@ def _write_minimal_artifact(directory: Path) -> None:
         metrics = zero_metrics if group == "FFN" else full_metrics
         ntk[group] = {
             **metrics,
-            "frobenius_norm": float(np.linalg.norm(zero_kernel if group == "FFN" else kernel)),
+            "frobenius_norm": float(
+                np.linalg.norm(zero_kernel if group == "FFN" else kernel)
+            ),
             "trace": float(np.trace(zero_kernel if group == "FFN" else kernel)),
             "parameter_count": 0 if group == "FFN" else 3,
             "kernel_array": f"step_000000_ntk_{group}",
@@ -236,6 +239,32 @@ class DynamicsAnalysisMathTests(unittest.TestCase):
 
 
 class DynamicsArtifactValidationTests(unittest.TestCase):
+    def test_public_default_bundle_has_verified_source_snapshots(self) -> None:
+        """Every published dynamics case must retain its minimal source chain."""
+
+        project_root = Path(__file__).resolve().parents[1]
+        for spec in DEFAULT_SPECS:
+            public_spec = DynamicsRunSpec(
+                spec.key,
+                spec.label,
+                project_root / spec.directory,
+            )
+            run = load_verified_run(public_spec, verify_source=True)
+            self.assertTrue(run.provenance["source_manifest_checked"])
+            self.assertGreater(run.provenance["source_snapshots_checked"], 0)
+
+        summary = json.loads(
+            (project_root / "results/dynamics-analysis-v1/summary.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        for artifact in summary["artifacts"]:
+            path = project_root / artifact["path"]
+            self.assertEqual(path.stat().st_size, artifact["bytes"])
+            self.assertEqual(
+                hashlib.sha256(path.read_bytes()).hexdigest(), artifact["sha256"]
+            )
+
     def test_valid_artifact_is_loaded_and_metrics_are_recomputed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary) / "dynamics"

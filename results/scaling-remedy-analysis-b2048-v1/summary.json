@@ -1,5 +1,15 @@
 {
-  "analysis_code_commit": "2d95f602da7659da3a8a6234d6e163b5de916d38",
+  "analysis_code_provenance": {
+    "method": "sha256_of_generator_sources",
+    "source_sha256": {
+      "src/routing_lab/scaling_analysis.py": "aa7282344c9457b7f4aa0e40b61efae1f044384fc0177f630b30bfd56746c802",
+      "src/routing_lab/scaling_io.py": "759d2aa1c83c8a4e15a3c4a02910a25c51bab49f85efe043c47352c5b0c14d77",
+      "src/routing_lab/scaling_remedy.py": "83b595d1cd75afd5a575f87fea7270edf905b4903a7a0c485d9a09497c09ad9f",
+      "src/routing_lab/scaling_remedy_figures.py": "c5b6c2ebd1ebf8f5608b4c98e5670821d0298c3543dacd00b06b9da125ce3e00",
+      "src/routing_lab/scaling_remedy_study.py": "ad813673732e8bcfb83879f22a2d7f00a698e9e6c4c523644bd2b2ba2cf12cd8",
+      "src/routing_lab/statistics.py": "03c7b392336672f13f95a568e86e87614ea3b8ec5bcb3ee6b4a21f05c25baa0d"
+    }
+  },
   "analysis_id": "scaling-remedy-analysis-b2048-v1",
   "baseline_gate_overview": {
     "cell_mean_ci_below_swap_threshold": [
@@ -67,7 +77,7 @@
       9
     ]
   },
-  "claim_guardrail": "Schedule effects do not by themselves localize compensation to QK, OV, FFN, or readout and are not an open-problem claim.",
+  "claim_guardrail": "Schedule effects do not by themselves localize compensation to QK, OV, FFN, or readout; pointwise intervals are targeted exploratory evidence, not independent-seed confirmatory inference or an open-problem claim.",
   "comparison_conclusions": [
     {
       "base_mse_direction": "decrease",
@@ -2702,6 +2712,14 @@
       "png": "results/scaling-remedy-analysis-b2048-v1/figures/paired_swap_mse.png",
       "svg": "results/scaling-remedy-analysis-b2048-v1/figures/paired_swap_mse.svg"
     }
+  },
+  "inference_status": {
+    "classification": "targeted_exploratory_followup",
+    "familywise_correction": false,
+    "independent_remedy_seeds": false,
+    "never_tuned_confirmatory_seeds": false,
+    "reused_training_seeds": true,
+    "selected_cells": true
   },
   "paired_comparisons": [
     {

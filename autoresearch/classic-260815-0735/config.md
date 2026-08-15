@@ -11,7 +11,7 @@ scientific effect is deliberately not an optimization metric.
 Verify:
 
 ```
-PYTHONPATH=src /home/zion/miniforge3/envs/llm4rec/bin/python3.11 \
+PYTHONPATH=src python \
   -m unittest discover -s tests -v
 ```
 

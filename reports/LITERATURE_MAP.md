@@ -279,17 +279,20 @@ factorization selection。
 3. **压缩负载改变 learned dictionary geometry**：$C/d$、head 数和 FFN 条件改变
    embedding effective rank；这只能叫 compressed dictionary geometry。
 
-### 被当前实验反对的具体命题
+### 当前探索性诊断反对的具体故事（不是预注册反证）
 
-预注册 QK 局部 suppression statistic 为正才表示 route 把 content chord 缩小。两个优化器
-的全部聚合 cell 中，终点值及 init-to-final 增量都为负：route 总体**放大**而非抑制
-output-relevant chord。opposition rate 略高于 $1/2$ 不能推翻净效应。
+协议预注册的是非对称 content/route/interaction split；当前 evaluator 实际保存的是对称
+midpoint split，把 interaction 一半分给 content、一半分给 route。对后一个探索性统计量，
+两个优化器的全部聚合 cell 中，终点值及 init-to-final 增量都为负：midpoint route 总体
+**放大**而非抑制 output-relevant chord。两种 estimand 不等价、甚至可能反号，所以这些
+数值没有检验预注册命题。
 
-数据反对的是：
+数据探索性反对的是：
 
 > “QK route 普遍作为 content cross-talk 的下游补偿器。”
 
-它不反对 QK 对 retrieval 很重要，也不反对某些 layer/head/任务存在 QK compensation。
+它不反对 QK 对 retrieval 很重要，也不反对某些 layer/head/任务存在 QK compensation；
+正式结论必须重放并保存三个非对称 endpoint 项及 finite hybrid output。
 
 ### 候选但尚未确认
 
@@ -317,7 +320,7 @@ donor patch 必然给同一个下游输出；把 pre-OV 与 post-OV patch 的差
 | 已有近似理论 | leading-gradient early phase；固定或随机但不学习的 embeddings；linear attention；特殊初始化/对称不变流形；参数线性 FFN mean-field | 复用其变量、守恒律、小初始化展开和 remedy |
 | 实验已知、理论缺失 | 标准 block 中的 plateau、attention 重组、rank collapse；GD 经常找到几何选择器；本实验 OV selectivity 与部分 FFN cancellation | 先做 finite intervention、optimizer replication、loss-landscape/NTK/geometry 对照 |
 | 真正开放 A | learned $E$ + factorized multi-head QK/OV + readout/FFN 在 fresh-value causal retrieval 的 joint population-GF closure 与解选择 | 立即推进；先完成低风险强迫的功能定理，再研究参数选择 |
-| 真正开放 B | 同一设定中 learned compressed dictionary 是否产生 functional cross-talk，以及哪个模块以 finite、on-support、可复制方式补偿 | 保留第二主问题；接受 QK suppression 当前反证；OV/FFN 只写候选 |
+| 真正开放 B | 同一设定中 learned compressed dictionary 是否产生 functional cross-talk，以及哪个模块以 finite、on-support、可复制方式补偿 | 保留第二主问题；QK midpoint 只作探索性诊断并重算预注册 estimand；OV/FFN 只写候选 |
 | 更远期开放 | 把有限训练 order parameters 推到 Hanin OP5/OP6 的 $n,d\to\infty$ DMFT，再与 Perspective 的深度/粒子极限耦合 | 不是当前论文首个 theorem claim |
 
 ---

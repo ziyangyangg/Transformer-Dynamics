@@ -141,24 +141,32 @@ E^{\rm route}_r=\mathbb E_{c,J}
 
 ### 3.1 直接 key 路径与 target selectivity
 
-对 slot \(i\)，在所有层和 head 同时执行
+对 episode \(U=(X,Y)\) 和 slot \(i\)，在所有层和 head 同时执行
 \(s^{\ell h}_{qi}\leftarrow-\infty\)，重算 softmax 与全部后代：
 
 \[
-D_{i,r}=\mathbb E\left[Y\left\{f(X)-
+\delta_{i,r}(U)=Y\left\{f(X)-
 f\bigl(\operatorname{do}(s^{\ell h}_{qi}=-\infty,\ \forall\ell,h)\bigr)
-\right\}\right].
+\right\}.
 \]
 
 主要的 key-path selectivity 是
 
 \[
-S_{{\rm key},r}=D_{J,r}-\frac1{m-1}\sum_{i\ne J}D_{i,r}. \tag{2}
+S_{{\rm key},r}=\mathbb E_U\left[
+\delta_{J,r}(U)-\frac1{m-1}\sum_{i\ne J}\delta_{i,r}(U)
+\right]. \tag{2}
 \]
 
-\(D_J\) 不是总 value 因果效应：target value 可能先进入其他 memory token，再间接到 query。
+\(\mathbb E\delta_J\) 不是总 value 因果效应：target value 可能先进入其他 memory token，
+再间接到 query。
 因此只有 (2) 显著为正时才可以说“直接 query-to-target key 路径具有任务选择性”；
 \(\Xi_{\rm value}>0\) 只允许说“输出因果依赖 queried value”。
+
+**发布偏差。** 当前 evaluator 只保存了 target-edge blocking effect
+\(\mathbb E\delta_J\)，没有逐个阻断 distractor edges，因而没有估计 (2)。结果表中的
+`target-edge + attention screen` 还结合了描述性的 target-minus-distractor attention mass；
+它不是 causal key selectivity，注册的 \(S_{\rm key}\) 在本批实验中尚未评估。
 
 ## 4. 表示几何与 superposition 的 seed-level estimands
 
@@ -172,7 +180,7 @@ r_{{\rm eff},r}(E)=
 \]
 
 \[
-\mu_r(E)=\max_{c\ne c'}|u_c^\top u_{c'}|,qquad
+\mu_r(E)=\max_{c\ne c'}|u_c^\top u_{c'}|,\qquad
 D_{c,r}=\frac{\|E_c\|_2^2}{\sum_{c'}(u_c^\top E_{c'})^2}.
 \]
 
@@ -253,7 +261,7 @@ I_{{\rm output},r}=\mathbb E[(f(X')-f(X))^2]. \tag{3}
 对注册节点 \(Z_s\)，recipient 为 \(X\)、donor 为 \(X'\)：
 
 \[
-p_{s,e}=f(X_e;\operatorname{do}(Z_s=Z_s(X'_e)))-f(X_e),qquad
+p_{s,e}=f(X_e;\operatorname{do}(Z_s=Z_s(X'_e)))-f(X_e),\qquad
 I_{s,r}=\mathbb E_e[p_{s,e}^2]. \tag{4}
 \]
 
@@ -351,6 +359,39 @@ O_{QK,r}=\Pr_e[t_{route}(t_{content}+t_{interaction})<0].
 只有 (8) 为正、\(O_{QK}>1/2\)，且第 5 节 finite patch 方向一致，才把 QK 称为候选
 compensator。
 
+#### 6.1.1 实现偏差：当前快照使用对称 midpoint split
+
+首轮机制快照没有保存式 (6) 的三个非对称 endpoint 项。实现采用了另一个同样精确、
+但**不等价于本节预注册 estimand** 的对称双线性恒等式。令
+\(\bar a=(a+a')/2\)、\(\bar z=(z+z')/2\)，则实现记录
+
+\[
+\delta m_{content}^{sym}=\sum_i\bar a_i(z'_i-z_i)
+=\delta m_{content}+\tfrac12\delta m_{interaction},
+\]
+
+\[
+\delta m_{route}^{sym}=\sum_i(a'_i-a_i)\bar z_i
+=\delta m_{route}+\tfrac12\delta m_{interaction},
+\qquad
+m'-m=\delta m_{content}^{sym}+\delta m_{route}^{sym}. \tag{8a}
+\]
+
+当前 CSV 中沿用的字段名 `qk_suppression_log_ratio` 实际计算
+
+\[
+C_{QK}^{sym}=\mathbb E_e\log
+\frac{(t_{content}^{sym})^2+10^{-12}}
+{(t_{content}^{sym}+t_{route}^{sym})^2+10^{-12}}, \tag{8b}
+\]
+
+而不是式 (8)。有限 interaction 被一半分给 content、一半分给 route，因此二者甚至可能
+符号相反。例如标量 \(t_{content}=1,t_{route}=0.05,t_{interaction}=-0.2\) 时，式 (8) 的
+log-ratio 为负，而式 (8b) 为正。故现有 midpoint 结果只能作为**探索性 protocol
+deviation**：它可以反对一个朴素的 midpoint suppression story，但没有检验、更没有反驳
+预注册的式 (8)。正式确认性重放必须同时输出三个 endpoint 项、式 (8) 与 finite hybrid
+validation；不得事后把式 (8b) 改名为预注册结果。
+
 ### 6.2 OV 的方向选择性（不是相邻 patch attenuation）
 
 由于 OV 是线性映射，pre/post-OV coherent patch 不能识别补偿。对 swap cross-talk
@@ -358,7 +399,7 @@ compensator。
 
 \[
 g_{swap}=\frac{\|C_{\ell h}\delta m\|_2^2}
-{\|\delta m\|_2^2+10^{-12}},qquad
+{\|\delta m\|_2^2+10^{-12}},\qquad
 g_{iso}=\frac{\|C_{\ell h}\|_F^2}{\dim(m)},
 \]
 
@@ -390,9 +431,10 @@ A_{OV,\ell h,r}=\mathbb E_e
 令同一层 attention 后的 base/donor query state 为 \(x,x'\)：
 
 \[
-\delta x_{skip}=x'-x,qquad
-\delta x_{ffn}=F(\operatorname{RMSNorm}(x'))-
-F(\operatorname{RMSNorm}(x)),
+\delta x_{skip}=x'-x,\qquad
+\delta x_{ffn}=L^{-1/2}\left[
+F(\operatorname{RMSNorm}(x'))-
+F(\operatorname{RMSNorm}(x))\right],
 \]
 
 \[
@@ -409,7 +451,7 @@ t_{ffn}=r^\top\delta x_{ffn},
 \[
 C_{FFN,r}=\mathbb E_e\log
 \frac{t_{skip}^2+10^{-12}}
-{(t_{skip}+t_{ffn})^2+10^{-12}},qquad
+{(t_{skip}+t_{ffn})^2+10^{-12}},\qquad
 O_{FFN,r}=\Pr_e[t_{skip}t_{ffn}<0]. \tag{12}
 \]
 
@@ -509,7 +551,7 @@ secondary，不能把 head 当独立样本。第 10 节对 (15) 的所有 layer/
 所有 primary comparison 以 seed id 为 block。若共有 \(R\) 个完整配对，
 
 \[
-\widehat I_{rank}=R^{-1}\sum_{r=1}^R\Delta^{rank}_r,qquad
+\widehat I_{rank}=R^{-1}\sum_{r=1}^R\Delta^{rank}_r,\qquad
 d_z=\frac{\overline\Delta}{s_\Delta},
 \]
 
@@ -539,8 +581,8 @@ intention-to-train（所有计划 seed，包括失败率）必须同时报告。
 一个训练 seed 只有同时满足
 
 \[
-\widehat A_r\ge0.95,qquad
-\widehat R_r\le0.05,qquad
+\widehat A_r\ge0.95,\qquad
+\widehat R_r\le0.05,\qquad
 \Xi_{{\rm value},r}\ge0.90 \tag{16}
 \]
 
@@ -550,7 +592,7 @@ intention-to-train（所有计划 seed，包括失败率）必须同时报告。
 对 compensation claim，donor endpoint 还必须满足
 
 \[
-A_r(X')\ge0.95,qquad I_{{\rm output},r}\le2.5\times10^{-3}. \tag{17}
+A_r(X')\ge0.95,\qquad I_{{\rm output},r}\le2.5\times10^{-3}. \tag{17}
 \]
 
 (17) 表示 RMS output swap sensitivity 不超过 label scale 的 5%。若 (17) 不通过，正确
@@ -562,7 +604,7 @@ cross-talk。
 表示比较的两个 cell 必须通过 bootstrap TOST 等效性。等效边界预注册为
 
 \[
-|\Delta A|<0.02,qquad |\Delta\Xi_{value}|<0.05,qquad
+|\Delta A|<0.02,\qquad |\Delta\Xi_{value}|<0.05,\qquad
 |\Delta E^{route}|<0.02. \tag{18}
 \]
 
@@ -681,6 +723,13 @@ optimizer remedy 只能依据 risk、NaN 与 gate pass rate，不能依据希望
 NTK 或 compensation 方向。任何 gradient clipping、warmup、初始化尺度、batch size 或模型
 结构改变都形成新 protocol version。禁止对同一 seed 反复重启直到成功。
 
+本项目已经完成的 b=2,048 follow-up **没有执行第 5 步**：它是在先前筛出的困难
+cells 3/7（另含边界 cells 6/11）上，继续使用训练 seeds 0--9 比较固定的延长/降学习率
+schedule。因此这些 paired bootstrap 区间只量化这批已选择 trajectories 上的
+targeted remedy effect；它们是高精度、同 seed 的**探索性诊断**，不是独立 remedy seeds
+或 never-tuned confirmatory seeds 上的确认性推断。任何正式的 optimization phase-boundary
+命题仍须按第 4--6 步重新采样并做 family-level correction。
+
 ## 13. Loss-landscape diagnostics
 
 这些诊断用于排除优化伪象，不证明 routing 或 compensation。
@@ -726,13 +775,13 @@ Lanczos top-20 eigenvalues，并用 64 个固定 Rademacher probes 做 Hutchinso
 \(J_t\in\mathbb R^{n_{NTK}\times P}\)，定义
 
 \[
-K_t=P^{-1}J_tJ_t^\top,qquad
+K_t=P^{-1}J_tJ_t^\top,\qquad
 D_{NTK}(t)=\frac{\|K_t-K_0\|_F}{\|K_0\|_F+10^{-12}},
 \]
 
 \[
 A_{NTK}(t)=\frac{\langle K_t,K_0\rangle_F}
-{\|K_t\|_F\|K_0\|_F+10^{-12}},qquad
+{\|K_t\|_F\|K_0\|_F+10^{-12}},\qquad
 r_{eff}(K_t)=\frac{\operatorname{tr}(K_t)^2}{\operatorname{tr}(K_t^2)}. \tag{21}
 \]
 

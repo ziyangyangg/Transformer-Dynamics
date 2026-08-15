@@ -1,12 +1,22 @@
 {
-  "analysis_code_commit": "2d95f602da7659da3a8a6234d6e163b5de916d38",
+  "analysis_code_provenance": {
+    "method": "sha256_of_generator_sources",
+    "source_sha256": {
+      "src/routing_lab/scaling_analysis.py": "aa7282344c9457b7f4aa0e40b61efae1f044384fc0177f630b30bfd56746c802",
+      "src/routing_lab/scaling_io.py": "759d2aa1c83c8a4e15a3c4a02910a25c51bab49f85efe043c47352c5b0c14d77",
+      "src/routing_lab/scaling_remedy.py": "83b595d1cd75afd5a575f87fea7270edf905b4903a7a0c485d9a09497c09ad9f",
+      "src/routing_lab/scaling_remedy_figures.py": "c5b6c2ebd1ebf8f5608b4c98e5670821d0298c3543dacd00b06b9da125ce3e00",
+      "src/routing_lab/scaling_remedy_study.py": "ad813673732e8bcfb83879f22a2d7f00a698e9e6c4c523644bd2b2ba2cf12cd8",
+      "src/routing_lab/statistics.py": "03c7b392336672f13f95a568e86e87614ea3b8ec5bcb3ee6b4a21f05c25baa0d"
+    }
+  },
   "analysis_id": "scaling-remedy-analysis-b2048-v1",
   "bootstrap_resamples": 20000,
   "files": [
     {
-      "bytes": 3876,
+      "bytes": 4363,
       "path": "README.md",
-      "sha256": "777bbfb2bdf81f1f44b4244ad4e08ea7015e978690e565259f955daf2ca75eff"
+      "sha256": "14f889dcb72b703baa180c934d467720c58c67c06a8aa1b0648c6253c5455a32"
     },
     {
       "bytes": 2199,
@@ -74,9 +84,9 @@
       "sha256": "eae773b3e92ec4acc64365179638b172c255e98ba4c2d8513c9f350af0f78b68"
     },
     {
-      "bytes": 224803,
+      "bytes": 225874,
       "path": "summary.json",
-      "sha256": "4cade7929490b5a321db53575ebb9f697591f1ffef315f23a65ff9904fc77ba8"
+      "sha256": "6bd15b519ac2009e242806d14cdd20d506c3967889b9e6cd5532cf60658e6bf0"
     }
   ],
   "sampling_unit": "training_seed",

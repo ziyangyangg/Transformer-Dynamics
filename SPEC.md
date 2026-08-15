@@ -213,14 +213,13 @@ retained in a failure ledger.
 
 ## Commands
 
-All commands use the existing environment:
+All commands assume the package environment described in `README.md`:
 
 ```
-PY=/home/zion/miniforge3/envs/llm4rec/bin/python3.11
-Test:     PYTHONPATH=src $PY -m unittest discover -s tests -v
-Smoke:    PYTHONPATH=src $PY -m routing_lab.run --config configs/smoke.json
-Primary:  PYTHONPATH=src $PY -m routing_lab.run --config configs/primary.json
-Analyze:  PYTHONPATH=src $PY -m routing_lab.analyze --run-dir results/primary
+Test:     PYTHONPATH=src python -m unittest discover -s tests -v
+Smoke:    PYTHONPATH=src python -m routing_lab.run --config configs/smoke.json --output results/smoke-reproduction --device cpu
+Primary:  PYTHONPATH=src python -m routing_lab.run --config configs/primary_adamw.json --output results/primary-adamw-reproduction --device cuda
+Analyze:  PYTHONPATH=src python -m routing_lab.mechanism_analysis --help
 ```
 
 ## Project structure

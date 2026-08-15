@@ -13,6 +13,7 @@ from routing_lab.scaling_remedy import (
     validate_shared_evaluation_contract,
 )
 from routing_lab.scaling_remedy_figures import render_gate_counts
+from routing_lab.scaling_remedy_study import _readme
 from routing_lab.statistics import BootstrapSpec
 
 
@@ -240,6 +241,40 @@ class RemedyFigureTests(unittest.TestCase):
             svg = Path(first["svg"]).read_text(encoding="utf-8")
             self.assertIn("Exact full-gate seed counts", svg)
             self.assertIn("n=10 paired training seeds", svg)
+
+
+class RemedyReadmeTests(unittest.TestCase):
+    def test_reproduction_command_uses_the_active_python_environment(self) -> None:
+        readme = _readme(
+            baseline_overview={
+                "passed_seed_runs": 1,
+                "total_seed_runs": 1,
+                "strict_10_of_10_passed_cells": 1,
+                "total_cells": 1,
+                "strict_fail_cell_indices": [],
+                "material_mean_cells_ci_above_swap_threshold": [],
+            },
+            comparison_rows=[
+                {
+                    "comparison": "same_lr_extension_1600",
+                    "cell_index": 3,
+                    "baseline_full_gate_pass_count": 0,
+                    "followup_full_gate_pass_count": 1,
+                    "swap_mse_baseline_mean": 0.01,
+                    "swap_mse_followup_mean": 0.001,
+                    "swap_mse_delta": -0.009,
+                    "swap_mse_delta_ci_lower": -0.01,
+                    "swap_mse_delta_ci_upper": -0.008,
+                }
+            ],
+            sensitivity_rows=[],
+        )
+
+        self.assertIn("python -m routing_lab.scaling_remedy_study", readme)
+        self.assertNotIn("/home/", readme)
+        self.assertIn("targeted exploratory follow-up", readme)
+        self.assertIn("unadjusted pointwise paired intervals", readme)
+        self.assertIn("never-tuned confirmatory seeds", readme)
 
 
 if __name__ == "__main__":
