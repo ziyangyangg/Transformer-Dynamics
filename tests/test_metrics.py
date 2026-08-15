@@ -10,6 +10,7 @@ import torch
 from routing_lab.metrics import (
     feature_geometry,
     participation_rank,
+    token_representation_geometry,
     value_flip_effect,
     walsh_spectrum,
 )
@@ -34,6 +35,64 @@ class GeometryMetricTests(unittest.TestCase):
         )
         self.assertLessEqual(float(geometry.effective_rank), algebraic_rank + 1.0e-10)
         self.assertGreaterEqual(float(geometry.coherence), geometry.welch_bound - 1.0e-10)
+
+    def test_token_geometry_uses_target_roles_and_centers_each_episode(self) -> None:
+        """The final token is the query and every earlier token is real memory.
+
+        There is no padding in this task.  Episode zero contains ``[e1,e2,e1]``
+        with memory zero targeted, so query--target cosine is one, query--distractor
+        cosine is zero, and the three centered tokens span one direction.  Episode
+        one contains three orthogonal tokens with memory one targeted; its centered
+        covariance has two equal nonzero eigenvalues.  This fixes both the semantic
+        roles and the fact that participation rank is averaged *after* computing it
+        separately within each episode.
+        """
+
+        states = torch.tensor(
+            [
+                [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [1.0, 0.0, 0.0]],
+                [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],
+            ],
+            dtype=torch.float64,
+        )
+        geometry = token_representation_geometry(
+            states,
+            target_index=torch.tensor([0, 1]),
+        )
+
+        torch.testing.assert_close(
+            geometry.query_target_cosine,
+            torch.tensor([1.0, 0.0], dtype=torch.float64),
+            atol=1.0e-12,
+            rtol=0.0,
+        )
+        torch.testing.assert_close(
+            geometry.query_distractor_mean_cosine,
+            torch.zeros(2, dtype=torch.float64),
+            atol=1.0e-12,
+            rtol=0.0,
+        )
+        torch.testing.assert_close(
+            geometry.global_offdiagonal_token_cosine,
+            torch.tensor([1.0 / 3.0, 0.0], dtype=torch.float64),
+            atol=1.0e-12,
+            rtol=0.0,
+        )
+        torch.testing.assert_close(
+            geometry.token_covariance_participation_rank,
+            torch.tensor([1.0, 2.0], dtype=torch.float64),
+            atol=1.0e-12,
+            rtol=0.0,
+        )
+
+    def test_token_geometry_rejects_padding_like_shape_mismatches(self) -> None:
+        """A target exists only among the ``T-1`` unpadded memory positions."""
+
+        states = torch.ones(2, 3, 4)
+        with self.assertRaisesRegex(ValueError, "target_index must have shape"):
+            token_representation_geometry(states, target_index=torch.tensor([0]))
+        with self.assertRaisesRegex(ValueError, "memory token"):
+            token_representation_geometry(states, target_index=torch.tensor([0, 2]))
 
 
 class CausalFourierMetricTests(unittest.TestCase):
@@ -103,4 +162,3 @@ class CausalFourierMetricTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

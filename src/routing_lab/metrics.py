@@ -24,6 +24,109 @@ def participation_rank(matrix: torch.Tensor, *, center: bool = False) -> torch.T
 
 
 @dataclass(frozen=True)
+class TokenRepresentationGeometry:
+    """Per-episode geometry of all memory tokens and the final query token.
+
+    Every field has shape ``[batch]``.  Keeping episodes separate here lets the
+    evaluator average at the seed boundary and avoids treating tokens as independent
+    statistical replicates.
+    """
+
+    query_target_cosine: torch.Tensor
+    query_distractor_mean_cosine: torch.Tensor
+    global_offdiagonal_token_cosine: torch.Tensor
+    token_covariance_participation_rank: torch.Tensor
+
+
+def token_representation_geometry(
+    states: torch.Tensor,
+    *,
+    target_index: torch.Tensor,
+) -> TokenRepresentationGeometry:
+    """Measure target-selective geometry and within-sequence collapse.
+
+    Args:
+        states: Residual-stream states with shape ``[B,T,d]``.  This retrieval task
+            has no padding: positions ``0,...,T-2`` are all memory cards and position
+            ``T-1`` is the query.
+        target_index: The queried memory position for each episode, shape ``[B]``.
+
+    For episode ``b``, let ``u_bi=x_bi/||x_bi||`` (with the explicit convention
+    ``u_bi=0`` if ``x_bi=0``).  We report the query--target cosine, the mean
+    query--distractor cosine, and the mean over all ordered off-diagonal token pairs.
+    The last statistic is the participation effective rank
+
+    ``tr(Sigma_b)^2 / tr(Sigma_b^2)``
+
+    of the token covariance after centering the ``T`` tokens *within that episode*.
+    It is zero when every centered token is exactly zero.  Computing covariance per
+    episode is essential: pooling unrelated episodes would mix concept identities and
+    could look high-rank even when every individual sequence has collapsed.
+    """
+
+    if states.ndim != 3 or states.shape[1] < 3 or states.shape[2] < 1:
+        raise ValueError("states must have shape [batch,T,d] with T >= 3")
+    if not states.is_floating_point():
+        raise ValueError("states must use a floating-point dtype")
+
+    batch_size, sequence_length, _ = states.shape
+    memory_size = sequence_length - 1
+    if target_index.shape != (batch_size,):
+        raise ValueError("target_index must have shape [batch]")
+    if target_index.dtype not in (
+        torch.int8,
+        torch.int16,
+        torch.int32,
+        torch.int64,
+        torch.uint8,
+    ):
+        raise ValueError("target_index must contain integer memory positions")
+    target = target_index.to(device=states.device, dtype=torch.long)
+    if bool(torch.any((target < 0) | (target >= memory_size))):
+        raise ValueError("every target_index must identify a real memory token")
+
+    # Exact zeros do not have a mathematical cosine.  Mapping their unit vector to
+    # zero keeps the registered summary finite and makes the convention explicit.
+    norms = states.norm(dim=-1, keepdim=True)
+    unit = states / torch.where(norms > 0, norms, torch.ones_like(norms))
+    cosine = torch.bmm(unit, unit.transpose(1, 2))
+
+    rows = torch.arange(batch_size, device=states.device)
+    query_position = sequence_length - 1
+    query_target = cosine[rows, query_position, target]
+
+    query_memory = cosine[:, query_position, :memory_size]
+    distractor_mask = torch.ones(
+        (batch_size, memory_size), dtype=torch.bool, device=states.device
+    )
+    distractor_mask[rows, target] = False
+    query_distractor = query_memory.masked_fill(~distractor_mask, 0.0).sum(dim=1)
+    query_distractor = query_distractor / (memory_size - 1)
+
+    diagonal_sum = cosine.diagonal(dim1=1, dim2=2).sum(dim=1)
+    global_offdiagonal = (cosine.sum(dim=(1, 2)) - diagonal_sum) / (
+        sequence_length * (sequence_length - 1)
+    )
+
+    centered = states - states.mean(dim=1, keepdim=True)
+    covariance_eigenvalue_power = torch.linalg.svdvals(centered).square()
+    total_power = covariance_eigenvalue_power.sum(dim=1)
+    squared_power = covariance_eigenvalue_power.square().sum(dim=1)
+    covariance_rank = torch.where(
+        squared_power > 0,
+        total_power.square() / squared_power,
+        torch.zeros_like(squared_power),
+    )
+
+    return TokenRepresentationGeometry(
+        query_target_cosine=query_target,
+        query_distractor_mean_cosine=query_distractor,
+        global_offdiagonal_token_cosine=global_offdiagonal,
+        token_covariance_participation_rank=covariance_rank,
+    )
+
+
+@dataclass(frozen=True)
 class FeatureGeometry:
     """Compressed-dictionary diagnostics for concept vectors stored by rows."""
 
@@ -111,4 +214,3 @@ def walsh_spectrum(values: torch.Tensor, output: torch.Tensor) -> torch.Tensor:
         active = ((masks >> index) & 1).to(torch.bool)
         characters[:, active] *= values_on_output_device[:, index, None]
     return (output[:, None] * characters).mean(dim=0)
-
