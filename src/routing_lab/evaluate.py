@@ -426,6 +426,9 @@ def evaluate_seed_mechanisms(
             "skip_signed_mean",
             "branch_signed_mean",
             "total_signed_mean",
+            "skip_energy_mean",
+            "branch_energy_mean",
+            "total_energy_mean",
             "opposite_sign_fraction",
             "cancellation_fraction_mean",
         )
@@ -468,6 +471,19 @@ def evaluate_seed_mechanisms(
             )
             metrics[f"{prefix}.total_signed_mean"] = _mean(
                 cancellation.total_signed
+            )
+            # A mean signed contribution can be near zero only because different
+            # episodes have opposite signs.  Second moments keep the magnitude of
+            # the local effect visible and supply the practical-relevance floor in
+            # the confirmatory compensation analysis.
+            metrics[f"{prefix}.skip_energy_mean"] = _mean(
+                cancellation.skip_signed.square()
+            )
+            metrics[f"{prefix}.branch_energy_mean"] = _mean(
+                cancellation.branch_signed.square()
+            )
+            metrics[f"{prefix}.total_energy_mean"] = _mean(
+                cancellation.total_signed.square()
             )
             metrics[f"{prefix}.opposite_sign_fraction"] = _mean(
                 cancellation.opposite_sign.to(torch.float32)

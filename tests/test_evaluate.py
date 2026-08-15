@@ -497,6 +497,12 @@ class SeedMechanismEvaluationContractTests(unittest.TestCase):
                 ("skip_signed_mean", expected.skip_signed.mean()),
                 ("branch_signed_mean", expected.branch_signed.mean()),
                 ("total_signed_mean", expected.total_signed.mean()),
+                # Signed means can cancel across episodes even when the local
+                # contribution is large.  These second moments are the registered
+                # practical-relevance floor for a compensation claim.
+                ("skip_energy_mean", expected.skip_signed.square().mean()),
+                ("branch_energy_mean", expected.branch_signed.square().mean()),
+                ("total_energy_mean", expected.total_signed.square().mean()),
                 ("opposite_sign_fraction", expected.opposite_sign.float().mean()),
                 ("cancellation_fraction_mean", expected.cancellation_fraction.mean()),
             ):
@@ -508,6 +514,9 @@ class SeedMechanismEvaluationContractTests(unittest.TestCase):
             "skip_signed_mean",
             "branch_signed_mean",
             "total_signed_mean",
+            "skip_energy_mean",
+            "branch_energy_mean",
+            "total_energy_mean",
             "opposite_sign_fraction",
             "cancellation_fraction_mean",
         )
