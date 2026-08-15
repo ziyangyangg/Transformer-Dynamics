@@ -11,7 +11,8 @@
     "figure": "paired_error_effects",
     "n_per_panel": 10,
     "question": "Which registered error endpoints change under each schedule?",
-    "sample_unit": "paired training seed"
+    "sample_unit": "paired training seed",
+    "walsh_leakage_definition": "walsh_distractor_direct_energy + walsh_interaction_energy"
   },
   {
     "encoding": "open circles for baseline + filled squares for follow-up",

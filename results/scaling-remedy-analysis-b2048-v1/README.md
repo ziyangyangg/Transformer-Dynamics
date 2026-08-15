@@ -11,6 +11,16 @@ $$\Delta_{c,s,e}=Y^{followup}_{c,s,e}-Y^{baseline}_{c,s,e},\qquad
 
 95% CI 对十维 seed-difference vector 做 20,000 次 percentile bootstrap。head、evaluation episode、不同 cell 都不是独立样本。
 
+图表中的 Walsh leakage 明确定义为
+
+$$
+L_{\mathrm{Walsh}}
+=E_{\mathrm{distractor\mbox{-}direct}}
++E_{\mathrm{all\ interactions}}.
+$$
+
+两项及其更细的 distractor-only / target interaction 分量均保留在 CSV，而不是先把分量丢弃。
+
 严格 full gate 要求同一 seed 同时满足：base accuracy、population risk $\tfrac12\mathrm{MSE}$、value-flip effect、donor accuracy、natural-swap MSE。cell 的 `10/10` pass count 是逐 seed 阈值筛查，不是 cell mean 的置信区间。
 
 ## 主要结果
@@ -34,7 +44,7 @@ $$\Delta_{c,s,e}=Y^{followup}_{c,s,e}-Y^{baseline}_{c,s,e},\qquad
 
 ## Evaluation-stream sensitivity
 
-同一 baseline checkpoints 在旧 b=256 stream 上为 136/160 seed gates，在新 b=2048 stream 上为 132/160。严格 cell gate 因单-seed tail 会变动；cells 3/7 的 material mean residual 则在两条 stream 上都存在。旧 b=256 / remedy b=512 结果只作为 sensitivity，不参与上表的主 paired estimand。
+同一 baseline checkpoints 在旧 b=256 stream 上为 136/160 seed gates，在新 b=2048 stream 上为 132/160。严格 cell gate 因单-seed tail 会变动；cells 3/7 的 material mean residual 则在两条 stream 上都存在。旧 b=256 / remedy b=512 结果只作为 sensitivity，不参与上表的主 paired estimand。尤其 remedy 的旧 b=512 评估运行于 CPU、新 b=2048 运行于 CUDA，所以该对照同时包含 evaluation stream 与 numerical backend 的变化，不能把差异单独归因于 batch size。
 
 ## 复现
 
