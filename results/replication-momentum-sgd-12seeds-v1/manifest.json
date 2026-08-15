@@ -1,0 +1,173 @@
+{
+  "checkpoint_steps": [
+    0,
+    25,
+    50,
+    100,
+    150,
+    200,
+    300,
+    400,
+    500,
+    600,
+    800
+  ],
+  "completed_seed_runs": 96,
+  "configuration": {
+    "cells": [
+      {
+        "batch_size": 512,
+        "d_model": 16,
+        "ffn_width": null,
+        "learning_rate": 0.03,
+        "memory_size": 4,
+        "momentum": 0.9,
+        "num_concepts": 16,
+        "num_heads": 1,
+        "num_layers": 2,
+        "optimizer": "sgd",
+        "steps": 800
+      },
+      {
+        "batch_size": 512,
+        "d_model": 16,
+        "ffn_width": null,
+        "learning_rate": 0.03,
+        "memory_size": 4,
+        "momentum": 0.9,
+        "num_concepts": 16,
+        "num_heads": 4,
+        "num_layers": 2,
+        "optimizer": "sgd",
+        "steps": 800
+      },
+      {
+        "batch_size": 512,
+        "d_model": 16,
+        "ffn_width": null,
+        "learning_rate": 0.03,
+        "memory_size": 4,
+        "momentum": 0.9,
+        "num_concepts": 64,
+        "num_heads": 1,
+        "num_layers": 2,
+        "optimizer": "sgd",
+        "steps": 800
+      },
+      {
+        "batch_size": 512,
+        "d_model": 16,
+        "ffn_width": null,
+        "learning_rate": 0.03,
+        "memory_size": 4,
+        "momentum": 0.9,
+        "num_concepts": 64,
+        "num_heads": 4,
+        "num_layers": 2,
+        "optimizer": "sgd",
+        "steps": 800
+      },
+      {
+        "batch_size": 512,
+        "d_model": 16,
+        "ffn_width": 32,
+        "learning_rate": 0.03,
+        "memory_size": 4,
+        "momentum": 0.9,
+        "num_concepts": 16,
+        "num_heads": 1,
+        "num_layers": 2,
+        "optimizer": "sgd",
+        "steps": 800
+      },
+      {
+        "batch_size": 512,
+        "d_model": 16,
+        "ffn_width": 32,
+        "learning_rate": 0.03,
+        "memory_size": 4,
+        "momentum": 0.9,
+        "num_concepts": 16,
+        "num_heads": 4,
+        "num_layers": 2,
+        "optimizer": "sgd",
+        "steps": 800
+      },
+      {
+        "batch_size": 512,
+        "d_model": 16,
+        "ffn_width": 32,
+        "learning_rate": 0.03,
+        "memory_size": 4,
+        "momentum": 0.9,
+        "num_concepts": 64,
+        "num_heads": 1,
+        "num_layers": 2,
+        "optimizer": "sgd",
+        "steps": 800
+      },
+      {
+        "batch_size": 512,
+        "d_model": 16,
+        "ffn_width": 32,
+        "learning_rate": 0.03,
+        "memory_size": 4,
+        "momentum": 0.9,
+        "num_concepts": 64,
+        "num_heads": 4,
+        "num_layers": 2,
+        "optimizer": "sgd",
+        "steps": 800
+      }
+    ],
+    "checkpoint_steps": [
+      0,
+      25,
+      50,
+      100,
+      150,
+      200,
+      300,
+      400,
+      500,
+      600,
+      800
+    ],
+    "eval_batch_size": 8192,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "study_id": "replication-momentum-sgd-12seeds-v1",
+    "weight_decay": 0.0
+  },
+  "environment": {
+    "device": "cuda",
+    "git_commit": "a137288272c17a80378642c6e89c91b77ac48b3d",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
+    "torch_version": "2.11.0+cu128"
+  },
+  "failed_seed_runs": 0,
+  "last_invocation": {
+    "checkpoint_rows": 1056,
+    "completed_seed_runs": 96,
+    "failed_seed_runs": 0,
+    "planned_seed_runs": 96,
+    "skipped_seed_runs": 0
+  },
+  "scheduled_seed_runs": 96,
+  "schema_version": 1,
+  "study_config_hash": "acac69fd0fb0eb72c223dcdbd380b2cff3f020d29c0cefc2e02ac2c1212afe00",
+  "study_id": "replication-momentum-sgd-12seeds-v1"
+}
