@@ -1038,6 +1038,8 @@ def _configure_plot_style() -> None:
             "savefig.facecolor": "#FFFFFF",
             "legend.frameon": False,
             "lines.linewidth": 1.8,
+            # Matplotlib otherwise salts SVG element identifiers per process.
+            "svg.hashsalt": "routing-lab-dynamics-analysis-v1",
         }
     )
 
@@ -1047,8 +1049,19 @@ def _save_figure(figure: plt.Figure, output_directory: Path, stem: str) -> list[
 
     png = output_directory / f"{stem}.png"
     svg = output_directory / f"{stem}.svg"
-    figure.savefig(png, dpi=220, bbox_inches="tight")
-    figure.savefig(svg, bbox_inches="tight")
+    figure.savefig(
+        png,
+        dpi=220,
+        bbox_inches="tight",
+        metadata={"Software": "routing_lab.dynamics_analysis"},
+    )
+    figure.savefig(
+        svg,
+        bbox_inches="tight",
+        # Suppress the wall-clock timestamp so identical source arrays produce
+        # byte-identical vector figures and a stable summary hash.
+        metadata={"Date": None, "Creator": "routing_lab.dynamics_analysis"},
+    )
     plt.close(figure)
     return [png, svg]
 
