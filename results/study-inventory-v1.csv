@@ -1,0 +1,12 @@
+study_id,config_path,result_manifest_path,cells,seeds,seed_runs,status
+smoke,configs/smoke.json,results/smoke-instrumentation-v1/manifest.json,2,2,4,completed
+primary_adamw,configs/primary_adamw.json,results/primary-adamw-12seeds-v1/manifest.json,8,12,96,completed
+replication_sgd,configs/replication_sgd.json,results/replication-momentum-sgd-12seeds-v1/manifest.json,8,12,96,completed
+sgd_extension,configs/remedy_sgd_seed10.json,results/remedy-sgd-c64-h1-attn-seed10-v1/manifest.json,1,1,1,completed
+scaling_high_lr,configs/scaling_width_load_adamw.json,results/scaling-width-load-adamw-10seeds-v1/manifest.json,16,10,160,completed
+scaling_pilot,configs/scaling_pilot_adamw.json,results/scaling-pilot-adamw-v1/manifest.json,16,2,32,completed
+scaling_tuned_pilot,configs/scaling_tuned_pilot_adamw.json,results/scaling-tuned-pilot-adamw-v1/manifest.json,16,2,32,completed
+plateau_remedy_pilot,configs/scaling_plateau_remedy_pilot.json,results/scaling-plateau-remedy-pilot-v1/manifest.json,4,2,8,completed
+scaling_tuned,configs/scaling_tuned_adamw.json,results/scaling-tuned-adamw-10seeds-v1/manifest.json,16,10,160,completed
+low_lr_remedy,configs/scaling_crosstalk_remedy_adamw.json,results/scaling-crosstalk-remedy-adamw-10seeds-v1/manifest.json,4,10,40,completed
+same_lr_extension,configs/scaling_crosstalk_extension_adamw.json,results/scaling-crosstalk-extension-adamw-10seeds-v1/manifest.json,3,10,30,completed

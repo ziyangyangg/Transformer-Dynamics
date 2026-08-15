@@ -1,0 +1,28 @@
+{
+  "artifact": "reports/artifact.json",
+  "counts": {
+    "manifest_blocks": 25,
+    "packager_reported_blocks": 28,
+    "charts": 7,
+    "metrics": 4,
+    "tables": 4
+  },
+  "html": "reports/report.html",
+  "manual_visual_qa": {
+    "figures_checked": [
+      "results/scaling-remedy-analysis-b2048-v1/figures/paired_swap_mse.png",
+      "results/scaling-analysis-v1/figures/representation_geometry.png",
+      "results/dynamics-analysis-v1/loss_landscapes.png",
+      "results/clustering-baseline-v1/clustering_baseline.png"
+    ],
+    "result": "passed",
+    "scope": "labels, clipping, legends, uncertainty encoding, scale semantics, and claim-chart agreement"
+  },
+  "ok": true,
+  "stages": {
+    "package": "passed",
+    "validation": "passed",
+    "verification": "structural_only"
+  },
+  "verification_note": "The artifact manifest contains 25 ordered content blocks; the portable packager reported 28 rendered block-like regions after expanding embedded structures. The packaged verifier could not complete its dependency-free browser probe because no compatible Chromium headless-shell was installed. Full Chrome was attempted but exceeded the verifier's bounded DOM-output limit. Static figures received explicit visual QA, while artifact structure, sources, datasets, and serialization were contract-tested."
+}

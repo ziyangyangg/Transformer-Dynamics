@@ -1,0 +1,272 @@
+{
+  "analysis_id": "dynamics-analysis-v1",
+  "analysis_schema_version": 1,
+  "artifacts": [
+    {
+      "bytes": 8964,
+      "path": "results/dynamics-analysis-v1/run_steps.csv",
+      "sha256": "0dca711955bf61efbb25fdc3dcf0ef96246390831d0154b153c2191de5e459f3"
+    },
+    {
+      "bytes": 14365,
+      "path": "results/dynamics-analysis-v1/ntk_groups.csv",
+      "sha256": "a5ef092e3dcda4d440384d8fefb40ada8baa925b9031daaa4474de7f182ed4d3"
+    },
+    {
+      "bytes": 16865,
+      "path": "results/dynamics-analysis-v1/hessian_ritz.csv",
+      "sha256": "34d33951193c1bc34a0a0f698bba2c1442b0c230d1a61a379ed2340a0ee52a99"
+    },
+    {
+      "bytes": 1003836,
+      "path": "results/dynamics-analysis-v1/loss_landscape_cells.csv",
+      "sha256": "bd4e932a40857569a07a4b9578aefc9d4491f29882f7bfab9de5c396f659cf84"
+    },
+    {
+      "bytes": 2425,
+      "path": "results/dynamics-analysis-v1/provenance.csv",
+      "sha256": "a0cd076f96cd50e98816934b55b117dfabc2010cdfc5a17ea4412f5188c5ddcc"
+    },
+    {
+      "bytes": 955536,
+      "path": "results/dynamics-analysis-v1/loss_landscapes.png",
+      "sha256": "8bffdb162b6fc22d0652a4c2083d6c417b65136b9984bdfc75732fb91e4a2b55"
+    },
+    {
+      "bytes": 371161,
+      "path": "results/dynamics-analysis-v1/loss_landscapes.svg",
+      "sha256": "5459567e37cac45b68197baf6fab2ce8a4f6530b0f6e701552980941268232f8"
+    },
+    {
+      "bytes": 924071,
+      "path": "results/dynamics-analysis-v1/ntk_group_dynamics.png",
+      "sha256": "78d9f75604f65bc16fa5abb259956b8c70fd5eb97c144e2d6f9af97b684df461"
+    },
+    {
+      "bytes": 253583,
+      "path": "results/dynamics-analysis-v1/ntk_group_dynamics.svg",
+      "sha256": "4b4ce77e4d05460f4f6eeecb5d51625096b8a3520ad912da56f320cf22331f1b"
+    },
+    {
+      "bytes": 271758,
+      "path": "results/dynamics-analysis-v1/linearization_dynamics.png",
+      "sha256": "7264b2aae4432108590212b51aaf82a21f81bf39696ca388dc390de71089c423"
+    },
+    {
+      "bytes": 116229,
+      "path": "results/dynamics-analysis-v1/linearization_dynamics.svg",
+      "sha256": "a356773267d3d8ceca7d78408e2a48a040432b50a13d04962438e73b98c83f75"
+    },
+    {
+      "bytes": 449711,
+      "path": "results/dynamics-analysis-v1/hessian_diagnostics.png",
+      "sha256": "86e2b7ca57a79f1ddfb024ccadbcd2276203784062ae3e67f6beaf497ebb4d03"
+    },
+    {
+      "bytes": 139998,
+      "path": "results/dynamics-analysis-v1/hessian_diagnostics.svg",
+      "sha256": "9afdcbb4c18cfc6a898196786ceb26c770c6137673687469e75fed3983346909"
+    },
+    {
+      "bytes": 11133,
+      "path": "reports/DYNAMICS_RESULTS.md",
+      "sha256": "a4c41bb61c0c0ae69a01034dc70fae6901bbb6773c1e049d446c3b105d181278"
+    }
+  ],
+  "interpretation_limits": [
+    "one seed; within-run repeated measurements are not replicates",
+    "highlr/tuned changes learning rate and horizon together",
+    "2-D slices are checkpoint-specific random planes",
+    "Ritz values and Hutchinson traces are finite-budget approximations",
+    "empirical NTK geometry is not itself a causal routing intervention"
+  ],
+  "paired_highlr_tuned_control": {
+    "bitwise_equal_array_count": 23,
+    "bitwise_equal_probe_and_step0_arrays": true,
+    "causal_scope": "descriptive paired mechanism contrast; not a randomized multi-seed estimate of a learning-rate causal effect",
+    "common_step_comparisons": [
+      {
+        "full_ntk_drift_highlr": 0.0,
+        "full_ntk_drift_tuned": 0.0,
+        "linearization_relative_error_highlr": 0.0,
+        "linearization_relative_error_tuned": 0.0,
+        "probe_accuracy_highlr": 0.46875,
+        "probe_accuracy_tuned": 0.46875,
+        "probe_loss_highlr": 1.6318551301956177,
+        "probe_loss_ratio_highlr_over_tuned": 1.0,
+        "probe_loss_tuned": 1.6318551301956177,
+        "source_eval_accuracy_highlr": 0.4793701171875,
+        "source_eval_accuracy_tuned": 0.4793701171875,
+        "source_eval_loss_highlr": 1.7195707559585571,
+        "source_eval_loss_tuned": 1.7195707559585571,
+        "source_eval_value_flip_highlr": -0.04365251213312149,
+        "source_eval_value_flip_tuned": -0.04365251213312149,
+        "step": 0
+      },
+      {
+        "full_ntk_drift_highlr": 0.7610032558441162,
+        "full_ntk_drift_tuned": 0.8071045279502869,
+        "linearization_relative_error_highlr": 8.7075834274292,
+        "linearization_relative_error_tuned": 1.785522222518921,
+        "probe_accuracy_highlr": 0.59375,
+        "probe_accuracy_tuned": 1.0,
+        "probe_loss_highlr": 0.9982694983482361,
+        "probe_loss_ratio_highlr_over_tuned": 22.591475092514962,
+        "probe_loss_tuned": 0.04418788477778435,
+        "source_eval_accuracy_highlr": 0.503662109375,
+        "source_eval_accuracy_tuned": 0.9971923828125,
+        "source_eval_loss_highlr": 1.0013940334320068,
+        "source_eval_loss_tuned": 0.03522220999002457,
+        "source_eval_value_flip_highlr": -1.0267467587254941e-06,
+        "source_eval_value_flip_tuned": 0.9526584148406982,
+        "step": 100
+      },
+      {
+        "full_ntk_drift_highlr": 0.801649808883667,
+        "full_ntk_drift_tuned": 0.9353994131088257,
+        "linearization_relative_error_highlr": 8.227438926696777,
+        "linearization_relative_error_tuned": 1.9435384273529053,
+        "probe_accuracy_highlr": 0.40625,
+        "probe_accuracy_tuned": 1.0,
+        "probe_loss_highlr": 1.0485678911209106,
+        "probe_loss_ratio_highlr_over_tuned": 1133.657676178686,
+        "probe_loss_tuned": 0.0009249422582797706,
+        "source_eval_accuracy_highlr": 0.4981689453125,
+        "source_eval_accuracy_tuned": 1.0,
+        "source_eval_loss_highlr": 1.00834059715271,
+        "source_eval_loss_tuned": 0.00046264304546639323,
+        "source_eval_value_flip_highlr": -1.2254677130840719e-06,
+        "source_eval_value_flip_tuned": 0.9985740780830383,
+        "step": 400
+      }
+    ],
+    "differing_cell_fields": [
+      "learning_rate",
+      "steps"
+    ],
+    "horizon_highlr": 400,
+    "horizon_tuned": 800,
+    "learning_rate_highlr": 0.01,
+    "learning_rate_tuned": 0.003,
+    "pair": [
+      "highlr_plateau",
+      "tuned"
+    ],
+    "relevant_source_code_unchanged_between_recorded_commits": true,
+    "same_initial_snapshot_sha256": "9f55a1ad231f1df817952f29752572093838a30f714252b64f7f082fb090b4fd",
+    "same_model_config": true,
+    "same_optimizer_batch_momentum_weight_decay": true,
+    "same_seed": true,
+    "statistical_unit": "one common-initialization training seed (seed 0)",
+    "training_data_stream_note": "The runner seeds its private training generator from seed alone, so the pair is designed to consume common random-number episodes through step 400. Raw batch hashes were not persisted, so this is code/config provenance rather than a byte-level batch audit."
+  },
+  "registered_estimands": {
+    "hessian": [
+      "16-step Lanczos Ritz values",
+      "8-probe Hutchinson trace"
+    ],
+    "landscape": [
+      "filter-normalized 2-D grid",
+      "center/grid minimum",
+      "centered slice curvature"
+    ],
+    "linearization": [
+      "relative_error",
+      "relative_parameter_displacement"
+    ],
+    "ntk": [
+      "relative_drift",
+      "alignment",
+      "effective_rank",
+      "frobenius_norm"
+    ],
+    "task": [
+      "probe_loss",
+      "probe_accuracy",
+      "source evaluation routing effects"
+    ]
+  },
+  "scope": {
+    "classification": "descriptive mechanism case studies, not population statistics",
+    "probe_batch_size": 32,
+    "run_count": 4,
+    "source_eval_batch_size": 8192,
+    "statistical_unit": "single training seed per architecture/optimizer case",
+    "training_seed": 0,
+    "training_seed_count": 1
+  },
+  "source_artifacts": [
+    {
+      "analysis_schema_version": 1,
+      "dynamics_arrays_sha256": "b2d06a8f6b7900434a769de6f58186686ab85562d32508fd51bc8966bf5be5d6",
+      "dynamics_contract_hash": "a48877d9052e8bce3c808eb66fe94f0892c48959b3d9c1ffaa0e695fcbb7ffe6",
+      "dynamics_directory": "results/dynamics-primary-c64-h4-noffn-seed0-v1",
+      "dynamics_manifest_sha256": "3c12988b468dbcfc4622c294fcfaf38b7dec6c70dc17b2f213cb7e004738f24c",
+      "numeric_metrics_recomputed": true,
+      "run_key": "primary_noffn",
+      "run_label": "Primary: C64, d16, H4, no FFN",
+      "source_cell_id": "cell-003-620823a00cef",
+      "source_git_commit": "062f46843965b40bbde14012218850546edd3c74",
+      "source_initial_snapshot_sha256": "8fa29d6a82891690f8d1b20fb368a8bf95392ee0222b697754f51147f15eb0cf",
+      "source_manifest_checked": true,
+      "source_seed": 0,
+      "source_snapshots_checked": 4,
+      "source_study_config_hash": "90f25d44730697fcd428fca6afac9f254a3ad500980f2eaa99d12549933b5fe0",
+      "source_study_id": "primary-adamw-12seeds-v1"
+    },
+    {
+      "analysis_schema_version": 1,
+      "dynamics_arrays_sha256": "3859933dda2d784894e9c4c25051be12220edf6f13095a6c682986581c209e90",
+      "dynamics_contract_hash": "d6dd7d2c762646bc75bcfb4acde06a76621621f56d46ef95d4a8002f0f16e33b",
+      "dynamics_directory": "results/dynamics-primary-c64-h4-ffn-seed0-v1",
+      "dynamics_manifest_sha256": "7fc8d5479b9fa8825c36073bf62a06d91a70380bfb9880a1aae825ca7d220af8",
+      "numeric_metrics_recomputed": true,
+      "run_key": "primary_ffn",
+      "run_label": "Primary: C64, d16, H4, FFN32",
+      "source_cell_id": "cell-007-8dda0b3cc614",
+      "source_git_commit": "062f46843965b40bbde14012218850546edd3c74",
+      "source_initial_snapshot_sha256": "d9edafd9f42241a622d5224015ee4f7e08a9d0cbf00d1d94c1b43ad3149cf4f1",
+      "source_manifest_checked": true,
+      "source_seed": 0,
+      "source_snapshots_checked": 4,
+      "source_study_config_hash": "90f25d44730697fcd428fca6afac9f254a3ad500980f2eaa99d12549933b5fe0",
+      "source_study_id": "primary-adamw-12seeds-v1"
+    },
+    {
+      "analysis_schema_version": 1,
+      "dynamics_arrays_sha256": "38ad15d9f68f1a402ba8c0ad8d00098136087bf1df06feb75e717e3a3c4dd5e7",
+      "dynamics_contract_hash": "56ac9a4ae95c1ad6fa2c7c7f3b40ffa4a382c2db55e4a244d2dfa8fae361fa68",
+      "dynamics_directory": "results/dynamics-highlr-plateau-c128-d32-h1-noffn-seed0-v1",
+      "dynamics_manifest_sha256": "ecad8e2c3ad9c99995f081594ea86b6118393c9d36455f04756a64cd95677b62",
+      "numeric_metrics_recomputed": true,
+      "run_key": "highlr_plateau",
+      "run_label": "High LR plateau: C128, d32, H1",
+      "source_cell_id": "cell-010-f5b3a33a84a0",
+      "source_git_commit": "df1ce531b7aee75288da3bf174c1c5d8549c9811",
+      "source_initial_snapshot_sha256": "9f55a1ad231f1df817952f29752572093838a30f714252b64f7f082fb090b4fd",
+      "source_manifest_checked": true,
+      "source_seed": 0,
+      "source_snapshots_checked": 3,
+      "source_study_config_hash": "bffb1a6d15694071b753472a492474ca54484853136fedff195831ccd64433a0",
+      "source_study_id": "scaling-width-load-adamw-10seeds-v1"
+    },
+    {
+      "analysis_schema_version": 1,
+      "dynamics_arrays_sha256": "3dc848380eaf4574036d251f5ff592663df658964f7737d826e0494560ec45e4",
+      "dynamics_contract_hash": "bba5a3a301d565b6f925417da19dc2d9f32c7edaee1e9b69f50ed95127d00230",
+      "dynamics_directory": "results/dynamics-tuned-c128-d32-h1-noffn-seed0-v1",
+      "dynamics_manifest_sha256": "6aa2fed9628e2ad2e7e10530a03a941df71dd710533a61ad1e16223b50f6353d",
+      "numeric_metrics_recomputed": true,
+      "run_key": "tuned",
+      "run_label": "Tuned: C128, d32, H1",
+      "source_cell_id": "cell-010-e2d6e09349f6",
+      "source_git_commit": "518c3c51c4d6f2a73c50257bcc70c35347d841c5",
+      "source_initial_snapshot_sha256": "9f55a1ad231f1df817952f29752572093838a30f714252b64f7f082fb090b4fd",
+      "source_manifest_checked": true,
+      "source_seed": 0,
+      "source_snapshots_checked": 4,
+      "source_study_config_hash": "7097b902cc3f3a43380d0b66433b0a90ecf3915af0cdb913b8b407b76daf38af",
+      "source_study_id": "scaling-tuned-adamw-10seeds-v1"
+    }
+  ]
+}

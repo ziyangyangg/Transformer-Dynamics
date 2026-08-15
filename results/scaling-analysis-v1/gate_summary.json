@@ -1,0 +1,30 @@
+{
+  "full_causal_robustness_gate": {
+    "evaluation_episodes_per_snapshot": 256,
+    "inference_scope": "Per-seed threshold screen on one fixed evaluation stream; a cell pass count is not a confidence interval for its mean crosstalk.",
+    "passed_architecture_cells": 12,
+    "passed_seed_runs": 136,
+    "requirements": {
+      "base_accuracy_min": 0.95,
+      "donor_accuracy_min": 0.95,
+      "natural_swap_mse_max": 0.0025,
+      "population_risk_max": 0.05,
+      "success_rate_per_cell_min": 0.8,
+      "successful_seeds_per_cell_min": 10,
+      "value_flip_effect_min": 0.9
+    },
+    "total_architecture_cells": 16,
+    "total_seed_runs": 160
+  },
+  "interpretation": "All tuned runs solve base retrieval. On the fixed b=256 evaluation stream, 4 cells do not reach the registered 10/10 per-seed gate; this is distinct from a cell-mean crosstalk claim.",
+  "trajectory_base_routing_gate": {
+    "pass_rate": 1.0,
+    "passed_seed_runs": 160,
+    "requirements": {
+      "accuracy_min": 0.95,
+      "population_risk_max": 0.05,
+      "value_flip_effect_min": 0.9
+    },
+    "total_seed_runs": 160
+  }
+}

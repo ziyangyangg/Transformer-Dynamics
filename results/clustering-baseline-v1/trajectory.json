@@ -1,0 +1,2625 @@
+{
+  "config": {
+    "T": 15.0,
+    "beta": 1.0,
+    "dimension": 3,
+    "dt": 0.1,
+    "n_particles": 64,
+    "seed": 20260815
+  },
+  "final_state": [
+    [
+      -0.2713902183838589,
+      -0.6366864280074899,
+      0.721787878643459
+    ],
+    [
+      -0.2713865376737196,
+      -0.6366821272789086,
+      0.7217930561962163
+    ],
+    [
+      -0.2713912178910655,
+      -0.6366851728619459,
+      0.7217886099886573
+    ],
+    [
+      -0.2713869852862658,
+      -0.6366828226454191,
+      0.7217922745260535
+    ],
+    [
+      -0.2713896922723467,
+      -0.6366842390559446,
+      0.7217900073193545
+    ],
+    [
+      -0.27138591428373415,
+      -0.6366799871338649,
+      0.7217951783654444
+    ],
+    [
+      -0.2713753668281753,
+      -0.6366813680283664,
+      0.7217979259352311
+    ],
+    [
+      -0.27138239586666907,
+      -0.6366798211584594,
+      0.7217966476392771
+    ],
+    [
+      -0.2713493457158354,
+      -0.6366790900528632,
+      0.7218097179098146
+    ],
+    [
+      -0.27137709998054754,
+      -0.6366804474105421,
+      0.721798086372678
+    ],
+    [
+      -0.2713949947972278,
+      -0.636689267578012,
+      0.7217835779165298
+    ],
+    [
+      -0.2713971730942006,
+      -0.6366849349117191,
+      0.721786580709933
+    ],
+    [
+      -0.2713902476059911,
+      -0.636679732644486,
+      0.7217937735559269
+    ],
+    [
+      -0.2713956388073272,
+      -0.636686513597638,
+      0.7217857650572277
+    ],
+    [
+      -0.27137778991926725,
+      -0.6366622856823065,
+      0.7218138465894897
+    ],
+    [
+      -0.27138563162063717,
+      -0.6366827220568421,
+      0.7217928722176172
+    ],
+    [
+      -0.27138403137973677,
+      -0.6366834402912871,
+      0.7217928403433586
+    ],
+    [
+      -0.27138197867247993,
+      -0.636664579213307,
+      0.721810248768298
+    ],
+    [
+      -0.2713549634453603,
+      -0.6366747241578625,
+      0.7218114569831078
+    ],
+    [
+      -0.27138945729864977,
+      -0.6366828064723276,
+      0.7217913593343059
+    ],
+    [
+      -0.27134877919533823,
+      -0.6366876581604377,
+      0.7218023732126246
+    ],
+    [
+      -0.2713936728690109,
+      -0.6366639189807543,
+      0.7218064342985145
+    ],
+    [
+      -0.27139245944149737,
+      -0.6366827614640803,
+      0.7217902702397477
+    ],
+    [
+      -0.27135756258282523,
+      -0.6366704214706101,
+      0.7218142750414014
+    ],
+    [
+      -0.27138377042040546,
+      -0.6366816326764818,
+      0.7217945329280447
+    ],
+    [
+      -0.27139781603858015,
+      -0.636689512631248,
+      0.7217823009432089
+    ],
+    [
+      -0.27139613460889905,
+      -0.6366833532019397,
+      0.7217883664031184
+    ],
+    [
+      -0.27139116351014764,
+      -0.6366840276142173,
+      0.7217896406499242
+    ],
+    [
+      -0.27135916600329285,
+      -0.636678825426395,
+      0.7218062595182058
+    ],
+    [
+      -0.2713812605342749,
+      -0.6366810295982064,
+      0.7217960085651595
+    ],
+    [
+      -0.27136468537849767,
+      -0.6366733598902542,
+      0.7218090054408327
+    ],
+    [
+      -0.2713888823765588,
+      -0.6366841111628609,
+      0.721790424649122
+    ],
+    [
+      -0.2713552318761816,
+      -0.6366885597078406,
+      0.7217991521680939
+    ],
+    [
+      -0.2713897650561312,
+      -0.6366817764661422,
+      0.7217921521731137
+    ],
+    [
+      -0.2713982885456798,
+      -0.6366820566965857,
+      0.721788700143665
+    ],
+    [
+      -0.2714222774329298,
+      -0.636681607305136,
+      0.7217800760844469
+    ],
+    [
+      -0.2713910447376327,
+      -0.6366843649811428,
+      0.7217893877196973
+    ],
+    [
+      -0.2713887010736603,
+      -0.6366788590245341,
+      0.7217951256421511
+    ],
+    [
+      -0.27139752023302166,
+      -0.636684825237566,
+      0.721786546926151
+    ],
+    [
+      -0.2713900861024659,
+      -0.636685307552761,
+      0.7217889167282512
+    ],
+    [
+      -0.27138675241595656,
+      -0.6366894834807538,
+      0.7217864865998334
+    ],
+    [
+      -0.27139503428288425,
+      -0.6366816903184334,
+      0.7217902469414883
+    ],
+    [
+      -0.271360011432562,
+      -0.6366721790089116,
+      0.7218118041923147
+    ],
+    [
+      -0.271374620630762,
+      -0.6366704474115151,
+      0.7218078391582702
+    ],
+    [
+      -0.27140712391754607,
+      -0.6366913421782168,
+      0.7217771871444169
+    ],
+    [
+      -0.27139381768889054,
+      -0.6366915319863533,
+      0.7217820230631402
+    ],
+    [
+      -0.2713952076612951,
+      -0.6366853426339905,
+      0.7217869600744535
+    ],
+    [
+      -0.27139492895619666,
+      -0.636685628199733,
+      0.7217868129723434
+    ],
+    [
+      -0.2713928018808322,
+      -0.6366839402987741,
+      0.7217891016445858
+    ],
+    [
+      -0.2713681611241472,
+      -0.6366560860248477,
+      0.7218229348362526
+    ],
+    [
+      -0.27138309954814,
+      -0.6366833750419688,
+      0.721793248253828
+    ],
+    [
+      -0.2713885711377207,
+      -0.6366399311998016,
+      0.7218295099659879
+    ],
+    [
+      -0.27139597499574153,
+      -0.6366834556344371,
+      0.7217883360636295
+    ],
+    [
+      -0.27138938406703417,
+      -0.6366842827849474,
+      0.7217900846301044
+    ],
+    [
+      -0.27139161136299395,
+      -0.6366837987920516,
+      0.7217896741000939
+    ],
+    [
+      -0.2713922377204976,
+      -0.6366831917878746,
+      0.7217899740228216
+    ],
+    [
+      -0.27138188134875846,
+      -0.6366819960776473,
+      0.7217949226381349
+    ],
+    [
+      -0.2713746981803233,
+      -0.6366696581396486,
+      0.7218085061786689
+    ],
+    [
+      -0.27138521861410864,
+      -0.6366856975394621,
+      0.7217904028639206
+    ],
+    [
+      -0.2713737487354274,
+      -0.6366768995301739,
+      0.7218024758214159
+    ],
+    [
+      -0.27139188780593215,
+      -0.6366830600505436,
+      0.7217902217942608
+    ],
+    [
+      -0.27138961293937247,
+      -0.6366823389754931,
+      0.7217917131869228
+    ],
+    [
+      -0.27138361243408365,
+      -0.6366830368986037,
+      0.7217933536877424
+    ],
+    [
+      -0.271371776527737,
+      -0.6366802962340185,
+      0.7218002211772605
+    ]
+  ],
+  "initial_state": [
+    [
+      -0.13968789163326917,
+      -0.9271051816554985,
+      -0.3477977502494475
+    ],
+    [
+      -0.06019465827798733,
+      -0.5094652404865244,
+      0.8583832313429731
+    ],
+    [
+      -0.48542584371326863,
+      -0.8667706063024196,
+      -0.11432614007914978
+    ],
+    [
+      -0.07505777920957389,
+      -0.678364345937883,
+      0.7308817578380207
+    ],
+    [
+      -0.39107410696106754,
+      -0.8805302583468044,
+      0.2678199152421518
+    ],
+    [
+      -0.09349764270994342,
+      0.005165961691441742,
+      0.9956060986391588
+    ],
+    [
+      0.8882874513222895,
+      -0.21775313097276205,
+      0.4043871632172695
+    ],
+    [
+      0.31091974434128067,
+      -0.04131428655637655,
+      0.9495378045686702
+    ],
+    [
+      0.8184160918998944,
+      0.32874352442114196,
+      -0.47129905120896404
+    ],
+    [
+      0.7777275517811784,
+      -0.13846164100203648,
+      0.6131624818687765
+    ],
+    [
+      -0.1706408190837519,
+      -0.38278623274503015,
+      -0.9079407529587457
+    ],
+    [
+      -0.8408010167116154,
+      -0.036095015027671415,
+      -0.540139611755022
+    ],
+    [
+      -0.5775664386074573,
+      0.25016616055629093,
+      0.7770675009977076
+    ],
+    [
+      -0.6099737933134082,
+      -0.36306041107769815,
+      -0.704357231366971
+    ],
+    [
+      0.06597479548586294,
+      0.9780922559230523,
+      0.19744078926086367
+    ],
+    [
+      0.13341351092315765,
+      -0.6602941168479225,
+      0.7390619151053439
+    ],
+    [
+      0.4077972872147153,
+      -0.74769100288217,
+      0.5240797045768646
+    ],
+    [
+      -0.03887560746423054,
+      0.9571399452416919,
+      0.28700489955228603
+    ],
+    [
+      0.855167430869489,
+      0.4636664742576689,
+      -0.2317370618384985
+    ],
+    [
+      -0.5014938390931619,
+      -0.5716763986248827,
+      0.6493766431023571
+    ],
+    [
+      0.7600461125156954,
+      0.14225598268859713,
+      -0.6341081471161527
+    ],
+    [
+      -0.27323433746582704,
+      0.9599008773590165,
+      0.06271604639166123
+    ],
+    [
+      -0.8953198941439531,
+      -0.2642406067433285,
+      0.3585794038953972
+    ],
+    [
+      0.7472604799184309,
+      0.6574876188012161,
+      -0.09649770088029491
+    ],
+    [
+      0.29810405166988985,
+      -0.40986689397661874,
+      0.8620574827701194
+    ],
+    [
+      -0.24032920077212355,
+      -0.1323939862116393,
+      -0.9616203552708442
+    ],
+    [
+      -0.9812291928754836,
+      0.05717147971416495,
+      -0.1841757121778546
+    ],
+    [
+      -0.6577481594854047,
+      -0.7228897100841473,
+      0.21165496863532385
+    ],
+    [
+      0.9571446416351365,
+      0.2289783013520046,
+      -0.17732194590376174
+    ],
+    [
+      0.5225474683253809,
+      -0.2738626583371743,
+      0.8074301132080914
+    ],
+    [
+      0.8092546633508938,
+      0.5435239430974533,
+      0.22290942807478473
+    ],
+    [
+      -0.2669402882454223,
+      -0.8980396257254972,
+      0.3496680041671809
+    ],
+    [
+      0.8082481772384208,
+      0.01859905954193076,
+      -0.5885481789751167
+    ],
+    [
+      -0.5822257277042143,
+      -0.2518933797135319,
+      0.7730219448733605
+    ],
+    [
+      -0.8936918600016787,
+      0.40302115825485985,
+      -0.19720244766648082
+    ],
+    [
+      -0.19084465754329924,
+      0.6545695571928405,
+      -0.7315169249467502
+    ],
+    [
+      -0.5933197988093815,
+      -0.7947707012220461,
+      0.12771510803273087
+    ],
+    [
+      -0.4092078948906834,
+      0.32114638220048614,
+      0.8540573165535641
+    ],
+    [
+      -0.840695826053668,
+      0.016969198341278552,
+      -0.5412416968079927
+    ],
+    [
+      -0.2923625619003674,
+      -0.9538995345287621,
+      -0.06782190225041287
+    ],
+    [
+      0.3820328120390288,
+      -0.6929394086895917,
+      -0.6114621054574612
+    ],
+    [
+      -0.9567112809420485,
+      0.22866366458752607,
+      0.18004569813141383
+    ],
+    [
+      0.8058662826583612,
+      0.5920483095141938,
+      0.007637648576584984
+    ],
+    [
+      0.3384745297323768,
+      0.7699566620958095,
+      0.5409267336864814
+    ],
+    [
+      -0.13959385060245036,
+      0.3268525239715507,
+      -0.9347090373198537
+    ],
+    [
+      0.07107253455554931,
+      -0.330840873038674,
+      -0.9410063823156878
+    ],
+    [
+      -0.7986599740265934,
+      -0.3510583415606441,
+      -0.48877426968748167
+    ],
+    [
+      -0.742973499000836,
+      -0.41735903735158797,
+      -0.5232607511780437
+    ],
+    [
+      -0.862960679680862,
+      -0.5014502131221654,
+      0.06202055372600042
+    ],
+    [
+      0.21428734235378913,
+      0.9679890564969822,
+      -0.13068328664765125
+    ],
+    [
+      0.5045323670730504,
+      -0.702617521406491,
+      0.5017725671938071
+    ],
+    [
+      -0.0023549514858556037,
+      0.913750203085595,
+      -0.40626964022005563
+    ],
+    [
+      -0.982206744283763,
+      0.0223681732978743,
+      -0.1864660191745579
+    ],
+    [
+      -0.3316812618323256,
+      -0.902913594447699,
+      0.2733762636200374
+    ],
+    [
+      -0.7465659225675614,
+      -0.6248628333758948,
+      0.22844203362405688
+    ],
+    [
+      -0.8644468476140909,
+      -0.40183485269606317,
+      0.30209336108030227
+    ],
+    [
+      0.5361911691823826,
+      -0.45600302127727615,
+      0.7103240631407791
+    ],
+    [
+      0.3071885333521825,
+      0.8039272378984159,
+      0.5092506270413014
+    ],
+    [
+      0.4002175415847169,
+      -0.9163698904011148,
+      -0.009599134030433
+    ],
+    [
+      0.722282215006252,
+      0.294816976592284,
+      0.6256127813581234
+    ],
+    [
+      -0.8334408389786898,
+      -0.41000617920675314,
+      0.3705014182628422
+    ],
+    [
+      -0.5497326372312699,
+      -0.42579154993207735,
+      0.71867627174493
+    ],
+    [
+      0.4283068631888279,
+      -0.6756639795149111,
+      0.6000261808716518
+    ],
+    [
+      0.9490493872511969,
+      -0.046212669725636105,
+      0.31172046726988767
+    ]
+  ],
+  "interpretation": "fixed Q=K=V=I continuum-depth dynamics; no parameters are trained",
+  "official_code": {
+    "commit": "538ba839f7fc03d042e03ad7b557c220defc4148",
+    "path": "third_party/2023-transformers-rotf/sphere.py"
+  },
+  "schema_version": "clustering-baseline-v1",
+  "trajectory": [
+    {
+      "gram_participation_rank": 2.794805579514649,
+      "high_alignment_pair_fraction": 0.05555555555555555,
+      "largest_gram_eigenvalue_fraction": 0.43950595519409036,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5133585692325378,
+      "mean_nearest_neighbor_cosine": 0.970952626863911,
+      "mean_normalized_attention_entropy": 0.9630556188278192,
+      "mean_offdiagonal_cosine": 0.014471164888359637,
+      "mean_resultant_length": 0.17282954879585555,
+      "step": 0,
+      "time": 0.0
+    },
+    {
+      "gram_participation_rank": 2.7810700854360846,
+      "high_alignment_pair_fraction": 0.05654761904761905,
+      "largest_gram_eigenvalue_fraction": 0.44393660886148606,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5152797580115934,
+      "mean_nearest_neighbor_cosine": 0.9711067645844793,
+      "mean_normalized_attention_entropy": 0.9631146768936449,
+      "mean_offdiagonal_cosine": 0.017877037392575686,
+      "mean_resultant_length": 0.1822709759762006,
+      "step": 1,
+      "time": 0.1
+    },
+    {
+      "gram_participation_rank": 2.7664667910515375,
+      "high_alignment_pair_fraction": 0.057539682539682536,
+      "largest_gram_eigenvalue_fraction": 0.44856626179602105,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5173108729602354,
+      "mean_nearest_neighbor_cosine": 0.9712710089415899,
+      "mean_normalized_attention_entropy": 0.963186225333082,
+      "mean_offdiagonal_cosine": 0.02164111054133361,
+      "mean_resultant_length": 0.19216651162240858,
+      "step": 2,
+      "time": 0.2
+    },
+    {
+      "gram_participation_rank": 2.750954621768477,
+      "high_alignment_pair_fraction": 0.057539682539682536,
+      "largest_gram_eigenvalue_fraction": 0.4534005312910713,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5194685777333847,
+      "mean_nearest_neighbor_cosine": 0.9714518979703171,
+      "mean_normalized_attention_entropy": 0.9632718446150121,
+      "mean_offdiagonal_cosine": 0.02579647120957329,
+      "mean_resultant_length": 0.20253000110335187,
+      "step": 3,
+      "time": 0.30000000000000004
+    },
+    {
+      "gram_participation_rank": 2.734495011485295,
+      "high_alignment_pair_fraction": 0.05952380952380952,
+      "largest_gram_eigenvalue_fraction": 0.45844392327571215,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5217505883264411,
+      "mean_nearest_neighbor_cosine": 0.9716336563277433,
+      "mean_normalized_attention_entropy": 0.9633732616585041,
+      "mean_offdiagonal_cosine": 0.030378388133110196,
+      "mean_resultant_length": 0.213374613809915,
+      "step": 4,
+      "time": 0.4
+    },
+    {
+      "gram_participation_rank": 2.7170534146568475,
+      "high_alignment_pair_fraction": 0.06299603174603174,
+      "largest_gram_eigenvalue_fraction": 0.4636994856219723,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5241562286849414,
+      "mean_nearest_neighbor_cosine": 0.9718160499915991,
+      "mean_normalized_attention_entropy": 0.9634923571995992,
+      "mean_offdiagonal_cosine": 0.03542428861747751,
+      "mean_resultant_length": 0.22471267010969687,
+      "step": 5,
+      "time": 0.5
+    },
+    {
+      "gram_participation_rank": 2.6986011364825817,
+      "high_alignment_pair_fraction": 0.06498015873015874,
+      "largest_gram_eigenvalue_fraction": 0.4691684135618316,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5267543758031429,
+      "mean_nearest_neighbor_cosine": 0.9720116086869588,
+      "mean_normalized_attention_entropy": 0.9636311725031016,
+      "mean_offdiagonal_cosine": 0.04097369829352265,
+      "mean_resultant_length": 0.23655545704482567,
+      "step": 6,
+      "time": 0.6000000000000001
+    },
+    {
+      "gram_participation_rank": 2.679117489689522,
+      "high_alignment_pair_fraction": 0.06696428571428571,
+      "largest_gram_eigenvalue_fraction": 0.47484961041716506,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5294274226796774,
+      "mean_nearest_neighbor_cosine": 0.9722198123408611,
+      "mean_normalized_attention_entropy": 0.9637919151979786,
+      "mean_offdiagonal_cosine": 0.04706813874172912,
+      "mean_resultant_length": 0.24891303516266403,
+      "step": 7,
+      "time": 0.7000000000000001
+    },
+    {
+      "gram_participation_rank": 2.658592262442804,
+      "high_alignment_pair_fraction": 0.0689484126984127,
+      "largest_gram_eigenvalue_fraction": 0.4807392112189433,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.532180237245503,
+      "mean_nearest_neighbor_cosine": 0.9724275906549047,
+      "mean_normalized_attention_entropy": 0.9639769639866044,
+      "mean_offdiagonal_cosine": 0.053750978281425325,
+      "mean_resultant_length": 0.2617940397445634,
+      "step": 8,
+      "time": 0.8
+    },
+    {
+      "gram_participation_rank": 2.637028446965876,
+      "high_alignment_pair_fraction": 0.0744047619047619,
+      "largest_gram_eigenvalue_fraction": 0.4868300828653297,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.534953353337157,
+      "mean_nearest_neighbor_cosine": 0.9726347090566945,
+      "mean_normalized_attention_entropy": 0.9641888719385454,
+      "mean_offdiagonal_cosine": 0.061067232102766614,
+      "mean_resultant_length": 0.2752054806888135,
+      "step": 9,
+      "time": 0.9
+    },
+    {
+      "gram_participation_rank": 2.6144451303603353,
+      "high_alignment_pair_fraction": 0.07738095238095238,
+      "largest_gram_eigenvalue_fraction": 0.49311132271539243,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5378307500708513,
+      "mean_nearest_neighbor_cosine": 0.9728434105299446,
+      "mean_normalized_attention_entropy": 0.9644303680195491,
+      "mean_offdiagonal_cosine": 0.0690633092875587,
+      "mean_resultant_length": 0.28915254638328985,
+      "step": 10,
+      "time": 1.0
+    },
+    {
+      "gram_participation_rank": 2.5908803864202072,
+      "high_alignment_pair_fraction": 0.07886904761904762,
+      "largest_gram_eigenvalue_fraction": 0.4995677884329901,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5407466476264482,
+      "mean_nearest_neighbor_cosine": 0.9731293502207837,
+      "mean_normalized_attention_entropy": 0.9647043564147894,
+      "mean_offdiagonal_cosine": 0.077786706168101,
+      "mean_resultant_length": 0.30363841799782915,
+      "step": 11,
+      "time": 1.1
+    },
+    {
+      "gram_participation_rank": 2.5663939300427074,
+      "high_alignment_pair_fraction": 0.08234126984126984,
+      "largest_gram_eigenvalue_fraction": 0.506179705882882,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5437057251256984,
+      "mean_nearest_neighbor_cosine": 0.9734586092713238,
+      "mean_normalized_attention_entropy": 0.9650139130719102,
+      "mean_offdiagonal_cosine": 0.08728564788716967,
+      "mean_resultant_length": 0.31866410158493325,
+      "step": 12,
+      "time": 1.2000000000000002
+    },
+    {
+      "gram_participation_rank": 2.5410692070981127,
+      "high_alignment_pair_fraction": 0.0873015873015873,
+      "largest_gram_eigenvalue_fraction": 0.5129224190214745,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5469452246893298,
+      "mean_nearest_neighbor_cosine": 0.9737922776647272,
+      "mean_normalized_attention_entropy": 0.965362278707787,
+      "mean_offdiagonal_cosine": 0.09760868278793769,
+      "mean_resultant_length": 0.33422828593549075,
+      "step": 13,
+      "time": 1.3
+    },
+    {
+      "gram_participation_rank": 2.5150144996540567,
+      "high_alignment_pair_fraction": 0.09126984126984126,
+      "largest_gram_eigenvalue_fraction": 0.519766365464048,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5504489904308785,
+      "mean_nearest_neighbor_cosine": 0.9741286171830639,
+      "mean_normalized_attention_entropy": 0.9657528472931161,
+      "mean_offdiagonal_cosine": 0.10880423700845633,
+      "mean_resultant_length": 0.35032723389025755,
+      "step": 14,
+      "time": 1.4000000000000001
+    },
+    {
+      "gram_participation_rank": 2.4883625422948263,
+      "high_alignment_pair_fraction": 0.09424603174603174,
+      "largest_gram_eigenvalue_fraction": 0.5266773821685429,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5542525913467076,
+      "mean_nearest_neighbor_cosine": 0.9744656219833265,
+      "mean_normalized_attention_entropy": 0.9661891487550276,
+      "mean_offdiagonal_cosine": 0.1209201387242884,
+      "mean_resultant_length": 0.3669547132232006,
+      "step": 15,
+      "time": 1.5
+    },
+    {
+      "gram_participation_rank": 2.461268089151345,
+      "high_alignment_pair_fraction": 0.09970238095238096,
+      "largest_gram_eigenvalue_fraction": 0.5336174644854315,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5582717877759792,
+      "mean_nearest_neighbor_cosine": 0.9748011179854662,
+      "mean_normalized_attention_entropy": 0.9666748243185533,
+      "mean_offdiagonal_cosine": 0.13400312190313773,
+      "mean_resultant_length": 0.38410196969476895,
+      "step": 16,
+      "time": 1.6
+    },
+    {
+      "gram_participation_rank": 2.433902867206957,
+      "high_alignment_pair_fraction": 0.10466269841269842,
+      "largest_gram_eigenvalue_fraction": 0.5405461141533201,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.56229905863871,
+      "mean_nearest_neighbor_cosine": 0.9751329261133089,
+      "mean_normalized_attention_entropy": 0.967213592521531,
+      "mean_offdiagonal_cosine": 0.1480983169900644,
+      "mean_resultant_length": 0.4017577389262025,
+      "step": 17,
+      "time": 1.7000000000000002
+    },
+    {
+      "gram_participation_rank": 2.4064474245311267,
+      "high_alignment_pair_fraction": 0.11359126984126984,
+      "largest_gram_eigenvalue_fraction": 0.547422411754088,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5665782905961594,
+      "mean_nearest_neighbor_cosine": 0.9754873224763836,
+      "mean_normalized_attention_entropy": 0.9678092034322947,
+      "mean_offdiagonal_cosine": 0.16324872939449642,
+      "mean_resultant_length": 0.4199082852215557,
+      "step": 18,
+      "time": 1.8
+    },
+    {
+      "gram_participation_rank": 2.3790795523878168,
+      "high_alignment_pair_fraction": 0.12003968253968254,
+      "largest_gram_eigenvalue_fraction": 0.5542079299791836,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5710082149814389,
+      "mean_nearest_neighbor_cosine": 0.9758356285168435,
+      "mean_normalized_attention_entropy": 0.9684653779069433,
+      "mean_offdiagonal_cosine": 0.1794946951464855,
+      "mean_resultant_length": 0.43853744484915047,
+      "step": 19,
+      "time": 1.9000000000000001
+    },
+    {
+      "gram_participation_rank": 2.351959236261362,
+      "high_alignment_pair_fraction": 0.12549603174603174,
+      "largest_gram_eigenvalue_fraction": 0.5608705591918051,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5752406757019652,
+      "mean_nearest_neighbor_cosine": 0.9761752337184667,
+      "mean_normalized_attention_entropy": 0.9691857278187137,
+      "mean_offdiagonal_cosine": 0.19687328668191564,
+      "mean_resultant_length": 0.45762663993424896,
+      "step": 20,
+      "time": 2.0
+    },
+    {
+      "gram_participation_rank": 2.325210466004191,
+      "high_alignment_pair_fraction": 0.13293650793650794,
+      "largest_gram_eigenvalue_fraction": 0.5673892404005818,
+      "max_unit_norm_error": 1.1102230246251565e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5792982836218514,
+      "mean_nearest_neighbor_cosine": 0.9765150073907871,
+      "mean_normalized_attention_entropy": 0.9699736522006155,
+      "mean_offdiagonal_cosine": 0.21541762185465926,
+      "mean_resultant_length": 0.4771548192287072,
+      "step": 21,
+      "time": 2.1
+    },
+    {
+      "gram_participation_rank": 2.2989006893823047,
+      "high_alignment_pair_fraction": 0.14484126984126985,
+      "largest_gram_eigenvalue_fraction": 0.5737594879379395,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5834230815815095,
+      "mean_nearest_neighbor_cosine": 0.9768597436424298,
+      "mean_normalized_attention_entropy": 0.9708322035379132,
+      "mean_offdiagonal_cosine": 0.23515600904038841,
+      "mean_resultant_length": 0.49709827639927723,
+      "step": 22,
+      "time": 2.2
+    },
+    {
+      "gram_participation_rank": 2.273019201028218,
+      "high_alignment_pair_fraction": 0.15476190476190477,
+      "largest_gram_eigenvalue_fraction": 0.5799994300446902,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5870807616697649,
+      "mean_nearest_neighbor_cosine": 0.977233186180123,
+      "mean_normalized_attention_entropy": 0.9717639186503817,
+      "mean_offdiagonal_cosine": 0.2561108451051448,
+      "mean_resultant_length": 0.5174302978666566,
+      "step": 23,
+      "time": 2.3000000000000003
+    },
+    {
+      "gram_participation_rank": 2.247456300285058,
+      "high_alignment_pair_fraction": 0.1636904761904762,
+      "largest_gram_eigenvalue_fraction": 0.5861558953211135,
+      "max_unit_norm_error": 1.1102230246251565e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5903895266703005,
+      "mean_nearest_neighbor_cosine": 0.977748380131556,
+      "mean_normalized_attention_entropy": 0.9727706103945354,
+      "mean_offdiagonal_cosine": 0.2782971763688415,
+      "mean_resultant_length": 0.5381206026422686,
+      "step": 24,
+      "time": 2.4000000000000004
+    },
+    {
+      "gram_participation_rank": 2.2219856149557358,
+      "high_alignment_pair_fraction": 0.1736111111111111,
+      "largest_gram_eigenvalue_fraction": 0.5923098252093787,
+      "max_unit_norm_error": 3.3306690738754696e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5934862821556015,
+      "mean_nearest_neighbor_cosine": 0.9782819037124144,
+      "mean_normalized_attention_entropy": 0.9738531201892751,
+      "mean_offdiagonal_cosine": 0.30172084075092676,
+      "mean_resultant_length": 0.559134556805599,
+      "step": 25,
+      "time": 2.5
+    },
+    {
+      "gram_participation_rank": 2.196252554593751,
+      "high_alignment_pair_fraction": 0.18700396825396826,
+      "largest_gram_eigenvalue_fraction": 0.5985800112075483,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.596343411848837,
+      "mean_nearest_neighbor_cosine": 0.9788383412888524,
+      "mean_normalized_attention_entropy": 0.9750110369572337,
+      "mean_offdiagonal_cosine": 0.32637613644966684,
+      "mean_resultant_length": 0.5804321746058199,
+      "step": 26,
+      "time": 2.6
+    },
+    {
+      "gram_participation_rank": 2.1697723622162775,
+      "high_alignment_pair_fraction": 0.20684523809523808,
+      "largest_gram_eigenvalue_fraction": 0.6051238919919013,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.5992730874426084,
+      "mean_nearest_neighbor_cosine": 0.9794221304355235,
+      "mean_normalized_attention_entropy": 0.9762423947917517,
+      "mean_offdiagonal_cosine": 0.3522430116237347,
+      "mean_resultant_length": 0.6019669547135573,
+      "step": 27,
+      "time": 2.7
+    },
+    {
+      "gram_participation_rank": 2.1419415169769622,
+      "high_alignment_pair_fraction": 0.2251984126984127,
+      "largest_gram_eigenvalue_fraction": 0.6121340153789595,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.6024103082896884,
+      "mean_nearest_neighbor_cosine": 0.9800377062701378,
+      "mean_normalized_attention_entropy": 0.9775433687049947,
+      "mean_offdiagonal_cosine": 0.37928384089298606,
+      "mean_resultant_length": 0.6236846405668759,
+      "step": 28,
+      "time": 2.8000000000000003
+    },
+    {
+      "gram_participation_rank": 2.1120660128838207,
+      "high_alignment_pair_fraction": 0.24107142857142858,
+      "largest_gram_eigenvalue_fraction": 0.6198289568437241,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.6061621969919886,
+      "mean_nearest_neighbor_cosine": 0.9806893410820815,
+      "mean_normalized_attention_entropy": 0.9789079946788358,
+      "mean_offdiagonal_cosine": 0.40743994417731666,
+      "mean_resultant_length": 0.645522032969864,
+      "step": 29,
+      "time": 2.9000000000000004
+    },
+    {
+      "gram_participation_rank": 2.0794089048939597,
+      "high_alignment_pair_fraction": 0.25396825396825395,
+      "largest_gram_eigenvalue_fraction": 0.6284381845671716,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.6106801625261786,
+      "mean_nearest_neighbor_cosine": 0.9813814410488515,
+      "mean_normalized_attention_entropy": 0.9803279466253765,
+      "mean_offdiagonal_cosine": 0.43662810179893763,
+      "mean_resultant_length": 0.6674060141385673,
+      "step": 30,
+      "time": 3.0
+    },
+    {
+      "gram_participation_rank": 2.0432570917829844,
+      "high_alignment_pair_fraction": 0.2822420634920635,
+      "largest_gram_eigenvalue_fraction": 0.6381816301385752,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.616202701747023,
+      "mean_nearest_neighbor_cosine": 0.9821173435542347,
+      "mean_normalized_attention_entropy": 0.9817924080189342,
+      "mean_offdiagonal_cosine": 0.46673741139477765,
+      "mean_resultant_length": 0.6892529574414128,
+      "step": 31,
+      "time": 3.1
+    },
+    {
+      "gram_participation_rank": 2.003003455067373,
+      "high_alignment_pair_fraction": 0.29910714285714285,
+      "largest_gram_eigenvalue_fraction": 0.6492463107304898,
+      "max_unit_norm_error": 1.1102230246251565e-16,
+      "mean_absolute_offdiagonal_cosine": 0.6232296494602392,
+      "mean_nearest_neighbor_cosine": 0.9828953800013414,
+      "mean_normalized_attention_entropy": 0.983288078093786,
+      "mean_offdiagonal_cosine": 0.4976268986120105,
+      "mean_resultant_length": 0.7109686901131426,
+      "step": 32,
+      "time": 3.2
+    },
+    {
+      "gram_participation_rank": 1.9582355931225697,
+      "high_alignment_pair_fraction": 0.32142857142857145,
+      "largest_gram_eigenvalue_fraction": 0.6617636485337215,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.6319893884469819,
+      "mean_nearest_neighbor_cosine": 0.9837149332834435,
+      "mean_normalized_attention_entropy": 0.9847993490626487,
+      "mean_offdiagonal_cosine": 0.529124318814848,
+      "mean_resultant_length": 0.732449145902544,
+      "step": 33,
+      "time": 3.3000000000000003
+    },
+    {
+      "gram_participation_rank": 1.908817642971812,
+      "high_alignment_pair_fraction": 0.3472222222222222,
+      "largest_gram_eigenvalue_fraction": 0.6757914593991083,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.6419656923865622,
+      "mean_nearest_neighbor_cosine": 0.9845736775154832,
+      "mean_normalized_attention_entropy": 0.9863086797771785,
+      "mean_offdiagonal_cosine": 0.5610265623305909,
+      "mean_resultant_length": 0.7535817953574618,
+      "step": 34,
+      "time": 3.4000000000000004
+    },
+    {
+      "gram_participation_rank": 1.854948921009532,
+      "high_alignment_pair_fraction": 0.36408730158730157,
+      "largest_gram_eigenvalue_fraction": 0.6913036453508665,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.6540040245130506,
+      "mean_nearest_neighbor_cosine": 0.9854678275876776,
+      "mean_normalized_attention_entropy": 0.9877971725304555,
+      "mean_offdiagonal_cosine": 0.593102000314154,
+      "mean_resultant_length": 0.7742478812106918,
+      "step": 35,
+      "time": 3.5
+    },
+    {
+      "gram_participation_rank": 1.79718428179057,
+      "high_alignment_pair_fraction": 0.38244047619047616,
+      "largest_gram_eigenvalue_fraction": 0.7081888147603135,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.669552654172315,
+      "mean_nearest_neighbor_cosine": 0.9863909969086673,
+      "mean_normalized_attention_entropy": 0.9892453355426255,
+      "mean_offdiagonal_cosine": 0.6250949856924728,
+      "mean_resultant_length": 0.794325422318226,
+      "step": 36,
+      "time": 3.6
+    },
+    {
+      "gram_participation_rank": 1.736407167514975,
+      "high_alignment_pair_fraction": 0.40575396825396826,
+      "largest_gram_eigenvalue_fraction": 0.7262571968304761,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.6875438941934334,
+      "mean_nearest_neighbor_cosine": 0.9873355981141261,
+      "mean_normalized_attention_entropy": 0.9906339878290514,
+      "mean_offdiagonal_cosine": 0.6567325572651042,
+      "mean_resultant_length": 0.8136928849743228,
+      "step": 37,
+      "time": 3.7
+    },
+    {
+      "gram_participation_rank": 1.673756322304071,
+      "high_alignment_pair_fraction": 0.4255952380952381,
+      "largest_gram_eigenvalue_fraction": 0.7452540056557597,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.7076727146531809,
+      "mean_nearest_neighbor_cosine": 0.9882929109368286,
+      "mean_normalized_attention_entropy": 0.99194523957415,
+      "mean_offdiagonal_cosine": 0.6877331874690225,
+      "mean_resultant_length": 0.8322333545435552,
+      "step": 38,
+      "time": 3.8000000000000003
+    },
+    {
+      "gram_participation_rank": 1.610518037519824,
+      "high_alignment_pair_fraction": 0.4503968253968254,
+      "largest_gram_eigenvalue_fraction": 0.7648770207616922,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.729998835380244,
+      "mean_nearest_neighbor_cosine": 0.989253502723417,
+      "mean_normalized_attention_entropy": 0.993163463177463,
+      "mean_offdiagonal_cosine": 0.7178171727600642,
+      "mean_resultant_length": 0.849838972650518,
+      "step": 39,
+      "time": 3.9000000000000004
+    },
+    {
+      "gram_participation_rank": 1.54800367733784,
+      "high_alignment_pair_fraction": 0.46577380952380953,
+      "largest_gram_eigenvalue_fraction": 0.7847963215468405,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.7538970250084405,
+      "mean_nearest_neighbor_cosine": 0.9902065892598972,
+      "mean_normalized_attention_entropy": 0.9942761605753757,
+      "mean_offdiagonal_cosine": 0.7467180106588033,
+      "mean_resultant_length": 0.8664153402048347,
+      "step": 40,
+      "time": 4.0
+    },
+    {
+      "gram_participation_rank": 1.4874342948486736,
+      "high_alignment_pair_fraction": 0.48759920634920634,
+      "largest_gram_eigenvalue_fraction": 0.8046744619200544,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.7783005107095503,
+      "mean_nearest_neighbor_cosine": 0.9911409575800887,
+      "mean_normalized_attention_entropy": 0.9952746337517097,
+      "mean_offdiagonal_cosine": 0.7741938792218356,
+      "mean_resultant_length": 0.8818855367104024,
+      "step": 41,
+      "time": 4.1000000000000005
+    },
+    {
+      "gram_participation_rank": 1.42985009242696,
+      "high_alignment_pair_fraction": 0.5114087301587301,
+      "largest_gram_eigenvalue_fraction": 0.8241856573806456,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.8020672298375504,
+      "mean_nearest_neighbor_cosine": 0.9920459427139954,
+      "mean_normalized_attention_entropy": 0.9961543795508467,
+      "mean_offdiagonal_cosine": 0.8000381887772412,
+      "mean_resultant_length": 0.8961933898872478,
+      "step": 42,
+      "time": 4.2
+    },
+    {
+      "gram_participation_rank": 1.3760544735029592,
+      "high_alignment_pair_fraction": 0.529265873015873,
+      "largest_gram_eigenvalue_fraction": 0.8430327383087625,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.824776914960616,
+      "mean_nearest_neighbor_cosine": 0.9929116227508649,
+      "mean_normalized_attention_entropy": 0.9969151576615147,
+      "mean_offdiagonal_cosine": 0.824088168263473,
+      "mean_resultant_length": 0.9093056640285246,
+      "step": 43,
+      "time": 4.3
+    },
+    {
+      "gram_participation_rank": 1.3265937311912128,
+      "high_alignment_pair_fraction": 0.5515873015873016,
+      "largest_gram_eigenvalue_fraction": 0.8609607855065978,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.8463681728940985,
+      "mean_nearest_neighbor_cosine": 0.9937294830326473,
+      "mean_normalized_attention_entropy": 0.9975607199907173,
+      "mean_offdiagonal_cosine": 0.8462306127915977,
+      "mean_resultant_length": 0.9212129284083724,
+      "step": 44,
+      "time": 4.4
+    },
+    {
+      "gram_participation_rank": 1.2817667201250074,
+      "high_alignment_pair_fraction": 0.5768849206349206,
+      "largest_gram_eigenvalue_fraction": 0.8777666134653355,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.8664042458049953,
+      "mean_nearest_neighbor_cosine": 0.9944925295449039,
+      "mean_normalized_attention_entropy": 0.9980982351264129,
+      "mean_offdiagonal_cosine": 0.8664042458049953,
+      "mean_resultant_length": 0.9319290098844932,
+      "step": 45,
+      "time": 4.5
+    },
+    {
+      "gram_participation_rank": 1.241655378159547,
+      "high_alignment_pair_fraction": 0.6066468253968254,
+      "largest_gram_eigenvalue_fraction": 0.8933036540829509,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.8845985811802988,
+      "mean_nearest_neighbor_cosine": 0.9951955096891467,
+      "mean_normalized_attention_entropy": 0.9985374845123598,
+      "mean_offdiagonal_cosine": 0.8845985811802988,
+      "mean_resultant_length": 0.9414891015563359,
+      "step": 46,
+      "time": 4.6000000000000005
+    },
+    {
+      "gram_participation_rank": 1.2061664914819263,
+      "high_alignment_pair_fraction": 0.6393849206349206,
+      "largest_gram_eigenvalue_fraction": 0.9074822859887178,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9008496172383473,
+      "mean_nearest_neighbor_cosine": 0.9958355282332877,
+      "mean_normalized_attention_entropy": 0.9988899374152703,
+      "mean_offdiagonal_cosine": 0.9008496172383473,
+      "mean_resultant_length": 0.9499467574390671,
+      "step": 47,
+      "time": 4.7
+    },
+    {
+      "gram_participation_rank": 1.1750766186864585,
+      "high_alignment_pair_fraction": 0.6795634920634921,
+      "largest_gram_eigenvalue_fraction": 0.920266155616085,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9152330612255846,
+      "mean_nearest_neighbor_cosine": 0.9964117114937742,
+      "mean_normalized_attention_entropy": 0.9991678219469085,
+      "mean_offdiagonal_cosine": 0.9152330612255846,
+      "mean_resultant_length": 0.957370118942478,
+      "step": 48,
+      "time": 4.800000000000001
+    },
+    {
+      "gram_participation_rank": 1.1480744701343786,
+      "high_alignment_pair_fraction": 0.7217261904761905,
+      "largest_gram_eigenvalue_fraction": 0.9316654326363467,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9278560008983381,
+      "mean_nearest_neighbor_cosine": 0.996925004163117,
+      "mean_normalized_attention_entropy": 0.999383296907018,
+      "mean_offdiagonal_cosine": 0.9278560008983381,
+      "mean_resultant_length": 0.9638377720780098,
+      "step": 49,
+      "time": 4.9
+    },
+    {
+      "gram_participation_rank": 1.124797424251645,
+      "high_alignment_pair_fraction": 0.7584325396825397,
+      "largest_gram_eigenvalue_fraction": 0.9417281534387302,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9388479853322398,
+      "mean_nearest_neighbor_cosine": 0.9973778635842497,
+      "mean_normalized_attention_entropy": 0.9995477983860755,
+      "mean_offdiagonal_cosine": 0.9388479853322398,
+      "mean_resultant_length": 0.969434621602418,
+      "step": 50,
+      "time": 5.0
+    },
+    {
+      "gram_participation_rank": 1.1048607909300052,
+      "high_alignment_pair_fraction": 0.8080357142857143,
+      "largest_gram_eigenvalue_fraction": 0.9505308103244501,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9483523706019168,
+      "mean_nearest_neighbor_cosine": 0.9977739010262849,
+      "mean_normalized_attention_entropy": 0.9996715953848814,
+      "mean_offdiagonal_cosine": 0.9483523706019168,
+      "mean_resultant_length": 0.9742481022877395,
+      "step": 51,
+      "time": 5.1000000000000005
+    },
+    {
+      "gram_participation_rank": 1.0878797633030157,
+      "high_alignment_pair_fraction": 0.8526785714285714,
+      "largest_gram_eigenvalue_fraction": 0.9581691763646856,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9565185783816551,
+      "mean_nearest_neighbor_cosine": 0.9981175157426778,
+      "mean_normalized_attention_entropy": 0.9997635509339597,
+      "mean_offdiagonal_cosine": 0.9565185783816551,
+      "mean_resultant_length": 0.9783649501052467,
+      "step": 52,
+      "time": 5.2
+    },
+    {
+      "gram_participation_rank": 1.07348478345081,
+      "high_alignment_pair_fraction": 0.9007936507936508,
+      "largest_gram_eigenvalue_fraction": 0.9647500859090865,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9634956674350266,
+      "mean_nearest_neighbor_cosine": 0.9984135572657868,
+      "mean_normalized_attention_entropy": 0.9998310574450872,
+      "mean_offdiagonal_cosine": 0.9634956674350266,
+      "mean_resultant_length": 0.9818686509056873,
+      "step": 53,
+      "time": 5.300000000000001
+    },
+    {
+      "gram_participation_rank": 1.061331414606126,
+      "high_alignment_pair_fraction": 0.9320436507936508,
+      "largest_gram_eigenvalue_fraction": 0.9703845933824828,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9694273820033138,
+      "mean_nearest_neighbor_cosine": 0.9986670384848824,
+      "mean_normalized_attention_entropy": 0.9998801006599763,
+      "mean_offdiagonal_cosine": 0.9694273820033138,
+      "mean_resultant_length": 0.9848375902449662,
+      "step": 54,
+      "time": 5.4
+    },
+    {
+      "gram_participation_rank": 1.0511059006760848,
+      "high_alignment_pair_fraction": 0.9632936507936508,
+      "largest_gram_eigenvalue_fraction": 0.9751826669339911,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9744486517296412,
+      "mean_nearest_neighbor_cosine": 0.9988829097916488,
+      "mean_normalized_attention_entropy": 0.9999154044455908,
+      "mean_offdiagonal_cosine": 0.9744486517296412,
+      "mean_resultant_length": 0.9873438567927417,
+      "step": 55,
+      "time": 5.5
+    },
+    {
+      "gram_participation_rank": 1.0425275183786995,
+      "high_alignment_pair_fraction": 0.9786706349206349,
+      "largest_gram_eigenvalue_fraction": 0.9792493718283333,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.978683389394814,
+      "mean_nearest_neighbor_cosine": 0.9990658948851432,
+      "mean_normalized_attention_entropy": 0.9999406150177657,
+      "mean_offdiagonal_cosine": 0.978683389394814,
+      "mean_resultant_length": 0.989452606967873,
+      "step": 56,
+      "time": 5.6000000000000005
+    },
+    {
+      "gram_participation_rank": 1.0353486710481952,
+      "high_alignment_pair_fraction": 0.9900793650793651,
+      "largest_gram_eigenvalue_fraction": 0.9826823701712354,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9822433637375352,
+      "mean_nearest_neighbor_cosine": 0.9992203823811474,
+      "mean_normalized_attention_entropy": 0.9999584935631775,
+      "mean_offdiagonal_cosine": 0.9822433637375352,
+      "mean_resultant_length": 0.9912218778755519,
+      "step": 57,
+      "time": 5.7
+    },
+    {
+      "gram_participation_rank": 1.0293534902041694,
+      "high_alignment_pair_fraction": 0.9965277777777778,
+      "largest_gram_eigenvalue_fraction": 0.985570500791813,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9852279036549977,
+      "mean_nearest_neighbor_cosine": 0.99935036395265,
+      "mean_normalized_attention_entropy": 0.9999710971348336,
+      "mean_offdiagonal_cosine": 0.9852279036549977,
+      "mean_resultant_length": 0.9927027337830736,
+      "step": 58,
+      "time": 5.800000000000001
+    },
+    {
+      "gram_participation_rank": 1.0243555330511138,
+      "high_alignment_pair_fraction": 0.9995039682539683,
+      "largest_gram_eigenvalue_fraction": 0.9879931897143819,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9877242022193647,
+      "mean_nearest_neighbor_cosine": 0.9994594086611146,
+      "mean_normalized_attention_entropy": 0.9999799369814167,
+      "mean_offdiagonal_cosine": 0.9877242022193647,
+      "mean_resultant_length": 0.9939396418091427,
+      "step": 59,
+      "time": 5.9
+    },
+    {
+      "gram_participation_rank": 1.0201950074355082,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9900204599640323,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9898080200301557,
+      "mean_nearest_neighbor_cosine": 0.9995506636272347,
+      "mean_normalized_attention_entropy": 0.9999861102875509,
+      "mean_offdiagonal_cosine": 0.9898080200301557,
+      "mean_resultant_length": 0.9949709893847081,
+      "step": 60,
+      "time": 6.0
+    },
+    {
+      "gram_participation_rank": 1.0167358267262327,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9917133443009789,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9915446262740375,
+      "mean_nearest_neighbor_cosine": 0.9996268725314515,
+      "mean_normalized_attention_entropy": 0.9999904056751241,
+      "mean_offdiagonal_cosine": 0.9915446262740375,
+      "mean_resultant_length": 0.9958296749386942,
+      "step": 61,
+      "time": 6.1000000000000005
+    },
+    {
+      "gram_participation_rank": 1.0138626959701145,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.993124544818245,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9929898549088408,
+      "mean_nearest_neighbor_cosine": 0.999690405104521,
+      "mean_normalized_attention_entropy": 0.999993385208629,
+      "mean_offdiagonal_cosine": 0.9929898549088408,
+      "mean_resultant_length": 0.9965437212816555,
+      "step": 62,
+      "time": 6.2
+    },
+    {
+      "gram_participation_rank": 1.0114783547451083,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9942992222205382,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9941911882794705,
+      "mean_nearest_neighbor_cosine": 0.9997432924296925,
+      "mean_normalized_attention_entropy": 0.9999954466442218,
+      "mean_offdiagonal_cosine": 0.9941911882794705,
+      "mean_resultant_length": 0.9971368767439123,
+      "step": 63,
+      "time": 6.300000000000001
+    },
+    {
+      "gram_participation_rank": 1.0095010472964456,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9952758313879424,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9951888092875786,
+      "mean_nearest_neighbor_cosine": 0.9997872643473034,
+      "mean_normalized_attention_entropy": 0.9999968697897735,
+      "mean_offdiagonal_cosine": 0.9951888092875786,
+      "mean_resultant_length": 0.9976291816814805,
+      "step": 64,
+      "time": 6.4
+    },
+    {
+      "gram_participation_rank": 1.007862252459946,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9960869471702515,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.996016585637824,
+      "mean_nearest_neighbor_cosine": 0.9998237864551773,
+      "mean_normalized_attention_entropy": 0.9999978505019533,
+      "mean_offdiagonal_cosine": 0.996016585637824,
+      "mean_resultant_length": 0.9980374875159914,
+      "step": 65,
+      "time": 6.5
+    },
+    {
+      "gram_participation_rank": 1.0065046805590283,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9967600453019354,
+      "max_unit_norm_error": 1.1102230246251565e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9967029662259668,
+      "mean_nearest_neighbor_cosine": 0.9998540951267398,
+      "mean_normalized_attention_entropy": 0.9999985253049845,
+      "mean_offdiagonal_cosine": 0.9967029662259668,
+      "mean_resultant_length": 0.9983759223752776,
+      "step": 66,
+      "time": 6.6000000000000005
+    },
+    {
+      "gram_participation_rank": 1.0053805285213369,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.997318218635383,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9972717813706877,
+      "mean_nearest_neighbor_cosine": 0.999879229651455,
+      "mean_normalized_attention_entropy": 0.9999989890352371,
+      "mean_offdiagonal_cosine": 0.9972717813706877,
+      "mean_resultant_length": 0.9986563021314044,
+      "step": 67,
+      "time": 6.7
+    },
+    {
+      "gram_participation_rank": 1.0044499751818443,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9977808195923267,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9977429463643764,
+      "mean_nearest_neighbor_cosine": 0.9999000610817946,
+      "mean_normalized_attention_entropy": 0.9999993073807926,
+      "mean_offdiagonal_cosine": 0.9977429463643764,
+      "mean_resultant_length": 0.9988884886850151,
+      "step": 68,
+      "time": 6.800000000000001
+    },
+    {
+      "gram_participation_rank": 1.003679894035491,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9981640268723758,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9981330726925627,
+      "mean_nearest_neighbor_cosine": 0.9999173176922016,
+      "mean_normalized_attention_entropy": 0.9999995257312276,
+      "mean_offdiagonal_cosine": 0.9981330726925627,
+      "mean_resultant_length": 0.9990806991588528,
+      "step": 69,
+      "time": 6.9
+    },
+    {
+      "gram_participation_rank": 1.003042759025684,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9984813389565735,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9984559940599322,
+      "mean_nearest_neighbor_cosine": 0.9999316071588221,
+      "mean_normalized_attention_entropy": 0.9999996753876874,
+      "mean_offdiagonal_cosine": 0.9984559940599322,
+      "mean_resultant_length": 0.9992397706020041,
+      "step": 70,
+      "time": 7.0
+    },
+    {
+      "gram_participation_rank": 1.0025157191910081,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9987439995598218,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9987232157066485,
+      "mean_nearest_neighbor_cosine": 0.99994343568758,
+      "mean_normalized_attention_entropy": 0.9999997779001163,
+      "mean_offdiagonal_cosine": 0.9987232157066485,
+      "mean_resultant_length": 0.9993713851523027,
+      "step": 71,
+      "time": 7.1000000000000005
+    },
+    {
+      "gram_participation_rank": 1.0020798193618676,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9989613615069051,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9989442958888172,
+      "mean_nearest_neighbor_cosine": 0.999953224378648,
+      "mean_normalized_attention_entropy": 0.9999998480847044,
+      "mean_offdiagonal_cosine": 0.9989442958888172,
+      "mean_resultant_length": 0.9994802605682385,
+      "step": 72,
+      "time": 7.2
+    },
+    {
+      "gram_participation_rank": 1.0017193460718474,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9991411959712561,
+      "max_unit_norm_error": 1.1102230246251565e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9991271681858855,
+      "mean_nearest_neighbor_cosine": 0.9999613231371453,
+      "mean_normalized_attention_entropy": 0.9999998961164285,
+      "mean_offdiagonal_cosine": 0.9991271681858855,
+      "mean_resultant_length": 0.9995703107750757,
+      "step": 73,
+      "time": 7.300000000000001
+    },
+    {
+      "gram_participation_rank": 1.001421280076924,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9992899539396737,
+      "max_unit_norm_error": 1.1102230246251565e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9992784127351995,
+      "mean_nearest_neighbor_cosine": 0.9999680224371764,
+      "mean_normalized_attention_entropy": 0.9999999289763482,
+      "mean_offdiagonal_cosine": 0.9992784127351995,
+      "mean_resultant_length": 0.9996447806777223,
+      "step": 74,
+      "time": 7.4
+    },
+    {
+      "gram_participation_rank": 1.0011748391389,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9994129863711683,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9994034837499473,
+      "mean_nearest_neighbor_cosine": 0.999973563229069,
+      "mean_normalized_attention_entropy": 0.9999999514504437,
+      "mean_offdiagonal_cosine": 0.9994034837499473,
+      "mean_resultant_length": 0.9997063590456723,
+      "step": 75,
+      "time": 7.5
+    },
+    {
+      "gram_participation_rank": 1.0009710968956416,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9995147289538218,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.999506899863116,
+      "mean_nearest_neighbor_cosine": 0.9999781452546687,
+      "mean_normalized_attention_entropy": 0.9999999668177051,
+      "mean_offdiagonal_cosine": 0.999506899863116,
+      "mean_resultant_length": 0.999757272818135,
+      "step": 76,
+      "time": 7.6000000000000005
+    },
+    {
+      "gram_participation_rank": 1.0008026656374258,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9995988567287156,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9995924030272422,
+      "mean_nearest_neighbor_cosine": 0.9999819340072527,
+      "mean_normalized_attention_entropy": 0.999999977323448,
+      "mean_offdiagonal_cosine": 0.9995924030272422,
+      "mean_resultant_length": 0.9997993657379173,
+      "step": 77,
+      "time": 7.7
+    },
+    {
+      "gram_participation_rank": 1.0006634326024888,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9996684132064668,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9996630909293253,
+      "mean_nearest_neighbor_cosine": 0.9999850665438654,
+      "mean_normalized_attention_entropy": 0.9999999845044926,
+      "mean_offdiagonal_cosine": 0.9996630909293253,
+      "mean_resultant_length": 0.9998341638159574,
+      "step": 78,
+      "time": 7.800000000000001
+    },
+    {
+      "gram_participation_rank": 1.0005483409868963,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9997259179870627,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9997215271746419,
+      "mean_nearest_neighbor_cosine": 0.9999876563303345,
+      "mean_normalized_attention_entropy": 0.9999999894123393,
+      "mean_offdiagonal_cosine": 0.9997215271746419,
+      "mean_resultant_length": 0.999862929762144,
+      "step": 79,
+      "time": 7.9
+    },
+    {
+      "gram_participation_rank": 1.0004532082401378,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9997734563274286,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9997698328620491,
+      "mean_nearest_neighbor_cosine": 0.9999897972738447,
+      "mean_normalized_attention_entropy": 0.9999999927662144,
+      "mean_offdiagonal_cosine": 0.9997698328620491,
+      "mean_resultant_length": 0.999886708194273,
+      "step": 80,
+      "time": 8.0
+    },
+    {
+      "gram_participation_rank": 1.0003745754027864,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9998127535930332,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9998097626184826,
+      "mean_nearest_neighbor_cosine": 0.9999915670751296,
+      "mean_normalized_attention_entropy": 0.9999999950579447,
+      "mean_offdiagonal_cosine": 0.9998097626184826,
+      "mean_resultant_length": 0.9999063631548553,
+      "step": 81,
+      "time": 8.1
+    },
+    {
+      "gram_participation_rank": 1.0003095822545487,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9998452370818763,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9998427676787549,
+      "mean_nearest_neighbor_cosine": 0.9999930300122286,
+      "mean_normalized_attention_entropy": 0.9999999966237856,
+      "mean_offdiagonal_cosine": 0.9998427676787549,
+      "mean_resultant_length": 0.999922609222221,
+      "step": 82,
+      "time": 8.200000000000001
+    },
+    {
+      "gram_participation_rank": 1.0002558638998937,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9998720873198242,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9998700481828465,
+      "mean_nearest_neighbor_cosine": 0.9999942392502549,
+      "mean_normalized_attention_entropy": 0.9999999976935913,
+      "mean_offdiagonal_cosine": 0.9998700481828465,
+      "mean_resultant_length": 0.9999360372943809,
+      "step": 83,
+      "time": 8.3
+    },
+    {
+      "gram_participation_rank": 1.0002114651436962,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9998942805910997,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9998925965098724,
+      "mean_nearest_neighbor_cosine": 0.9999952387565505,
+      "mean_normalized_attention_entropy": 0.9999999984244609,
+      "mean_offdiagonal_cosine": 0.9998925965098724,
+      "mean_resultant_length": 0.9999471359473986,
+      "step": 84,
+      "time": 8.4
+    },
+    {
+      "gram_participation_rank": 1.0001747696193266,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999126241816173,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999112331686182,
+      "mean_nearest_neighbor_cosine": 0.9999960648877397,
+      "mean_normalized_attention_entropy": 0.9999999989237552,
+      "mean_offdiagonal_cosine": 0.9999112331686182,
+      "mean_resultant_length": 0.9999563091207329,
+      "step": 85,
+      "time": 8.5
+    },
+    {
+      "gram_participation_rank": 1.0001444411430096,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999277855701176,
+      "max_unit_norm_error": 1.1102230246251565e-16,
+      "mean_absolute_offdiagonal_cosine": 0.999926636512033,
+      "mean_nearest_neighbor_cosine": 0.9999967477042717,
+      "mean_normalized_attention_entropy": 0.9999999992648368,
+      "mean_offdiagonal_cosine": 0.999926636512033,
+      "mean_resultant_length": 0.9999638907563274,
+      "step": 86,
+      "time": 8.6
+    },
+    {
+      "gram_participation_rank": 1.0001193751959006,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999403165971195,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999393673308244,
+      "mean_nearest_neighbor_cosine": 0.9999973120588217,
+      "mean_normalized_attention_entropy": 0.9999999994978321,
+      "mean_offdiagonal_cosine": 0.9999393673308244,
+      "mean_resultant_length": 0.999970156912835,
+      "step": 87,
+      "time": 8.700000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000986587921485,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999506734693597,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999498892034683,
+      "mean_nearest_neighbor_cosine": 0.9999977784971641,
+      "mean_normalized_attention_entropy": 0.999999999656989,
+      "mean_offdiagonal_cosine": 0.9999498892034683,
+      "mean_resultant_length": 0.9999753357881704,
+      "step": 88,
+      "time": 8.8
+    },
+    {
+      "gram_participation_rank": 1.0000815372884462,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999592333129894,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999585853312934,
+      "mean_nearest_neighbor_cosine": 0.9999981640036331,
+      "mean_normalized_attention_entropy": 0.9999999997657056,
+      "mean_offdiagonal_cosine": 0.9999585853312934,
+      "mean_resultant_length": 0.9999796160099924,
+      "step": 89,
+      "time": 8.9
+    },
+    {
+      "gram_participation_rank": 1.0000673869378058,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999663078679464,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999657724633244,
+      "mean_nearest_neighbor_cosine": 0.9999984826178427,
+      "mean_normalized_attention_entropy": 0.9999999998399665,
+      "mean_offdiagonal_cosine": 0.9999657724633244,
+      "mean_resultant_length": 0.9999831534923903,
+      "step": 90,
+      "time": 9.0
+    },
+    {
+      "gram_participation_rank": 1.0000556921957326,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999721548152456,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.999971712412306,
+      "mean_nearest_neighbor_cosine": 0.999998745944813,
+      "mean_normalized_attention_entropy": 0.9999999998906908,
+      "mean_offdiagonal_cosine": 0.999971712412306,
+      "mean_resultant_length": 0.9999860771060083,
+      "step": 91,
+      "time": 9.1
+    },
+    {
+      "gram_participation_rank": 1.0000460269574774,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999769871449441,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999766215774726,
+      "mean_nearest_neighbor_cosine": 0.9999989635768571,
+      "mean_normalized_attention_entropy": 0.999999999925338,
+      "mean_offdiagonal_cosine": 0.9999766215774726,
+      "mean_resultant_length": 0.9999884933664609,
+      "step": 92,
+      "time": 9.200000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000380390465047,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.99998098090274,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999806788182882,
+      "mean_nearest_neighbor_cosine": 0.9999991434424558,
+      "mean_normalized_attention_entropy": 0.9999999999490036,
+      "mean_offdiagonal_cosine": 0.9999806788182882,
+      "mean_resultant_length": 0.999990490310659,
+      "step": 93,
+      "time": 9.3
+    },
+    {
+      "gram_participation_rank": 1.0000314373915353,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.999984281595195,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999840319641873,
+      "mean_nearest_neighbor_cosine": 0.9999992920947196,
+      "mean_normalized_attention_entropy": 0.9999999999651681,
+      "mean_offdiagonal_cosine": 0.9999840319641873,
+      "mean_resultant_length": 0.9999921407014889,
+      "step": 94,
+      "time": 9.4
+    },
+    {
+      "gram_participation_rank": 1.0000259814266637,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999870094854026,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999868031962446,
+      "mean_nearest_neighbor_cosine": 0.9999994149498852,
+      "mean_normalized_attention_entropy": 0.9999999999762088,
+      "mean_offdiagonal_cosine": 0.9999868031962446,
+      "mean_resultant_length": 0.999993504677057,
+      "step": 95,
+      "time": 9.5
+    },
+    {
+      "gram_participation_rank": 1.000021472329492,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999892639709933,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999890934960123,
+      "mean_nearest_neighbor_cosine": 0.9999995164844837,
+      "mean_normalized_attention_entropy": 0.9999999999837501,
+      "mean_offdiagonal_cosine": 0.9999890934960123,
+      "mean_resultant_length": 0.9999946319406604,
+      "step": 96,
+      "time": 9.600000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000177457787973,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999911272033146,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999909863230457,
+      "mean_nearest_neighbor_cosine": 0.9999996003983338,
+      "mean_normalized_attention_entropy": 0.999999999988901,
+      "mean_offdiagonal_cosine": 0.9999909863230457,
+      "mean_resultant_length": 0.9999955635710334,
+      "step": 97,
+      "time": 9.700000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000146659683693,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999926670791399,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999925506547297,
+      "mean_nearest_neighbor_cosine": 0.999999669749278,
+      "mean_normalized_attention_entropy": 0.9999999999924192,
+      "mean_offdiagonal_cosine": 0.9999925506547297,
+      "mean_resultant_length": 0.9999963335186534,
+      "step": 98,
+      "time": 9.8
+    },
+    {
+      "gram_participation_rank": 1.000012120659249,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999939397136273,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999938434989067,
+      "mean_nearest_neighbor_cosine": 0.9999997270645553,
+      "mean_normalized_attention_entropy": 0.9999999999948221,
+      "mean_offdiagonal_cosine": 0.9999938434989067,
+      "mean_resultant_length": 0.9999969698425274,
+      "step": 99,
+      "time": 9.9
+    },
+    {
+      "gram_participation_rank": 1.0000100170903106,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999949914843865,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999949119706838,
+      "mean_nearest_neighbor_cosine": 0.9999997744328584,
+      "mean_normalized_attention_entropy": 0.9999999999964636,
+      "mean_offdiagonal_cosine": 0.9999949119706838,
+      "mean_resultant_length": 0.9999974957324352,
+      "step": 100,
+      "time": 10.0
+    },
+    {
+      "gram_participation_rank": 1.0000082785983384,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.999995860721008,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999957950089774,
+      "mean_nearest_neighbor_cosine": 0.9999998135804251,
+      "mean_normalized_attention_entropy": 0.9999999999975846,
+      "mean_offdiagonal_cosine": 0.9999957950089774,
+      "mean_resultant_length": 0.9999979303538391,
+      "step": 101,
+      "time": 10.100000000000001
+    },
+    {
+      "gram_participation_rank": 1.00000684182453,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999965791015166,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999965247952639,
+      "mean_nearest_neighbor_cosine": 0.9999998459339285,
+      "mean_normalized_attention_entropy": 0.9999999999983502,
+      "mean_offdiagonal_cosine": 0.9999965247952639,
+      "mean_resultant_length": 0.9999982895462063,
+      "step": 102,
+      "time": 10.200000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000056544057119,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999971728065562,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999971279261836,
+      "mean_nearest_neighbor_cosine": 0.9999998726724584,
+      "mean_normalized_attention_entropy": 0.999999999998873,
+      "mean_offdiagonal_cosine": 0.9999971279261836,
+      "mean_resultant_length": 0.9999985864001691,
+      "step": 103,
+      "time": 10.3
+    },
+    {
+      "gram_participation_rank": 1.0000046730661738,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999976634733417,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999976263826894,
+      "mean_nearest_neighbor_cosine": 0.9999998947704835,
+      "mean_normalized_attention_entropy": 0.9999999999992305,
+      "mean_offdiagonal_cosine": 0.9999976263826894,
+      "mean_resultant_length": 0.9999988317345476,
+      "step": 104,
+      "time": 10.4
+    },
+    {
+      "gram_participation_rank": 1.0000038620406206,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.999998068984081,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999980383310346,
+      "mean_nearest_neighbor_cosine": 0.9999999130333597,
+      "mean_normalized_attention_entropy": 0.9999999999994744,
+      "mean_offdiagonal_cosine": 0.9999980383310346,
+      "mean_resultant_length": 0.9999990344905898,
+      "step": 105,
+      "time": 10.5
+    },
+    {
+      "gram_participation_rank": 1.0000031917707883,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999984041176055,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999983787847726,
+      "mean_nearest_neighbor_cosine": 0.9999999281266767,
+      "mean_normalized_attention_entropy": 0.999999999999641,
+      "mean_offdiagonal_cosine": 0.9999983787847726,
+      "mean_resultant_length": 0.999999202057812,
+      "step": 106,
+      "time": 10.600000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000026378282454,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999986810879268,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999986601518805,
+      "mean_nearest_neighbor_cosine": 0.9999999406005136,
+      "mean_normalized_attention_entropy": 0.9999999999997546,
+      "mean_offdiagonal_cosine": 0.9999986601518805,
+      "mean_resultant_length": 0.9999993405432862,
+      "step": 107,
+      "time": 10.700000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000021800241272,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999989099893353,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999988926869416,
+      "mean_nearest_neighbor_cosine": 0.9999999509094841,
+      "mean_normalized_attention_entropy": 0.9999999999998326,
+      "mean_offdiagonal_cosine": 0.9999988926869416,
+      "mean_resultant_length": 0.9999994549942056,
+      "step": 108,
+      "time": 10.8
+    },
+    {
+      "gram_participation_rank": 1.000001801673368,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.999999099164272,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999990848648566,
+      "mean_nearest_neighbor_cosine": 0.9999999594293045,
+      "mean_normalized_attention_entropy": 0.9999999999998858,
+      "mean_offdiagonal_cosine": 0.9999990848648566,
+      "mean_resultant_length": 0.9999995495818201,
+      "step": 109,
+      "time": 10.9
+    },
+    {
+      "gram_participation_rank": 1.0000014889866202,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999992555073426,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999992436897016,
+      "mean_nearest_neighbor_cosine": 0.9999999664704851,
+      "mean_normalized_attention_entropy": 0.9999999999999221,
+      "mean_offdiagonal_cosine": 0.9999992436897016,
+      "mean_resultant_length": 0.9999996277534555,
+      "step": 110,
+      "time": 11.0
+    },
+    {
+      "gram_participation_rank": 1.0000012305677044,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999993847165931,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999993749499873,
+      "mean_nearest_neighbor_cosine": 0.9999999722896471,
+      "mean_normalized_attention_entropy": 0.9999999999999466,
+      "mean_offdiagonal_cosine": 0.9999993749499873,
+      "mean_resultant_length": 0.9999996923581495,
+      "step": 111,
+      "time": 11.100000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000010169982736,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999994915011676,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999994834296191,
+      "mean_nearest_neighbor_cosine": 0.9999999770988751,
+      "mean_normalized_attention_entropy": 0.9999999999999637,
+      "mean_offdiagonal_cosine": 0.9999994834296191,
+      "mean_resultant_length": 0.9999997457504834,
+      "step": 112,
+      "time": 11.200000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000008404945573,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999995797529294,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999995730822462,
+      "mean_nearest_neighbor_cosine": 0.9999999810734459,
+      "mean_normalized_attention_entropy": 0.9999999999999752,
+      "mean_offdiagonal_cosine": 0.9999995730822462,
+      "mean_resultant_length": 0.9999997898763957,
+      "step": 113,
+      "time": 11.3
+    },
+    {
+      "gram_participation_rank": 1.0000006946236808,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999996526883014,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999996471753528,
+      "mean_nearest_neighbor_cosine": 0.9999999843582166,
+      "mean_normalized_attention_entropy": 0.9999999999999831,
+      "mean_offdiagonal_cosine": 0.9999996471753528,
+      "mean_resultant_length": 0.999999826344104,
+      "step": 114,
+      "time": 11.4
+    },
+    {
+      "gram_participation_rank": 1.000000574069212,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999997129654912,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999997084093434,
+      "mean_nearest_neighbor_cosine": 0.9999999870729042,
+      "mean_normalized_attention_entropy": 0.9999999999999885,
+      "mean_offdiagonal_cosine": 0.9999997084093434,
+      "mean_resultant_length": 0.9999998564827135,
+      "step": 115,
+      "time": 11.5
+    },
+    {
+      "gram_participation_rank": 1.0000004744374025,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999997627813644,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999997590159596,
+      "mean_nearest_neighbor_cosine": 0.9999999893164482,
+      "mean_normalized_attention_entropy": 0.9999999999999921,
+      "mean_offdiagonal_cosine": 0.9999997590159596,
+      "mean_resultant_length": 0.9999998813906606,
+      "step": 116,
+      "time": 11.600000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000003920970522,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999998039515186,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999998008396179,
+      "mean_nearest_neighbor_cosine": 0.9999999911706173,
+      "mean_normalized_attention_entropy": 0.9999999999999947,
+      "mean_offdiagonal_cosine": 0.9999998008396179,
+      "mean_resultant_length": 0.9999999019757445,
+      "step": 117,
+      "time": 11.700000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000003240471678,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999998379764474,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999998354046304,
+      "mean_nearest_neighbor_cosine": 0.9999999927029888,
+      "mean_normalized_attention_entropy": 0.9999999999999963,
+      "mean_offdiagonal_cosine": 0.9999998354046304,
+      "mean_resultant_length": 0.999999918988213,
+      "step": 118,
+      "time": 11.8
+    },
+    {
+      "gram_participation_rank": 1.0000002678075885,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999998660962267,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999998639707605,
+      "mean_nearest_neighbor_cosine": 0.9999999939694117,
+      "mean_normalized_attention_entropy": 0.9999999999999977,
+      "mean_offdiagonal_cosine": 0.9999998639707605,
+      "mean_resultant_length": 0.9999999330481069,
+      "step": 119,
+      "time": 11.9
+    },
+    {
+      "gram_participation_rank": 1.0000002213285937,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999998893357175,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999998875791352,
+      "mean_nearest_neighbor_cosine": 0.9999999950160423,
+      "mean_normalized_attention_entropy": 0.9999999999999986,
+      "mean_offdiagonal_cosine": 0.9999998875791352,
+      "mean_resultant_length": 0.9999999446678541,
+      "step": 120,
+      "time": 12.0
+    },
+    {
+      "gram_participation_rank": 1.0000001829161986,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999085419102,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999070901904,
+      "mean_nearest_neighbor_cosine": 0.9999999958810266,
+      "mean_normalized_attention_entropy": 0.9999999999999989,
+      "mean_offdiagonal_cosine": 0.9999999070901904,
+      "mean_resultant_length": 0.999999954270952,
+      "step": 121,
+      "time": 12.100000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000001511704157,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999244147989,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999232150306,
+      "mean_nearest_neighbor_cosine": 0.9999999965958897,
+      "mean_normalized_attention_entropy": 0.9999999999999993,
+      "mean_offdiagonal_cosine": 0.9999999232150306,
+      "mean_resultant_length": 0.9999999622073973,
+      "step": 122,
+      "time": 12.200000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000001249342305,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999375328895,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999365413457,
+      "mean_nearest_neighbor_cosine": 0.9999999971866855,
+      "mean_normalized_attention_entropy": 0.9999999999999993,
+      "mean_offdiagonal_cosine": 0.9999999365413457,
+      "mean_resultant_length": 0.999999968766443,
+      "step": 123,
+      "time": 12.3
+    },
+    {
+      "gram_participation_rank": 1.000000103251432,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999483742869,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999475548299,
+      "mean_nearest_neighbor_cosine": 0.9999999976749466,
+      "mean_normalized_attention_entropy": 0.9999999999999998,
+      "mean_offdiagonal_cosine": 0.9999999475548299,
+      "mean_resultant_length": 0.9999999741871425,
+      "step": 124,
+      "time": 12.4
+    },
+    {
+      "gram_participation_rank": 1.0000000853317632,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999573341204,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999566568835,
+      "mean_nearest_neighbor_cosine": 0.9999999980784683,
+      "mean_normalized_attention_entropy": 0.9999999999999998,
+      "mean_offdiagonal_cosine": 0.9999999566568835,
+      "mean_resultant_length": 0.9999999786670596,
+      "step": 125,
+      "time": 12.5
+    },
+    {
+      "gram_participation_rank": 1.0000000705221193,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999647389414,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999641792419,
+      "mean_nearest_neighbor_cosine": 0.9999999984119572,
+      "mean_normalized_attention_entropy": 0.9999999999999998,
+      "mean_offdiagonal_cosine": 0.9999999641792419,
+      "mean_resultant_length": 0.9999999823694709,
+      "step": 126,
+      "time": 12.600000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000000582827437,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999708586291,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999703960673,
+      "mean_nearest_neighbor_cosine": 0.9999999986875678,
+      "mean_normalized_attention_entropy": 0.9999999999999998,
+      "mean_offdiagonal_cosine": 0.9999999703960673,
+      "mean_resultant_length": 0.9999999854293143,
+      "step": 127,
+      "time": 12.700000000000001
+    },
+    {
+      "gram_participation_rank": 1.000000048167557,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999759162221,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999755339397,
+      "mean_nearest_neighbor_cosine": 0.9999999989153453,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999755339397,
+      "mean_resultant_length": 0.9999999879581111,
+      "step": 128,
+      "time": 12.8
+    },
+    {
+      "gram_participation_rank": 1.0000000398078988,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999800960514,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999797801152,
+      "mean_nearest_neighbor_cosine": 0.9999999991035913,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999797801152,
+      "mean_resultant_length": 0.9999999900480253,
+      "step": 129,
+      "time": 12.9
+    },
+    {
+      "gram_participation_rank": 1.0000000328990901,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999835504553,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999832893512,
+      "mean_nearest_neighbor_cosine": 0.9999999992591662,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999832893512,
+      "mean_resultant_length": 0.9999999917752274,
+      "step": 130,
+      "time": 13.0
+    },
+    {
+      "gram_participation_rank": 1.0000000271893308,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999864053343,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999861895463,
+      "mean_nearest_neighbor_cosine": 0.9999999993877406,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999861895463,
+      "mean_resultant_length": 0.9999999932026676,
+      "step": 131,
+      "time": 13.100000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000000224705212,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999887647394,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999885864019,
+      "mean_nearest_neighbor_cosine": 0.9999999994940005,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999885864019,
+      "mean_resultant_length": 0.9999999943823696,
+      "step": 132,
+      "time": 13.200000000000001
+    },
+    {
+      "gram_participation_rank": 1.000000018570679,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999907146603,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999905672743,
+      "mean_nearest_neighbor_cosine": 0.9999999995818185,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999905672743,
+      "mean_resultant_length": 0.9999999953573303,
+      "step": 133,
+      "time": 13.3
+    },
+    {
+      "gram_participation_rank": 1.0000000153476685,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999923261658,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999922043589,
+      "mean_nearest_neighbor_cosine": 0.9999999996543956,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999922043589,
+      "mean_resultant_length": 0.9999999961630828,
+      "step": 134,
+      "time": 13.4
+    },
+    {
+      "gram_participation_rank": 1.0000000126840236,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999936579886,
+      "max_unit_norm_error": 1.1102230246251565e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999935573214,
+      "mean_nearest_neighbor_cosine": 0.9999999997143765,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999935573214,
+      "mean_resultant_length": 0.9999999968289941,
+      "step": 135,
+      "time": 13.5
+    },
+    {
+      "gram_participation_rank": 1.000000010482664,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.999999994758668,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999946754721,
+      "mean_nearest_neighbor_cosine": 0.9999999997639477,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999946754721,
+      "mean_resultant_length": 0.9999999973793338,
+      "step": 136,
+      "time": 13.600000000000001
+    },
+    {
+      "gram_participation_rank": 1.000000008663359,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999956683209,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999955995638,
+      "mean_nearest_neighbor_cosine": 0.9999999998049153,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999955995638,
+      "mean_resultant_length": 0.9999999978341603,
+      "step": 137,
+      "time": 13.700000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000000071598008,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999964200997,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999963632759,
+      "mean_nearest_neighbor_cosine": 0.999999999838773,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999963632759,
+      "mean_resultant_length": 0.9999999982100498,
+      "step": 138,
+      "time": 13.8
+    },
+    {
+      "gram_participation_rank": 1.0000000059171905,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999970414045,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999969944428,
+      "mean_nearest_neighbor_cosine": 0.9999999998667546,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999969944428,
+      "mean_resultant_length": 0.9999999985207023,
+      "step": 139,
+      "time": 13.9
+    },
+    {
+      "gram_participation_rank": 1.0000000048902402,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.99999999755488,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999975160685,
+      "mean_nearest_neighbor_cosine": 0.9999999998898798,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999975160685,
+      "mean_resultant_length": 0.99999999877744,
+      "step": 140,
+      "time": 14.0
+    },
+    {
+      "gram_participation_rank": 1.000000004041521,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999979792397,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.999999997947164,
+      "mean_nearest_neighbor_cosine": 0.9999999999089915,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.999999997947164,
+      "mean_resultant_length": 0.9999999989896198,
+      "step": 141,
+      "time": 14.100000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000000033401,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999983299505,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999983034414,
+      "mean_nearest_neighbor_cosine": 0.9999999999247864,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999983034414,
+      "mean_resultant_length": 0.9999999991649747,
+      "step": 142,
+      "time": 14.200000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000000027604132,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999986197932,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999985978855,
+      "mean_nearest_neighbor_cosine": 0.9999999999378401,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999985978855,
+      "mean_resultant_length": 0.9999999993098968,
+      "step": 143,
+      "time": 14.3
+    },
+    {
+      "gram_participation_rank": 1.0000000022813331,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999988593331,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999988412275,
+      "mean_nearest_neighbor_cosine": 0.9999999999486281,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999988412275,
+      "mean_resultant_length": 0.9999999994296668,
+      "step": 144,
+      "time": 14.4
+    },
+    {
+      "gram_participation_rank": 1.0000000018853994,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999990573001,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999990423368,
+      "mean_nearest_neighbor_cosine": 0.9999999999575439,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999990423368,
+      "mean_resultant_length": 0.9999999995286502,
+      "step": 145,
+      "time": 14.5
+    },
+    {
+      "gram_participation_rank": 1.0000000015581814,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999992209088,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999992085428,
+      "mean_nearest_neighbor_cosine": 0.9999999999649123,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999992085428,
+      "mean_resultant_length": 0.9999999996104549,
+      "step": 146,
+      "time": 14.600000000000001
+    },
+    {
+      "gram_participation_rank": 1.0000000012877532,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999993561235,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999993459032,
+      "mean_nearest_neighbor_cosine": 0.9999999999710019,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999993459032,
+      "mean_resultant_length": 0.9999999996780619,
+      "step": 147,
+      "time": 14.700000000000001
+    },
+    {
+      "gram_participation_rank": 1.000000001064259,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999994678705,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999994594241,
+      "mean_nearest_neighbor_cosine": 0.9999999999760346,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999994594241,
+      "mean_resultant_length": 0.9999999997339353,
+      "step": 148,
+      "time": 14.8
+    },
+    {
+      "gram_participation_rank": 1.0000000008795529,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999995602237,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.999999999553243,
+      "mean_nearest_neighbor_cosine": 0.999999999980194,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.999999999553243,
+      "mean_resultant_length": 0.9999999997801119,
+      "step": 149,
+      "time": 14.9
+    },
+    {
+      "gram_participation_rank": 1.000000000726903,
+      "high_alignment_pair_fraction": 1.0,
+      "largest_gram_eigenvalue_fraction": 0.9999999996365487,
+      "max_unit_norm_error": 2.220446049250313e-16,
+      "mean_absolute_offdiagonal_cosine": 0.9999999996307795,
+      "mean_nearest_neighbor_cosine": 0.9999999999836313,
+      "mean_normalized_attention_entropy": 1.0000000000000002,
+      "mean_offdiagonal_cosine": 0.9999999996307795,
+      "mean_resultant_length": 0.999999999818274,
+      "step": 150,
+      "time": 15.0
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "bootstrap": {
+    "confidence_level": 0.95,
+    "n_resamples": 20000,
+    "rng_seed": 20260815
+  },
+  "claim_limits": {
+    "confirmatory_compensator_claims": 0,
+    "ffn_practical_floor_available": false,
+    "finite_output_validation_available": false,
+    "ov_metric_matches_registered_isotropic_attenuation": false,
+    "qk_metric_endpoint_split": "symmetric_midpoint",
+    "qk_metric_matches_registered_endpoint_split": false
+  },
+  "derived_row_counts": {
+    "cell_step_summary": 2144,
+    "optimizer_replication": 268,
+    "paired_delta_summary": 1072,
+    "seed_step_metrics": 768,
+    "site_delta_summary": 1824,
+    "site_step_metrics": 57600
+  },
+  "independent_unit": "training_seed",
+  "schema_version": "mechanism-analysis-v1",
+  "source_directories": {
+    "primary": "results/primary-adamw-mechanisms-v1",
+    "replication": "results/replication-sgd-mechanisms-v1"
+  },
+  "studies": {
+    "primary_adamw": {
+      "cells": 8,
+      "checkpoints_per_seed": 4,
+      "evaluation_batch_size": 512,
+      "evaluation_contract_hash": "aa23f33836a27cc04d292097b26ece4d78fe4e62b3c7f3ef024a24581991646f",
+      "failed_snapshot_rows": 0,
+      "numerical_checks": {
+        "max_abs_parseval_gap": 4.76837158203125e-06,
+        "max_abs_value_flip_minus_walsh": 0.016351699829101562,
+        "max_final_abs_value_flip_minus_walsh": 0.003402888774871826
+      },
+      "rows": 384,
+      "seeds_per_cell": 12,
+      "training_study_id": "primary-adamw-12seeds-v1"
+    },
+    "replication_sgd": {
+      "cells": 8,
+      "checkpoints_per_seed": 4,
+      "evaluation_batch_size": 512,
+      "evaluation_contract_hash": "636491adb118227c55747c1ac2e7d79f9905e05dbe58699c1803bfbd5a8d893f",
+      "failed_snapshot_rows": 0,
+      "numerical_checks": {
+        "max_abs_parseval_gap": 4.76837158203125e-06,
+        "max_abs_value_flip_minus_walsh": 0.013159949332475662,
+        "max_final_abs_value_flip_minus_walsh": 0.0019267797470092773
+      },
+      "rows": 384,
+      "seeds_per_cell": 12,
+      "training_study_id": "replication-momentum-sgd-12seeds-v1"
+    }
+  }
+}

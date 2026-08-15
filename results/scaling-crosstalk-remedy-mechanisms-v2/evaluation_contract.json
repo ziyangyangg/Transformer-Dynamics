@@ -1,0 +1,13 @@
+{
+  "configuration": {
+    "evaluation_batch_size": 512,
+    "evaluation_seed_offset": 900000,
+    "selected_steps": [
+      1600
+    ]
+  },
+  "evaluation_contract_hash": "7293342a2ca818b986032f962c5849537f00a5e62af8b6446a95188300341c46",
+  "schema_version": 1,
+  "training_study_config_hash": "171480eaba9815827e2e0b692ce6b8646ce66d84079922ce55597f50b4176a5b",
+  "training_study_id": "scaling-crosstalk-remedy-adamw-10seeds-v1"
+}

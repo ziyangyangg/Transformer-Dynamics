@@ -1,0 +1,43 @@
+[
+  {
+    "family": "trend / faceted seed-band line",
+    "figure": "scaling_loss_trajectories",
+    "n": 10,
+    "non_color_encoding": "head marker shape; FFN line style; width/load facets",
+    "question": "How quickly does each of the 16 tuned architectures reduce MSE?",
+    "sample_unit": "training seed"
+  },
+  {
+    "family": "uncertainty / paired dot and interval",
+    "figure": "factorial_rank_effects",
+    "inference_status": "secondary exploratory contrasts; unadjusted pointwise intervals",
+    "n": 10,
+    "non_color_encoding": "filled circles for main effects; open diamonds for interactions",
+    "question": "What exploratory scale, load, heads, FFN, and selected-interaction patterns appear in r_eff/d?",
+    "sample_unit": "training seed"
+  },
+  {
+    "family": "trend / small-multiple descriptive lines",
+    "figure": "high_lr_stress_vs_remedy",
+    "n": 4,
+    "non_color_encoding": "distinct marker and line style for every optimizer setting",
+    "question": "Do lower-LR/longer-training schedules resolve selected stress failures?",
+    "sample_unit": "one matched seed\u00d7architecture trajectory"
+  },
+  {
+    "family": "uncertainty / faceted dot and interval",
+    "figure": "embedding_scaling_endpoints",
+    "n": 10,
+    "non_color_encoding": "head marker shape and line style; width/FFN facets",
+    "question": "How do final normalized rank and coherence vary across the complete grid?",
+    "sample_unit": "training seed"
+  },
+  {
+    "family": "trend / ordered representation-site path",
+    "figure": "representation_geometry",
+    "n": 10,
+    "non_color_encoding": "metric marker shape; initialization/final line and fill style",
+    "question": "How do global average alignment and label-conditioned target selectivity evolve through depth?",
+    "sample_unit": "training seed after within-seed H\u00d7FFN averaging"
+  }
+]

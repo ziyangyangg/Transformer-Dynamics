@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68,<82"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "transformer-routing-superposition-lab"
+version = "0.1.0"
+description = "Causal routing and compressed-concept compensation experiments"
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.11,<3",
+    "numpy>=2.4,<3",
+    "scipy>=1.17,<2",
+    "pandas>=2.3,<3",
+    "matplotlib>=3.11,<4",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

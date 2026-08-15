@@ -1,0 +1,22 @@
+{
+  "study_id": "remedy-sgd-c64-h1-attn-seed10-v1",
+  "cells": [
+    {
+      "num_concepts": 64,
+      "memory_size": 4,
+      "d_model": 16,
+      "num_layers": 2,
+      "num_heads": 1,
+      "ffn_width": null,
+      "optimizer": "sgd",
+      "learning_rate": 0.03,
+      "momentum": 0.9,
+      "steps": 1600,
+      "batch_size": 512
+    }
+  ],
+  "seeds": [10],
+  "checkpoint_steps": [0, 100, 200, 400, 600, 800, 1000, 1200, 1600],
+  "eval_batch_size": 8192,
+  "weight_decay": 0.0
+}

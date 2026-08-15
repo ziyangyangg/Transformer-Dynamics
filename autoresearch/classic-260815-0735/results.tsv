@@ -1,0 +1,17 @@
+iteration	change	verify	decision	note
+0	baseline specification	pending	keep	Estimands fixed before implementation
+1	on-support data law and paired swap	7/7 data tests pass	keep	Swap endpoints preserve support, query, value vector, target, and label
+2	analytic QK/content tangent decomposition	3/3 tangent tests pass	keep	Manual formula matches autograd JVP and centered finite difference
+3	causal Walsh and dictionary-capacity metrics	5/5 metric tests pass	keep	Parseval separates target main effect, distractors, and nonlinear interactions
+4	instrumented causal Transformer and patch replay	21/21 full tests pass	keep	Input and internal patches exactly recompute descendants; QK/OV orientations verified
+5	on-support patching and exhaustive causal spectrum	4/4 intervention tests pass	keep	Walsh kernel is exact; coherent patch caveat moved into analysis protocol
+6	reproducible training and crash-safe grid runner	47/47 implemented tests pass	keep	Exact CPU replay, scheduled snapshots, content hashes, atomic resume, and failure ledger validated
+7	module-local QK/OV/FFN diagnostics	10/10 mechanism tests pass	keep	Finite chord identity, OV directional gain, signed FFN cancellation, and Parseval buckets are hand checked
+8	official GPU smoke study	4/4 seed runs pass all function gates	keep	Both attention-only and FFN hardest cells reach loss<0.05, accuracy>0.99, and Xi_value>0.96 by step 150
+9	primary AdamW 2x2x2 grid	96/96 runs complete; 12 seeds per cell	keep	All cells pass the function gate; retain every seed and checkpoint for paired architecture contrasts
+10	momentum-SGD replication and stuck-seed extension	96/96 runs plus one 1600-step extension complete	keep	Optimizer replication is strong, while the retained C64-H1-noFFN seed-10 plateau shows that endpoint failures must be audited
+11	module-local mechanism replay	768 seed-snapshot rows; Parseval gap <=4.77e-6	keep	Function-level causal routing is strong; the exploratory midpoint QK statistic points opposite the simple suppression story, while the registered asymmetric estimand was not evaluated
+12	high-learning-rate width/load/head/FFN scaling	160/160 runs complete; 153 strict endpoint successes	keep	The complete factorial grid reveals both representation interactions and a concentrated d32-H1 optimization failure mode
+13	plateau remedy pilot	learning rates 0.003 and 0.001 recover all selected d32-H1 cases by 1600 steps	keep	Known optimizer remedies work, so the plateau is not promoted to a new capacity open problem
+14	tuned width/load/head/FFN scaling	160/160 runs complete; no execution failures	keep	The preregistered low-learning-rate rerun separates stable scaling phenomena from high-step-size artifacts
+15	fixed-parameter clustering and read-only dynamics diagnostics	Perspective baseline plus four NTK/Hessian/landscape studies complete	keep	Global sphere clustering is reproduced as a depth baseline; matched plateau/tuned diagnostics explain optimization without conflating it with causal routing
