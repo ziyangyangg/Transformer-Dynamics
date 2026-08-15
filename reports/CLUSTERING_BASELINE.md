@@ -27,7 +27,7 @@ commit `538ba839f7fc03d042e03ad7b557c220defc4148`，并保留
 |---|---:|---|
 | (n) | 64 | token/粒子数 |
 | (d) | 3 | 每个粒子所在球面的环境维数 |
-| (eta) | 1 | softmax inverse temperature |
+| (\beta) | 1 | softmax inverse temperature |
 | (T) | 15 | continuum-depth 终点；**不是训练时间** |
 | (Delta t) | 0.1 | 显式 Euler 步长 |
 | seed | 20260815 | `np.random.randn` 对应的固定 legacy NumPy seed |
@@ -129,12 +129,12 @@ z_i^{k+1}=\frac{\widetilde z_i^{k+1}}
 
 | 时刻/事件 | (t) | 观测 |
 |---|---:|---:|
-| 初始化 | 0.0 | (ho=0.01447, r_{PR}=2.7948, p_{max}=0.4395) |
-| (ho\ge0.5) 首次发生 | 3.3 | 表示云已经出现全局一致方向 |
-| (ho\ge0.9) 首次发生 | 4.7 | 绝大多数几何差异已经消失 |
+| 初始化 | 0.0 | (\rho=0.01447, r_{PR}=2.7948, p_{max}=0.4395) |
+| (\rho\ge0.5) 首次发生 | 3.3 | 表示云已经出现全局一致方向 |
+| (\rho\ge0.9) 首次发生 | 4.7 | 绝大多数几何差异已经消失 |
 | (r_{PR}\le1.1) 首次发生 | 5.2 | Gram 谱几乎 rank one |
 | (P_{0.9}\ge0.9) 首次发生 | 5.3 | 至少 90% 有序 token pair 高度对齐 |
-| 终点 | 15.0 | (ho=0.9999999996, r_{PR}=1.0000000007, p_{max}=0.9999999996) |
+| 终点 | 15.0 | (\rho=0.9999999996, r_{PR}=1.0000000007, p_{max}=0.9999999996) |
 
 一个容易误读、但很关键的现象是 (H_A(15)=1)。粒子完全重合时
 (z_i^\top z_j=1) 对所有 (i,j) 相同，所以
@@ -193,7 +193,7 @@ C(s)=W_O(s)W_V(s),\quad w_{out}(s)
 如何被 population gradient flow 选择。两个时间和两个问题不能混同。
 
 本基线的实验价值是提供一个明确反例：global clustering
-(ho\to1, r_{PR}\to1) 并不推出任务相关 routing。训练选择理论必须证明的 order
+(\rho\to1, r_{PR}\to1) 并不推出任务相关 routing。训练选择理论必须证明的 order
 parameter 应该是 target-selective 几何
 
 \[
