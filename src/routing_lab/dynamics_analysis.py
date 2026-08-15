@@ -823,7 +823,11 @@ def _write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     fieldnames = list(rows[0]) if rows else []
     with temporary.open("w", encoding="utf-8", newline="") as handle:
         if fieldnames:
-            writer = csv.DictWriter(handle, fieldnames=fieldnames)
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=fieldnames,
+                lineterminator="\n",
+            )
             writer.writeheader()
             writer.writerows(rows)
     os.replace(temporary, path)
@@ -1062,6 +1066,11 @@ def _save_figure(figure: plt.Figure, output_directory: Path, stem: str) -> list[
         # byte-identical vector figures and a stable summary hash.
         metadata={"Date": None, "Creator": "routing_lab.dynamics_analysis"},
     )
+    # Matplotlib emits a space before many SVG newlines.  It is semantically inert,
+    # but normalizing it keeps ``git diff --check`` useful for generated assets.
+    svg_text = svg.read_text(encoding="utf-8")
+    normalized_svg = "\n".join(line.rstrip() for line in svg_text.splitlines()) + "\n"
+    svg.write_text(normalized_svg, encoding="utf-8")
     plt.close(figure)
     return [png, svg]
 
