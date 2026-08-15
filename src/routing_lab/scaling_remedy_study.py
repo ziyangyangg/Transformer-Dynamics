@@ -114,6 +114,8 @@ def _source_descriptor(
         raise TypeError("loaded mechanism study has malformed manifest/audit")
     return {
         "directory": str(root),
+        "manifest_schema_version": manifest.get("schema_version"),
+        "evaluation_device": manifest.get("device"),
         "manifest_sha256": _sha256(manifest_path),
         "snapshot_table_sha256": _sha256(table_path),
         "training_study_id": manifest.get("training_study_id"),
@@ -234,6 +236,9 @@ def _chart_contracts() -> list[dict[str, object]]:
             "sample_unit": "paired training seed",
             "n_per_panel": 10,
             "encoding": "endpoint marker shapes + 20k seed-bootstrap intervals",
+            "walsh_leakage_definition": (
+                "walsh_distractor_direct_energy + walsh_interaction_energy"
+            ),
         },
         {
             "figure": "full_gate_counts",
@@ -290,6 +295,16 @@ $$\Delta_{{c,s,e}}=Y^{{followup}}_{{c,s,e}}-Y^{{baseline}}_{{c,s,e}},\qquad
 
 95% CI 对十维 seed-difference vector 做 20,000 次 percentile bootstrap。head、evaluation episode、不同 cell 都不是独立样本。
 
+图表中的 Walsh leakage 明确定义为
+
+$$
+L_{{\mathrm{{Walsh}}}}
+=E_{{\mathrm{{distractor\mbox{{-}}direct}}}}
++E_{{\mathrm{{all\ interactions}}}}.
+$$
+
+两项及其更细的 distractor-only / target interaction 分量均保留在 CSV，而不是先把分量丢弃。
+
 严格 full gate 要求同一 seed 同时满足：base accuracy、population risk $\tfrac12\mathrm{{MSE}}$、value-flip effect、donor accuracy、natural-swap MSE。cell 的 `10/10` pass count 是逐 seed 阈值筛查，不是 cell mean 的置信区间。
 
 ## 主要结果
@@ -307,7 +322,7 @@ $$\Delta_{{c,s,e}}=Y^{{followup}}_{{c,s,e}}-Y^{{baseline}}_{{c,s,e}},\qquad
 
 ## Evaluation-stream sensitivity
 
-同一 baseline checkpoints 在旧 b=256 stream 上为 {small_passes}/160 seed gates，在新 b=2048 stream 上为 {large_passes}/160。严格 cell gate 因单-seed tail 会变动；cells 3/7 的 material mean residual 则在两条 stream 上都存在。旧 b=256 / remedy b=512 结果只作为 sensitivity，不参与上表的主 paired estimand。
+同一 baseline checkpoints 在旧 b=256 stream 上为 {small_passes}/160 seed gates，在新 b=2048 stream 上为 {large_passes}/160。严格 cell gate 因单-seed tail 会变动；cells 3/7 的 material mean residual 则在两条 stream 上都存在。旧 b=256 / remedy b=512 结果只作为 sensitivity，不参与上表的主 paired estimand。尤其 remedy 的旧 b=512 评估运行于 CPU、新 b=2048 运行于 CUDA，所以该对照同时包含 evaluation stream 与 numerical backend 的变化，不能把差异单独归因于 batch size。
 
 ## 复现
 
@@ -470,8 +485,10 @@ def run_remedy_study(
         "comparison_conclusions": _comparison_conclusions(paired_summary_rows),
         "evaluation_stream_sensitivity": {
             "scope": (
-                "same checkpoints, independent evaluation streams; descriptive "
-                "sensitivity only, never pooled with the b=2048 schedule estimand"
+                "same checkpoints, independent evaluation streams; the low-lr "
+                "b512-to-b2048 comparison also changes CPU to CUDA backend; "
+                "descriptive sensitivity only, never pooled with the b=2048 "
+                "schedule estimand"
             ),
             "cell_summaries": sensitivity_summary_rows,
         },

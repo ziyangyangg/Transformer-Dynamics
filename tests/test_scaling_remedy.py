@@ -198,6 +198,12 @@ class PairedScheduleTests(unittest.TestCase):
         self.assertAlmostEqual(summary["base_mse_delta"], -0.01)
         self.assertAlmostEqual(summary["donor_mse_delta"], -0.01)
         self.assertAlmostEqual(summary["swap_mse_delta"], -0.0135)
+        # The plotted Walsh endpoint retains both registered leakage sources.
+        self.assertAlmostEqual(
+            summary["walsh_leakage_baseline_mean"],
+            summary["walsh_distractor_direct_baseline_mean"]
+            + summary["walsh_interaction_baseline_mean"],
+        )
         self.assertEqual(summary["swap_mse_n_resamples"], 2_000)
         self.assertEqual(summary["paired_seeds"], "0;1;2;3;4;5;6;7;8;9")
 
