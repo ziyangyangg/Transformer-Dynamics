@@ -231,3 +231,243 @@ def write_trajectory_data(
     csv_path = output_directory / "trajectory.csv"
     _atomic_text_write(csv_path, buffer.getvalue())
     return json_path, csv_path
+
+
+def _draw_unit_sphere(ax: Any) -> None:
+    """Add a light reference sphere without hiding the particle cloud."""
+
+    longitude = np.linspace(0.0, 2.0 * np.pi, 25)
+    colatitude = np.linspace(0.0, np.pi, 13)
+    x = np.outer(np.cos(longitude), np.sin(colatitude))
+    y = np.outer(np.sin(longitude), np.sin(colatitude))
+    z = np.outer(np.ones_like(longitude), np.cos(colatitude))
+    ax.plot_wireframe(
+        x,
+        y,
+        z,
+        rstride=2,
+        cstride=2,
+        color="#94a3b8",
+        alpha=0.16,
+        linewidth=0.45,
+    )
+    ax.set(xlim=(-1.08, 1.08), ylim=(-1.08, 1.08), zlim=(-1.08, 1.08))
+    ax.set_box_aspect((1.0, 1.0, 1.0))
+    ax.set_axis_off()
+    ax.view_init(elev=20, azim=35)
+
+
+def render_clustering_figure(
+    run: ClusteringRun,
+    output_directory: Path,
+) -> tuple[Path, Path]:
+    """Render metric trajectories and the initial/final sphere configurations.
+
+    The same particle keeps the same color in both sphere panels.  This is useful
+    because clustering can otherwise look like an uninformative density change.
+    SVG is the analysis-quality source; PNG is included for convenient previews.
+    """
+
+    if run.config.dimension != 3:
+        raise ValueError("the sphere figure requires dimension=3")
+
+    # Import plotting only when requested so the mathematical simulator stays a
+    # lightweight dependency for tests and downstream analysis code.
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    output_directory.mkdir(parents=True, exist_ok=True)
+    time = np.asarray([row["time"] for row in run.metrics], dtype=np.float64)
+    values = {
+        name: np.asarray([row[name] for row in run.metrics], dtype=np.float64)
+        for name in run.metrics[0]
+        if name not in {"step", "time"}
+    }
+
+    with plt.rc_context(
+        {
+            "font.family": "DejaVu Sans",
+            "font.size": 9.5,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "axes.titleweight": "bold",
+            "figure.facecolor": "white",
+        }
+    ):
+        figure = plt.figure(figsize=(11.6, 8.3), constrained_layout=True)
+        grid = figure.add_gridspec(2, 2, height_ratios=(0.84, 1.16))
+
+        alignment_ax = figure.add_subplot(grid[0, 0])
+        alignment_ax.plot(
+            time,
+            values["mean_offdiagonal_cosine"],
+            color="#2563eb",
+            linewidth=2.2,
+            label="mean off-diagonal cosine",
+        )
+        alignment_ax.plot(
+            time,
+            values["mean_resultant_length"],
+            color="#dc2626",
+            linewidth=1.9,
+            label="mean resultant length",
+        )
+        alignment_ax.plot(
+            time,
+            values["high_alignment_pair_fraction"],
+            color="#059669",
+            linewidth=1.8,
+            label=r"pair fraction $\cos\geq0.9$",
+        )
+        alignment_ax.set(
+            title="A. Alignment order parameters",
+            xlabel="continuum-depth time $t$",
+            ylabel="order parameter",
+            ylim=(-0.05, 1.05),
+        )
+        alignment_ax.grid(alpha=0.2, linewidth=0.6)
+        alignment_ax.legend(frameon=False, loc="best")
+
+        spectral_ax = figure.add_subplot(grid[0, 1])
+        rank_line = spectral_ax.plot(
+            time,
+            values["gram_participation_rank"],
+            color="#7c3aed",
+            linewidth=2.2,
+            label=r"Gram participation rank $r_{\mathrm{PR}}$",
+        )[0]
+        spectral_ax.set(
+            title="B. Spectral collapse and attention concentration",
+            xlabel="continuum-depth time $t$",
+            ylabel="participation rank (1 = complete collapse)",
+        )
+        spectral_ax.set_ylim(0.9, max(run.config.dimension + 0.15, 1.15))
+        spectral_ax.grid(alpha=0.2, linewidth=0.6)
+        fraction_ax = spectral_ax.twinx()
+        top_line = fraction_ax.plot(
+            time,
+            values["largest_gram_eigenvalue_fraction"],
+            color="#ea580c",
+            linewidth=1.9,
+            label="largest Gram eigenvalue / trace",
+        )[0]
+        entropy_line = fraction_ax.plot(
+            time,
+            values["mean_normalized_attention_entropy"],
+            color="#475569",
+            linestyle="--",
+            linewidth=1.6,
+            label="normalized attention entropy",
+        )[0]
+        fraction_ax.set(ylabel="fraction / normalized entropy", ylim=(-0.02, 1.02))
+        spectral_ax.legend(
+            [rank_line, top_line, entropy_line],
+            [line.get_label() for line in (rank_line, top_line, entropy_line)],
+            frameon=False,
+            loc="center right",
+        )
+
+        # The initial z-coordinate supplies a persistent, non-semantic particle
+        # color.  It reveals which initially distant points enter a final cluster.
+        particle_colors = plt.get_cmap("coolwarm")((run.states[0, :, 2] + 1.0) / 2.0)
+        for panel_index, (state, title) in enumerate(
+            ((run.states[0], "C. Initialization"), (run.states[-1], "D. Final state"))
+        ):
+            sphere_ax = figure.add_subplot(grid[1, panel_index], projection="3d")
+            _draw_unit_sphere(sphere_ax)
+            sphere_ax.scatter(
+                state[:, 0],
+                state[:, 1],
+                state[:, 2],
+                c=particle_colors,
+                s=34,
+                depthshade=False,
+                edgecolors="#0f172a",
+                linewidths=0.45,
+                alpha=0.92,
+            )
+            sphere_ax.set_title(f"{title} ($t={panel_index * run.config.T:g}$)", pad=2)
+
+        figure.suptitle(
+            (
+                r"Fixed-parameter softmax particle dynamics ($Q=K=V=I$; no training)"
+                "\n"
+                f"n={run.config.n_particles}, d={run.config.dimension}, "
+                f"β={run.config.beta:g}, dt={run.config.dt:g}, "
+                f"seed={run.config.seed}"
+            ),
+            fontsize=14,
+            fontweight="bold",
+        )
+
+        svg_path = output_directory / "clustering_baseline.svg"
+        png_path = output_directory / "clustering_baseline.png"
+        temporary_svg = output_directory / ".clustering_baseline.svg.tmp"
+        temporary_png = output_directory / ".clustering_baseline.png.tmp"
+        figure.savefig(
+            temporary_svg,
+            format="svg",
+            bbox_inches="tight",
+            metadata={"Creator": "transformer-routing-superposition-lab"},
+        )
+        figure.savefig(
+            temporary_png,
+            format="png",
+            dpi=320,
+            bbox_inches="tight",
+            metadata={"Software": "transformer-routing-superposition-lab"},
+        )
+        plt.close(figure)
+        temporary_svg.replace(svg_path)
+        temporary_png.replace(png_path)
+    return svg_path, png_path
+
+
+def _argument_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Reproduce the fixed Q=K=V=I clustering loop from the Perspective "
+            "code without its nondeterministic 151-frame movie renderer."
+        )
+    )
+    parser.add_argument("--output", type=Path, default=Path("results/clustering-baseline-v1"))
+    parser.add_argument("--n-particles", type=int, default=64)
+    parser.add_argument("--dimension", type=int, default=3)
+    parser.add_argument("--beta", type=float, default=1.0)
+    parser.add_argument("--T", type=float, default=15.0)
+    parser.add_argument("--dt", type=float, default=0.1)
+    parser.add_argument("--seed", type=int, default=20260815)
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Command-line entry point used by the documented reproduction command."""
+
+    arguments = _argument_parser().parse_args(argv)
+    config = ClusteringConfig(
+        n_particles=arguments.n_particles,
+        dimension=arguments.dimension,
+        beta=arguments.beta,
+        T=arguments.T,
+        dt=arguments.dt,
+        seed=arguments.seed,
+    )
+    run = run_clustering_baseline(config)
+    json_path, csv_path = write_trajectory_data(run, arguments.output)
+    svg_path, png_path = render_clustering_figure(run, arguments.output)
+    summary = {
+        "json": str(json_path),
+        "csv": str(csv_path),
+        "svg": str(svg_path),
+        "png": str(png_path),
+        "initial": run.metrics[0],
+        "final": run.metrics[-1],
+    }
+    print(json.dumps(summary, indent=2, sort_keys=True, allow_nan=False))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

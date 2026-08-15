@@ -13,6 +13,7 @@ import numpy as np
 from routing_lab.clustering_baseline import (
     ClusteringConfig,
     normalized_softmax_euler_step,
+    render_clustering_figure,
     run_clustering_baseline,
     write_trajectory_data,
 )
@@ -116,6 +117,21 @@ class ClusteringSimulationTests(unittest.TestCase):
             np.testing.assert_allclose(
                 np.asarray(payload["final_state"]), run.states[-1], atol=0.0, rtol=0.0
             )
+
+    def test_figure_writer_creates_vector_and_raster_versions(self) -> None:
+        run = run_clustering_baseline(
+            ClusteringConfig(n_particles=8, dimension=3, beta=1.0, T=0.2, dt=0.1, seed=5)
+        )
+
+        with TemporaryDirectory() as temporary_directory:
+            svg_path, png_path = render_clustering_figure(
+                run, Path(temporary_directory)
+            )
+
+            self.assertTrue(svg_path.read_text(encoding="utf-8").lstrip().startswith("<?xml"))
+            self.assertEqual(png_path.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
+            self.assertGreater(svg_path.stat().st_size, 10_000)
+            self.assertGreater(png_path.stat().st_size, 10_000)
 
 
 if __name__ == "__main__":
