@@ -155,6 +155,48 @@ class LogicalState:
     source_walsh_l_w: float
 
 
+@dataclass(frozen=True)
+class LogicalDesignRequest:
+    """One planned arm-step request before checkpoint bytes are available."""
+
+    seed: int
+    arm: str
+    step: int
+    tier_role: str
+    planned_physical_key: str
+
+
+def plan_logical_design(seeds: Sequence[int]) -> tuple[LogicalDesignRequest, ...]:
+    """Return the frozen logical design without requiring private checkpoints.
+
+    The public repository can audit all 144 requested rows and the intended
+    132 physical evaluations from committed metadata.  Production replay still
+    uses :func:`load_logical_design`, which verifies the actual checkpoint bytes.
+    """
+
+    requests: list[LogicalDesignRequest] = []
+    for raw_seed in seeds:
+        seed = int(raw_seed)
+        for arm, steps, role in _LOGICAL_DESIGN:
+            for step in steps:
+                shared_prefix = step == 800 and arm in {HARD_FACTOR, HARD_COSINE}
+                physical_key = (
+                    f"{seed}:hard-factorized-shared-prefix:800"
+                    if shared_prefix
+                    else f"{seed}:{arm}:{step}"
+                )
+                requests.append(
+                    LogicalDesignRequest(
+                        seed=seed,
+                        arm=arm,
+                        step=step,
+                        tier_role=role,
+                        planned_physical_key=physical_key,
+                    )
+                )
+    return tuple(requests)
+
+
 def _repository_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
@@ -593,34 +635,32 @@ def load_logical_design(
         by_key[key] = dict(item)
 
     selected: list[LogicalState] = []
-    for seed in requested_seeds:
-        for arm, steps, role in _LOGICAL_DESIGN:
-            for step in steps:
-                key = (seed, arm, step)
-                if key not in by_key:
-                    raise ValueError(f"source lacks required sensitivity state {key}")
-                row = by_key[key]
-                relative = _state_relative_path(row)
-                state_path = source / relative
-                if not state_path.is_file():
-                    raise FileNotFoundError(f"checkpoint state is missing: {relative}")
-                selected.append(
-                    LogicalState(
-                        seed=seed,
-                        arm=arm,
-                        step=step,
-                        tier_role=role,
-                        cell_id=str(row["cell_id"]),
-                        source_row_sha256=canonical_sha256(row),
-                        source_state_relative_path=relative.as_posix(),
-                        source_state_sha256=_sha256_file(state_path),
-                        source_i_swap_b2048=float(row["i_swap"]),
-                        source_population_risk=float(row["population_risk"]),
-                        source_accuracy=float(row["accuracy"]),
-                        source_xi_value=float(row["xi_value"]),
-                        source_walsh_l_w=float(row["walsh_l_w"]),
-                    )
-                )
+    for request in plan_logical_design(requested_seeds):
+        key = (request.seed, request.arm, request.step)
+        if key not in by_key:
+            raise ValueError(f"source lacks required sensitivity state {key}")
+        row = by_key[key]
+        relative = _state_relative_path(row)
+        state_path = source / relative
+        if not state_path.is_file():
+            raise FileNotFoundError(f"checkpoint state is missing: {relative}")
+        selected.append(
+            LogicalState(
+                seed=request.seed,
+                arm=request.arm,
+                step=request.step,
+                tier_role=request.tier_role,
+                cell_id=str(row["cell_id"]),
+                source_row_sha256=canonical_sha256(row),
+                source_state_relative_path=relative.as_posix(),
+                source_state_sha256=_sha256_file(state_path),
+                source_i_swap_b2048=float(row["i_swap"]),
+                source_population_risk=float(row["population_risk"]),
+                source_accuracy=float(row["accuracy"]),
+                source_xi_value=float(row["xi_value"]),
+                source_walsh_l_w=float(row["walsh_l_w"]),
+            )
+        )
 
     expected_logical = 12 * len(requested_seeds)
     if len(selected) != expected_logical:

@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import json
 import math
+import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -31,6 +33,7 @@ from routing_lab.phase2_swap_sensitivity import (
     load_logical_design,
     nested_inference,
     paired_block_bootstrap,
+    plan_logical_design,
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -87,14 +90,10 @@ class SwapSensitivitySpecTests(unittest.TestCase):
         self.assertGreaterEqual(first, 0)
         self.assertLess(first, 1 << 63)
 
-    def test_frozen_source_selects_144_logical_and_132_unique_states(self) -> None:
-        if not PHASE2_SOURCE.is_dir():
-            self.skipTest("full frozen Phase-II source is not present")
-        _, states = load_logical_design(PHASE2_SOURCE, seeds=tuple(range(100, 112)))
+    def test_public_design_plans_144_logical_and_132_physical_states(self) -> None:
+        states = plan_logical_design(tuple(range(100, 112)))
         self.assertEqual(len(states), 144)
-        self.assertEqual(
-            len({(state.seed, state.source_state_sha256) for state in states}), 132
-        )
+        self.assertEqual(len({state.planned_physical_key for state in states}), 132)
         for seed in range(100, 112):
             selected = [state for state in states if state.seed == seed]
             self.assertEqual(len(selected), 12)
@@ -108,7 +107,27 @@ class SwapSensitivitySpecTests(unittest.TestCase):
                 for state in selected
                 if state.arm == HARD_COSINE and state.step == 800
             )
-            self.assertEqual(constant.source_state_sha256, cosine.source_state_sha256)
+            self.assertEqual(
+                constant.planned_physical_key,
+                cosine.planned_physical_key,
+            )
+
+    def test_production_loader_still_requires_private_checkpoint_bytes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary)
+            for name in (
+                "_SUCCESS",
+                "failures.jsonl",
+                "manifest.json",
+                "launch_contract.json",
+                "checkpoint_metrics.json",
+            ):
+                shutil.copy2(PHASE2_SOURCE / name, source / name)
+
+            with self.assertRaisesRegex(
+                FileNotFoundError, "checkpoint state is missing"
+            ):
+                load_logical_design(source, seeds=(100,))
 
 
 class CheckpointDiagnosticsTests(unittest.TestCase):
