@@ -1,0 +1,683 @@
+{
+  "config": {
+    "cells": [
+      {
+        "arm_name": "A_fixed_attention_width-h1",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 8,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 16,
+          "memory_size": 4,
+          "num_heads": 1,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "A_fixed_attention_width-h2",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 8,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 16,
+          "memory_size": 4,
+          "num_heads": 2,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "A_fixed_attention_width-h4",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 8,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 16,
+          "memory_size": 4,
+          "num_heads": 4,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "A_fixed_attention_width-h8",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 8,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 16,
+          "memory_size": 4,
+          "num_heads": 8,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "B_fixed_head_width-h1",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 2,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 16,
+          "memory_size": 4,
+          "num_heads": 1,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "B_fixed_head_width-h2",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 4,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 16,
+          "memory_size": 4,
+          "num_heads": 2,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "B_fixed_head_width-h4",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 8,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 16,
+          "memory_size": 4,
+          "num_heads": 4,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "B_fixed_head_width-h8",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 16,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 16,
+          "memory_size": 4,
+          "num_heads": 8,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "C_fixed_total_budget-h1",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 2,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 36,
+          "memory_size": 4,
+          "num_heads": 1,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "C_fixed_total_budget-h2",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 4,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 32,
+          "memory_size": 4,
+          "num_heads": 2,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "C_fixed_total_budget-h4",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 8,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 24,
+          "memory_size": 4,
+          "num_heads": 4,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      },
+      {
+        "arm_name": "C_fixed_total_budget-h8",
+        "checkpoint_steps": [
+          0,
+          25,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1200,
+          1600,
+          2400,
+          3200,
+          4800,
+          6400
+        ],
+        "codebook_replica_seeds": [],
+        "codebook_seed_policy": "master_init",
+        "model_config": {
+          "attention_width": 16,
+          "beta": 1.0,
+          "codebook": {
+            "d_model": 8,
+            "geometry": "random_normalized",
+            "max_tight_frame_relative_error": 0.02,
+            "max_welch_ratio": 1.2,
+            "num_concepts": 32,
+            "row_norm": 1.0,
+            "seed": 271801,
+            "trainable": true
+          },
+          "composite": {
+            "kind": "factorized"
+          },
+          "ffn_width": 8,
+          "memory_size": 4,
+          "num_heads": 8,
+          "num_layers": 2,
+          "rms_epsilon": 1e-06
+        },
+        "training_config": {
+          "batch_size": 256,
+          "momentum": 0.0,
+          "optimizer": "adamw",
+          "schedule": {
+            "base_learning_rate": 0.003,
+            "branch_step": 0,
+            "end_step": 6400,
+            "kind": "constant"
+          },
+          "weight_decay": 0.0
+        }
+      }
+    ],
+    "cohort": "discovery-remedy",
+    "diag_seed_offset": 70000000,
+    "eval_seed_offset": 30000000,
+    "evaluation_batch_size": 8192,
+    "init_seed_offset": 10000000,
+    "patch_seed_offset": 60000000,
+    "seeds": [
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111
+    ],
+    "study_id": "phase2-head-capacity-discovery-remedy-v2",
+    "swap_pair_count": 2048,
+    "swap_seed_offset": 50000000,
+    "train_seed_offset": 20000000,
+    "walsh_seed_offset": 40000000,
+    "walsh_skeleton_count": 512
+  },
+  "schema_version": "phase2-config-bundle-v1",
+  "study_config_hash": "a4e2a71934443f90e009ec0aa3243e95d947e7d38b2aa95b1cf07cba6b0c42c4",
+  "study_name": "head-capacity"
+}

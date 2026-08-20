@@ -1,0 +1,22 @@
+{
+  "cohort": "discovery-remedy",
+  "schema_version": "phase2-config-bundle-v1",
+  "studies": {
+    "head-capacity": {
+      "filename": "head-capacity.json",
+      "study_config_hash": "a4e2a71934443f90e009ec0aa3243e95d947e7d38b2aa95b1cf07cba6b0c42c4"
+    },
+    "representation-source": {
+      "filename": "representation-source.json",
+      "study_config_hash": "0335e0b0b3d04027be17cd25f898845da15623eb334ce3ba69ded410084d0949"
+    },
+    "residual-factorization-ffn": {
+      "filename": "residual-factorization-ffn.json",
+      "study_config_hash": "a0b7c4bd732152d96ed24b190b8364bcacb63a467f719fb0be919034f550b255"
+    },
+    "residual-factorization-noffn": {
+      "filename": "residual-factorization-noffn.json",
+      "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "cohort": "untouched-confirmation",
+  "schema_version": "phase2-config-bundle-v1",
+  "studies": {
+    "head-capacity": {
+      "filename": "head-capacity.json",
+      "study_config_hash": "b4b8b5541ba3a8bc9efcd675c6c89bde22df08785f7c9e05c665c11b26e056c0"
+    },
+    "representation-source": {
+      "filename": "representation-source.json",
+      "study_config_hash": "180818da4b4f6ea47b26c35828fa5f46a341e07b0879f634684748bc888737af"
+    },
+    "residual-factorization-ffn": {
+      "filename": "residual-factorization-ffn.json",
+      "study_config_hash": "f3ad00f9665a609de48f5b31a4317da972098243d0372beb151de2f8455b005c"
+    },
+    "residual-factorization-noffn": {
+      "filename": "residual-factorization-noffn.json",
+      "study_config_hash": "da22b37423268efd9720e282dcb792e16eeb4a8329aa69f2cb14edc1f96121c2"
+    }
+  }
+}
