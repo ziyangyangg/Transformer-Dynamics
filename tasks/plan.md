@@ -1,264 +1,116 @@
-# Implementation plan: controlled routing dynamics to pretrained language models
+# Current plan: learning task-aligned interaction kernels
 
-## Overview
+> 本文件是当前唯一实施计划。历史 toy-to-Pythia 计划保存在 Git 历史与对应 protocol/result
+> manifests 中，不再规定下一阶段方向。
 
-Phase I built the finite causal-Transformer laboratory and found residual cross-talk at
-$d=8,C=32,m=4,H=4$. Phase II does **not** call that residual an open problem. It first
-exhausts the six controls specified by the user, then carries the same function-level
-and finite-intervention estimands into frozen pretrained causal language models.
+## 成功标准
 
-The user already approved this matrix and requested autonomous execution. The terminal
-choice is therefore: verify, independently review, then publish a curated snapshot.
+项目必须闭合下面的定理链：
 
-## Assumptions frozen before implementation
+\[
+(\mathcal D,R,\theta_0)
+\xrightarrow{\mathrm{gradient\ flow}}
+\{B_{\ell h}(s),C_{\ell h}(s)\}
+\xrightarrow{\mathrm{exact\ softmax}}
+\mathcal K_{\ell,s}
+\xrightarrow{\mathrm{depth}}
+\Phi_{\theta_s}^{L}(X).
+\]
 
-1. The primary hard cell is attention-only $d=8,C=32,m=4,H=4,L=2$; the matching FFN
-   cell is a replication and is never silently pooled with it.
-2. The inferential unit is a seed. Paired cells reuse initialization, online data,
-   evaluation episodes, and intervention streams wherever architecture permits.
-3. The first pretrained bridge freezes weights. It asks whether the pretrained model
-   performs token-level associative retrieval and where finite causal effects live.
-4. The staged real-model ladder is 70M, 160M/410M, then 1B only after functionality,
-   runtime, and storage gates.
-5. The asymmetric QK estimand and episode-level per-slot $S_{\mathrm{key}}$ are
-   implemented literally. The old midpoint split and target-edge-plus-attention screen
-   remain exploratory.
-6. Because $C=32>d=8$, an orthogonal hard-cell dictionary is impossible. Its coherence
-   obeys the Welch lower bound
-   $\mu\ge\sqrt{(C-d)/(d(C-1))}\approx0.311$. Orthogonal $E$ is therefore only a
-   $C\le d$ negative control; the hard cell uses a deterministic near-Welch tight frame.
+最终结果必须说明：
 
-## Architecture decisions
+1. 任务分布的什么结构驱动 \(QK/OV\) 参数更新；
+2. 梯度流何时形成正确 source margin 与 value transport；
+3. learned kernel 为什么在有限深度内实现目标 interaction operator；
+4. 哪些条件不可缺少，并给出 bypass/cancellation/不可识别性的反例。
 
-- Preserve every v1 schema and hash contract. Phase-II uses a separate v2 control schema
-  and model factory; adding defaults to the old `GridCell` would invalidate old hashes.
-- Separate model adapters from estimands. Synthetic and Hugging Face models expose a
-  small shared trace/intervention contract; architecture-specific hooks stay internal.
-- A full $d\times d$ direct composite at $H=4,d_h=2$ has rank/capacity and parameter
-  advantages over $Q_h^\top K_h$ or $O_hV_h$. It is only an upper-bound control.
-  Optimization geometry is isolated with (a) an $H=1$ function-class-matched comparison
-  and (b) a rank-$d_h$ gauge-fixed/manifold composite control.
-- Keep raw observations long-form and immutable; all summaries/figures are derived.
-- Use Pythia first because its official suite provides 154 checkpoints per size, the same
-  data order across sizes, Apache-2.0 weights, and public training code.
-- Model weights are a local cache, never a Git artifact. Manifests record model id,
-  revision, hashes, tokenizer, dtype, device, and exact library versions.
+只增加层数、heads、数据集或模型大小不构成完成。
 
-## Task list
+## Phase 0 — 冻结问题与 prior-art 边界
 
-### Phase A — contracts and controlled architectures
+- [x] 把 Perspective 的训练缺口准确定位为当前 v5 的 §10，而不是 §3.4 或编号 Problem。
+- [x] 区分 fixed-kernel depth dynamics 与 parameter-training dynamics。
+- [x] 记录已解决的特殊情形：max-margin selection、Scan-and-Snap、co-occurrence GF、
+  multi-head ICL allocation、LEGO/CoT training。
+- [x] 将 retrieval、rank、collision、causal routing 和 module localization 降为从属对象。
 
-#### Task 1: Freeze Phase-II estimands and v2 schemas
+**Gate 0：**任何 novelty statement 必须指出它同时超出哪个 training-only 特例和哪个
+fixed-kernel dynamics 结果。
 
-**Acceptance criteria**
+## Phase 1 — 最小完整 softmax 训练定理
 
-- Define base risk, natural-swap MSE, Walsh leakage, late-time decay slopes/ratios,
-  asymmetric QK contrast, finite module-suffix response, and causal per-slot
-  $S_{\mathrm{key}}$.
-- Give every cell a stable id, pairing policy, seeds, checkpoints, correction family,
-  equivalence/practical thresholds, and decision label.
-- Reject incomplete or confounded head/parameterization comparisons.
+冻结一个公开、可枚举且具有已知正确 interaction graph \(G^*(X)\) 的生成任务。模型保留：
+learned representation、factorized \(Q/K/O/V\)、exact softmax 和训练 readout；先从单层、
+单头、无 FFN 的最小标准子类开始。
 
-**Verification:** schema RED→GREEN tests and hand-computed mathematical cases.
+### 1.1 精确训练方程
 
-**Files:** `reports/PHASE2_PROTOCOL.md`, `src/routing_lab/control_config.py`,
-`tests/test_control_config.py`, `configs/phase2_*.json`.
+- 推导 population gradient flow 的 \(Q,K,O,V,E,w\) 方程。
+- 同时跟踪 gauge-invariant \(B=Q^\top K\)、\(C=OV\) 与任务定义的 order parameters。
+- 证明所选 order parameters 是否闭合；若不闭合，构造相同低阶状态、不同导数的反例。
 
-#### Task 2: Direct-composite and embedding-source controls
+### 1.2 Kernel alignment
 
-**Acceptance criteria**
+- 定义正确 source margin \(\gamma_s\)。
+- 定义正确 value transport error \(\mathcal E_{\rm transport}(s)\)。
+- 证明或反驳
 
-- Support factorized QK/OV, full direct composites (explicit capacity upper bound), and
-  rank-matched gauge-fixed composites.
-- Support learned, fixed normalized Gaussian, orthogonal when $C\le d$, and
-  deterministic near-Welch low-coherence embeddings.
-- At matched composites, forward scores, head updates, predictions, and traces agree.
+\[
+R(\theta_s)\downarrow0,\qquad
+\gamma_s\uparrow,\qquad
+\mathcal E_{\rm transport}(s)\downarrow0.
+\]
 
-**Verification:** analytic forward/gradient equivalence, rank/capacity audit,
-serialization, and invalid-config tests.
+- 明确 norm、gain、initialization、separability、no-bypass 和 signed-cancellation 条件。
 
-**Dependencies:** Task 1.
+### 1.3 实验职责
 
-**Files:** `src/routing_lab/model_variants.py`, `src/routing_lab/control_model.py`,
-`tests/test_model_variants.py`.
+- 枚举 population 或使用可验证的高精度近似，逐步记录理论中的同一变量。
+- 至少 10 个独立训练 seeds；seed 是推断单位。
+- 实验只判断假设是否合理、有限宽度误差多大、是否存在反例；不替代理论。
 
-#### Task 3: Horizon, scheduler, and genuine head-capacity controls
+**Gate 1：**得到一个 kernel-learning 定理或一个能推翻拟议定理的完整 exact-softmax 反例。
 
-**Acceptance criteria**
+## Phase 2 — Training-to-depth bridge
 
-- Constant LR and cosine decay continue exactly to 3200/6400 from saved optimizer and
-  random-stream state.
-- Compare (i) fixed residual width $d$, (ii) fixed per-head width $d_h$, and (iii) fixed
-  total parameter budget using variable attention inner width plus an explicitly audited
-  budget-balancing module. Standard MHA's fixed-$d$ and attention-parameter matching are
-  recognized as the same comparison, not counted twice.
-- Every comparison reports $d,H,d_h,p=Hd_h$, attention parameters, total parameters,
-  and which quantities remain unmatched.
+固定若干训练时间 \(s\)，把学出的 \(B_s,C_s\) 代回 layer/depth dynamics：
 
-**Verification:** replay/resume equality, scheduler values, and parameter-count tests.
+- 证明 softmax leakage 如何由训练产生的 margin 控制；
+- 证明单层 message error 如何在有限深度内传播；
+- 给出到任务目标算子/目标表示集合的误差界；
+- 分清任务对齐 transport、局部 clustering 与全局 collapse。
 
-**Dependencies:** Tasks 1–2.
+训练时间 \(s\) 和深度时间 \(t\) 不得混写。
 
-**Files:** `src/routing_lab/control_training.py`, `src/routing_lab/control_run.py`,
-`tests/test_control_training.py`, `configs/phase2_training_limits.json`.
+**Gate 2：**同一个定理同时出现由 gradient flow 得到的 kernel 条件，以及该条件推出的
+depth-dynamics 结论。
 
-#### Checkpoint A
+## Phase 3 — 必要的架构扩展
 
-- Legacy plus new contract tests pass.
-- Four calibration seeds freeze only runtime/numerical choices, never favorable outcomes.
+按理论障碍一次加入一个组件：
 
-### Phase B — finite mechanisms and population gradient
+1. multi-head：只研究 head 分工或 cancellation 是否改变 Gate 1/2；
+2. multi-layer/residual：只研究 interaction operator 的组合与 identifiability；
+3. RMSNorm/FFN：只研究它们是否破坏或恢复已有界；
+4. finite width/rank：只在定理中出现明确容量项时研究。
 
-#### Task 4: Registered finite causal localization
+每次扩展必须沿用同一任务、相同指标、配对初始化和独立 seeds。若只是新增现象，不晋级。
 
-**Acceptance criteria**
+## Phase 4 — 公开任务与中模型验证
 
-- Block every memory slot separately and compute
-  $\delta_i=(\hat y-\hat y^{(-i)})y$ and
-  $S_{\mathrm{key}}=\mathbb E[\delta_J-(m-1)^{-1}\sum_{i\ne J}\delta_i]$.
-- For QK, OV, FFN, and readout, use the same on-manifold swap and compute the
-  site-specific finite suffix response $G_{M,e}(z+\Delta)-G_{M,e}(z)$.
-- Never use adjacent coherent donor-patch equivalence as attenuation evidence; tangent
-  results are only local approximations to a measured finite effect.
-
-**Verification:** exact mask cases, finite identities, and small-$\epsilon$ tangent limits.
-
-**Dependencies:** Tasks 1–3.
-
-**Files:** `src/routing_lab/finite_localization.py`,
-`src/routing_lab/interventions.py`, `tests/test_finite_localization.py`.
-
-#### Task 5: Exact population GF-like bridge
-
-**Acceptance criteria**
-
-- Enumerate ordered distinct concept tuples, target slots, and all $2^m$ values for
-  registered small $(C,m)$ cells with exact multiplicity.
-- Run full-batch small-step GD and report the same order parameters as online AdamW/SGD.
-- Verify population risk, gradient, and step-halving convergence independently.
-
-**Verification:** exact row count/risk, finite-difference gradient, and step-halving tests.
-
-**Dependencies:** Tasks 1–2.
-
-**Files:** `src/routing_lab/population_gf.py`, `tests/test_population_gf.py`,
-`configs/phase2_population_gf.json`.
-
-#### Checkpoint B
-
-- Full tests pass; outputs have unique keys, finite values, Parseval checks, and hashes.
-
-### Phase C — production toy matrix and analysis
-
-#### Task 6: Run the six-axis matrix
-
-**Acceptance criteria**
-
-- Frozen production configs use at least 10 paired seeds for primary contrasts.
-- Failures remain in a ledger and trigger literature-backed remedies before promotion.
-- Checkpoints and manifests are resumable, immutable, and independently replayable.
-
-**Verification:** completeness, CRN identity, hashes, duplicate audit, representative replay.
-
-**Dependencies:** Checkpoints A–B.
-
-**Files:** `configs/phase2_*.json`, `results/toy-controlled-matrix-v1/`,
-`autoresearch/orchestrator-260820-1726/`.
-
-#### Task 7: Trajectory statistics and mechanism classification
-
-**Acceptance criteria**
-
-- Compare base risk and leakage with paired late-time log slopes, leakage/risk ratios,
-  floor-aware censoring, and prespecified sensitivity windows.
-- Use whole-seed resampling and family correction for confirmatory endpoints; label all
-  selected slices exploratory.
-- Show seed distributions, trajectories, uncertainty, module/site effects, head geometry,
-  and failures—not only means.
-
-**Verification:** independent numerical recomputation and rendered PNG/SVG inspection.
-
-**Dependencies:** Task 6.
-
-**Files:** `src/routing_lab/control_analysis.py`,
-`src/routing_lab/control_figures.py`, `tests/test_control_analysis.py`,
-`results/toy-controlled-analysis-v1/`.
-
-### Phase D — pretrained causal-LM bridge
-
-#### Task 8: Versioned GPT-NeoX/Pythia adapter
-
-**Acceptance criteria**
-
-- Record hidden states, attention probabilities, per-head value/output updates, logits,
-  and exact token positions without changing logits in observation-only mode.
-- Support deterministic target/distractor edge masks and finite residual/head
-  interventions with descendants recomputed.
-- Save exact model revision, tokenizer/prompt tokens, dtype, device, and packages.
-
-**Verification:** no-op logit equivalence, mask semantics, hook cleanup, deterministic reload.
-
-**Dependencies:** Task 1 and official Transformers documentation.
-
-**Files:** `src/routing_lab/pretrained_adapter.py`,
-`src/routing_lab/pretrained_tasks.py`, `tests/test_pretrained_adapter.py`.
-
-#### Task 9: Pythia training-time and scale pilots
-
-**Acceptance criteria**
-
-- Use held-out collision-free symbolic mappings and balanced labels.
-- Evaluate at least four training revisions and two sizes; proceed upward only after a
-  functional gate or a powered negative capability result.
-- Reuse episode ids across checkpoints/sizes for function, causal routing, geometry, and
-  finite site effects.
-
-**Verification:** revision/hash and token audits, repeated-load equality, paired inference.
-
-**Dependencies:** Task 8.
-
-**Files:** `configs/pretrained_pythia_pilot.json`,
-`src/routing_lab/pretrained_run.py`, `tests/test_pretrained_run.py`,
-`results/pretrained-pythia-pilot-v1/`.
-
-#### Checkpoint D
-
-- A frozen pretrained family either passes retrieval functionality with causal measures,
-  or yields a well-powered negative boundary; a nonfunctional task is not interpreted.
-
-### Phase E — review and publication
-
-#### Task 10: Independent validation and clean GitHub snapshot
-
-**Acceptance criteria**
-
-- Recompute every headline number; every figure has a chart contract and uncertainty.
-- Independent review finds no Critical/Required issue in math, statistics, causal wording,
-  code, provenance, or public scope.
-- Publish commented code, configs, verified aggregates, reports, and commands; exclude
-  caches and unnecessary raw checkpoints.
-
-**Verification:** clean-clone full tests, hash/path/secret audit, and remote tree equality.
-
-**Dependencies:** Checkpoint D.
-
-**Files:** `reports/PHASE2_RESULTS.md`, `reports/PHASE2_VALIDATION.json`,
-`README.md`, curated result directories.
-
-## Risks and mitigations
-
-| Risk | Impact | Mitigation |
-|---|---:|---|
-| Home has only 14GB free | High | Stage 70M first, set a cache budget, delete nothing without approval. |
-| Small LMs fail symbolic retrieval | High | Tune prompt only on a development split, freeze it, then evaluate held-out episodes. |
-| Head controls are confounded | High | Encode design mode and report all dimension/parameter deltas. |
-| Direct composites change capacity | High | Separate rank-matched/H=1 geometry controls from a full-rank upper bound. |
-| Diagnostics invite selective reporting | High | Freeze endpoint families and corrections before production. |
-| Hooks change model behavior | High | Require no-op logit equality and automatic cleanup tests. |
-| Residual called open too early | High | Require persistence across every registered remedy and independent confirmation. |
-
-## Official implementation sources
-
-- https://huggingface.co/EleutherAI/pythia-70m-deduped
-- https://github.com/EleutherAI/pythia
-- https://huggingface.co/docs/transformers/model_doc/gpt_neox
+- 理论任务优先使用公开、版本冻结、具有已知 interaction graph 的 algorithmic/state-tracking
+  generator；LEGO 可作为候选外部验证，但不重复其已证明的 CoT/长度外推结论。
+- 20M–70M 从头训练必须有多个独立 seeds，检验 Gate 1/2 的量而非只看 accuracy。
+- Pythia/OLMo checkpoint 只检验相同结构量是否在预训练轨迹出现；checkpoint 是 repeated
+  measure，不是 seed。
+- 自然文本通常没有唯一内部 interaction graph，只作外部描述性检验。
+
+**Gate 3：**小模型定理预测在中模型多 seed 上方向一致；否则报告理论适用边界，不扩规模。
+
+## 不再执行
+
+- 围绕单个 \(C=32,d=8\) cell 无限调参；
+- 把 low rank、非正交 embedding、fixed-QKV clustering 重新包装为创新；
+- 从 attention heatmap、单条 Pythia trajectory 或局部 patch 命名普遍机制；
+- 在 Gate 1/2 前继续扩展模型家族、数据集和诊断模块；
+- 与主式无关的“有趣现象”进入论文主线。

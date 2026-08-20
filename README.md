@@ -1,12 +1,50 @@
 # Transformer Routing & Superposition Lab
 
-当前阶段的精简结论见 [STAGE_DECISION.md](reports/STAGE_DECISION.md)：主理论对象、已解决部分、反例边界与唯一下一实验均集中在该文件。Pythia-70M 的 8-checkpoint float64 校准见 [短报告](results/pretrained-pythia70m-suite-a-calibration-float64-v4-analysis-v1/REPORT.md)。
+本仓库只围绕一个问题：
 
-一个面向 **causal Transformer training dynamics、learned compressed representations、
-QK/OV/FFN 机制定位** 的可复现实验室。项目不把 accuracy、attention 热图或低秩单独
-当作解释；每一层结论都有独立的数学对象、干预和统计门槛。
+> **能否从任务分布和梯度流出发，推导完整 softmax Transformer 学出的 \(QK/OV\)
+> interaction kernel，并证明该 kernel 的逐层动力学实现任务要求的交互结构？**
 
-## 我们研究什么
+权威研究边界与当前计划见 [RESEARCH_CHARTER.md](reports/RESEARCH_CHARTER.md) 和
+[tasks/plan.md](tasks/plan.md)。已完成 toy/Pythia 证据见
+[EXPERIMENT_POSITIONING.md](reports/EXPERIMENT_POSITIONING.md)；完整历史判断保存在
+[STAGE_DECISION.md](reports/STAGE_DECISION.md)，但不再定义论文主问题。
+
+核心对象是
+
+\[
+\dot\theta_s=-\nabla_\theta R(\theta_s),\qquad
+B_{\ell h}=Q_{\ell h}^{\top}K_{\ell h},\qquad
+C_{\ell h}=O_{\ell h}V_{\ell h},
+\]
+
+\[
+\mathcal K_{\ell,s}(i,j;X)
+=\sum_h
+\operatorname{softmax}_{j}\!\left(
+\frac{(z_i^\ell)^\top B_{\ell h}(s)z_j^\ell}{\sqrt{d_h}}
+\right)
+C_{\ell h}(s).
+\]
+
+训练时间 \(s\) 决定 learned interaction kernel；网络深度 \(\ell\) 决定该 kernel 如何传播
+token 信息。项目要证明这两个动力系统的联系，而不是仅证明 attention 能选择信息，也不是
+把 clustering、rank、superposition 或某个 module compensator 当作标题。
+
+## 已有工作的正确位置
+
+| 内容 | 保留用途 | 结论边界 |
+|---|---|---|
+| fixed-kernel clustering | Perspective depth dynamics 的复现 | clustering 不等于任务对齐 |
+| random-value retrieval toy | 已知正确 source 的最小 kernel-learning 实例 | 不代表一般语言任务 |
+| Walsh/swap/slot blocking | 检查 learned kernel 是否真正使用正确输入 | 不是论文主问题 |
+| rank/head/composite controls | kernel 学习失败时的候选限制 | 不能单独作为创新 |
+| Pythia-70M calibration | 验证测量在真实 checkpoint 上可运行 | 单条轨迹不产生训练定律 |
+
+## 已完成的 retrieval 实验室
+
+以下内容记录已经完成、可复现的受控实例。它服务于主问题，但不改变
+[研究宪章](reports/RESEARCH_CHARTER.md)。
 
 每个 episode 包含 `m` 张记忆卡和一个 query：
 
@@ -38,7 +76,7 @@ d theta_s / ds = -grad R(theta_s)
 
 第 3 项不自动推出第 4 项，最终 accuracy 也不自动推出第 5 项。
 
-## 最重要的数学接口
+## 历史实验的数学接口
 
 ### 端到端 value causal kernel
 
@@ -72,16 +110,16 @@ index 与 label 均不变。两个端点都来自原始数据分布，因此它�
 residual、FFN branch、post-FFN residual 与 prediction。有限 attention chord 被精确分成
 content 与 route 两项；tangent 版本同时对照手算、autograd JVP 和中心差分。
 
-## 研究边界与当前结论
+## Phase-I/II 证据边界
 
 - 固定权重的 sphere clustering 已按 Perspective 官方实现复现；它产生 global token
   collapse，但终点 attention 是均匀的，因此 **global clustering 不等于 selective causal
   routing**。
 - 在成功模型中，Walsh target coefficient 和 value-flip effect 接近 1，支持函数级
   composite routing。
-- 当前 target-key mask 只阻断 target edge，没有逐个阻断 distractor edges；因此注册的
-  causal key selectivity $S_{key}$ 尚未评估，现有 target-edge + attention 量只是探索性
-  screen。
+- 早期 Phase-I 分析只使用 target-edge effect 与 attention proxy，不能检验注册的
+  \(S_{key}\)。后续 toy/Pythia 管线已实现逐 slot blocking；早期 proxy 结论仍保持降级，
+  不因后来补齐测量而追溯升级。
 - 对称 midpoint QK 诊断在两个优化器上不支持“route 抑制 content cross-talk”的简单
   故事；它与预注册的非对称 content/route/interaction estimand 不同，因此只是探索性
   protocol deviation，不能称为预注册反证。
@@ -99,9 +137,9 @@ content 与 route 两项；tangent 版本同时对照手算、autograd JVP 和�
   区间是未做 family correction 的 targeted exploratory evidence，不是新种子确认性推断。
   它目前是未完全解决的优化路径现象，不是已证实的容量障碍。
 
-完整、带限定词的结论请从 [交互式可移植报告](reports/report.html) 或
-[最终数学研究报告](reports/FINAL_REPORT.md) 开始阅读；截至 2026-08-15 的逐篇文献查重
-在 [LITERATURE_MAP.md](reports/LITERATURE_MAP.md)。
+当前结论以 [研究宪章](reports/RESEARCH_CHARTER.md) 和
+[实验定位](reports/EXPERIMENT_POSITIONING.md) 为准。旧的
+[交互式报告](reports/report.html) 与 [数学报告](reports/FINAL_REPORT.md) 只保留完整历史审计。
 
 ## 目录
 
@@ -296,16 +334,12 @@ Chromium headless-shell，浏览器交互验证仅为 structural-only；这一�
 
 ## 推荐阅读顺序
 
-1. [report.html](reports/report.html)：answer-first 图表、精确表格与可展开来源；
-2. [FINAL_REPORT.md](reports/FINAL_REPORT.md)：完整数学设定、实验、结果和下一步；
-3. [THEORY_PROBLEMS.md](reports/THEORY_PROBLEMS.md)：完整模型、动力学、定理/反例目标；
-4. [LITERATURE_MAP.md](reports/LITERATURE_MAP.md)：原始 open problems 与 2026-08-15 边界；
-5. [ANALYSIS_PROTOCOL.md](reports/ANALYSIS_PROTOCOL.md)：统计与 claim ladder；
-6. [MECHANISM_RESULTS_DRAFT.md](reports/MECHANISM_RESULTS_DRAFT.md)：QK/OV/FFN 负结果与候选；
-7. [CLUSTERING_BASELINE.md](reports/CLUSTERING_BASELINE.md)：Perspective baseline；
-8. [DYNAMICS_RESULTS.md](reports/DYNAMICS_RESULTS.md)：loss landscape、NTK 与 Hessian 个案。
-9. [VALIDATION_REPORT.md](reports/VALIDATION_REPORT.md)：发布测试、provenance 与 claim audit。
-10. [NEXT_STEPS.md](reports/NEXT_STEPS.md)：下一轮按 estimand、实验与 theorem 拆分的任务表。
+1. [RESEARCH_CHARTER.md](reports/RESEARCH_CHARTER.md)：唯一主问题、数学对象与 prior-art 边界；
+2. [EXPERIMENT_POSITIONING.md](reports/EXPERIMENT_POSITIONING.md)：哪些结果是基础、次级证据或隔离项；
+3. [tasks/plan.md](tasks/plan.md)：当前理论优先计划与停止条件；
+4. [CAUSAL_ROUTING_BRIDGE_THEOREM.md](reports/CAUSAL_ROUTING_BRIDGE_THEOREM.md)：已证明的条件定理与反例；
+5. [LITERATURE_MAP.md](reports/LITERATURE_MAP.md)：逐篇文献证据；
+6. [report.html](reports/report.html) 与 [FINAL_REPORT.md](reports/FINAL_REPORT.md)：历史实验的完整审计，不定义当前主线。
 
 ## 可复现性边界
 

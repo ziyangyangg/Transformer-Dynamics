@@ -2,10 +2,13 @@
 
 > **证据冻结：2026-08-20。** toy、localization gate 与 Pythia-70M float64 calibration
 > 均已审计；本报告不包含未完成实验。
+>
+> 本文是历史证据判断，不再规定下一阶段主目标。后续研究以
+> [RESEARCH_CHARTER.md](RESEARCH_CHARTER.md) 为唯一方向约束；rank--collision 仅保留为候选机制。
 
-## 判断
+## 当时的候选判断（现已降级）
 
-当前证据足以确定一个**主理论对象**，不足以宣称通用训练定律。主问题收缩为：
+当时证据曾把候选机制收缩为：
 
 \[
 \boxed{
