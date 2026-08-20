@@ -6,13 +6,9 @@ __pycache__/
 build/
 dist/
 *.egg-info/
-results/**/checkpoints/
-results/**/seeds/
-results/**/records/
-results/**/*.pt
-results/**/*.pth
-# Per-episode/redundant production payloads stay local; compact NPZ/JSON summaries
-# and their SHA-256 receipts are published.
-results/pretrained-*/revisions/*/*.csv
-results/phase2-controlled-localization-*/snapshots/
-results/phase2-landscape-ntk-smoke-cpu-*/
+*.orig
+# Experiment outputs are private by default. Curated evidence is force-added only
+# after its configuration, source hashes, and receipts pass review.
+results/**
+autoresearch/**
+configs/*_smoke_*.json

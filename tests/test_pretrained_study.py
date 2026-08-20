@@ -378,25 +378,6 @@ class PretrainedStudyConfigurationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "stripped|suffix"):
             replace(valid, memory_value_strings=("positive", "minus"))
 
-    def test_default_production_config_freezes_four_prompt_families(self) -> None:
-        api = _study_api()
-        config = api.default_pythia_70m_study_config(device="cpu", batch_size=8)
-
-        self.assertGreaterEqual(len(config.templates), 4)
-        self.assertEqual(config.memory_value_strings, ("plus", "minus"))
-        self.assertEqual(config.answer_choices, (" plus", " minus"))
-        self.assertEqual(
-            config.memory_value_strings,
-            tuple(answer.strip() for answer in config.answer_choices),
-        )
-        self.assertEqual(config.skeletons_per_template, 512)
-        self.assertEqual(config.memory_size, 4)
-        self.assertEqual(len(config.value_assignments), 16)
-        self.assertEqual(config.dtype, "float32")
-        self.assertEqual((config.device, config.batch_size), ("cpu", 8))
-        self.assertIn("step0", config.revisions)
-        self.assertIn("step143000", config.revisions)
-
     def test_float64_calibration_helper_is_full_trajectory_and_v4_versioned(
         self,
     ) -> None:
@@ -411,6 +392,11 @@ class PretrainedStudyConfigurationTests(unittest.TestCase):
         )
         self.assertEqual(config.dtype, "float64")
         self.assertEqual(config.skeletons_per_template, 16)
+        self.assertEqual(len(config.templates), 4)
+        self.assertEqual(config.memory_value_strings, ("plus", "minus"))
+        self.assertEqual(config.answer_choices, (" plus", " minus"))
+        self.assertEqual(config.memory_size, 4)
+        self.assertEqual(len(config.value_assignments), 16)
         self.assertEqual(
             config.revisions,
             (

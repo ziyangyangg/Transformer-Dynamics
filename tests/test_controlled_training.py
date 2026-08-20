@@ -272,7 +272,7 @@ class LossAndCheckpointContractTests(_ControlledTrainingTestCase):
         final_expected = training_api.population_risk(
             state.model(evaluation_batch), evaluation_batch.label
         )
-        self.assertEqual(records[-1].loss, float(final_expected))
+        self.assertEqual(records[-1].loss, float(final_expected.detach()))
 
 
 class RetractionContractTests(_ControlledTrainingTestCase):

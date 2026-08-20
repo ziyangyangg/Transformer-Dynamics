@@ -761,7 +761,9 @@ class HuggingFaceLoaderContractTests(unittest.TestCase):
     def test_frozen_templates_do_not_duplicate_value_boundary_whitespace(self) -> None:
         api = _study_api()
         config = replace(
-            api.default_pythia_70m_study_config(device="cpu", batch_size=4),
+            api.default_pythia_70m_float64_calibration_config(
+                device="cpu", batch_size=4
+            ),
             revisions=("step0",),
             skeletons_per_template=1,
         )
@@ -777,30 +779,8 @@ class HuggingFaceLoaderContractTests(unittest.TestCase):
                 self.assertNotIn("  ", case.base_prompt)
                 self.assertNotIn("  ", case.swap_prompt)
 
-    def test_serialized_production_config_matches_the_frozen_default(self) -> None:
+    def test_serialized_v4_config_matches_the_frozen_default(self) -> None:
         api = _study_api()
-        production_path = (
-            Path(__file__).resolve().parents[1]
-            / "configs"
-            / "pretrained_pythia70m_suite_a_v1.json"
-        )
-        calibration_path = (
-            Path(__file__).resolve().parents[1]
-            / "configs"
-            / "pretrained_pythia70m_suite_a_calibration_v1.json"
-        )
-        loaded = api.load_pretrained_study_config(production_path)
-        self.assertEqual(
-            loaded,
-            api.default_pythia_70m_study_config(device="cuda", batch_size=16),
-        )
-        calibration = api.load_pretrained_study_config(calibration_path)
-        self.assertEqual(
-            calibration,
-            api.default_pythia_70m_calibration_config(device="cuda", batch_size=16),
-        )
-        self.assertEqual(calibration.skeletons_per_template, 16)
-
         float64_path = (
             Path(__file__).resolve().parents[1]
             / "configs"

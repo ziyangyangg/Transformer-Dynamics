@@ -1,16 +1,9 @@
-"""RED contracts for the Phase-II controlled-experiment schema.
-
-Phase I artifacts are content addressed by :class:`routing_lab.run.GridCell`.
-Adding Phase-II fields to that dataclass would silently give old experiments new
-identities, so the richer controls live in ``routing_lab.control_config`` instead.
-These tests pin both sides of that boundary before the new implementation exists.
-"""
+"""Contracts for the active controlled-experiment schema."""
 
 from __future__ import annotations
 
 import math
 import unittest
-from dataclasses import fields
 
 from routing_lab.control_config import (
     CodebookConfig,
@@ -19,27 +12,10 @@ from routing_lab.control_config import (
     build_head_capacity_families,
     canonical_sha256,
 )
-from routing_lab.run import ExperimentConfig, GridCell, plan_experiment
 
 
 class CanonicalIdentityContractTests(unittest.TestCase):
-    """Content identity must be deterministic without changing the v1 schema."""
-
-    @staticmethod
-    def _legacy_cell() -> GridCell:
-        return GridCell(
-            num_concepts=6,
-            memory_size=2,
-            d_model=8,
-            num_layers=1,
-            num_heads=1,
-            ffn_width=None,
-            optimizer="adamw",
-            learning_rate=0.02,
-            momentum=0.0,
-            steps=2,
-            batch_size=32,
-        )
+    """Content identity must be deterministic."""
 
     def test_v2_hash_is_canonical_and_has_a_fixed_known_digest(self) -> None:
         """Mapping order and tuple/list syntax cannot alter a scientific cell id."""
@@ -60,39 +36,6 @@ class CanonicalIdentityContractTests(unittest.TestCase):
         self.assertEqual(canonical_sha256(reordered), expected)
         with self.assertRaises((TypeError, ValueError)):
             canonical_sha256({"nonfinite_scientific_choice": math.nan})
-
-    def test_legacy_gridcell_fields_and_hash_remain_bit_for_bit_v1(self) -> None:
-        """Phase-II choices must never be appended to the published v1 GridCell."""
-
-        self.assertEqual(
-            tuple(field.name for field in fields(GridCell)),
-            (
-                "num_concepts",
-                "memory_size",
-                "d_model",
-                "num_layers",
-                "num_heads",
-                "ffn_width",
-                "optimizer",
-                "learning_rate",
-                "momentum",
-                "steps",
-                "batch_size",
-            ),
-        )
-        config = ExperimentConfig(
-            study_id="legacy-hash-fixture",
-            cells=(self._legacy_cell(),),
-            seeds=(0,),
-            checkpoint_steps=(0, 1, 2),
-            eval_batch_size=16,
-            weight_decay=0.0,
-        )
-        planned = plan_experiment(config)
-        self.assertEqual(
-            planned.seed_runs[0].config_hash,
-            "555af22065328733d38d7b547a01221f503f0340f951a85d5be817b90b9159b8",
-        )
 
 
 class RepresentationAndCompositeControlTests(unittest.TestCase):

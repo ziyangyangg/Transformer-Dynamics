@@ -24,17 +24,18 @@
 
 这些代码和数学结果是当前项目真正的起点。
 
-## 有用的次级证据：保留，但不主导论文
+## 次级证据：保留结论，不保留独立研究分支
 
 | 实验 | 准确结论 | 地位 |
 |---|---|---|
 | Phase-II 12-seed training limit | constant/cosine 均未形成稳定不可消除 plateau；更长训练仍改善 | 排除“残差已是新 open problem” |
 | rank-matched vs dense composites | same-rank direct 没修复，dense upper bound 强烈改善 leakage | rank/function capacity 候选；不能称纯 factorization optimization |
-| high-\(N\) on-support swap | 干扰高度重尾，方向性对照稳定，但 all-state precision gate 仍失败 | 采样设计与稀有误差警告；不是 tail-law 定理 |
-| composite planes、NTK、gauge controls | 排除 raw-factor flatness 与纯 lazy 描述等普通误读 | 附录诊断；不能决定主机制 |
-| representation/coherence statistics | 高 coherence 可与低 leakage 共存 | 排除“非正交必然导致功能错误”这一充分解释 |
+| high-\(N\) on-support swap | 干扰高度重尾，但 all-state precision gate 仍失败 | 只保留“稀有事件需要高精度采样”的方法警告 |
+| composite planes、NTK、gauge controls | 排除 raw-factor flatness 与纯 lazy 描述等普通误读 | 历史诊断，不再保留独立代码路径 |
+| representation/coherence statistics | 高 coherence 可与低 leakage 共存 | 只保留对简单几何解释的否定 |
 
-只有当这些量进入 kernel-learning 定理的假设或误差项时，才再次运行。
+活跃结果只保留前两项 Phase-II 证据链。其余代码、配置和派生表从当前树移除；只有当这些量
+进入 kernel-learning 定理的假设或误差项时，才从 Git 历史恢复。
 
 ## 外部校准：只证明工具可用
 
@@ -56,16 +57,17 @@ direct-edge effect 非单调且模板异质。
 
 | 内容 | 原因 | 处理 |
 |---|---|---|
-| localization-v2 的 62/72 complete cases | runner 把 row-wise 联合容差错误接成 max-relative gate；root 无 success marker | 保留失败诊断；禁止 complete-case inference，不为当前主线重跑 |
+| localization-v2 的 62/72 complete cases | runner 把 row-wise 联合容差错误接成 max-relative gate；root 无 success marker | 禁止 complete-case inference；代码与结果退出活跃树 |
 | QK midpoint suppression 结论 | 与注册 asymmetric content/route/interaction estimand 不同 | 仅保留 protocol-deviation 记录 |
 | OV/FFN “compensator”命名 | local hybrid patches 不构成跨模块加法归因，FFN gates 未闭合 | confirmed compensator 仍为 0；停止命名 |
-| population-GF P39 closure | P38 数值收敛 gate 在 representation/functional coordinates 失败 | 记为 blocked，不拟合或解释低维 closure |
+| population-GF P39 closure | P38 数值收敛 gate 在 representation/functional coordinates 失败 | 记为 blocked；拟合、refinement 与 optimizer bridge 已退出活跃树 |
 | 大范围 architecture factorial patterns | 多数是选择后、探索性或改变多个因素的 contrasts | 不作为主结果，不继续扩 grid |
 | rare-collision 论文主线 | toy 有重尾线索，但 Pythia 未保存所需 episode-level tail，且没有跨模型确认 | 降为未来可能机制，不再作为标题 |
 
 ## 对已有仓库的处理原则
 
-- 不删除历史代码、配置或结果；它们继续提供审计与反例来源。
+- 当前活跃树由 [REPOSITORY_SCOPE.toml](../REPOSITORY_SCOPE.toml) 精确约束。
+- 清理前的代码、配置和结果可从 Git commit 1f06157 完整恢复。
 - README 首先指向研究宪章、本文件和当前计划，而不是历史机制报告。
 - 新实验必须直接测量 \(B_s,C_s,\gamma_s,\mathcal E_{\rm transport}\) 或 depth error。
 - 与主定理链无关的指标不再新增；失败实验不通过换名字进入主结论。

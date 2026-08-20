@@ -1,5 +1,12 @@
 # Current checklist
 
+## Repository foundation
+
+- [x] 冻结唯一研究问题和方法合同。
+- [x] 删除主依赖闭包之外的源码、专属测试、配置、报告和派生结果。
+- [x] 保留 Phase-II、Pythia-v4 与 fixed-kernel baseline 的直接证据；GF 保留核心引擎。
+- [x] 增加机器可检查的活跃树 allowlist。
+
 ## Theory first
 
 - [ ] 冻结一个具有已知 \(G^*(X)\) 的公开生成任务及 population law。

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "transformer-routing-superposition-lab"
 version = "0.1.0"
-description = "Causal routing and compressed-concept compensation experiments"
+description = "Training-aware softmax Transformer interaction-kernel dynamics"
 requires-python = ">=3.11"
 dependencies = [
     "torch>=2.11,<3",

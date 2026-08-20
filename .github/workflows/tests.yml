@@ -33,11 +33,11 @@ jobs:
           python -m pip install --no-deps --target /tmp/transformer-wheel-site /tmp/transformer-wheel/*.whl
           cd /tmp
           PYTHONPATH=/tmp/transformer-wheel-site python - <<'PY'
-          from routing_lab.phase2_swap_sensitivity import plan_logical_design
+          from routing_lab.control_config import canonical_sha256
+          from routing_lab.population_gf import PopulationStepConfig
 
-          design = plan_logical_design(range(100, 112))
-          assert len(design) == 144
-          assert len({row.planned_physical_key for row in design}) == 132
+          assert len(canonical_sha256({"scope": "training-aware-kernel"})) == 64
+          assert PopulationStepConfig(step_size=0.1).step_size == 0.1
           PY
       - name: Run tests
         run: python -m unittest discover -s tests -v

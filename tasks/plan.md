@@ -37,6 +37,16 @@
 **Gate 0：**任何 novelty statement 必须指出它同时超出哪个 training-only 特例和哪个
 fixed-kernel dynamics 结果。
 
+## Repository gate — 保持研究对象唯一
+
+- [x] 以依赖闭包保留 toy/GF/Phase-II/Pythia 的 20 个核心模块。
+- [x] 从活跃树移除旧 scaling、NTK/landscape、localization、mechanism 与报告打包分支。
+- [x] 只保留两份有效配置和六套直接证据。
+- [x] 用 REPOSITORY_SCOPE.toml 与单测阻止未分类模块、配置、报告或结果重新进入。
+
+清理前完整状态固定在 Git commit 1f06157。恢复历史内容必须先说明它检验 Gate 1/2 的
+哪个变量；否则不得重新加入活跃树。
+
 ## Phase 1 — 最小完整 softmax 训练定理
 
 冻结一个公开、可枚举且具有已知正确 interaction graph \(G^*(X)\) 的生成任务。模型保留：

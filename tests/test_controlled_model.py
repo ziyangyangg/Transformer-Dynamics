@@ -14,20 +14,12 @@ collection at the first missing module.
 from __future__ import annotations
 
 import unittest
-from dataclasses import fields
 from importlib import import_module
 
 import torch
 
 from routing_lab.control_config import CodebookConfig, CompositeConfig
 from routing_lab.data import sample_retrieval_batch
-from routing_lab.model import ModelConfig
-from routing_lab.run import (
-    SCHEMA_VERSION,
-    ExperimentConfig,
-    GridCell,
-    plan_experiment,
-)
 
 
 def _controlled_model_api():
@@ -274,7 +266,7 @@ class MatchedFullModelCloneContractTests(unittest.TestCase):
                         )
 
                 prediction = clone(batch)
-                max_absolute_gap = float((prediction - reference).abs().max())
+                max_absolute_gap = float((prediction - reference).detach().abs().max())
                 self.assertLess(
                     max_absolute_gap,
                     1.0e-12,
@@ -320,70 +312,6 @@ class InstrumentationSafetyContractTests(unittest.TestCase):
             patches={"layers.0.qk_scores": trace["layers.0.qk_scores"]},
         )
         self.assertTrue(torch.equal(replay, model(batch)))
-
-
-class LegacyIsolationContractTests(unittest.TestCase):
-    """The additive v2 model must not mutate published v1 schemas or identities."""
-
-    def test_v1_model_api_and_grid_hash_remain_frozen(self) -> None:
-        self.assertEqual(SCHEMA_VERSION, 1)
-        self.assertEqual(
-            tuple(field.name for field in fields(ModelConfig)),
-            (
-                "num_concepts",
-                "memory_size",
-                "d_model",
-                "num_layers",
-                "num_heads",
-                "beta",
-                "ffn_width",
-                "rms_epsilon",
-            ),
-        )
-        self.assertEqual(
-            tuple(field.name for field in fields(GridCell)),
-            (
-                "num_concepts",
-                "memory_size",
-                "d_model",
-                "num_layers",
-                "num_heads",
-                "ffn_width",
-                "optimizer",
-                "learning_rate",
-                "momentum",
-                "steps",
-                "batch_size",
-            ),
-        )
-
-        legacy_cell = GridCell(
-            num_concepts=6,
-            memory_size=2,
-            d_model=8,
-            num_layers=1,
-            num_heads=1,
-            ffn_width=None,
-            optimizer="adamw",
-            learning_rate=0.02,
-            momentum=0.0,
-            steps=2,
-            batch_size=32,
-        )
-        plan = plan_experiment(
-            ExperimentConfig(
-                study_id="legacy-hash-fixture",
-                cells=(legacy_cell,),
-                seeds=(0,),
-                checkpoint_steps=(0, 1, 2),
-                eval_batch_size=16,
-                weight_decay=0.0,
-            )
-        )
-        self.assertEqual(
-            plan.seed_runs[0].config_hash,
-            "555af22065328733d38d7b547a01221f503f0340f951a85d5be817b90b9159b8",
-        )
 
 
 if __name__ == "__main__":
