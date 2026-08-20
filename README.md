@@ -149,6 +149,12 @@ source .venv/bin/activate
 python -m pip install -e .
 ```
 
+若要运行 Pythia-70M 实验或完整单测，请显式安装预训练模型依赖：
+
+```bash
+python -m pip install -e ".[pretrained]"
+```
+
 若要复现本次发布所用的 Python 3.11 / CUDA 12.8 软件栈，先安装精确依赖闭包，再以
 `--no-deps` 安装本项目：
 

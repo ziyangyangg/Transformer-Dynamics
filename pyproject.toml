@@ -15,6 +15,13 @@ dependencies = [
     "matplotlib>=3.11,<4",
 ]
 
+[project.optional-dependencies]
+# The toy-model laboratory does not require Hugging Face Transformers. Install
+# this extra for the Pythia bridge and for the complete test suite.
+pretrained = [
+    "transformers==5.8.0",
+]
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
