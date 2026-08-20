@@ -1,6 +1,11 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.venv/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
 results/**/checkpoints/
 results/**/seeds/
 results/**/records/
