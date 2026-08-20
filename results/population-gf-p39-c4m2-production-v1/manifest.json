@@ -1,0 +1,60 @@
+{
+  "schema_version": "population-gf-p39-status-v1",
+  "study_id": "population-gf-p39-c4m2-production-v1",
+  "created_on": "2026-08-20",
+  "bundle_role": "convenience_status_narrative",
+  "self_validating_evidence_bundle": false,
+  "population": {
+    "num_concepts": 4,
+    "memory_size": 2,
+    "support_size": 96
+  },
+  "registered_p38_threshold": 0.1,
+  "discovery_seeds": [100, 101, 102, 103],
+  "numerical_validation_seeds": [200, 201, 202, 203],
+  "prospective_untouched_seeds": [300, 301, 302, 303],
+  "prospective_untouched_generated": false,
+  "prospective_untouched_inspected": false,
+  "p39_status": "blocked_by_unresolved_P38_numerical_convergence",
+  "p39_vector_field_fit": false,
+  "p39_closure_score_computed": false,
+  "p39_counterexample_search_run": false,
+  "stop_reason": {
+    "seed_201": {
+      "final_actual_eta_divisors": [16, 32, 64],
+      "failed_parameters": ["r_eff_E"],
+      "max_discrepancy": 0.14664291322408685
+    },
+    "seed_202": {
+      "final_actual_eta_divisors": [16, 32, 64],
+      "failed_parameters": ["L_H", "S_Q_minus_S_K_frobenius"],
+      "max_discrepancy": 0.5591781271120067
+    }
+  },
+  "failure_is_not_a_near_zero_denominator_artifact": true,
+  "optimizer_bridge": {
+    "artifact": "results/population-optimizer-bridge-c4m2-seed100-calibration-v1",
+    "runtime_seconds": 5.20723,
+    "comparison_is_euclidean_population_gf": false,
+    "comparison_is_p38": false
+  },
+  "runtime": {
+    "measured_job_seconds_excluding_seed100": 2062.7428694010764,
+    "seed100_filesystem_timestamp_estimate_seconds": 470.95,
+    "sum_including_estimate_seconds": 2533.692869401076,
+    "note": "Job-time sum is not wall-clock time because the final seed pair ran concurrently."
+  },
+  "integrity": {
+    "source_contract": "reports/P39_SOURCE_INTEGRITY_CONTRACT.md",
+    "test_count_claim": "omitted_because_the_manual_bundle_has_no_command_receipt",
+    "adversarial_mutations_rejected": [
+      "config_hash",
+      "csv_json_mismatch",
+      "initial_hessian",
+      "stored_p38",
+      "continuation_state",
+      "committed_p39_output"
+    ]
+  },
+  "interpretation_boundary": "No P39 closure or counterexample claim is licensed by this bundle."
+}

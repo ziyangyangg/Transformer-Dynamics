@@ -1,13 +1,36 @@
-- [x] Data distribution and on-support swap tests pass.
-- [x] Instrumented model and causal-path patch tests pass.
-- [x] Tangent decomposition matches JVP and finite differences.
-- [x] Smoke training reaches the registered accuracy gate (4/4 hardest-cell seeds).
-- [x] Primary, optimizer-replication, and $2^4$ scaling grids complete with raw observations.
-- [x] High-precision baseline, low-LR remedy, and same-LR extension evaluations complete
-  (230/230 snapshot endpoints, zero failures).
-- [x] Seed-level mechanism, scaling, clustering, and optimization-dynamics analyses complete.
-- [x] Loss-landscape, grouped NTK, linearization, Hessian, superposition-geometry, and
-  causal-intervention figures complete.
-- [x] Independent review findings resolved.
-- [x] Portable reproduction report validated.
-- [x] Curated code/results snapshot published and verified on GitHub.
+# Phase I — complete
+
+- [x] Finite causal Transformer, runner, interventions, statistics, and diagnostics.
+- [x] Primary/replication/scaling/remedy studies and b2048 analysis.
+- [x] Theory/literature map, clustering/dynamics studies, audit, and GitHub snapshot.
+
+# Phase II — controlled residual and pretrained bridge
+
+- [ ] Task 1: freeze Phase-II estimands and v2 schemas.
+- [ ] Task 2: capacity-audited composite and embedding-source variants.
+- [ ] Task 3: exact continuation, schedulers, and genuine head-capacity controls.
+
+## Checkpoint A
+- [ ] New RED→GREEN contracts and all legacy tests pass.
+- [ ] Four-seed runtime calibration is frozen.
+
+- [ ] Task 4: per-slot causal selectivity and finite module-suffix localization.
+- [ ] Task 5: exact population enumeration and GF-like bridge.
+
+## Checkpoint B
+- [ ] Identities, Parseval, provenance, uniqueness, and full tests pass.
+
+- [ ] Task 6: ten-seed six-axis matrix completes without silent failures.
+- [ ] Task 7: paired trajectory statistics, multiplicity controls, and figures complete.
+
+## Checkpoint C
+- [ ] Every residual exhausts the remedy ladder.
+- [ ] Classify each as solved, optimization-limited, capacity-limited, descriptive, or unresolved.
+
+- [ ] Task 8: GPT-NeoX/Pythia adapter passes no-op and intervention tests.
+- [ ] Task 9: Pythia checkpoint/scale pilot completes or gives a powered negative gate.
+
+## Checkpoint D
+- [ ] Pretrained findings have held-out functionality and exact provenance.
+
+- [ ] Task 10: independent review, full QA, final report, clean snapshot, GitHub publish.

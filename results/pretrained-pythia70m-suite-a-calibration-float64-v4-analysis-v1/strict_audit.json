@@ -1,0 +1,514 @@
+{
+  "analysis_inputs": {
+    "config": "configs/pretrained_pythia70m_suite_a_calibration_float64_v4.json",
+    "study_directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4"
+  },
+  "analysis_schema_version": "pretrained-analysis-v1",
+  "checkpoint_is_seed": false,
+  "checkpoint_template_rows": 32,
+  "completed_revisions": 8,
+  "direct_edge_rows_per_revision": 4096,
+  "direct_edge_slot_summary_rows": 128,
+  "episode_level_natural_swap_delta_saved": false,
+  "execution_environment": {
+    "attention_backend": "eager",
+    "cuda_available": true,
+    "cuda_capability": [
+      12,
+      0
+    ],
+    "cuda_device_name": "NVIDIA GeForce RTX 5090",
+    "cuda_matmul_allow_tf32": false,
+    "cuda_runtime_version": "12.8",
+    "cudnn_allow_tf32": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "cudnn_version": 91900,
+    "deterministic_algorithms_enabled": false,
+    "deterministic_algorithms_warn_only": false,
+    "numpy_version": "2.4.4",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python_implementation": "CPython",
+    "python_version": "3.11.15",
+    "requested_device": "cuda",
+    "requested_dtype": "float64",
+    "torch_version": "2.11.0+cu128",
+    "transformers_version": "5.8.0"
+  },
+  "failure_ledger_rows": 0,
+  "failures_jsonl_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "head_diagnostic_rows_per_revision": 196608,
+  "manifest_sha256": "460c55f78f582bba307dd8bc6bab38d285cea4010505cdcc2d30e9b712344b2d",
+  "measurement_contract_hash": "f376b5652d9d3bd708fd3a13efb952d65a9a739b9a895316a0569c5fddb187c8",
+  "measurement_source_hashes": {
+    "phase2_protocol": "7ba03a8f83dc6c299ec0d467bf876384fa3f1fe74740ad63347eaaf8ab2f93ea",
+    "pretrained_bridge": "fe55b37dfe6a1380c6c876840ce231b2f047376d212ad9eb232c1d7f14b4cf4a",
+    "pretrained_causal": "f067afe42d95960a91fdd6e339d8079468954ee6b6e0729832da6ba140cc48a2",
+    "pretrained_study": "7dab23a5b5e43a67aadc78456d9e3c8ca0a7745fe56f287f8f9b23c50491e085"
+  },
+  "natural_swap_evidence": "aggregate_mse_only",
+  "parallel_chord_rows_per_revision": 6144,
+  "patch_rows_per_revision": 24576,
+  "prompt_population_hash": "580f33b45dc585881d7f7d6eba23ed86c577622eea21bec008107d3ef4cf0a8d",
+  "result_identity_count": 8,
+  "revision_receipts": [
+    {
+      "checkpoint_json_sha256": "43cc876a78e24c161b3753c72e0f6a5966ab3b2f9e21156d4c171be99020681a",
+      "directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/revisions/000-step0-799ae0e7",
+      "resolved_revision": "c913ae980de9355947d0bf73f9f10d580eb79301",
+      "result_identity_hash": "41c70a597aabd780c8aaaf26a3518564a035b9a5f6ff9c353bf8a3e5249b00f0",
+      "revision": "step0",
+      "revision_index": 0,
+      "sidecars": {
+        "direct_edge_slot_effects.csv": {
+          "bytes": 7417948,
+          "sha256": "fbdc96e7b24ce50dca831190fef4e65719095280bc6266244f4f8c25713d494e"
+        },
+        "direct_edge_slot_effects.json": {
+          "bytes": 2985,
+          "sha256": "92833fb5b57af4a92f3d70ff912d9d4ec905d47245566eec3e76911e6ae7a710"
+        },
+        "direct_edge_slot_effects.npz": {
+          "bytes": 87890,
+          "sha256": "f6bb0d111efa6e9cf7416874eac4b2f1a3486adb7f969ae148b9332c257529a4"
+        },
+        "head_diagnostics.json": {
+          "bytes": 3031,
+          "sha256": "cdfdc87474892dbd50ff71f03e96c727aca2fd6c39e58a942acce3f3ea078c7e"
+        },
+        "head_diagnostics.npz": {
+          "bytes": 5892884,
+          "sha256": "eed733db88ccdf1fb982a484bc5471dea5ffe999ff1d566734a34619fb14f33d"
+        },
+        "parallel_residual_chords.json": {
+          "bytes": 3224,
+          "sha256": "9f7f9c3fa278b1046132b90efe2d720595c3961759a0547c88b32a64f50f4a41"
+        },
+        "parallel_residual_chords.npz": {
+          "bytes": 371952,
+          "sha256": "8d338fc3eb97caba6da5b1e0f5c6b3af2ac0890f62401dcf2c388b2bd8623f2d"
+        },
+        "patch_effects.csv": {
+          "bytes": 45655322,
+          "sha256": "ef9a117c399a307e1c57b582da3fe9a4855d91ae90c69f1fafc3d967a5bef95a"
+        },
+        "patch_effects.json": {
+          "bytes": 3098,
+          "sha256": "4f89a1c368acac96732bc8ac52c306d0cf57fa5725f26bcacc9c9d9b639e4b2b"
+        },
+        "patch_effects.npz": {
+          "bytes": 406549,
+          "sha256": "a606b937c5dd89df83a896d716a74cdeb6fc6f4a7095cca8faba20e368878ad5"
+        },
+        "prompt_population_audit.json": {
+          "bytes": 66606,
+          "sha256": "905fadd17edbf7abf806ef85dc14e50cf4ff68f0a7c1ddc0216d097d2e4e8317"
+        }
+      }
+    },
+    {
+      "checkpoint_json_sha256": "e071f02f7c47e4e739f28af6bdd0a5de1d85a0ce07c6b56a7129b5aec3648891",
+      "directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/revisions/001-step64-7d715d7e",
+      "resolved_revision": "667f52d8964a899fdd6a3ffc849c9baab40b1b04",
+      "result_identity_hash": "f70f17abe0aa0dc2c420e3bb401315d827234e0322f153550e309b52f0bfebbf",
+      "revision": "step64",
+      "revision_index": 1,
+      "sidecars": {
+        "direct_edge_slot_effects.csv": {
+          "bytes": 7414180,
+          "sha256": "ab089967f8df5f36aab7e7c4a637769fd6a338d7ea88e51ba845751b1a1c2406"
+        },
+        "direct_edge_slot_effects.json": {
+          "bytes": 2986,
+          "sha256": "27706f42969a726746d42e145f203ea0a1ad3dd5e5058139135669895f3d304d"
+        },
+        "direct_edge_slot_effects.npz": {
+          "bytes": 86051,
+          "sha256": "3a0c733beefd38f6c0bd188429cff4c44e9048bd755cb0c535ed7bbd3ac90d41"
+        },
+        "head_diagnostics.json": {
+          "bytes": 3032,
+          "sha256": "f639f0e768af5e76582c2d491ade77131b37567bbf0c7001b4ed2eee95ec4a61"
+        },
+        "head_diagnostics.npz": {
+          "bytes": 5890636,
+          "sha256": "96f06985f24cce165bf04cbaf9c19bf54494c0902be498e05f93e43662f35ff5"
+        },
+        "parallel_residual_chords.json": {
+          "bytes": 3225,
+          "sha256": "d676008dc70e8409ca740791ea23d3dd84bb6af9f47d5678f68b70d11948b779"
+        },
+        "parallel_residual_chords.npz": {
+          "bytes": 372086,
+          "sha256": "499abd4b4a01d280855a6c5180bb8e3e67a4a6fab53d8f8a142da105c775c944"
+        },
+        "patch_effects.csv": {
+          "bytes": 45641385,
+          "sha256": "99b19057b51f450fe2770f0210d9a757c0d8dedf105ef2559636d0c5fad02b04"
+        },
+        "patch_effects.json": {
+          "bytes": 3099,
+          "sha256": "59d2d751d8b4779dd8f1fa9cbd64bb08edf489f32566319a0b61e02e18d06354"
+        },
+        "patch_effects.npz": {
+          "bytes": 388865,
+          "sha256": "a8241cfbc7418150fd4fcc1443aadc1a64aadfd96e78cd850df68b79f9fe3d64"
+        },
+        "prompt_population_audit.json": {
+          "bytes": 66607,
+          "sha256": "08b3b78940e7c69b4158f3446054e1d689acfbcfb1b3722c90745b5021e637c8"
+        }
+      }
+    },
+    {
+      "checkpoint_json_sha256": "9d1f07518b15e7dd919969ef5b6e124ef608b46dc755887cd41c3b22e9363d01",
+      "directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/revisions/002-step512-874d6baf",
+      "resolved_revision": "2d7e43cf2b420873c7d37e8c4b716980e802beaa",
+      "result_identity_hash": "d7ffbdfd9fa1e3f18d9090c6e0df1de76c7defed3b5c00fbb920ab85519c9a17",
+      "revision": "step512",
+      "revision_index": 2,
+      "sidecars": {
+        "direct_edge_slot_effects.csv": {
+          "bytes": 7418454,
+          "sha256": "bca294f22fd83fcce402da6c804b500e989bf2d0f7988b3e045ae9ada20ba83b"
+        },
+        "direct_edge_slot_effects.json": {
+          "bytes": 2987,
+          "sha256": "02e7bd13ff1a1debb53c1ecd3d162e7887cb59227e80818282f20c6ab89d850d"
+        },
+        "direct_edge_slot_effects.npz": {
+          "bytes": 87610,
+          "sha256": "4c227c15d6e6884a8479d3e7903cb5ff98e632e4293a58b45e3eeba8c6408f3a"
+        },
+        "head_diagnostics.json": {
+          "bytes": 3033,
+          "sha256": "a192cef4de46678eb255e840f7c1ec7fe0ab7d1fade47f5e430aca3353871c8e"
+        },
+        "head_diagnostics.npz": {
+          "bytes": 5943151,
+          "sha256": "53f3f42d5eda54dd1c798c012915b06d0098e24bee0f498da8ffd3ab904c06c4"
+        },
+        "parallel_residual_chords.json": {
+          "bytes": 3226,
+          "sha256": "f9e8a5c227fd556a51b6d3afff3e8dc262b3fba6f847c0d9799d6ca11bfd743b"
+        },
+        "parallel_residual_chords.npz": {
+          "bytes": 373836,
+          "sha256": "2105e5f0297d656f3de1aed7fa4d9b044123b46391a4e59bf8077b735a2c20f4"
+        },
+        "patch_effects.csv": {
+          "bytes": 45664477,
+          "sha256": "4a0e55b47a10372b329ef5f89894cb749291fe2e391853dbcbfe57c1a0e8d30a"
+        },
+        "patch_effects.json": {
+          "bytes": 3100,
+          "sha256": "8a0e5fb34ae69e80acc2c8be9002083bd1b647224e87a07c6db8f9dbabf24ebe"
+        },
+        "patch_effects.npz": {
+          "bytes": 405341,
+          "sha256": "817dc4a287e23019f4797127f3453464cdfd29fb39369c8d40cdeeb6b290932f"
+        },
+        "prompt_population_audit.json": {
+          "bytes": 66608,
+          "sha256": "883ab3fe94fe4eb1110bc6ed567d12c78725d0b826908a092ddf8c6d61adc098"
+        }
+      }
+    },
+    {
+      "checkpoint_json_sha256": "f2fad6a218b765dfa87b439b99a6c1355fac7112491407df53f06d94e30eb9ca",
+      "directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/revisions/003-step1000-86561340",
+      "resolved_revision": "66bac1f7ae4b7faa77c34ee6a50d41cd09579a88",
+      "result_identity_hash": "75f00f55daaaef76ccbe5fb20f96a394053d80e2847e2b8baea990a66a991a8d",
+      "revision": "step1000",
+      "revision_index": 3,
+      "sidecars": {
+        "direct_edge_slot_effects.csv": {
+          "bytes": 7423994,
+          "sha256": "e6034472e558a7c09928f1ed5b5e3cd8d46b2c7ab9bc8b6af2e958ba4c91d5df"
+        },
+        "direct_edge_slot_effects.json": {
+          "bytes": 2988,
+          "sha256": "dd1bcd39e1ba26dcc9b6d6509aeb618551b584897980f47dcbf6199d909cabc0"
+        },
+        "direct_edge_slot_effects.npz": {
+          "bytes": 88792,
+          "sha256": "3eb8c55a0001fded03b3649983e5b6b9f091812b99e0aa78e179645f1248fa2e"
+        },
+        "head_diagnostics.json": {
+          "bytes": 3034,
+          "sha256": "30d861aee65d45e0532508d9851efb660b7a719ffe53f8e876efea70d69c23ac"
+        },
+        "head_diagnostics.npz": {
+          "bytes": 5945277,
+          "sha256": "10b46ef7ce96e5956a9e3bd09881b963788c483a7ea5e51c7fa7a8b71f23e35e"
+        },
+        "parallel_residual_chords.json": {
+          "bytes": 3227,
+          "sha256": "91f41a68d595c6109774e828de28e226a83c13118b948b5a73b87912faa51209"
+        },
+        "parallel_residual_chords.npz": {
+          "bytes": 375448,
+          "sha256": "ed9fa1df38951bc2e6be700ecedb65a524987c86d5758736e146976403f626e6"
+        },
+        "patch_effects.csv": {
+          "bytes": 45706504,
+          "sha256": "92b09f83bb45106ebd8d90ea543ecc4d567967c3a409f32281f0a0aa8cd389ab"
+        },
+        "patch_effects.json": {
+          "bytes": 3101,
+          "sha256": "17948af95bb420c5bbbdcf9bf4aaa7711beabb9ebb0753fc96084759487af2fa"
+        },
+        "patch_effects.npz": {
+          "bytes": 412269,
+          "sha256": "7f5997e5e26c3635051d6496037f54f41027db575a6bbee8768c6716232b717e"
+        },
+        "prompt_population_audit.json": {
+          "bytes": 66609,
+          "sha256": "bd2174c33d3e4196ad86be1353d2ea553ccc72a2d59639f372689a569b7ae365"
+        }
+      }
+    },
+    {
+      "checkpoint_json_sha256": "51d7469d955c19da57342962d6116cd738d13f6142f46acb3d75a30292885c7b",
+      "directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/revisions/004-step4000-29bf74b5",
+      "resolved_revision": "bc237540ffd28d4711cf7e7340109b0b83a86584",
+      "result_identity_hash": "f4663950a568baefb288e86b151b0db5a4301c760e88f33d627ced46c7264a0b",
+      "revision": "step4000",
+      "revision_index": 4,
+      "sidecars": {
+        "direct_edge_slot_effects.csv": {
+          "bytes": 7419533,
+          "sha256": "ce5f806cedc4ebb62b236e0999ab76f91d17874480f6ae54d85f4d610a01e2c1"
+        },
+        "direct_edge_slot_effects.json": {
+          "bytes": 2988,
+          "sha256": "0c36a6965af749792591eb20d92333f1adc23323c96160bf20f5f6a52eea11e0"
+        },
+        "direct_edge_slot_effects.npz": {
+          "bytes": 88286,
+          "sha256": "8348b02a12ca52fa02c120be4bdfd742164337d6020367e606798d8d78bb56d6"
+        },
+        "head_diagnostics.json": {
+          "bytes": 3034,
+          "sha256": "ba1f069987427c23e592cd475e3f0ca81bac55083da5a65c50f35cdb9325c570"
+        },
+        "head_diagnostics.npz": {
+          "bytes": 5961956,
+          "sha256": "dd841178196468b782fe59090b2b406f009f8f3411a9af32bc81a521e717fa23"
+        },
+        "parallel_residual_chords.json": {
+          "bytes": 3227,
+          "sha256": "004fbcf2625e83f69af7d8c02213f73f2a8f1cbb633a40a390962f0d6b33eefa"
+        },
+        "parallel_residual_chords.npz": {
+          "bytes": 377333,
+          "sha256": "cde40ccb60a8bac87f0c175766ace8ded8b0b6f0af5d75b06634e80fc3299b1d"
+        },
+        "patch_effects.csv": {
+          "bytes": 45685347,
+          "sha256": "1e1bcf1eac0a9f106420c8fe994f3c31cd65c8820fd1e8ee5955214a018504fb"
+        },
+        "patch_effects.json": {
+          "bytes": 3101,
+          "sha256": "29d50d0097dc0afc54086cef5fb9491b47d39128d8cdb6a5b44b386c1260be59"
+        },
+        "patch_effects.npz": {
+          "bytes": 408559,
+          "sha256": "4ef6a4056a26f5f1c6bfd32b7a0a15d4fc386137069f5e5696d6a85ece15f65f"
+        },
+        "prompt_population_audit.json": {
+          "bytes": 66609,
+          "sha256": "16e7921b216409861197178a2a18b1c44065ea17039fd29016c82254a66f094f"
+        }
+      }
+    },
+    {
+      "checkpoint_json_sha256": "66199fdaa1c16d0f76ca1d558f33d0ee45677178cc37580c8f2c39a5105d4d52",
+      "directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/revisions/005-step16000-e54ac36b",
+      "resolved_revision": "eba780c73a4c19dbcc119a21a6ac5b4c7ef9c7e5",
+      "result_identity_hash": "cd5e89d66bb1d43e811bc48e0635bc798794167afa906bc0e245477a5f9213a7",
+      "revision": "step16000",
+      "revision_index": 5,
+      "sidecars": {
+        "direct_edge_slot_effects.csv": {
+          "bytes": 7427869,
+          "sha256": "2b8deb13177e3ba3b5ee66e23f61ea81b90b2a739013f7143b2dcf99873d0d7e"
+        },
+        "direct_edge_slot_effects.json": {
+          "bytes": 2989,
+          "sha256": "1a9c10ebb2f58e26266071aa50f04e3238da7e92daa1c300e0259cb28962e453"
+        },
+        "direct_edge_slot_effects.npz": {
+          "bytes": 88853,
+          "sha256": "9de05637c2234fd4749ebe56a0fad831cbdb089f2cda5197188df19607151c75"
+        },
+        "head_diagnostics.json": {
+          "bytes": 3035,
+          "sha256": "d6756298d93b885d680fb587d00e8740a9d5ca9687cc1ac2d241d2de78a18a9b"
+        },
+        "head_diagnostics.npz": {
+          "bytes": 5963555,
+          "sha256": "932a627a2801e94511f41e9cada7fae7b2dca0fdca22ffd2b89a773cf38baf3a"
+        },
+        "parallel_residual_chords.json": {
+          "bytes": 3228,
+          "sha256": "252999599281a340ca6e42041f8971c29149ba3f87dee6554078ee074be30ed3"
+        },
+        "parallel_residual_chords.npz": {
+          "bytes": 377387,
+          "sha256": "ed8e770c50bc509d74a42d0a496b09f5affd3ea0069f982aace4b394b2b3e18d"
+        },
+        "patch_effects.csv": {
+          "bytes": 45737200,
+          "sha256": "b97cbffe9b8fd16d43bbc47b850792b57149165e25d6f1ab9f2428ce0de69234"
+        },
+        "patch_effects.json": {
+          "bytes": 3102,
+          "sha256": "3dbe168a7c93ed962235baf5aed6c189e20fb204f7cd9d8202732f3f4f152cc5"
+        },
+        "patch_effects.npz": {
+          "bytes": 412369,
+          "sha256": "02009fcb70dadc3b8209aa60b2c762d1b5887b0279562eb3af5bf7b1fdc095fe"
+        },
+        "prompt_population_audit.json": {
+          "bytes": 66610,
+          "sha256": "5bc5ee7b3929e5ecb9f7ca6cfd89a7e1913596b9477a8e90c0fae9bbdaccc1b5"
+        }
+      }
+    },
+    {
+      "checkpoint_json_sha256": "325cb6c932613b773c8052aa2ba061533c29d7d68736a8ce201d7ff32666e747",
+      "directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/revisions/006-step64000-58010f9a",
+      "resolved_revision": "7764b56e8ccf9f01b30eb2e88d7a3cf398260a64",
+      "result_identity_hash": "dd742fb18ab04a9732ecdc85f450a479bd534ad8800deff22f8ae9611fe38732",
+      "revision": "step64000",
+      "revision_index": 6,
+      "sidecars": {
+        "direct_edge_slot_effects.csv": {
+          "bytes": 7423266,
+          "sha256": "fd3966e748b2c751524b8495145acb320f0437cdec9b496c8b5b8f3beef069a2"
+        },
+        "direct_edge_slot_effects.json": {
+          "bytes": 2989,
+          "sha256": "c202cfb085f5b644d2aafcadbe38d4fc84be4769e9ea71028e7aa3163575cdef"
+        },
+        "direct_edge_slot_effects.npz": {
+          "bytes": 88393,
+          "sha256": "1892e7aed30c458861c94aa30d2ac1f785564238b849f2a4bbf9903e8445c9b8"
+        },
+        "head_diagnostics.json": {
+          "bytes": 3035,
+          "sha256": "864107f203efee5e074e470ea1dfaf8d83d938b9d06d984f42aab6e29647ca66"
+        },
+        "head_diagnostics.npz": {
+          "bytes": 5964971,
+          "sha256": "5b9669af081741b0e68f894609e3ef286ada18a99829f0a4abdcc24efe58dc31"
+        },
+        "parallel_residual_chords.json": {
+          "bytes": 3228,
+          "sha256": "a46316e0064d1807776bd7e839eab7b0f3475cbaed45c7ad648a82572bd70ad7"
+        },
+        "parallel_residual_chords.npz": {
+          "bytes": 377609,
+          "sha256": "8ce82934d9fc1c8f93df4c988503ec09a995377a9d88eb61215693676e716a4d"
+        },
+        "patch_effects.csv": {
+          "bytes": 45708897,
+          "sha256": "a20c386bcd687420290e355de0d09f129d0c1c86ae0e5b0f6ebe5c52955017dd"
+        },
+        "patch_effects.json": {
+          "bytes": 3102,
+          "sha256": "05674cd762ce3ca02e0bc295b7e44529918e7b2b445e083e6e31ec8d75538e80"
+        },
+        "patch_effects.npz": {
+          "bytes": 408500,
+          "sha256": "86a3dcc5f1d3e01fbc47a4e655d38abfb430bd2e253965285d0aa88e406d844b"
+        },
+        "prompt_population_audit.json": {
+          "bytes": 66610,
+          "sha256": "7aff7bc7bb9bacb4bb208e8e31511f4a65be8732cdc2a0c6a56d101473eb9ab2"
+        }
+      }
+    },
+    {
+      "checkpoint_json_sha256": "1acf94060d893e3a78e9876538a8093d849a5b0ecbdc51eafc81748de79ce917",
+      "directory": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/revisions/007-step143000-c40656e4",
+      "resolved_revision": "9a7c847e93250c8f24d4b7e7134dbf369e8fc9cb",
+      "result_identity_hash": "6b4065328d339753d5891ef3bb5160fc64d35758469a9a081896773c9b6ef09f",
+      "revision": "step143000",
+      "revision_index": 7,
+      "sidecars": {
+        "direct_edge_slot_effects.csv": {
+          "bytes": 7431926,
+          "sha256": "658d882d872eaf4be900929f5a8f2b7998c2c37ac500cdade342638961fc0b28"
+        },
+        "direct_edge_slot_effects.json": {
+          "bytes": 2990,
+          "sha256": "01fb068be4b21641165bfb8542d2885cee85cee2f22eeccc5acf66f46d9f2f3d"
+        },
+        "direct_edge_slot_effects.npz": {
+          "bytes": 88523,
+          "sha256": "dee03b534431906d6306bfe61abcd5b66a4856088d6166ca49faaf6a30481f63"
+        },
+        "head_diagnostics.json": {
+          "bytes": 3036,
+          "sha256": "975de9323901be846e46ed65d181d6415807f691a4d52858ac666205dcd6924d"
+        },
+        "head_diagnostics.npz": {
+          "bytes": 5979314,
+          "sha256": "805ebd6ab917785ab921007b64fa7c222dba8fe9306fed4e22a3ee6714b24f5a"
+        },
+        "parallel_residual_chords.json": {
+          "bytes": 3229,
+          "sha256": "47bfa4b30027c136c712111b151a5e38e5b305ef12f235bbff880c1abdd8828e"
+        },
+        "parallel_residual_chords.npz": {
+          "bytes": 376601,
+          "sha256": "c9f701a75ccb0834b09611f7c8fd0aff65d1ac359985a97f98231fcaa8171e03"
+        },
+        "patch_effects.csv": {
+          "bytes": 45748640,
+          "sha256": "ab7ebc1d367d567be0610f018d93c20524c7cf4efd358aaa788c2559917142b8"
+        },
+        "patch_effects.json": {
+          "bytes": 3103,
+          "sha256": "cf5c1d814ac90737f2b3c45b5d435f7a3d0366c0c96b89f059727d0e86659196"
+        },
+        "patch_effects.npz": {
+          "bytes": 409875,
+          "sha256": "9b5c9edfa8310c067d0d9ae0644026fa70bd606f65fc3ae255fb573cd85cd89b"
+        },
+        "prompt_population_audit.json": {
+          "bytes": 66611,
+          "sha256": "6f5f1018446ce2970ebf5d5ad74e648be55f791bc6a3123e61231a7b3c6d7588"
+        }
+      }
+    }
+  ],
+  "root_aggregate_receipts": {
+    "checkpoint_metrics_tidy.csv": {
+      "bytes": 2226311,
+      "sha256": "069e9cc98be9d327e2ef7e3c9fc9ef8b2649c49d22a1b98ad9d6536b4c81e43c"
+    },
+    "checkpoint_metrics_tidy.json": {
+      "bytes": 3208058,
+      "sha256": "7addd85dd18b0f8d5a19b859a330d6e87e0d9af205a9f647901448fcda746246"
+    },
+    "checkpoint_metrics_wide.csv": {
+      "bytes": 106065,
+      "sha256": "13543541f6f794c372c6c06794ebd344db6cb63e1a7bed914e098d815f8f8d35"
+    },
+    "checkpoint_metrics_wide.json": {
+      "bytes": 154354,
+      "sha256": "ccb95854c9722ceed1c36c42fffaf5e59c7d54026e64a795d977b494c366c587"
+    }
+  },
+  "root_success_sha256": "822d234e95f24111c8967c4f21b803a2577a075fd799044a8353005fb7200f28",
+  "single_execution_environment": true,
+  "statistical_scope": "descriptive_only",
+  "statistical_unit": "one_pretraining_trajectory",
+  "status": "passed",
+  "study_config_hash": "c92daf6ca856acc3e1b7c50f84aaa6440972665d1c00521b6b9ff26d1a590e4e",
+  "study_id": "pythia-70m-causal-routing-calibration-float64-v4",
+  "unresolved_failure_revisions": []
+}

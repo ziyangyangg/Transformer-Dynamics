@@ -1,5 +1,7 @@
 # Transformer Routing & Superposition Lab
 
+当前阶段的精简结论见 [STAGE_DECISION.md](reports/STAGE_DECISION.md)：主理论对象、已解决部分、反例边界与唯一下一实验均集中在该文件。Pythia-70M 的 8-checkpoint float64 校准见 [短报告](results/pretrained-pythia70m-suite-a-calibration-float64-v4-analysis-v1/REPORT.md)。
+
 一个面向 **causal Transformer training dynamics、learned compressed representations、
 QK/OV/FFN 机制定位** 的可复现实验室。项目不把 accuracy、attention 热图或低秩单独
 当作解释；每一层结论都有独立的数学对象、干预和统计门槛。

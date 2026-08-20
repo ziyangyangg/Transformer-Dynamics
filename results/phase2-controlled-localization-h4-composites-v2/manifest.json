@@ -1,0 +1,76 @@
+{
+  "attribution_scope": "overlapping_local_hybrid_estimand_not_additive_attribution",
+  "committed_snapshots": 62,
+  "config": {
+    "chunk_size": 128,
+    "p32_min_upstream_energy": 0.0001,
+    "pair_count": 2048,
+    "reconstruction_absolute_tolerance": 1e-08,
+    "reconstruction_relative_tolerance": 1e-05,
+    "selected_arm_names": [
+      "hard-factorized-constant-6400",
+      "hard-rank-matched-constant-6400",
+      "hard-dense-direct-constant-6400"
+    ],
+    "selected_seeds": [
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111
+    ],
+    "selected_steps": [
+      0,
+      6400
+    ],
+    "source_study_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+    "study_id": "phase2-controlled-localization-h4-composites-v2"
+  },
+  "episode_id_scheme": "zero_based_patch_stream_index_v1",
+  "inference_unit": "seed",
+  "localization_config_hash": "19f63fc22342eae94d789c21b8b5990f935419469d279c7bf76a6c69e5368e41",
+  "localization_study_id": "phase2-controlled-localization-h4-composites-v2",
+  "measurement_contract": {
+    "attribution_scope": "overlapping_local_hybrid_estimand_not_additive_attribution",
+    "checkpoint_policy": "immutable_source_bytes_in_memory_float64_copy",
+    "contract_version": "controlled-localization-measurement-v2",
+    "measurement_dtype": "float64",
+    "patch_consumption_policy": "exact_registered_site_equality_required",
+    "path_scope": "final_query_row_only_path_specific",
+    "protocol_clauses": [
+      "P27",
+      "P28",
+      "P29",
+      "P30",
+      "P31",
+      "P32",
+      "P33"
+    ],
+    "resume_policy": "raw_npz_reconstructs_exact_snapshot_and_root_aggregates",
+    "zero_energy_policy": "persist_episode_flags_and_apply_group_energy_gate"
+  },
+  "measurement_contract_sha256": "2fd372a5e4d06c4402dd2c6105b5a359dcf0f4cd12fc066d6c7a99fea976b76f",
+  "measurement_dtype": "float64",
+  "measurement_source_bundle_sha256": "81a77a1e6a76ec553f3bc9a7b94674489d33ef6845a97f4e68bcf524726e0243",
+  "measurement_source_sha256": {
+    "reports/PHASE2_PROTOCOL.md": "7ba03a8f83dc6c299ec0d467bf876384fa3f1fe74740ad63347eaaf8ab2f93ea",
+    "src/routing_lab/controlled_localization.py": "76fcb1cbd10d79b473b31e205b319ba79e5c17ac8cdbe0c8b71a518a59805261",
+    "src/routing_lab/controlled_model.py": "b360a42c4238fd2a15159e88a66af19b483579882eefd806886dcfa16ba1ceb1",
+    "src/routing_lab/data.py": "0647632b89756cae1b01e655811e245abb740d72fd88ce66590365d4c46c98a7",
+    "src/routing_lab/finite_localization_v2.py": "dfe564d262603a04a2c1623986f35995e3743c76196b01a6636f06c124fe77e4",
+    "src/routing_lab/localization_study.py": "6c354a1d6d36d8d31cfcfad63822a5186c135bb3aeda6717e4c66660a3c45e7a"
+  },
+  "path_scope": "final_query_row_only_path_specific",
+  "planned_snapshots": 72,
+  "schema_version": "controlled-localization-study-v2",
+  "source_study_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+  "source_study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+  "source_study_manifest_sha256": "a49d36a868b7be3d0d0f9771dc1419f95251b2e185c8c6eea02fc48c446672f5"
+}

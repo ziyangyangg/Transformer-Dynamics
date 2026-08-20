@@ -1,0 +1,20 @@
+{
+  "schema_version": "phase2-iswap-nested-mc-sensitivity-v1",
+  "source_directory": "results/phase2-residual-factorization-noffn-discovery-remedy-v2",
+  "output_directory": "results/phase2-residual-factorization-noffn-iswap-nested-mc-sensitivity-v1",
+  "device": "cuda",
+  "spec": {
+    "initial_blocks": 64,
+    "episodes_per_block": 2048,
+    "extension_blocks": [128, 256],
+    "bootstrap_resamples": 20000,
+    "bootstrap_seed": 20260820,
+    "seeds": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111],
+    "checkpoint_rse_max": 0.1,
+    "paired_mc_se_max_bits": 0.25,
+    "convergence_max_bits": 0.25,
+    "inference_floor": 1e-12,
+    "practical_floor": 0.0025
+  },
+  "claim_boundary": "sensitivity_discovery_only_does_not_replace_registered_p8"
+}

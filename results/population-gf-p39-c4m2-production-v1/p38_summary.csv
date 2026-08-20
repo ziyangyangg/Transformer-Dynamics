@@ -1,0 +1,15 @@
+seed,cohort,artifact,actual_eta_divisors,p38_pass,failed_parameters,max_discrepancy,runtime_seconds,runtime_kind
+100,discovery,population-gf-c4m2-seed100-discovery-6400-v1,1-2-4,true,,0.0009918757631173889,470.95,filesystem_timestamp_estimate
+101,discovery,population-gf-c4m2-seed101-discovery-6400-v1,1-2-4,true,,0.004386173438505088,37.1103,measured
+102,discovery,population-gf-c4m2-seed102-discovery-6400-v1,1-2-4,true,,0.0009675162605424666,38.1778,measured
+103,discovery,population-gf-c4m2-seed103-discovery-6400-v1,1-2-4,true,,0.004446083923480679,34.8530,measured
+200,numerical_validation,population-gf-c4m2-seed200-untouched-6400-v1,1-2-4,true,,0.001075826594457162,36.1026,measured
+201,numerical_validation,population-gf-c4m2-seed201-untouched-6400-v1,1-2-4,false,L_H;r_eff_E;S_O_minus_S_V_frobenius,0.20363532150512506,41.9390,measured
+201,numerical_remedy,population-gf-c4m2-seed201-untouched-6400-refined-eta4-v1,4-8-16,false,r_eff_E,0.1902955217286024,124.8222,measured
+201,numerical_remedy,population-gf-c4m2-seed201-untouched-6400-refined-eta8-v1,8-16-32,false,r_eff_E,0.16864529936738137,249.9210,measured
+201,numerical_remedy,population-gf-c4m2-seed201-untouched-6400-refined-eta16-v1,16-32-64,false,r_eff_E,0.14664291322408685,502.1042885109782,measured
+202,numerical_validation,population-gf-c4m2-seed202-untouched-6400-v1,1-2-4,false,L_D;L_H;B_frobenius;S_Q_minus_S_K_frobenius,0.8096772659889825,38.3477,measured
+202,numerical_remedy,population-gf-c4m2-seed202-untouched-6400-refined-eta4-v1,4-8-16,false,L_D;L_H;S_Q_minus_S_K_frobenius,0.4852553423203608,123.1810,measured
+202,numerical_remedy,population-gf-c4m2-seed202-untouched-6400-refined-eta8-v1,8-16-32,false,L_D;L_H;S_Q_minus_S_K_frobenius,0.3623015885881802,264.2363,measured
+202,numerical_remedy,population-gf-c4m2-seed202-untouched-6400-refined-eta16-v1,16-32-64,false,L_H;S_Q_minus_S_K_frobenius,0.5591781271120067,531.059150890098,measured
+203,numerical_validation,population-gf-c4m2-seed203-untouched-6400-v1,1-2-4,true,,0.07624422502686524,35.6813,measured

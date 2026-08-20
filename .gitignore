@@ -6,3 +6,8 @@ results/**/seeds/
 results/**/records/
 results/**/*.pt
 results/**/*.pth
+# Per-episode/redundant production payloads stay local; compact NPZ/JSON summaries
+# and their SHA-256 receipts are published.
+results/pretrained-*/revisions/*/*.csv
+results/phase2-controlled-localization-*/snapshots/
+results/phase2-landscape-ntk-smoke-cpu-*/

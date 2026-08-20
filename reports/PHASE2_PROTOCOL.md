@@ -546,14 +546,47 @@ D_z=
 所有注册 $z$ 均满足 $D_z\le.10$ 才称 GF-like。AdamW 是不同的 adaptive
 preconditioned dynamics，偏离 Euclidean GF 不是 closure 反例。
 
-经验 vector field $F_\phi(z)$ 只在 discovery seeds 拟合，并在 untouched seeds 检验
+**P39-A 坐标修正（2026-08-20，任何 closure 拟合或 untouched closure 输出读取前）：**
+预生产审阅指出原式没有指定量纲不同的 order parameters 如何加权。只在 discovery
+seeds 上定义
 
 \[
-E_{closure}=
-\frac{\sum\|\dot z-F_\phi(z)\|^2}
-{\sum\|\dot z-\overline{\dot z}\|^2}\le.10 .
+\mu_j=\mathbb E_D z_j,\qquad
+\sigma_j=
+\left\{\mathbb E_D(z_j-\mu_j)^2\right\}^{1/2},qquad
+\widetilde z_j=\frac{z_j-\mu_j}{\sigma_j},
+\tag{P39a}
+\]
+
+其中经验 $\sigma_j\le10^{-12}$ 的 discovery-constant coordinate 固定取
+$\sigma_j=1$。经验 vector field $F_\phi(\widetilde z)$、ridge 和所有 scaler
+只在 discovery seeds 拟合；untouched seeds 不参与任何选择。注册 gate 为
+
+\[
+E_{closure}^{std}=
+\frac{\sum_U\|
+\dot{\widetilde z}-F_\phi(\widetilde z)\|^2}
+{\sum_U\|
+\dot{\widetilde z}-\overline{\dot{\widetilde z}}_D\|^2}
+\le.10 ,
 \tag{P39}
 \]
+
+其中 $U$ 表示 untouched points，分母 baseline 是 discovery seeds 的平均标准化速度。
+同时必须用同一个 fitted field 报告、不设通过阈值的 raw-coordinate sensitivity：
+
+\[
+E_{closure}^{raw}=
+\frac{\sum_U\|
+\dot z-D_\sigma F_\phi(\widetilde z)\|^2}
+{\sum_U\|
+\dot z-D_\sigma\overline{\dot{\widetilde z}}_D\|^2},
+\qquad D_\sigma=\operatorname{diag}(\sigma_1,\ldots,\sigma_p).
+\tag{P39b}
+\]
+
+这个修正改变坐标权重，不改变 source trajectories、P38 gate 或 untouched seed。若标准化
+与 raw sensitivity 给出冲突，必须公开冲突，不能事后选择较好者。
 
 否则只能叫低维描述；应寻找相同 $z$、不同 $\dot z$ 的 closure counterexample。
 

@@ -414,6 +414,7 @@ $G_{M,e}$。真实 finite response 是
 p_{M,e}(\Delta)=
 G_{M,e}(z_{M,e}+\Delta)-G_{M,e}(z_{M,e}).
 \tag{T32}
+\]
 
 它不是 Jacobian 乘向量。tangent $J_G(z)\Delta$ 只能作为小扰动近似，并须和式 (T32)
 分别报告。
@@ -444,6 +445,7 @@ response 反向；实际 nonlinear suffix 衰减；跨 pairs、seeds 和第二 o
 \qquad
 x_s^{\ell+1}=\Phi_{\theta_s^\ell}(x_s^\ell).
 \tag{T34}
+\]
 
 固定 $s$ 研究 $\ell$，得到的是给定参数下 token 如何聚类或传播；固定有限架构研究 $s$，
 得到的是训练如何改变传播算子。二者不能混称一个“动力学”。
@@ -453,16 +455,38 @@ x_s^{\ell+1}=\Phi_{\theta_s^\ell}(x_s^\ell).
 \[
 \theta_{k+1}=\theta_k-\eta\nabla R(\theta_k)
 \tag{T35}
+\]
 
 逼近式 (T34)，并用 $\eta,\eta/2,\eta/4$ 的 step-halving 检验，而不是把一个任意 full-batch
 学习率称作 gradient flow。
 
-候选低维 order parameter 向量为
+候选低维 order parameter 向量与协议 (P37) 和生产代码逐坐标一致：
 
 \[
-z=(R,E_T,L_D,L_H,L_0,S_{key},r_{eff}(E),
-\|B\|_F,\|C\|_F,QQ^\top-KK^\top,O^\top O-VV^\top).
+\begin{aligned}
+z=(&R,K_{target},L_D,L_H,\Xi_{value},S_{key},r_{eff}(E),
+\|B\|_F,\|C\|_F,\mathcal I_{QK},\mathcal I_{OV}),\\
+\mathcal I_{QK}
+&=\left\{\sum_{\ell,h}
+\|Q_{\ell h}^{\top}Q_{\ell h}
+-K_{\ell h}^{\top}K_{\ell h}\|_F^2\right\}^{1/2},\\
+\mathcal I_{OV}
+&=\left\{\sum_{\ell,h}
+\|O_{\ell h}O_{\ell h}^{\top}
+-V_{\ell h}^{\top}V_{\ell h}\|_F^2\right\}^{1/2}.
+\end{aligned}
 \tag{T36}
+\]
+
+这里 $E_T,L_0$ 仍逐 checkpoint 保存，用于 Parseval 与风险审计，但不进入本轮
+P39 closure state。$K_{target}$ 与 $\Xi_{value}$ 理论上相等；二者同时保留是为了让
+Walsh 路径和 finite flip 路径成为可观察的独立实现审计，不表示两个独立自由度。
+
+还必须区分两类 Gram。式 (T36) 中的 $Q^\top Q-K^\top K$ 与
+$OO^\top-V^\top V$ 是 $d\times d$ 的 composite-conditioning 坐标。连续 Euclidean
+factorized GF 的原始守恒候选则是每头 $d_h\times d_h$ 的
+$QQ^\top-KK^\top$ 与 $O^\top O-VV^\top$；它们只在 raw-invariant sidecar 中审计，
+不属于 $z$。把这两类矩阵互换会得到不同的 closure 命题。
 
 ### 定理/反例目标 E（closure）
 
@@ -471,6 +495,7 @@ z=(R,E_T,L_D,L_H,L_0,S_{key},r_{eff}(E),
 \[
 \dot z=F(z)
 \tag{T37}
+\]
 
 在注册分布和参数化下近似闭合。真正有力的反例是找到两组完整参数 $\theta,\theta'$，
 满足 $z(\theta)=z(\theta')$，但 $\dot z(\theta)\ne\dot z(\theta')$。这会说明必须增加哪个
@@ -489,6 +514,7 @@ attention 变成均匀分布。这说明
 \centernot\Longrightarrow
 \text{task-selective causal routing}.
 \tag{T38}
+\]
 
 本项目接在其上游：训练怎样选择 $B_s,C_s$，使固定 $s$ 时的层动力学具有任务相关结构。
 若未来能从式 (T24)–(T27) 推出某类 learned interaction kernel 再满足 clustering theorem 的
@@ -501,6 +527,7 @@ attention 变成均匀分布。这说明
 \Longrightarrow
 \text{depth-wise representation dynamics}.
 \tag{T39}
+\]
 
 当前实验直接测第一条箭头；Perspective 的证明主要约束第二条箭头之后的行为。
 

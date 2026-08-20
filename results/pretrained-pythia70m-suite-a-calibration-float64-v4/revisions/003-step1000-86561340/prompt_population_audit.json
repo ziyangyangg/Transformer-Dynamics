@@ -1,0 +1,4534 @@
+{
+  "all_cube_assignments_audited": true,
+  "checkpoint_config_hash": "e6b5ef82e2778998e52cfa9e6ca56c07cc8362ddc772e9d44bfdba70b80659fe",
+  "checkpoint_is_seed": false,
+  "concept_value_token_ownership_disjoint": true,
+  "contextual_concept_swap_geometry_aligned": true,
+  "device": "cuda",
+  "dtype": "float64",
+  "execution_environment": {
+    "attention_backend": "eager",
+    "cuda_available": true,
+    "cuda_capability": [
+      12,
+      0
+    ],
+    "cuda_device_name": "NVIDIA GeForce RTX 5090",
+    "cuda_matmul_allow_tf32": false,
+    "cuda_runtime_version": "12.8",
+    "cudnn_allow_tf32": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "cudnn_version": 91900,
+    "deterministic_algorithms_enabled": false,
+    "deterministic_algorithms_warn_only": false,
+    "numpy_version": "2.4.4",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python_implementation": "CPython",
+    "python_version": "3.11.15",
+    "requested_device": "cuda",
+    "requested_dtype": "float64",
+    "torch_version": "2.11.0+cu128",
+    "transformers_version": "5.8.0"
+  },
+  "geometry_records": [
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15
+        ],
+        [
+          20,
+          21
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      ],
+      "prompt_token_count": 32,
+      "receiver_position": 31,
+      "skeleton_id": "bracket_dictionary:0000:6802cab68b02",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          17
+        ],
+        [
+          23
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          21,
+          22
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      ],
+      "prompt_token_count": 33,
+      "receiver_position": 32,
+      "skeleton_id": "bracket_dictionary:0001:f13481d340a6",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          18
+        ],
+        [
+          24
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          21
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      ],
+      "prompt_token_count": 32,
+      "receiver_position": 31,
+      "skeleton_id": "bracket_dictionary:0002:31771b96286d",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          18
+        ],
+        [
+          23
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9
+        ],
+        [
+          14,
+          15,
+          16
+        ],
+        [
+          21,
+          22,
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 35,
+      "receiver_position": 34,
+      "skeleton_id": "bracket_dictionary:0003:36709e40fe7e",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          11
+        ],
+        [
+          18
+        ],
+        [
+          25
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          14,
+          15,
+          16
+        ],
+        [
+          21,
+          22
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      ],
+      "prompt_token_count": 32,
+      "receiver_position": 31,
+      "skeleton_id": "bracket_dictionary:0004:4019baf9e585",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          5
+        ],
+        [
+          11
+        ],
+        [
+          18
+        ],
+        [
+          24
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15
+        ],
+        [
+          20,
+          21,
+          22
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      ],
+      "prompt_token_count": 34,
+      "receiver_position": 33,
+      "skeleton_id": "bracket_dictionary:0005:1ce5baedcea0",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          17
+        ],
+        [
+          24
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          20,
+          21
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      ],
+      "prompt_token_count": 32,
+      "receiver_position": 31,
+      "skeleton_id": "bracket_dictionary:0006:2e78cd38ac1d",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          5
+        ],
+        [
+          11
+        ],
+        [
+          17
+        ],
+        [
+          23
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10,
+          11
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          22,
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 34,
+      "receiver_position": 33,
+      "skeleton_id": "bracket_dictionary:0007:994adc20e7a5",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          13
+        ],
+        [
+          19
+        ],
+        [
+          25
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          21,
+          22
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      ],
+      "prompt_token_count": 33,
+      "receiver_position": 32,
+      "skeleton_id": "bracket_dictionary:0008:b1f34387cb7e",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          18
+        ],
+        [
+          24
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4,
+          5
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          16
+        ],
+        [
+          21,
+          22
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      ],
+      "prompt_token_count": 33,
+      "receiver_position": 32,
+      "skeleton_id": "bracket_dictionary:0009:520283575c94",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          13
+        ],
+        [
+          18
+        ],
+        [
+          24
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          21
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      ],
+      "prompt_token_count": 31,
+      "receiver_position": 30,
+      "skeleton_id": "bracket_dictionary:0010:f8d6665b2e70",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          18
+        ],
+        [
+          23
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          20,
+          21
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      ],
+      "prompt_token_count": 32,
+      "receiver_position": 31,
+      "skeleton_id": "bracket_dictionary:0011:72dae084d07f",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          5
+        ],
+        [
+          11
+        ],
+        [
+          17
+        ],
+        [
+          23
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15
+        ],
+        [
+          20,
+          21
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      ],
+      "prompt_token_count": 32,
+      "receiver_position": 31,
+      "skeleton_id": "bracket_dictionary:0012:79465428b1c0",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          17
+        ],
+        [
+          23
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15
+        ],
+        [
+          20,
+          21
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      ],
+      "prompt_token_count": 31,
+      "receiver_position": 30,
+      "skeleton_id": "bracket_dictionary:0013:969d66d12141",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          17
+        ],
+        [
+          23
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10,
+          11
+        ],
+        [
+          16,
+          17,
+          18
+        ],
+        [
+          23,
+          24
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      ],
+      "prompt_token_count": 35,
+      "receiver_position": 34,
+      "skeleton_id": "bracket_dictionary:0014:14b8efddca7e",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          26
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          15,
+          16,
+          17
+        ],
+        [
+          22,
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 34,
+      "receiver_position": 33,
+      "skeleton_id": "bracket_dictionary:0015:d99d5f6dc888",
+      "template_id": "bracket_dictionary",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          19
+        ],
+        [
+          25
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8
+        ],
+        [
+          12
+        ],
+        [
+          16
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14
+        ],
+        [
+          16,
+          17,
+          18
+        ]
+      ],
+      "prompt_token_count": 26,
+      "receiver_position": 25,
+      "skeleton_id": "compact_cards:0000:c4c435eb36a8",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          10
+        ],
+        [
+          14
+        ],
+        [
+          18
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ],
+        [
+          17,
+          18,
+          19,
+          20
+        ]
+      ],
+      "prompt_token_count": 28,
+      "receiver_position": 27,
+      "skeleton_id": "compact_cards:0001:116193f2624c",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          10
+        ],
+        [
+          15
+        ],
+        [
+          20
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          18,
+          19
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          13,
+          14,
+          15,
+          16
+        ],
+        [
+          18,
+          19,
+          20,
+          21
+        ]
+      ],
+      "prompt_token_count": 29,
+      "receiver_position": 28,
+      "skeleton_id": "compact_cards:0002:e85e31fdb661",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          11
+        ],
+        [
+          16
+        ],
+        [
+          21
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          18,
+          19
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          13,
+          14,
+          15,
+          16
+        ],
+        [
+          18,
+          19,
+          20,
+          21
+        ]
+      ],
+      "prompt_token_count": 29,
+      "receiver_position": 28,
+      "skeleton_id": "compact_cards:0003:c6bce922ec61",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          11
+        ],
+        [
+          16
+        ],
+        [
+          21
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          4
+        ],
+        [
+          8
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          17
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ],
+        [
+          17,
+          18,
+          19
+        ]
+      ],
+      "prompt_token_count": 26,
+      "receiver_position": 25,
+      "skeleton_id": "compact_cards:0004:468d9f0abb49",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          10
+        ],
+        [
+          15
+        ],
+        [
+          19
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          17
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ],
+        [
+          17,
+          18,
+          19
+        ]
+      ],
+      "prompt_token_count": 27,
+      "receiver_position": 26,
+      "skeleton_id": "compact_cards:0005:6798d91857c4",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          10
+        ],
+        [
+          15
+        ],
+        [
+          19
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          12
+        ],
+        [
+          16
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5
+        ],
+        [
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14
+        ],
+        [
+          16,
+          17,
+          18
+        ]
+      ],
+      "prompt_token_count": 25,
+      "receiver_position": 24,
+      "skeleton_id": "compact_cards:0006:36a98d0cef6a",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          5
+        ],
+        [
+          10
+        ],
+        [
+          14
+        ],
+        [
+          18
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ],
+        [
+          17,
+          18,
+          19,
+          20
+        ]
+      ],
+      "prompt_token_count": 28,
+      "receiver_position": 27,
+      "skeleton_id": "compact_cards:0007:740d72e1f33c",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          10
+        ],
+        [
+          15
+        ],
+        [
+          20
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          18,
+          19
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          13,
+          14,
+          15,
+          16
+        ],
+        [
+          18,
+          19,
+          20,
+          21
+        ]
+      ],
+      "prompt_token_count": 29,
+      "receiver_position": 28,
+      "skeleton_id": "compact_cards:0008:cc6c678dd6f4",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          11
+        ],
+        [
+          16
+        ],
+        [
+          21
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          13
+        ],
+        [
+          18
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          13,
+          14,
+          15
+        ],
+        [
+          18,
+          19,
+          20
+        ]
+      ],
+      "prompt_token_count": 28,
+      "receiver_position": 27,
+      "skeleton_id": "compact_cards:0009:5ac298204648",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          11
+        ],
+        [
+          15
+        ],
+        [
+          20
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5
+        ],
+        [
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ],
+        [
+          17,
+          18,
+          19,
+          20
+        ]
+      ],
+      "prompt_token_count": 28,
+      "receiver_position": 27,
+      "skeleton_id": "compact_cards:0010:cb00ad6ffa9f",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          5
+        ],
+        [
+          10
+        ],
+        [
+          15
+        ],
+        [
+          20
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          12
+        ],
+        [
+          16
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5
+        ],
+        [
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14
+        ],
+        [
+          16,
+          17,
+          18
+        ]
+      ],
+      "prompt_token_count": 26,
+      "receiver_position": 25,
+      "skeleton_id": "compact_cards:0011:36de985a64fd",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          5
+        ],
+        [
+          10
+        ],
+        [
+          14
+        ],
+        [
+          18
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ],
+        [
+          17,
+          18,
+          19,
+          20
+        ]
+      ],
+      "prompt_token_count": 28,
+      "receiver_position": 27,
+      "skeleton_id": "compact_cards:0012:22ed01ccba2b",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          10
+        ],
+        [
+          15
+        ],
+        [
+          20
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          19
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        [
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          19,
+          20,
+          21
+        ]
+      ],
+      "prompt_token_count": 28,
+      "receiver_position": 27,
+      "skeleton_id": "compact_cards:0013:40a9ffafefe5",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          17
+        ],
+        [
+          21
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          13,
+          14,
+          15
+        ],
+        [
+          19
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          19,
+          20,
+          21
+        ]
+      ],
+      "prompt_token_count": 30,
+      "receiver_position": 29,
+      "skeleton_id": "compact_cards:0014:e9db98ec8871",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          11
+        ],
+        [
+          17
+        ],
+        [
+          21
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          12
+        ],
+        [
+          16,
+          17,
+          18
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          3,
+          4,
+          5
+        ],
+        [
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          12,
+          13,
+          14
+        ],
+        [
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      ],
+      "prompt_token_count": 28,
+      "receiver_position": 27,
+      "skeleton_id": "compact_cards:0015:0988f2a3c7d5",
+      "template_id": "compact_cards",
+      "value_token_spans": [
+        [
+          5
+        ],
+        [
+          10
+        ],
+        [
+          14
+        ],
+        [
+          20
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          24,
+          25
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        [
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ]
+      ],
+      "prompt_token_count": 39,
+      "receiver_position": 38,
+      "skeleton_id": "line_records:0000:b0d002e100e0",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          14
+        ],
+        [
+          21
+        ],
+        [
+          28
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          23,
+          24
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      ],
+      "prompt_token_count": 38,
+      "receiver_position": 37,
+      "skeleton_id": "line_records:0001:2afc2d28f5ba",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          27
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          16
+        ],
+        [
+          22
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      ],
+      "prompt_token_count": 35,
+      "receiver_position": 34,
+      "skeleton_id": "line_records:0002:f9eda5d6516b",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          13
+        ],
+        [
+          19
+        ],
+        [
+          25
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 37,
+      "receiver_position": 36,
+      "skeleton_id": "line_records:0003:26ec71469919",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          26
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          9
+        ],
+        [
+          15
+        ],
+        [
+          21,
+          22
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      ],
+      "prompt_token_count": 35,
+      "receiver_position": 34,
+      "skeleton_id": "line_records:0004:c44dc7c713a2",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          12
+        ],
+        [
+          18
+        ],
+        [
+          25
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 37,
+      "receiver_position": 36,
+      "skeleton_id": "line_records:0005:cfe008d572dd",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          26
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          16
+        ],
+        [
+          22,
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 37,
+      "receiver_position": 36,
+      "skeleton_id": "line_records:0006:cfa1775fd5b5",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          13
+        ],
+        [
+          19
+        ],
+        [
+          26
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10,
+          11,
+          12
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          25,
+          26
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        [
+          24,
+          25,
+          26,
+          27,
+          28,
+          29
+        ]
+      ],
+      "prompt_token_count": 40,
+      "receiver_position": 39,
+      "skeleton_id": "line_records:0007:04dadcdc45ad",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          15
+        ],
+        [
+          22
+        ],
+        [
+          29
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          17,
+          18,
+          19
+        ],
+        [
+          25,
+          26
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        [
+          24,
+          25,
+          26,
+          27,
+          28,
+          29
+        ]
+      ],
+      "prompt_token_count": 40,
+      "receiver_position": 39,
+      "skeleton_id": "line_records:0008:9b0a27633d5b",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          14
+        ],
+        [
+          22
+        ],
+        [
+          29
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 37,
+      "receiver_position": 36,
+      "skeleton_id": "line_records:0009:a7eeaf8e98e0",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          26
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          17,
+          18,
+          19
+        ],
+        [
+          25
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        [
+          24,
+          25,
+          26,
+          27,
+          28
+        ]
+      ],
+      "prompt_token_count": 40,
+      "receiver_position": 39,
+      "skeleton_id": "line_records:0010:34ca320351bf",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          14
+        ],
+        [
+          22
+        ],
+        [
+          28
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          23,
+          24
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      ],
+      "prompt_token_count": 38,
+      "receiver_position": 37,
+      "skeleton_id": "line_records:0011:962e9f003202",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          27
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          17
+        ],
+        [
+          23,
+          24
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        [
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      ],
+      "prompt_token_count": 38,
+      "receiver_position": 37,
+      "skeleton_id": "line_records:0012:116d8ae7efdd",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          14
+        ],
+        [
+          20
+        ],
+        [
+          27
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          24
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      ],
+      "prompt_token_count": 38,
+      "receiver_position": 37,
+      "skeleton_id": "line_records:0013:fea28782e18d",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          27
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3,
+          4
+        ],
+        [
+          10
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 36,
+      "receiver_position": 35,
+      "skeleton_id": "line_records:0014:30ec8811c2fc",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          7
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          26
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          3
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          23
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        [
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      ],
+      "prompt_token_count": 37,
+      "receiver_position": 36,
+      "skeleton_id": "line_records:0015:c145c9a88aaa",
+      "template_id": "line_records",
+      "value_token_spans": [
+        [
+          6
+        ],
+        [
+          13
+        ],
+        [
+          20
+        ],
+        [
+          26
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7
+        ],
+        [
+          14
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          29
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      ],
+      "prompt_token_count": 43,
+      "receiver_position": 42,
+      "skeleton_id": "prose_facts:0000:1a5053c10224",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          9
+        ],
+        [
+          16
+        ],
+        [
+          24
+        ],
+        [
+          31
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7,
+          8
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          23
+        ],
+        [
+          30,
+          31
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ]
+      ],
+      "prompt_token_count": 45,
+      "receiver_position": 44,
+      "skeleton_id": "prose_facts:0001:912bd40a490e",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          10
+        ],
+        [
+          18
+        ],
+        [
+          25
+        ],
+        [
+          33
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7,
+          8
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          23,
+          24
+        ],
+        [
+          31,
+          32
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ],
+        [
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ]
+      ],
+      "prompt_token_count": 46,
+      "receiver_position": 45,
+      "skeleton_id": "prose_facts:0002:f9593e8c927d",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          10
+        ],
+        [
+          18
+        ],
+        [
+          26
+        ],
+        [
+          34
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          22
+        ],
+        [
+          29
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      ],
+      "prompt_token_count": 42,
+      "receiver_position": 41,
+      "skeleton_id": "prose_facts:0003:455885ad8ef0",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          9
+        ],
+        [
+          17
+        ],
+        [
+          24
+        ],
+        [
+          31
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7,
+          8
+        ],
+        [
+          15
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          30,
+          31
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ]
+      ],
+      "prompt_token_count": 45,
+      "receiver_position": 44,
+      "skeleton_id": "prose_facts:0004:dce57eda9348",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          10
+        ],
+        [
+          17
+        ],
+        [
+          25
+        ],
+        [
+          33
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7
+        ],
+        [
+          14
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          29,
+          30
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      ],
+      "prompt_token_count": 44,
+      "receiver_position": 43,
+      "skeleton_id": "prose_facts:0005:fc485655256b",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          9
+        ],
+        [
+          16
+        ],
+        [
+          24
+        ],
+        [
+          32
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7,
+          8
+        ],
+        [
+          15
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          30
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      ],
+      "prompt_token_count": 43,
+      "receiver_position": 42,
+      "skeleton_id": "prose_facts:0006:a6b4acecd523",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          10
+        ],
+        [
+          17
+        ],
+        [
+          25
+        ],
+        [
+          32
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7,
+          8
+        ],
+        [
+          15
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          31
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ]
+      ],
+      "prompt_token_count": 45,
+      "receiver_position": 44,
+      "skeleton_id": "prose_facts:0007:5fa306134ad1",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          10
+        ],
+        [
+          17
+        ],
+        [
+          25
+        ],
+        [
+          33
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          30
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      ],
+      "prompt_token_count": 43,
+      "receiver_position": 42,
+      "skeleton_id": "prose_facts:0008:db88aa81d780",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          9
+        ],
+        [
+          17
+        ],
+        [
+          25
+        ],
+        [
+          32
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7,
+          8
+        ],
+        [
+          15
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          30
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      ],
+      "prompt_token_count": 43,
+      "receiver_position": 42,
+      "skeleton_id": "prose_facts:0009:71d4c36500b5",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          10
+        ],
+        [
+          17
+        ],
+        [
+          25
+        ],
+        [
+          32
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          30,
+          31
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ]
+      ],
+      "prompt_token_count": 45,
+      "receiver_position": 44,
+      "skeleton_id": "prose_facts:0010:981d640d14ea",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          9
+        ],
+        [
+          17
+        ],
+        [
+          25
+        ],
+        [
+          33
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          22
+        ],
+        [
+          29,
+          30,
+          31
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ]
+      ],
+      "prompt_token_count": 45,
+      "receiver_position": 44,
+      "skeleton_id": "prose_facts:0011:187cd2fa3217",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          9
+        ],
+        [
+          17
+        ],
+        [
+          24
+        ],
+        [
+          33
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7,
+          8
+        ],
+        [
+          15
+        ],
+        [
+          22,
+          23,
+          24
+        ],
+        [
+          32
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ],
+        [
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ]
+      ],
+      "prompt_token_count": 46,
+      "receiver_position": 45,
+      "skeleton_id": "prose_facts:0012:282d0cf47943",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          10
+        ],
+        [
+          17
+        ],
+        [
+          26
+        ],
+        [
+          34
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7
+        ],
+        [
+          14
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          29,
+          30
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      ],
+      "prompt_token_count": 43,
+      "receiver_position": 42,
+      "skeleton_id": "prose_facts:0013:dd3dc1c9f01a",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          9
+        ],
+        [
+          16
+        ],
+        [
+          24
+        ],
+        [
+          32
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7
+        ],
+        [
+          14
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          29,
+          30
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      ],
+      "prompt_token_count": 43,
+      "receiver_position": 42,
+      "skeleton_id": "prose_facts:0014:b90a4ef5f635",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          9
+        ],
+        [
+          16
+        ],
+        [
+          24
+        ],
+        [
+          32
+        ]
+      ]
+    },
+    {
+      "concept_token_spans": [
+        [
+          7,
+          8
+        ],
+        [
+          16
+        ],
+        [
+          23,
+          24
+        ],
+        [
+          31
+        ]
+      ],
+      "full_memory_slot_token_spans": [
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ],
+        [
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ]
+      ],
+      "prompt_token_count": 45,
+      "receiver_position": 44,
+      "skeleton_id": "prose_facts:0015:1e4ce19c3f67",
+      "template_id": "prose_facts",
+      "value_token_spans": [
+        [
+          10
+        ],
+        [
+          18
+        ],
+        [
+          26
+        ],
+        [
+          33
+        ]
+      ]
+    }
+  ],
+  "geometry_sha256": "14fc86f08b6eab312a2892fe23220a838b7ea42a8c75a145544727fd1839672e",
+  "measurement_contract_hash": "f376b5652d9d3bd708fd3a13efb952d65a9a739b9a895316a0569c5fddb187c8",
+  "measurement_source_hashes": {
+    "phase2_protocol": "7ba03a8f83dc6c299ec0d467bf876384fa3f1fe74740ad63347eaaf8ab2f93ea",
+    "pretrained_bridge": "fe55b37dfe6a1380c6c876840ce231b2f047376d212ad9eb232c1d7f14b4cf4a",
+    "pretrained_causal": "f067afe42d95960a91fdd6e339d8079468954ee6b6e0729832da6ba140cc48a2",
+    "pretrained_study": "7dab23a5b5e43a67aadc78456d9e3c8ca0a7745fe56f287f8f9b23c50491e085"
+  },
+  "memory_answer_boundary_hard_gate_passed": true,
+  "n_cases": 1024,
+  "n_cube_assignments_per_skeleton": 16,
+  "n_skeletons": 64,
+  "n_templates": 4,
+  "population_audit_status": "passed",
+  "prompt_population_hash": "580f33b45dc585881d7f7d6eba23ed86c577622eea21bec008107d3ef4cf0a8d",
+  "prompt_prefix_hard_gate_passed": true,
+  "prompt_token_geometry_invariant": true,
+  "repo_id": "EleutherAI/pythia-70m-deduped",
+  "resolved_revision": "66bac1f7ae4b7faa77c34ee6a50d41cd09579a88",
+  "result_identity_hash": "75f00f55daaaef76ccbe5fb20f96a394053d80e2847e2b8baea990a66a991a8d",
+  "revision": "step1000",
+  "schema_version": "pretrained-study-v4",
+  "slot_token_ownership_disjoint": true,
+  "statistical_scope": "descriptive_only",
+  "study_config_hash": "c92daf6ca856acc3e1b7c50f84aaa6440972665d1c00521b6b9ff26d1a590e4e",
+  "study_id": "pythia-70m-causal-routing-calibration-float64-v4",
+  "tokenizer_hash": "ec1545d285a5952b1bb4cbb6aa54bef956a72d2872f73f1179b5e12c82965ffb",
+  "value_label_token_geometry_matched": true
+}

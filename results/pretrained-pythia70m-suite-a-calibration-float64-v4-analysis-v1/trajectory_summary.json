@@ -1,0 +1,134 @@
+{
+  "analysis_schema_version": "pretrained-analysis-v1",
+  "checkpoint_is_seed": false,
+  "final_checkpoint_by_template": [
+    {
+      "accuracy": 0.53515625,
+      "best_attention_selectivity": 0.13342761421112673,
+      "natural_swap_mse": 0.016096176849217488,
+      "risk": 0.5099458288736805,
+      "s_key": 0.040227545679021204,
+      "template_id": "compact_cards",
+      "walsh_L_W": 0.16327276148451325
+    },
+    {
+      "accuracy": 0.53125,
+      "best_attention_selectivity": 0.18400237601656136,
+      "natural_swap_mse": 0.00961651144269999,
+      "risk": 0.5073092648518241,
+      "s_key": 0.02259979812282517,
+      "template_id": "line_records",
+      "walsh_L_W": 0.14720158830636196
+    },
+    {
+      "accuracy": 0.54296875,
+      "best_attention_selectivity": 0.08772625058842468,
+      "natural_swap_mse": 0.01837534151696331,
+      "risk": 0.5034213788499501,
+      "s_key": -5.87763189989545e-05,
+      "template_id": "prose_facts",
+      "walsh_L_W": 0.07404310758270041
+    },
+    {
+      "accuracy": 0.5625,
+      "best_attention_selectivity": 0.12537721569627477,
+      "natural_swap_mse": 0.011809395369538843,
+      "risk": 0.48564914079889726,
+      "s_key": 0.05685849113050041,
+      "template_id": "bracket_dictionary",
+      "walsh_L_W": 0.1362741115822044
+    }
+  ],
+  "max_accuracy": {
+    "revision": "step4000",
+    "template_id": "bracket_dictionary",
+    "value": 0.71484375
+  },
+  "max_attention_selectivity": {
+    "distractor_card_mass": 0.14073048909355687,
+    "head": 4,
+    "layer": 5,
+    "revision": "step143000",
+    "target_card_mass": 0.32473286511011823,
+    "template_id": "line_records",
+    "value": 0.18400237601656136
+  },
+  "max_natural_swap_mse": {
+    "revision": "step16000",
+    "template_id": "bracket_dictionary",
+    "value": 0.03577586234614148
+  },
+  "max_s_key": {
+    "revision": "step4000",
+    "template_id": "bracket_dictionary",
+    "value": 0.223024925918812
+  },
+  "mechanistic_story_assessment": {
+    "checkpoint_is_seed": false,
+    "full_story_supported": false,
+    "operational_checks": {
+      "confirmatory_status": false,
+      "selective_routing_descriptive_screen": "at least one positive registered S_key and one positive layer-head attention selectivity",
+      "stable_retrieval_posthoc_screen": "at final checkpoint, all four templates have accuracy>=0.60, risk<=0.45, and S_key>0"
+    },
+    "reasons": [
+      "stable retrieval was not observed across the frozen templates",
+      "episode-level natural-swap deltas were not saved",
+      "only one pretraining trajectory was measured"
+    ],
+    "selective_routing_observed": true,
+    "sequence_diffuse_to_selective_to_sparse_collision_supported": false,
+    "sequence_reason": "natural-swap tails are unobserved and checkpoints come from one trajectory",
+    "sparse_collision_testable": false,
+    "stable_retrieval": false,
+    "statistical_unit": "one_pretraining_trajectory",
+    "training_law_testable": false
+  },
+  "min_risk": {
+    "revision": "step4000",
+    "template_id": "bracket_dictionary",
+    "value": 0.3793870268271504
+  },
+  "min_s_key": {
+    "revision": "step143000",
+    "template_id": "prose_facts",
+    "value": -5.87763189989545e-05
+  },
+  "module_attribution": {
+    "reason": "source transmission, decision receiver, and coherent replay are overlapping nonlinear suffix estimands, not an additive decomposition",
+    "status": "non_identifiable_distributed_local_hybrids"
+  },
+  "n_checkpoint_template_rows": 32,
+  "p10_boundary": "final-prompt receiver to one full-card direct path; not total mediation",
+  "parallel_closure_max_abs": {
+    "layer": 5,
+    "revision": "step16000",
+    "template_id": "line_records",
+    "value": 2.042810365310288e-14
+  },
+  "patch_role_extrema": {
+    "coherent_replay_gate": {
+      "layer": 5,
+      "max_mean_squared_effect": 0.030430673509011363,
+      "revision": "step16000",
+      "site_kind": "resid_pre",
+      "template_id": "bracket_dictionary"
+    },
+    "decision_receiver_accumulation": {
+      "layer": 4,
+      "max_mean_squared_effect": 0.02502100323529215,
+      "revision": "step16000",
+      "site_kind": "attn_out",
+      "template_id": "bracket_dictionary"
+    },
+    "source_span_transmission": {
+      "layer": 1,
+      "max_mean_squared_effect": 0.038505975756600586,
+      "revision": "step16000",
+      "site_kind": "resid_pre",
+      "template_id": "bracket_dictionary"
+    }
+  },
+  "statistical_scope": "descriptive_only",
+  "statistical_unit": "one_pretraining_trajectory"
+}
