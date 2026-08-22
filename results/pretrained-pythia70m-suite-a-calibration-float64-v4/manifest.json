@@ -1,0 +1,327 @@
+{
+  "aggregate_artifacts": {
+    "checkpoint_metrics_tidy.csv": {
+      "bytes": 2226311,
+      "sha256": "069e9cc98be9d327e2ef7e3c9fc9ef8b2649c49d22a1b98ad9d6536b4c81e43c"
+    },
+    "checkpoint_metrics_tidy.json": {
+      "bytes": 3208058,
+      "sha256": "7addd85dd18b0f8d5a19b859a330d6e87e0d9af205a9f647901448fcda746246"
+    },
+    "checkpoint_metrics_wide.csv": {
+      "bytes": 106065,
+      "sha256": "13543541f6f794c372c6c06794ebd344db6cb63e1a7bed914e098d815f8f8d35"
+    },
+    "checkpoint_metrics_wide.json": {
+      "bytes": 154354,
+      "sha256": "ccb95854c9722ceed1c36c42fffaf5e59c7d54026e64a795d977b494c366c587"
+    }
+  },
+  "completed_revisions": 8,
+  "configuration": {
+    "answer_choices": [
+      " plus",
+      " minus"
+    ],
+    "batch_size": 16,
+    "concept_pool": [
+      "amber",
+      "birch",
+      "cedar",
+      "delta",
+      "elm",
+      "frost",
+      "grove",
+      "hazel",
+      "iris",
+      "jade",
+      "kelp",
+      "linen",
+      "maple",
+      "north",
+      "olive",
+      "pearl",
+      "quartz",
+      "reed",
+      "spruce",
+      "tulip",
+      "umber",
+      "violet",
+      "willow",
+      "xenon",
+      "yarrow",
+      "zinc",
+      "acorn",
+      "basil",
+      "coral",
+      "dune",
+      "ember",
+      "flint"
+    ],
+    "device": "cuda",
+    "dtype": "float64",
+    "evaluation_seed": 20260820,
+    "memory_size": 4,
+    "memory_value_strings": [
+      "plus",
+      "minus"
+    ],
+    "repo_id": "EleutherAI/pythia-70m-deduped",
+    "revisions": [
+      "step0",
+      "step64",
+      "step512",
+      "step1000",
+      "step4000",
+      "step16000",
+      "step64000",
+      "step143000"
+    ],
+    "skeletons_per_template": 16,
+    "study_id": "pythia-70m-causal-routing-calibration-float64-v4",
+    "templates": [
+      {
+        "card_format": "{concept} = {value}",
+        "card_separator": " ; ",
+        "prefix": "Memory cards:",
+        "query_format": "Query: {query}\nAnswer:",
+        "template_id": "compact_cards"
+      },
+      {
+        "card_format": "- {concept} maps to {value}",
+        "card_separator": "\n",
+        "prefix": "Records:",
+        "query_format": "\nLook up {query}.\nAnswer:",
+        "template_id": "line_records"
+      },
+      {
+        "card_format": "The value for {concept} is {value}.",
+        "card_separator": " ",
+        "prefix": "Remember these associations.",
+        "query_format": "What is the value for {query}? Answer:",
+        "template_id": "prose_facts"
+      },
+      {
+        "card_format": "[{concept} -> {value}]",
+        "card_separator": " ",
+        "prefix": "Dictionary:",
+        "query_format": "Retrieve [{query}] =",
+        "template_id": "bracket_dictionary"
+      }
+    ],
+    "value_assignments": [
+      [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "estimand": {
+    "checkpoint_is_seed": false,
+    "grain": "checkpoint_x_template_prompt_population",
+    "inference": "descriptive_only"
+  },
+  "execution_environment": {
+    "attention_backend": "eager",
+    "cuda_available": true,
+    "cuda_capability": [
+      12,
+      0
+    ],
+    "cuda_device_name": "NVIDIA GeForce RTX 5090",
+    "cuda_matmul_allow_tf32": false,
+    "cuda_runtime_version": "12.8",
+    "cudnn_allow_tf32": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "cudnn_version": 91900,
+    "deterministic_algorithms_enabled": false,
+    "deterministic_algorithms_warn_only": false,
+    "numpy_version": "2.4.4",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python_implementation": "CPython",
+    "python_version": "3.11.15",
+    "requested_device": "cuda",
+    "requested_dtype": "float64",
+    "torch_version": "2.11.0+cu128",
+    "transformers_version": "5.8.0"
+  },
+  "measurement_contract": {
+    "checkpoint_is_seed": false,
+    "concept_span": "exploratory diagnostic only; never the registered S_key source",
+    "concept_swap_geometry": {
+      "bare_concept_length_is_sufficient": false,
+      "hard_gate": "base and donor prompts have aligned contextual token counts; all changed token ids lie inside the registered concept span",
+      "scope": "every sampled skeleton across its complete Boolean value cube"
+    },
+    "direct_edge": {
+      "descendants": "complete answer likelihood rerun",
+      "equations": [
+        "P10",
+        "P11"
+      ],
+      "receiver": "final prompt token",
+      "scope": "all layers and heads before softmax",
+      "source": "full value-bearing memory card token span"
+    },
+    "numerics": {
+      "allowed_dtypes": [
+        "float32",
+        "float64"
+      ],
+      "reason": "P12 keeps its original absolute gate; float64 is the prospective full-trajectory remediation for borderline float32 closure",
+      "rejected_dtypes": [
+        "float16",
+        "bfloat16"
+      ],
+      "remediation_dtype": "float64"
+    },
+    "parallel_residual_closure_gate": "primary_absolute_hard_gate",
+    "parallel_residual_closure_max_abs": 1e-05,
+    "parallel_residual_identity": "delta_post = delta_h + delta_attention + delta_ffn",
+    "parallel_residual_relative_sensitivity": {
+      "component_scale_max_abs": "max(||delta_post||_inf, ||delta_h||_inf + ||delta_attention||_inf + ||delta_ffn||_inf)",
+      "definition": "closure_relative_sensitivity = closure_max_abs / component_scale_max_abs (or zero when the component scale is zero)",
+      "gating": false,
+      "interpretation": "scale-normalized numerical sensitivity only"
+    },
+    "patch_roles": [
+      "source_span_transmission",
+      "decision_receiver_accumulation",
+      "coherent_replay_gate"
+    ],
+    "prompt_value_boundary": {
+      "answer_suffixes": "separate full-answer teacher-forcing suffixes",
+      "hard_gate": "no duplicate ASCII spaces in any rendered prompt",
+      "memory_values": "boundary-whitespace-free strings rendered inside cards"
+    },
+    "schema_version": "pretrained-study-v4",
+    "score": "P40 complete-answer tanh((logp(answer_0)-logp(answer_1))/2)",
+    "statistical_scope": "descriptive_only"
+  },
+  "measurement_contract_hash": "f376b5652d9d3bd708fd3a13efb952d65a9a739b9a895316a0569c5fddb187c8",
+  "measurement_source_hashes": {
+    "phase2_protocol": "7ba03a8f83dc6c299ec0d467bf876384fa3f1fe74740ad63347eaaf8ab2f93ea",
+    "pretrained_bridge": "fe55b37dfe6a1380c6c876840ce231b2f047376d212ad9eb232c1d7f14b4cf4a",
+    "pretrained_causal": "f067afe42d95960a91fdd6e339d8079468954ee6b6e0729832da6ba140cc48a2",
+    "pretrained_study": "7dab23a5b5e43a67aadc78456d9e3c8ca0a7745fe56f287f8f9b23c50491e085"
+  },
+  "patch_estimand": "mean[(patched full-answer P40 score-base score)^2]",
+  "patch_roles": [
+    "source_span_transmission",
+    "decision_receiver_accumulation",
+    "coherent_replay_gate"
+  ],
+  "scalar_metrics": [
+    "base_risk",
+    "base_accuracy",
+    "value_flip_effect",
+    "walsh_target_error_energy",
+    "walsh_distractor_direct_energy",
+    "walsh_interaction_energy",
+    "walsh_bias_energy",
+    "walsh_leakage",
+    "walsh_parseval_relative_gap",
+    "natural_swap_mse",
+    "direct_edge_target_effect",
+    "direct_edge_mean_distractor_effect",
+    "direct_edge_s_key",
+    "parallel_residual_max_closure_error"
+  ],
+  "scheduled_revisions": 8,
+  "schema_version": "pretrained-study-v4",
+  "study_config_hash": "c92daf6ca856acc3e1b7c50f84aaa6440972665d1c00521b6b9ff26d1a590e4e",
+  "study_id": "pythia-70m-causal-routing-calibration-float64-v4"
+}

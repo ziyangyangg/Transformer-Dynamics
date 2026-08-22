@@ -1,0 +1,51 @@
+schema_version = 1
+research_question = "Derive the QK/OV interaction kernel learned by gradient flow and prove that its depth dynamics implement the task interaction graph."
+policy = "The active tree contains only the theorem-facing core, the audited toy/GF/Pythia bridges, and evidence required to reproduce current claims. Removed work remains recoverable from Git history."
+
+active_modules = [
+  "__init__.py",
+  "clustering_baseline.py",
+  "control_config.py",
+  "controlled_model.py",
+  "controlled_training.py",
+  "data.py",
+  "finite_localization_v2.py",
+  "interventions.py",
+  "metrics.py",
+  "model.py",
+  "model_variants.py",
+  "phase2_analysis.py",
+  "phase2_precision_audit.py",
+  "phase2_results.py",
+  "phase2_study.py",
+  "population_gf.py",
+  "population_gf_study.py",
+  "pretrained_analysis.py",
+  "pretrained_bridge.py",
+  "pretrained_causal.py",
+  "pretrained_study.py",
+]
+
+active_configs = [
+  "phase2/discovery-remedy/residual-factorization-noffn.json",
+  "pretrained_pythia70m_suite_a_calibration_float64_v4.json",
+]
+
+active_reports = [
+  "CAUSAL_ROUTING_BRIDGE_THEOREM.md",
+  "CLUSTERING_BASELINE.md",
+  "EXPERIMENT_POSITIONING.md",
+  "LITERATURE_MAP.md",
+  "PHASE2_PROTOCOL.md",
+  "PYTHIA_CALIBRATION_ANALYSIS_SPEC.md",
+  "RESEARCH_CHARTER.md",
+]
+
+active_result_directories = [
+  "clustering-baseline-v1",
+  "phase2-residual-factorization-noffn-analysis-v3",
+  "phase2-residual-factorization-noffn-discovery-remedy-v2",
+  "phase2-residual-factorization-noffn-precision-audit-v2",
+  "pretrained-pythia70m-suite-a-calibration-float64-v4",
+  "pretrained-pythia70m-suite-a-calibration-float64-v4-analysis-v1",
+]

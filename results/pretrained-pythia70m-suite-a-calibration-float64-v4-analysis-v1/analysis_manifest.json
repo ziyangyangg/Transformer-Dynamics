@@ -1,0 +1,104 @@
+{
+  "analysis_schema_version": "pretrained-analysis-v1",
+  "analysis_source_sha256": "996710201827f65f403030c5361daf72dfc33d2de27f518cd7e774ca833cedfa",
+  "analysis_spec_sha256": "896045a0992aba89cd9569daa2ac62f4b4c0905030d7f0d630fde0bf7bec1015",
+  "checkpoint_is_seed": false,
+  "confidence_intervals_or_p_values": false,
+  "figure_count": 4,
+  "files": {
+    "REPORT.md": {
+      "bytes": 1897,
+      "sha256": "81f3d22c9114f2d1687e6b2c0b66bcdcd3115075d30320c1572ca6e0a2eddb83"
+    },
+    "checkpoint_template_summary.csv": {
+      "bytes": 12577,
+      "sha256": "49f2b7e77e6c213ad89e9952cd55a44d431b9956890dcd980c3f903e226ea74d"
+    },
+    "checkpoint_template_summary.json": {
+      "bytes": 32223,
+      "sha256": "8e8bf912514241494cb11b1ae48b7e8dac21a7b303c3c68156e9a8465ef01e5f"
+    },
+    "direct_edge_by_slot.csv": {
+      "bytes": 23842,
+      "sha256": "b21bbbed66561c7208b008cc685a1ab31e41cc7257fbf26217c41031c28fd2a3"
+    },
+    "direct_edge_by_slot.json": {
+      "bytes": 77444,
+      "sha256": "e7be5e0ecb6cd6e4e106b442ac366ba465d049a330574a548c5f5b3b0e025480"
+    },
+    "figure1_function_walsh.png": {
+      "bytes": 500204,
+      "sha256": "be0aa111ba642e25a4f4b9fd093c5f9669d4a51cba25ea180cd89f5333e9f2ab"
+    },
+    "figure1_function_walsh.svg": {
+      "bytes": 197105,
+      "sha256": "2f14005a5410f0b151b51b504ca4f69360948ff40a166ad56c3cf644b75bcf68"
+    },
+    "figure2_swap_direct_causal.png": {
+      "bytes": 333388,
+      "sha256": "74fefaf6657fe4f2ad7ecfe93aae504dab93c6c503f0da6733c86b6f69fc1461"
+    },
+    "figure2_swap_direct_causal.svg": {
+      "bytes": 121622,
+      "sha256": "af0854301babbd9e3c954c168366d7150e8487af737ce677ba4b05ffd7362d90"
+    },
+    "figure3_layer_head_routing.png": {
+      "bytes": 189842,
+      "sha256": "35e478f692c4ad87250852ec138e49e77dc30e370be1fc6ad594db42565dea42"
+    },
+    "figure3_layer_head_routing.svg": {
+      "bytes": 187877,
+      "sha256": "f770f467551f880885ab0d0eca0aad90d79e61218b40b7ff0685c98a544b2881"
+    },
+    "figure4_patch_parallel.png": {
+      "bytes": 438221,
+      "sha256": "240653e4fcb8d16f5c95a2dfbb3a1d9db6fb8b4d2e53eb91b05f3c1a1d295c32"
+    },
+    "figure4_patch_parallel.svg": {
+      "bytes": 323838,
+      "sha256": "5739e3fe2522ae021b617747410ca30430d367bdb098b43eafdbb11786daa75e"
+    },
+    "finite_patch_roles.csv": {
+      "bytes": 144805,
+      "sha256": "f8cd7ae52123525a7a802030c0fda188b787a376cfc429f5337673fa16b6af5f"
+    },
+    "finite_patch_roles.json": {
+      "bytes": 426435,
+      "sha256": "6b7a4955d134df3c1874cb98745e309e3da0b5f4cf7cfbb21606091b752b2f36"
+    },
+    "parallel_residual.csv": {
+      "bytes": 36788,
+      "sha256": "96e5782d9a56c01e3d8c51eb618e29bf5cbb3d8023fe07c47ebf89d9d67ea307"
+    },
+    "parallel_residual.json": {
+      "bytes": 119053,
+      "sha256": "ff2e7950b74aa7d019dba65c10fc30e20c3dacd09e246b3e8e20f99d848f2827"
+    },
+    "routing_layer_head.csv": {
+      "bytes": 395089,
+      "sha256": "5b9d4ceaa71a2d3c3e47d87d5519bff56e460bcfae748fc4920cfe2986958182"
+    },
+    "routing_layer_head.json": {
+      "bytes": 1257934,
+      "sha256": "31b4e54ad323df7f45af3ebd01ac8fef2fa433479e0680a2f736f222d9bb6daa"
+    },
+    "strict_audit.json": {
+      "bytes": 21528,
+      "sha256": "ac5779b77ba45c2c7be4bb867033bedcdad906c4020aa55f67266d0b284cbf3e"
+    },
+    "trajectory_summary.json": {
+      "bytes": 4516,
+      "sha256": "266cfa42ae76dc39bbd1e34aaedf5ce4250c909d7193e26c17bbdf4a917465c6"
+    }
+  },
+  "public_scope": {
+    "exclude_from_git": "redundant multi-hundred-MB raw CSV; retain raw NPZ and hashes locally or as release artifacts",
+    "include": "compact CSV/JSON, PNG/SVG, report, config, code, tests, and strict receipts"
+  },
+  "statistical_scope": "descriptive_only",
+  "statistical_unit": "one_pretraining_trajectory",
+  "status": "passed",
+  "strict_input_audit_sha256": "ac5779b77ba45c2c7be4bb867033bedcdad906c4020aa55f67266d0b284cbf3e",
+  "study_config_hash": "c92daf6ca856acc3e1b7c50f84aaa6440972665d1c00521b6b9ff26d1a590e4e",
+  "study_id": "pythia-70m-causal-routing-calibration-float64-v4"
+}

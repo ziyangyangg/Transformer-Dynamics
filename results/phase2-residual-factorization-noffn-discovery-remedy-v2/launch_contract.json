@@ -1,0 +1,28 @@
+{
+  "schema_version": "phase2-launch-contract-v1",
+  "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+  "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+  "inference_status": "controlled_reinstantiation_discovery_not_phase1_continuation",
+  "production_source_commit": "edfa871d656cfdafd18e9d88b997f9ee5352ca5f",
+  "source_files": {
+    "src/routing_lab/control_config.py": "8786147699b012ec8693fb28bb6f32ffacf24f0e0bbe90d39eb0d7f266e922c8",
+    "src/routing_lab/model_variants.py": "2d795f06a8433e701051b0dd5db3a72456e467e11b18c6e65e9ca967e9971493",
+    "src/routing_lab/controlled_model.py": "b360a42c4238fd2a15159e88a66af19b483579882eefd806886dcfa16ba1ceb1",
+    "src/routing_lab/controlled_training.py": "f4bf80db05531798b565bc155a1aaae908e43864c4740b7da3405e0c132e63ec",
+    "src/routing_lab/finite_localization_v2.py": "dfe564d262603a04a2c1623986f35995e3743c76196b01a6636f06c124fe77e4",
+    "src/routing_lab/phase2_analysis.py": "5999a0918719db97c24a08a1422371132f73e23f9bb69d7d4ff9ab360f13b57c",
+    "src/routing_lab/phase2_study.py": "9884d6688409a50c2c9ee073af50c1400b599942f05a4eae0452120f3760bab2",
+    "src/routing_lab/phase2_configs.py": "43ba62f8d9764855220589fcafcb27ca6df902540768ecc6822305ff11ef8e6f"
+  },
+  "contract_files": {
+    "configs/phase2/discovery-remedy/residual-factorization-noffn.json": "e339121989a1e970e453d6e6fe60e737c94da00b5c9fee950b981cde7003ddbc",
+    "reports/PHASE2_PROTOCOL.md": "edeaa36737844c314472dde39e8607611ab3f069f4fc7338ae1ba03a2beed74b",
+    "reports/PHASE2_THEORY_OBJECTS.md": "800c306348970a3dbe21b54a5fb29066d6281583f878845a900cc53345e93f97"
+  },
+  "source_bundle_hash": "ff7e1b30cdd0f02eaacc9cd519a840a54755adbb23a86729dd7e9bcf6a30f452",
+  "notes": [
+    "The source commit was created after launch solely to freeze byte-identical files; the listed source SHA-256 values were recorded while the process was running.",
+    "The evaluation cube is the complete registered binary-value population for sampled retrieval skeletons; the unused r_eval stream is retained as provenance but is not the base-risk estimator.",
+    "This discovery matrix changes Phase-I batch size and codebook initialization geometry, so it cannot be described as literal continuation of a Phase-I trajectory."
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "checkpoint_metrics_float64.csv": {
+      "bytes": 977344,
+      "sha256": "d2257bfdcec4168e9f7c12aa341af1a589e2ddc6b0c9c35775e72cf07d843fa1"
+    },
+    "checkpoint_metrics_float64.json": {
+      "bytes": 2031931,
+      "sha256": "a19a13fd7735e6784669419de679cdefec73805ce9970e941aa6175335d4b5be"
+    },
+    "precision_deltas.csv": {
+      "bytes": 913546,
+      "sha256": "267cbb693f6e23e0bbfd959c77de0f8befe2a111ea55ad638b258591ed116d8f"
+    },
+    "precision_deltas.json": {
+      "bytes": 1793013,
+      "sha256": "9d075c94487309400fd1da8e33ad10c973b3eca518872f68715bbb70ad6cf273"
+    }
+  },
+  "measurement_contract": {
+    "coverage": "every_registered_checkpoint_not_selected_failures_only",
+    "direct_mse": "mean_v[(float64(f_theta(v))-float64(y(v)))^2]",
+    "model_forward_dtype": "unchanged_from_checkpoint",
+    "parseval_gate": "relative_gap_strictly_less_than_1e-6",
+    "reduction_dtype": "float64",
+    "registered_s_key": "mean_episode[delta_target-mean_distractor_delta]",
+    "risk": "one_half_times_walsh_error_energy",
+    "schema_version": "phase2-float64-reduction-audit-v2",
+    "slot_effect": "float64(y)*(float64(f_theta(x))-float64(f_theta(do(edge_i=-inf))))",
+    "source_mutation": "forbidden",
+    "swap_effect": "mean_episode[(float64(f_theta(x_swap))-float64(f_theta(x_base)))^2]",
+    "trained_parameter_dtype": "unchanged_from_checkpoint",
+    "value_population": "complete_2^m_boolean_cube_per_fixed_skeleton",
+    "walsh_coefficient": "mean_v[float64(f_theta(v))*float64(chi_S(v))]"
+  },
+  "measurement_contract_hash": "23b8a97e05ee3868cf67f5cee71da337326c09839a05d6ddcf6aaded2f1bae96",
+  "measurement_source_bundle_hash": "3d400237f80d05a270f1f52535f7c70b317638ab7a299c1e5a8741e7ceeadacf",
+  "measurement_source_files": {
+    "reports/PHASE2_PROTOCOL.md": "7ba03a8f83dc6c299ec0d467bf876384fa3f1fe74740ad63347eaaf8ab2f93ea",
+    "src/routing_lab/controlled_model.py": "b360a42c4238fd2a15159e88a66af19b483579882eefd806886dcfa16ba1ceb1",
+    "src/routing_lab/controlled_training.py": "f4bf80db05531798b565bc155a1aaae908e43864c4740b7da3405e0c132e63ec",
+    "src/routing_lab/data.py": "0647632b89756cae1b01e655811e245abb740d72fd88ce66590365d4c46c98a7",
+    "src/routing_lab/finite_localization_v2.py": "dfe564d262603a04a2c1623986f35995e3743c76196b01a6636f06c124fe77e4",
+    "src/routing_lab/phase2_analysis.py": "5999a0918719db97c24a08a1422371132f73e23f9bb69d7d4ff9ab360f13b57c",
+    "src/routing_lab/phase2_precision_audit.py": "2d2dd9f68feb09c3dc6c67e859c6f3074ae598765e53855083ed02f3fde14185"
+  },
+  "schema_version": "phase2-float64-reduction-audit-v2",
+  "source_artifacts": {
+    "checkpoint_metrics.json": "ce1dde5d966bf43678d95cb045f2dc21f03c842a3c3a6910370a509eb7935abd",
+    "launch_contract.json": "c6e980f010a22c6c43cfa24714281e73798b520145f0d3f0e7218de77e7985fc",
+    "manifest.json": "a49d36a868b7be3d0d0f9771dc1419f95251b2e185c8c6eea02fc48c446672f5"
+  },
+  "source_launch_bundle_hash": "ff7e1b30cdd0f02eaacc9cd519a840a54755adbb23a86729dd7e9bcf6a30f452",
+  "source_launch_contract_sha256": "c6e980f010a22c6c43cfa24714281e73798b520145f0d3f0e7218de77e7985fc",
+  "source_study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+  "source_study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+  "summary": {
+    "checkpoint_rows": 1068,
+    "failed_source_rows": 19,
+    "max_float64_relative_gap": 3.569764059688039e-16,
+    "max_source_relative_gap": 3.344357827758717e-06,
+    "repaired_source_rows": 19
+  }
+}

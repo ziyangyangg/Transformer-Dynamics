@@ -1,0 +1,32 @@
+{
+  "branch_step": 800,
+  "cell_indices": [
+    5
+  ],
+  "checkpoint_steps": [
+    0,
+    25,
+    50,
+    100,
+    200,
+    400,
+    800
+  ],
+  "codebook_replica_id": null,
+  "codebook_seed": 271801,
+  "codebook_seed_scope": "master_init_derived",
+  "initial_codebook_sha256": "cf6ec4bad2af7da4795d7087320f02c90b1ec07768c4bab55a2a5c145e7a459b",
+  "prefix_hash": "83ca69b51bbbd2a699a68732dd6fdc359d6011fc66996130a95f1ecf31865ad3",
+  "realized_codebook_seed": 10271910,
+  "schema_version": "phase2-study-v2",
+  "seed": 109,
+  "streams": {
+    "diag": 70000109,
+    "eval": 30000109,
+    "init": 10000109,
+    "patch": 60000109,
+    "swap": 50000109,
+    "train": 20000109,
+    "walsh": 40000109
+  }
+}

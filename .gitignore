@@ -1,8 +1,14 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
-results/**/checkpoints/
-results/**/seeds/
-results/**/records/
-results/**/*.pt
-results/**/*.pth
+.venv/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+*.orig
+# Experiment outputs are private by default. Curated evidence is force-added only
+# after its configuration, source hashes, and receipts pass review.
+results/**
+autoresearch/**
+configs/*_smoke_*.json

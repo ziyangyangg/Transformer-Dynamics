@@ -1,0 +1,2568 @@
+{
+  "bootstrap": {
+    "headline_method": "paired-seed-studentized-max-t-bootstrap",
+    "n_resamples": 20000,
+    "rng_seed": 20260820,
+    "sampling_unit": "training_seed"
+  },
+  "checkpoint_primary_key": [
+    "study_config_hash",
+    "cell_hash",
+    "seed",
+    "step"
+  ],
+  "cohort": "discovery-remedy",
+  "exploratory": {
+    "head_capacity": [],
+    "representation": []
+  },
+  "factorization": [
+    {
+      "arm_roles": {
+        "dense_direct": "capacity_upper_bound",
+        "factorized": "rank_limited_baseline",
+        "h1_direct_factorized": "capacity_equal_parameterization_calibration",
+        "rank_matched_direct": "conditioning_control_same_function_class"
+      },
+      "claim_guardrail": "Dense improvement alone is rank/function-capacity evidence, not pure optimization geometry. The functional gate is evaluated per training seed and never changes the evidential role of a direct-composite arm.",
+      "claim_status": "registered_p19_evaluated_discovery_only",
+      "cohort": "discovery-remedy",
+      "functional_gate_by_arm": {
+        "h1-dense-direct-constant-6400": {
+          "all_seeds_pass": true,
+          "pass_rate": 1.0,
+          "passed_seed_count": 12,
+          "passing_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "thresholds": {
+            "accuracy_min": 0.95,
+            "risk_max": 0.01,
+            "xi_value_min": 0.9
+          },
+          "total_seed_count": 12
+        },
+        "h1-factorized-constant-6400": {
+          "all_seeds_pass": true,
+          "pass_rate": 1.0,
+          "passed_seed_count": 12,
+          "passing_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "thresholds": {
+            "accuracy_min": 0.95,
+            "risk_max": 0.01,
+            "xi_value_min": 0.9
+          },
+          "total_seed_count": 12
+        },
+        "hard-dense-direct-constant-6400": {
+          "all_seeds_pass": true,
+          "pass_rate": 1.0,
+          "passed_seed_count": 12,
+          "passing_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "thresholds": {
+            "accuracy_min": 0.95,
+            "risk_max": 0.01,
+            "xi_value_min": 0.9
+          },
+          "total_seed_count": 12
+        },
+        "hard-factorized-constant-6400": {
+          "all_seeds_pass": true,
+          "pass_rate": 1.0,
+          "passed_seed_count": 12,
+          "passing_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "thresholds": {
+            "accuracy_min": 0.95,
+            "risk_max": 0.01,
+            "xi_value_min": 0.9
+          },
+          "total_seed_count": 12
+        },
+        "hard-rank-matched-constant-6400": {
+          "all_seeds_pass": true,
+          "pass_rate": 1.0,
+          "passed_seed_count": 12,
+          "passing_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "thresholds": {
+            "accuracy_min": 0.95,
+            "risk_max": 0.01,
+            "xi_value_min": 0.9
+          },
+          "total_seed_count": 12
+        }
+      },
+      "multiplicity": {
+        "family_size": 9,
+        "method": "paired-seed-studentized-max-t-bootstrap",
+        "n_resamples": 20000
+      },
+      "paired_seeds": [
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111
+      ],
+      "per_seed": [
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 2.644219791949033
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.3193991862090018
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.9801614264213693
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.5923734619322214
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.8863497904077228
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.3413977300493013
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.25579489262617383
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -1.6514912213125177
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 4.002505923112778
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.806946479000378
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.9483454203572874
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.8907013513668038
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 2.469449937690943
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.3133886442032371
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.9532346743609615
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.5665351870556625
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.8928344537437418
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.3292176432206771
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.22420595966053075
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -1.5491634282198217
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 3.9243688097186364
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.8295714620000965
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.994239197809769
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.9793093396642758
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 4.392972280733979
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.67469778571611
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.05101157777511723
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.12088267740176444
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -1.4530539866996677
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.2861362614151968
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.8496154799861524
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.06206550223295105
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 5.989637166736698
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 2.845339371869978
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.22258665803793287
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "rank_matched_vs_factorized",
+          "comparison_role": "conditioning_control_same_function_class",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 2.832009894392746
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -6.92156511826383
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -8.917511533589007
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -8.824076777877885
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -9.387984755281023
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -11.096833199414995
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -10.054438612342974
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -10.857480916341599
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -8.024238144039664
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -6.243114400316652
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -7.46243502450689
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -7.479411528906118
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -8.453490154985282
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -7.180752360606474
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -9.457686301884785
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -9.708545914733094
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -9.508350591640601
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -11.770136106418947
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -10.301550116894017
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -11.15485225134952
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -8.033112396865722
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -6.436660423059516
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -7.72264550746403
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -7.654537946880721
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -8.532321947909836
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -4.562646192643588
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -9.590501398481312
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -10.8231095043145
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -11.034136746863195
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -13.3113276063142
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -10.906643413203643
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -12.676621149835547
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -9.338458725873336
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -5.51070078249243
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -7.517110533025008
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -9.060687316686503
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "dense_vs_factorized",
+          "comparison_role": "capacity_plus_conditioning_upper_bound",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -7.184769275163649
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.3648151729287885
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.173250564164621
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.9109163099516677
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.0105456975358038
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.6898292034472786
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.5394079452505072
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.1502998797627949
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.1423873596918942
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.24726759125272021
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.19813462748053057
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.71677873187859
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "R",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.8002909005648783
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.18583384745741532
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.214233089498535
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.1561426028640716
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.7957110093971326
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.083181894525302
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.3810139515939393
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.1835531409220364
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.1337473437519855
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": -0.25864699648373674
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.3576029944239816
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.8868169751696456
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "L_W",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.6751895221969938
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 100,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.5565304660298849
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 101,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.4147834453293588
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 102,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.6013341154655863
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 103,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.0502261576922705
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 104,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.5300670686240803
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 105,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.580590133424053
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 106,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.5046947136203654
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 107,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.36544270788198013
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 108,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.4097663153940869
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 109,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 0.5723463047286994
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 110,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.1984401371263438
+        },
+        {
+          "cohort": "discovery-remedy",
+          "comparison": "h1_dense_vs_factorized",
+          "comparison_role": "full_rank_capacity_equal_parameterization_calibration",
+          "endpoint": "I_swap",
+          "estimand": "log2_treatment_over_baseline_at_step_6400",
+          "seed": 111,
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+          "value": 1.0106116711187647
+        }
+      ],
+      "registered_p19": {
+        "classification": {
+          "arm_roles": {
+            "dense_direct": "capacity_upper_bound",
+            "factorized": "baseline",
+            "rank_matched_direct": "optimization_control"
+          },
+          "classification": "rank_or_function_capacity",
+          "dense_direct_status": "remedied",
+          "rank_matched_direct_status": "not_remedied",
+          "supports_optimization_geometry": false
+        },
+        "dense_vs_factorized": {
+          "baseline_arm": "hard-factorized-constant-6400",
+          "comparison": "dense_vs_factorized",
+          "function_noninferiority": {
+            "all_pass": true,
+            "checks": {
+              "accuracy_lower_above_negative_margin": true,
+              "risk_upper_below_margin": true,
+              "xi_value_lower_above_negative_margin": true
+            },
+            "margins": {
+              "accuracy_lower": -0.02,
+              "risk_upper": 0.01,
+              "xi_value_lower": -0.05
+            },
+            "simultaneous_90_bands": {
+              "accuracy_difference": {
+                "estimate": 0.0009765625,
+                "lower": 0.000513973114891794,
+                "standard_error": 0.00019124742475601567,
+                "upper": 0.001439151885108206
+              },
+              "risk_difference": {
+                "estimate": -0.0015054591260391197,
+                "lower": -0.0021768621517565547,
+                "standard_error": 0.0002775768397967475,
+                "upper": -0.0008340561003216846
+              },
+              "xi_value_difference": {
+                "estimate": 0.002224834171386192,
+                "lower": -0.0007220797522646248,
+                "standard_error": 0.001218336859900132,
+                "upper": 0.005171748095037008
+              }
+            }
+          },
+          "paired_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "per_seed_function_differences": [
+            {
+              "accuracy_difference": 0.00048828125,
+              "risk_difference": -0.0006859912920212663,
+              "seed": 100,
+              "xi_value_difference": 0.00024137511445587734
+            },
+            {
+              "accuracy_difference": 0.0009765625,
+              "risk_difference": -0.0014131095619802244,
+              "seed": 101,
+              "xi_value_difference": 0.005889138928978355
+            },
+            {
+              "accuracy_difference": 0.001953125,
+              "risk_difference": -0.0029824105609306253,
+              "seed": 102,
+              "xi_value_difference": -0.001914943035444594
+            },
+            {
+              "accuracy_difference": 0.0009765625,
+              "risk_difference": -0.0017819313735983032,
+              "seed": 103,
+              "xi_value_difference": 0.006547242577653378
+            },
+            {
+              "accuracy_difference": 0.002197265625,
+              "risk_difference": -0.003269131131666693,
+              "seed": 104,
+              "xi_value_difference": 0.0035015025841858005
+            },
+            {
+              "accuracy_difference": 0.001220703125,
+              "risk_difference": -0.002010364385393633,
+              "seed": 105,
+              "xi_value_difference": 0.0023779632720106747
+            },
+            {
+              "accuracy_difference": 0.0015869140625,
+              "risk_difference": -0.0021728613480724,
+              "seed": 106,
+              "xi_value_difference": 0.011862783263495658
+            },
+            {
+              "accuracy_difference": 0.00048828125,
+              "risk_difference": -0.0009832856914668486,
+              "seed": 107,
+              "xi_value_difference": -0.0005228893671755941
+            },
+            {
+              "accuracy_difference": 0.0001220703125,
+              "risk_difference": -0.00020155486878569557,
+              "seed": 108,
+              "xi_value_difference": 0.00014271504915086553
+            },
+            {
+              "accuracy_difference": 0.0003662109375,
+              "risk_difference": -0.0006310741122104316,
+              "seed": 109,
+              "xi_value_difference": -0.0017832439662015531
+            },
+            {
+              "accuracy_difference": 0.0003662109375,
+              "risk_difference": -0.0007386378231210466,
+              "seed": 110,
+              "xi_value_difference": 0.0026154394709010376
+            },
+            {
+              "accuracy_difference": 0.0009765625,
+              "risk_difference": -0.001195157363222266,
+              "seed": 111,
+              "xi_value_difference": -0.0022590738353756024
+            }
+          ],
+          "residual_reduction": {
+            "any_endpoint_pass": true,
+            "criterion": "upper_simultaneous_95_below_0_and_point_below_-1_bit",
+            "endpoints": {
+              "I_swap": {
+                "estimate": -9.293059387074742,
+                "lower": -11.961652295502155,
+                "passed": true,
+                "standard_error": 0.7784867001679997,
+                "upper": -6.624466478647328
+              },
+              "L_W": {
+                "estimate": -8.95509598880894,
+                "lower": -10.573768836087613,
+                "passed": true,
+                "standard_error": 0.4722021405176004,
+                "upper": -7.336423141530268
+              }
+            }
+          },
+          "sampling_unit": "training_seed",
+          "seed_function_gate": {
+            "observed_pass_rate": 1.0,
+            "passed": true,
+            "required_pass_rate": 0.8
+          },
+          "status": "remedied",
+          "treatment_arm": "hard-dense-direct-constant-6400"
+        },
+        "inference_boundary": "discovery_only_not_confirmation",
+        "rank_matched_vs_factorized": {
+          "baseline_arm": "hard-factorized-constant-6400",
+          "comparison": "rank_matched_vs_factorized",
+          "function_noninferiority": {
+            "all_pass": true,
+            "checks": {
+              "accuracy_lower_above_negative_margin": true,
+              "risk_upper_below_margin": true,
+              "xi_value_lower_above_negative_margin": true
+            },
+            "margins": {
+              "accuracy_lower": -0.02,
+              "risk_upper": 0.01,
+              "xi_value_lower": -0.05
+            },
+            "simultaneous_90_bands": {
+              "accuracy_difference": {
+                "estimate": -0.0006001790364583334,
+                "lower": -0.0013075154904060617,
+                "standard_error": 0.00031748890678154725,
+                "upper": 0.00010715741748939481
+              },
+              "risk_difference": {
+                "estimate": 0.0012234023182390251,
+                "lower": 0.00010484530660386285,
+                "standard_error": 0.0005020658002494609,
+                "upper": 0.0023419593298741872
+              },
+              "xi_value_difference": {
+                "estimate": -0.00254210045057827,
+                "lower": -0.006330043931222079,
+                "standard_error": 0.0017002234621273536,
+                "upper": 0.001245843030065539
+              }
+            }
+          },
+          "paired_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "per_seed_function_differences": [
+            {
+              "accuracy_difference": -0.0020751953125,
+              "risk_difference": 0.003632499470105413,
+              "seed": 100,
+              "xi_value_difference": -0.005359566666697901
+            },
+            {
+              "accuracy_difference": 0.0,
+              "risk_difference": 0.0003509094917554718,
+              "seed": 101,
+              "xi_value_difference": 0.002842686250914994
+            },
+            {
+              "accuracy_difference": -0.0013427734375,
+              "risk_difference": 0.0029073642384680846,
+              "seed": 102,
+              "xi_value_difference": -0.014011919848485377
+            },
+            {
+              "accuracy_difference": -0.002197265625,
+              "risk_difference": 0.003596762562479165,
+              "seed": 103,
+              "xi_value_difference": -0.0001606886939953256
+            },
+            {
+              "accuracy_difference": 0.0013427734375,
+              "risk_difference": -0.0015012782974666297,
+              "seed": 104,
+              "xi_value_difference": 0.0001226599906658521
+            },
+            {
+              "accuracy_difference": 0.000244140625,
+              "risk_difference": -0.00042403025041346247,
+              "seed": 105,
+              "xi_value_difference": -0.005230866012425395
+            },
+            {
+              "accuracy_difference": 0.0001220703125,
+              "risk_difference": 0.0004217481296869773,
+              "seed": 106,
+              "xi_value_difference": 0.006380452022312966
+            },
+            {
+              "accuracy_difference": 0.0003662109375,
+              "risk_difference": -0.0006728797160755771,
+              "seed": 107,
+              "xi_value_difference": -0.00017713132115204644
+            },
+            {
+              "accuracy_difference": -0.0018310546875,
+              "risk_difference": 0.003069451917979227,
+              "seed": 108,
+              "xi_value_difference": -0.007771172665798076
+            },
+            {
+              "accuracy_difference": -0.0009765625,
+              "risk_difference": 0.001586052968218592,
+              "seed": 109,
+              "xi_value_difference": -0.005353650678785016
+            },
+            {
+              "accuracy_difference": -0.00048828125,
+              "risk_difference": 0.0006905504212072964,
+              "seed": 110,
+              "xi_value_difference": 0.004903369707790262
+            },
+            {
+              "accuracy_difference": -0.0003662109375,
+              "risk_difference": 0.0010236768829237444,
+              "seed": 111,
+              "xi_value_difference": -0.006689377491284176
+            }
+          ],
+          "residual_reduction": {
+            "any_endpoint_pass": false,
+            "criterion": "upper_simultaneous_95_below_0_and_point_below_-1_bit",
+            "endpoints": {
+              "I_swap": {
+                "estimate": 1.4007311125297683,
+                "lower": -0.8141596054415701,
+                "passed": false,
+                "standard_error": 0.6461318850173879,
+                "upper": 3.615621830501107
+              },
+              "L_W": {
+                "estimate": 0.8735906405816559,
+                "lower": -0.6017937513023776,
+                "passed": false,
+                "standard_error": 0.4304017758160108,
+                "upper": 2.3489750324656895
+              }
+            }
+          },
+          "sampling_unit": "training_seed",
+          "seed_function_gate": {
+            "observed_pass_rate": 1.0,
+            "passed": true,
+            "required_pass_rate": 0.8
+          },
+          "status": "not_remedied",
+          "treatment_arm": "hard-rank-matched-constant-6400"
+        }
+      },
+      "sampling_unit": "training_seed",
+      "simultaneous_95_bands": {
+        "dense_vs_factorized:I_swap": {
+          "estimate": -9.293059387074742,
+          "lower": -11.961652295502155,
+          "standard_error": 0.7784867001679997,
+          "upper": -6.624466478647328
+        },
+        "dense_vs_factorized:L_W": {
+          "estimate": -8.95509598880894,
+          "lower": -10.573768836087613,
+          "standard_error": 0.4722021405176004,
+          "upper": -7.336423141530268
+        },
+        "dense_vs_factorized:R": {
+          "estimate": -8.643548347155495,
+          "lower": -10.149311450553139,
+          "standard_error": 0.43926390791825165,
+          "upper": -7.13778524375785
+        },
+        "h1_dense_vs_factorized:I_swap": {
+          "estimate": 0.9829027697029561,
+          "lower": 0.5279875098459574,
+          "standard_error": 0.13270869392770693,
+          "upper": 1.4378180295599547
+        },
+        "h1_dense_vs_factorized:L_W": {
+          "estimate": 0.5661982812764418,
+          "lower": 0.10024723919076312,
+          "standard_error": 0.13592807207408766,
+          "upper": 1.0321493233621204
+        },
+        "h1_dense_vs_factorized:R": {
+          "estimate": 0.5298791254167248,
+          "lower": 0.10210177993175218,
+          "standard_error": 0.12479197296880654,
+          "upper": 0.9576564709016974
+        },
+        "rank_matched_vs_factorized:I_swap": {
+          "estimate": 1.4007311125297683,
+          "lower": -0.8141596054415701,
+          "standard_error": 0.6461318850173879,
+          "upper": 3.615621830501107
+        },
+        "rank_matched_vs_factorized:L_W": {
+          "estimate": 0.8735906405816559,
+          "lower": -0.6017937513023776,
+          "standard_error": 0.4304017758160108,
+          "upper": 2.3489750324656895
+        },
+        "rank_matched_vs_factorized:R": {
+          "estimate": 0.8801007659337922,
+          "lower": -0.6403243994046234,
+          "standard_error": 0.4435411508734748,
+          "upper": 2.400525931272208
+        }
+      },
+      "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    }
+  ],
+  "sampling_unit": "training_seed",
+  "schedule_paired_slopes": [
+    {
+      "cohort": "discovery-remedy",
+      "contrast": "cosine_minus_constant_tail_log2_decay_slope",
+      "multiplicity": {
+        "confidence_level": 0.95,
+        "family": [
+          "delta_p_R",
+          "delta_p_L_W",
+          "delta_p_I_swap"
+        ],
+        "method": "paired-seed-studentized-max-t-bootstrap",
+        "n_resamples": 20000
+      },
+      "paired_seeds": [
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111
+      ],
+      "per_seed": [
+        {
+          "constant_p_I_swap": 2.1766006735682533,
+          "constant_p_L_W": 1.28958784490641,
+          "constant_p_R": 1.32880693749889,
+          "cosine_p_I_swap": 1.8087016328604715,
+          "cosine_p_L_W": 2.3492745706862577,
+          "cosine_p_R": 2.3563475532535136,
+          "delta_p_I_swap": -0.3678990407077818,
+          "delta_p_L_W": 1.0596867257798477,
+          "delta_p_R": 1.0275406157546236,
+          "seed": 100
+        },
+        {
+          "constant_p_I_swap": 1.5001083064975549,
+          "constant_p_L_W": 1.2780779332129906,
+          "constant_p_R": 1.3331467346231871,
+          "cosine_p_I_swap": 2.3593633329291173,
+          "cosine_p_L_W": 2.016971106759624,
+          "cosine_p_R": 2.0843835709957426,
+          "delta_p_I_swap": 0.8592550264315624,
+          "delta_p_L_W": 0.7388931735466335,
+          "delta_p_R": 0.7512368363725554,
+          "seed": 101
+        },
+        {
+          "constant_p_I_swap": 0.6479287940425065,
+          "constant_p_L_W": 0.8158992029070482,
+          "constant_p_R": 0.866219676628878,
+          "cosine_p_I_swap": 1.9722402752166484,
+          "cosine_p_L_W": 1.5365974802693088,
+          "cosine_p_R": 1.5940988536596243,
+          "delta_p_I_swap": 1.3243114811741419,
+          "delta_p_L_W": 0.7206982773622606,
+          "delta_p_R": 0.7278791770307463,
+          "seed": 102
+        },
+        {
+          "constant_p_I_swap": 0.4413830562634507,
+          "constant_p_L_W": 0.7106569783715397,
+          "constant_p_R": 0.7355737282519851,
+          "cosine_p_I_swap": 2.4606741235746177,
+          "cosine_p_L_W": 2.338009289028883,
+          "cosine_p_R": 2.3409861899514413,
+          "delta_p_I_swap": 2.019291067311167,
+          "delta_p_L_W": 1.6273523106573433,
+          "delta_p_R": 1.6054124616994563,
+          "seed": 103
+        },
+        {
+          "constant_p_I_swap": 0.44132408559449593,
+          "constant_p_L_W": 0.8552756524961216,
+          "constant_p_R": 0.8817277424835315,
+          "cosine_p_I_swap": 2.1299264301900385,
+          "cosine_p_L_W": 2.2026934088661987,
+          "cosine_p_R": 2.200887186930604,
+          "delta_p_I_swap": 1.6886023445955425,
+          "delta_p_L_W": 1.347417756370077,
+          "delta_p_R": 1.3191594444470727,
+          "seed": 104
+        },
+        {
+          "constant_p_I_swap": 1.1039814449290284,
+          "constant_p_L_W": 0.8940149424765522,
+          "constant_p_R": 0.9319706694303251,
+          "cosine_p_I_swap": 2.9974988972691445,
+          "cosine_p_L_W": 2.114336162182346,
+          "cosine_p_R": 2.166981528605829,
+          "delta_p_I_swap": 1.8935174523401161,
+          "delta_p_L_W": 1.2203212197057938,
+          "delta_p_R": 1.235010859175504,
+          "seed": 105
+        },
+        {
+          "constant_p_I_swap": 0.01620086205418474,
+          "constant_p_L_W": 0.5755297966933898,
+          "constant_p_R": 0.5852353768899559,
+          "cosine_p_I_swap": 2.2864616550176997,
+          "cosine_p_L_W": 1.2679251715859456,
+          "cosine_p_R": 1.3157405965492255,
+          "delta_p_I_swap": 2.270260792963515,
+          "delta_p_L_W": 0.6923953748925559,
+          "delta_p_R": 0.7305052196592696,
+          "seed": 106
+        },
+        {
+          "constant_p_I_swap": 1.1362736627277925,
+          "constant_p_L_W": 1.4310200658547723,
+          "constant_p_R": 1.4484528263785386,
+          "cosine_p_I_swap": 1.8530172535890543,
+          "cosine_p_L_W": 2.2378276702973836,
+          "cosine_p_R": 2.281242856136236,
+          "delta_p_I_swap": 0.7167435908612618,
+          "delta_p_L_W": 0.8068076044426113,
+          "delta_p_R": 0.8327900297576973,
+          "seed": 107
+        },
+        {
+          "constant_p_I_swap": 2.05589152798539,
+          "constant_p_L_W": 1.510241189939204,
+          "constant_p_R": 1.5669782192418336,
+          "cosine_p_I_swap": 2.32786739798023,
+          "cosine_p_L_W": 2.400536048773484,
+          "cosine_p_R": 2.446485423096413,
+          "delta_p_I_swap": 0.27197586999484,
+          "delta_p_L_W": 0.8902948588342801,
+          "delta_p_R": 0.8795072038545795,
+          "seed": 108
+        },
+        {
+          "constant_p_I_swap": 1.6385147044551513,
+          "constant_p_L_W": 1.2208094132784884,
+          "constant_p_R": 1.251380529245094,
+          "cosine_p_I_swap": 1.3298400900026803,
+          "cosine_p_L_W": 1.8957339620342446,
+          "cosine_p_R": 1.9517426561920732,
+          "delta_p_I_swap": -0.308674614452471,
+          "delta_p_L_W": 0.6749245487557562,
+          "delta_p_R": 0.7003621269469793,
+          "seed": 109
+        },
+        {
+          "constant_p_I_swap": 1.1812514212166583,
+          "constant_p_L_W": 1.3509199828996152,
+          "constant_p_R": 1.4088194836511598,
+          "cosine_p_I_swap": 2.061898005374313,
+          "cosine_p_L_W": 1.5174220265795562,
+          "cosine_p_R": 1.5903012933117422,
+          "delta_p_I_swap": 0.8806465841576545,
+          "delta_p_L_W": 0.16650204367994093,
+          "delta_p_R": 0.18148180966058236,
+          "seed": 110
+        },
+        {
+          "constant_p_I_swap": 1.6601308724728177,
+          "constant_p_L_W": 1.2302876023451772,
+          "constant_p_R": 1.2881535367520798,
+          "cosine_p_I_swap": 1.511294945410369,
+          "cosine_p_L_W": 2.3720834846709056,
+          "cosine_p_R": 2.4247794908693905,
+          "delta_p_I_swap": -0.14883592706244864,
+          "delta_p_L_W": 1.1417958823257284,
+          "delta_p_R": 1.1366259541173107,
+          "seed": 111
+        }
+      ],
+      "sampling_unit": "training_seed",
+      "simultaneous_95_bands": {
+        "delta_p_I_swap": {
+          "estimate": 0.924932885633925,
+          "lower": 0.20864523482920416,
+          "standard_error": 0.2684203114859859,
+          "upper": 1.6412205364386456
+        },
+        "delta_p_L_W": {
+          "estimate": 0.9239241480294025,
+          "lower": 0.6294328401623404,
+          "standard_error": 0.11035712886964548,
+          "upper": 1.2184154558964646
+        },
+        "delta_p_R": {
+          "estimate": 0.9272926448730314,
+          "lower": 0.6437382606948627,
+          "standard_error": 0.10625864628381129,
+          "upper": 1.2108470290512001
+        }
+      },
+      "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    }
+  ],
+  "schema_version": "phase2-results-v2",
+  "source_studies": [
+    {
+      "checkpoint_rows": 1068,
+      "cohort": "discovery-remedy",
+      "launch_contract_sha256": "c6e980f010a22c6c43cfa24714281e73798b520145f0d3f0e7218de77e7985fc",
+      "master_seeds": [
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111
+      ],
+      "precision_audit": {
+        "artifact_manifest_sha256": "206fad4ff6170b6113c5829933253fbed9b1509790ad383416d5c24dead2b3b8",
+        "corrected_checkpoint_table_sha256": "a19a13fd7735e6784669419de679cdefec73805ce9970e941aa6175335d4b5be",
+        "measurement_contract_hash": "23b8a97e05ee3868cf67f5cee71da337326c09839a05d6ddcf6aaded2f1bae96",
+        "measurement_source_bundle_hash": "3d400237f80d05a270f1f52535f7c70b317638ab7a299c1e5a8741e7ceeadacf",
+        "schema_version": "phase2-float64-reduction-audit-v2"
+      },
+      "production_source_commit": "edfa871d656cfdafd18e9d88b997f9ee5352ca5f",
+      "schema_version": "phase2-study-v2",
+      "source_bundle_hash": "ff7e1b30cdd0f02eaacc9cd519a840a54755adbb23a86729dd7e9bcf6a30f452",
+      "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2",
+      "validation": "launch_contract_root_seed_checkpoint_and_raw_causal_sidecars_passed"
+    }
+  ],
+  "training_limit": [
+    {
+      "analysis": {
+        "bootstrap": {
+          "n_resamples": 20000,
+          "rng_seed": 2294130764,
+          "sampling_unit": "training_seed"
+        },
+        "excluded_incomplete_seeds": [],
+        "expected_seeds": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "identifiability": {
+          "I_swap": {
+            "floor_seed_count": 0,
+            "floor_seed_fraction": 0.0,
+            "identifiable": true
+          },
+          "L_W": {
+            "floor_seed_count": 0,
+            "floor_seed_fraction": 0.0,
+            "identifiable": true
+          },
+          "R": {
+            "floor_seed_count": 0,
+            "floor_seed_fraction": 0.0,
+            "identifiable": true
+          }
+        },
+        "paired_seeds": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "plateau_equivalence": {
+          "bands": {
+            "I_swap": {
+              "equivalent": false,
+              "estimate": -1.1779160135361233,
+              "lower": -2.718518610880544,
+              "upper": 0.36268658380829755
+            },
+            "L_W": {
+              "equivalent": false,
+              "estimate": -0.6034664355750453,
+              "lower": -1.4749109637376738,
+              "upper": 0.2679780925875832
+            },
+            "R": {
+              "equivalent": false,
+              "estimate": -0.6133874297082574,
+              "lower": -1.4942506001857008,
+              "upper": 0.2674757407691859
+            }
+          },
+          "confidence_level": 0.9,
+          "equivalence_interval": [
+            -0.32192809488736235,
+            0.32192809488736235
+          ],
+          "family": [
+            "R",
+            "L_W",
+            "I_swap"
+          ],
+          "method": "paired-seed-studentized-max-t-bootstrap",
+          "passed": false,
+          "simultaneous": true
+        },
+        "practical_floor_gate": {
+          "any_residual_above_floor": false,
+          "bands": {
+            "I_swap": {
+              "above_threshold": false,
+              "estimate": 0.004436222656641372,
+              "lower": 0.000825063788535588,
+              "upper": 0.008047381524747155
+            },
+            "L_W": {
+              "above_threshold": false,
+              "estimate": 0.0025857657332387066,
+              "lower": 0.0012409082027306734,
+              "upper": 0.00393062326374674
+            }
+          },
+          "both_residuals_above_floor": false,
+          "confidence_level": 0.95,
+          "family": [
+            "L_W",
+            "I_swap"
+          ],
+          "method": "paired-seed-studentized-max-t-bootstrap",
+          "passed": false,
+          "simultaneous": true,
+          "threshold": 0.0025
+        },
+        "rate_equivalence": {
+          "bands": {
+            "d_W": {
+              "equivalent": true,
+              "estimate": -0.03867873797451243,
+              "lower": -0.04938974957784364,
+              "upper": -0.027967726371181216
+            },
+            "d_swap": {
+              "equivalent": false,
+              "estimate": 0.031093662560985485,
+              "lower": -0.24439139831766685,
+              "upper": 0.3065787234396378
+            }
+          },
+          "confidence_level": 0.9,
+          "equivalence_interval": [
+            -0.25,
+            0.25
+          ],
+          "family": [
+            "d_W",
+            "d_swap"
+          ],
+          "method": "paired-seed-studentized-max-t-bootstrap",
+          "n_resamples": 20000,
+          "paired_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "passed": false,
+          "simultaneous": true
+        },
+        "sampling_unit": "training_seed",
+        "seed_estimates": [
+          {
+            "d_W": -0.03921909259248002,
+            "d_swap": 0.8477937360693633,
+            "final_I_swap": 0.00016059560841813177,
+            "final_L_W": 0.0012714709182158788,
+            "p_I_swap": 2.1766006735682533,
+            "p_L_W": 1.28958784490641,
+            "p_R": 1.32880693749889,
+            "q_I_swap": -4.745213185995259,
+            "q_L_W": -1.1516070197232924,
+            "q_R": -1.220946036733127,
+            "seed": 100
+          },
+          {
+            "d_W": -0.055068801410196544,
+            "d_swap": 0.16696157187436778,
+            "final_I_swap": 0.0021817191172938924,
+            "final_L_W": 0.0024368678108139634,
+            "p_I_swap": 1.5001083064975549,
+            "p_L_W": 1.2780779332129906,
+            "p_R": 1.3331467346231871,
+            "q_I_swap": -0.897081672096506,
+            "q_L_W": -0.9824012666495345,
+            "q_R": -0.9368816336158878,
+            "seed": 101
+          },
+          {
+            "d_W": -0.050320473721829795,
+            "d_swap": -0.21829088258637153,
+            "final_I_swap": 0.011496568177125164,
+            "final_L_W": 0.005280582190548062,
+            "p_I_swap": 0.6479287940425065,
+            "p_L_W": 0.8158992029070482,
+            "p_R": 0.866219676628878,
+            "q_I_swap": 0.31030139509516486,
+            "q_L_W": -0.40114683990777944,
+            "q_R": -0.44782646816129745,
+            "seed": 102
+          },
+          {
+            "d_W": -0.024916749880445344,
+            "d_swap": -0.2941906719885344,
+            "final_I_swap": 0.005112644709987409,
+            "final_L_W": 0.003054630107359581,
+            "p_I_swap": 0.4413830562634507,
+            "p_L_W": 0.7106569783715397,
+            "p_R": 0.7355737282519851,
+            "q_I_swap": -0.5603420937803079,
+            "q_L_W": -0.339246077260209,
+            "q_R": -0.4018560779954437,
+            "seed": 103
+          },
+          {
+            "d_W": -0.026452089987409888,
+            "d_swap": -0.44040365688903554,
+            "final_I_swap": 0.013363787132598694,
+            "final_L_W": 0.005829384797027485,
+            "p_I_swap": 0.44132408559449593,
+            "p_L_W": 0.8552756524961216,
+            "p_R": 0.8817277424835315,
+            "q_I_swap": 1.4699870976650975,
+            "q_L_W": 1.4309551082563738,
+            "q_R": 1.3583318061362588,
+            "seed": 104
+          },
+          {
+            "d_W": -0.03795572695377292,
+            "d_swap": 0.17201077549870325,
+            "final_I_swap": 0.004163083494458567,
+            "final_L_W": 0.0034009156603938308,
+            "p_I_swap": 1.1039814449290284,
+            "p_L_W": 0.8940149424765522,
+            "p_R": 0.9319706694303251,
+            "q_I_swap": 2.920932356412908,
+            "q_L_W": 1.8633038797558643,
+            "q_R": 1.9304706311866693,
+            "seed": 105
+          },
+          {
+            "d_W": -0.009705580196566088,
+            "d_swap": -0.5690345148357712,
+            "final_I_swap": 0.009821713086462468,
+            "final_L_W": 0.0037280202287584144,
+            "p_I_swap": 0.01620086205418474,
+            "p_L_W": 0.5755297966933898,
+            "p_R": 0.5852353768899559,
+            "q_I_swap": 0.25852512786532,
+            "q_L_W": 0.2184461518796468,
+            "q_R": 0.15219159808302132,
+            "seed": 106
+          },
+          {
+            "d_W": -0.0174327605237663,
+            "d_swap": -0.31217916365074605,
+            "final_I_swap": 0.003027491145359376,
+            "final_L_W": 0.0015275219013183023,
+            "p_I_swap": 1.1362736627277925,
+            "p_L_W": 1.4310200658547723,
+            "p_R": 1.4484528263785386,
+            "q_I_swap": 0.2438422222765854,
+            "q_L_W": -1.138881941125374,
+            "q_R": -1.0866420406948507,
+            "seed": 107
+          },
+          {
+            "d_W": -0.05673702930262947,
+            "d_swap": 0.48891330874355643,
+            "final_I_swap": 0.00015629898774812898,
+            "final_L_W": 0.0003661607824264303,
+            "p_I_swap": 2.05589152798539,
+            "p_L_W": 1.510241189939204,
+            "p_R": 1.5669782192418336,
+            "q_I_swap": -5.62790518974033,
+            "q_L_W": -2.996614820913499,
+            "q_R": -3.1365841965538994,
+            "seed": 108
+          },
+          {
+            "d_W": -0.030571115966605555,
+            "d_swap": 0.38713417521005744,
+            "final_I_swap": 0.00081012812437405,
+            "final_L_W": 0.0009949575327662173,
+            "p_I_swap": 1.6385147044551513,
+            "p_L_W": 1.2208094132784884,
+            "p_R": 1.251380529245094,
+            "q_I_swap": -2.6439542325846963,
+            "q_L_W": -2.1832816884501223,
+            "q_R": -2.0797632286983254,
+            "seed": 109
+          },
+          {
+            "d_W": -0.0578995007515446,
+            "d_swap": -0.22756806243450156,
+            "final_I_swap": 0.002202191303054414,
+            "final_L_W": 0.0012797799909418828,
+            "p_I_swap": 1.1812514212166583,
+            "p_L_W": 1.3509199828996152,
+            "p_R": 1.4088194836511598,
+            "q_I_swap": -2.1869942362247916,
+            "q_L_W": -1.754109930085479,
+            "q_R": -1.7780277007001484,
+            "seed": 110
+          },
+          {
+            "d_W": -0.057865934406902575,
+            "d_swap": 0.3719773357207379,
+            "final_I_swap": 0.0007384509928161597,
+            "final_L_W": 0.0018588968782944357,
+            "p_I_swap": 1.6601308724728177,
+            "p_L_W": 1.2302876023451772,
+            "p_R": 1.2881535367520798,
+            "q_I_swap": -2.677089751326663,
+            "q_L_W": 0.1929872173228606,
+            "q_R": 0.28688419124794046,
+            "seed": 111
+          }
+        ],
+        "stable_residual_gate_pass": false,
+        "stratum": {
+          "arm": "hard-factorized-constant-6400",
+          "cohort": "discovery-remedy",
+          "config_hash": "6e9beb2f8bd9f2effa15740a286ed530de99381342f9f3eb7cff502912d91099",
+          "schema_version": "phase2-results-v2",
+          "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+        },
+        "stratum_fields": [
+          "schema_version",
+          "study_id",
+          "study_config_hash",
+          "config_hash",
+          "cohort",
+          "arm"
+        ],
+        "tail_steps": [
+          800,
+          1600,
+          3200,
+          6400
+        ]
+      },
+      "arm": "hard-factorized-constant-6400",
+      "cohort": "discovery-remedy",
+      "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    },
+    {
+      "analysis": {
+        "bootstrap": {
+          "n_resamples": 20000,
+          "rng_seed": 3525305275,
+          "sampling_unit": "training_seed"
+        },
+        "excluded_incomplete_seeds": [],
+        "expected_seeds": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "identifiability": {
+          "I_swap": {
+            "floor_seed_count": 0,
+            "floor_seed_fraction": 0.0,
+            "identifiable": true
+          },
+          "L_W": {
+            "floor_seed_count": 0,
+            "floor_seed_fraction": 0.0,
+            "identifiable": true
+          },
+          "R": {
+            "floor_seed_count": 0,
+            "floor_seed_fraction": 0.0,
+            "identifiable": true
+          }
+        },
+        "paired_seeds": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "plateau_equivalence": {
+          "bands": {
+            "I_swap": {
+              "equivalent": false,
+              "estimate": -2.9831883413826223,
+              "lower": -4.027693234008288,
+              "upper": -1.9386834487569575
+            },
+            "L_W": {
+              "equivalent": false,
+              "estimate": -2.7954990891913334,
+              "lower": -3.487851820268565,
+              "upper": -2.1031463581141017
+            },
+            "R": {
+              "equivalent": false,
+              "estimate": -2.7753126271975277,
+              "lower": -3.4301411636110277,
+              "upper": -2.1204840907840277
+            }
+          },
+          "confidence_level": 0.9,
+          "equivalence_interval": [
+            -0.32192809488736235,
+            0.32192809488736235
+          ],
+          "family": [
+            "R",
+            "L_W",
+            "I_swap"
+          ],
+          "method": "paired-seed-studentized-max-t-bootstrap",
+          "passed": false,
+          "simultaneous": true
+        },
+        "practical_floor_gate": {
+          "any_residual_above_floor": false,
+          "bands": {
+            "I_swap": {
+              "above_threshold": false,
+              "estimate": 0.0005414165197042176,
+              "lower": -0.00013824548722273986,
+              "upper": 0.0012210785266311749
+            },
+            "L_W": {
+              "above_threshold": false,
+              "estimate": 0.0004043449762946895,
+              "lower": -5.931287434257908e-05,
+              "upper": 0.0008680028269319581
+            }
+          },
+          "both_residuals_above_floor": false,
+          "confidence_level": 0.95,
+          "family": [
+            "L_W",
+            "I_swap"
+          ],
+          "method": "paired-seed-studentized-max-t-bootstrap",
+          "passed": false,
+          "simultaneous": true,
+          "threshold": 0.0025
+        },
+        "rate_equivalence": {
+          "bands": {
+            "d_W": {
+              "equivalent": true,
+              "estimate": -0.04204723481814145,
+              "lower": -0.05835335905189997,
+              "upper": -0.025741110584382935
+            },
+            "d_swap": {
+              "equivalent": false,
+              "estimate": 0.028733903321879046,
+              "lower": -0.35187724562332706,
+              "upper": 0.4093450522670851
+            }
+          },
+          "confidence_level": 0.9,
+          "equivalence_interval": [
+            -0.25,
+            0.25
+          ],
+          "family": [
+            "d_W",
+            "d_swap"
+          ],
+          "method": "paired-seed-studentized-max-t-bootstrap",
+          "n_resamples": 20000,
+          "paired_seeds": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "passed": false,
+          "simultaneous": true
+        },
+        "sampling_unit": "training_seed",
+        "seed_estimates": [
+          {
+            "d_W": -0.00707298256725597,
+            "d_swap": -0.5476459203930422,
+            "final_I_swap": 0.0008208071107134902,
+            "final_L_W": 0.00013107854848453895,
+            "p_I_swap": 1.8087016328604715,
+            "p_L_W": 2.3492745706862577,
+            "p_R": 2.3563475532535136,
+            "q_I_swap": -0.2396602647993478,
+            "q_L_W": -3.8370422241632927,
+            "q_R": -3.7674242233037347,
+            "seed": 100
+          },
+          {
+            "d_W": -0.06741246423611846,
+            "d_swap": 0.2749797619333747,
+            "final_I_swap": 0.0003533639864064953,
+            "final_L_W": 0.0006290573442623707,
+            "p_I_swap": 2.3593633329291173,
+            "p_L_W": 2.016971106759624,
+            "p_R": 2.0843835709957426,
+            "q_I_swap": -2.292636059551822,
+            "q_L_W": -1.1673430535071119,
+            "q_R": -1.2293317679894202,
+            "seed": 101
+          },
+          {
+            "d_W": -0.05750137339031558,
+            "d_swap": 0.378141421557024,
+            "final_I_swap": 0.0006381130033861556,
+            "final_L_W": 0.0014022341804553352,
+            "p_I_swap": 1.9722402752166484,
+            "p_L_W": 1.5365974802693088,
+            "p_R": 1.5940988536596243,
+            "q_I_swap": -3.2727260594041954,
+            "q_L_W": -1.5952257120498519,
+            "q_R": -1.6559679789803277,
+            "seed": 102
+          },
+          {
+            "d_W": -0.002976900922558201,
+            "d_swap": 0.11968793362317642,
+            "final_I_swap": 8.877585480330207e-05,
+            "final_L_W": 0.00013316879055939187,
+            "p_I_swap": 2.4606741235746177,
+            "p_L_W": 2.338009289028883,
+            "p_R": 2.3409861899514413,
+            "q_I_swap": -3.7475023058663686,
+            "q_L_W": -3.0517142953378897,
+            "q_R": -2.9218011201237815,
+            "seed": 103
+          },
+          {
+            "d_W": 0.001806221935594543,
+            "d_swap": -0.07096075674056568,
+            "final_I_swap": 0.0003542380900093665,
+            "final_L_W": 0.0001972853461919167,
+            "p_I_swap": 2.1299264301900385,
+            "p_L_W": 2.2026934088661987,
+            "p_R": 2.200887186930604,
+            "q_I_swap": -1.6756301963946096,
+            "q_L_W": -4.09807316483249,
+            "q_R": -3.9566580238153377,
+            "seed": 104
+          },
+          {
+            "d_W": -0.052645366423483164,
+            "d_swap": 0.8305173686633154,
+            "final_I_swap": 4.391787498790947e-05,
+            "final_L_W": 0.0002361980905999218,
+            "p_I_swap": 2.9974988972691445,
+            "p_L_W": 2.114336162182346,
+            "p_R": 2.166981528605829,
+            "q_I_swap": -4.708398627574817,
+            "q_L_W": -1.486107270401975,
+            "q_R": -1.5013606478575516,
+            "seed": 105
+          },
+          {
+            "d_W": -0.04781542496327984,
+            "d_swap": 0.9707210584684742,
+            "final_I_swap": 7.613854505742618e-05,
+            "final_L_W": 0.0005774285478623442,
+            "p_I_swap": 2.2864616550176997,
+            "p_L_W": 1.2679251715859456,
+            "p_R": 1.3157405965492255,
+            "q_I_swap": -5.124988631010905,
+            "q_L_W": -2.0678666002560533,
+            "q_R": -2.0824326792757857,
+            "seed": 106
+          },
+          {
+            "d_W": -0.04341518583885229,
+            "d_swap": -0.42822560254718156,
+            "final_I_swap": 0.0005327804968877325,
+            "final_L_W": 0.00027304504733090214,
+            "p_I_swap": 1.8530172535890543,
+            "p_L_W": 2.2378276702973836,
+            "p_R": 2.281242856136236,
+            "q_I_swap": -2.7806019110744993,
+            "q_L_W": -3.0394756073440217,
+            "q_R": -3.0046345780521997,
+            "seed": 107
+          },
+          {
+            "d_W": -0.04594937432292889,
+            "d_swap": -0.11861802511618302,
+            "final_I_swap": 0.00012321737204711372,
+            "final_L_W": 8.196003717380145e-05,
+            "p_I_swap": 2.32786739798023,
+            "p_L_W": 2.400536048773484,
+            "p_R": 2.446485423096413,
+            "q_I_swap": -4.9770629898174255,
+            "q_L_W": -4.476107177130803,
+            "q_R": -4.3574175090809,
+            "seed": 108
+          },
+          {
+            "d_W": -0.05600869415782861,
+            "d_swap": -0.6219025661893929,
+            "final_I_swap": 0.0019636485287342804,
+            "final_L_W": 0.00028698961577400836,
+            "p_I_swap": 1.3298400900026803,
+            "p_L_W": 1.8957339620342446,
+            "p_R": 1.9517426561920732,
+            "q_I_swap": -1.1303920971084644,
+            "q_L_W": -3.610016963743613,
+            "q_R": -3.626144629345486,
+            "seed": 109
+          },
+          {
+            "d_W": -0.07287926673218603,
+            "d_swap": 0.4715967120625706,
+            "final_I_swap": 0.0003146968850629116,
+            "final_L_W": 0.0007604787141050583,
+            "p_I_swap": 2.061898005374313,
+            "p_L_W": 1.5174220265795562,
+            "p_R": 1.5903012933117422,
+            "q_I_swap": -4.31598189906829,
+            "q_L_W": -2.457933363335425,
+            "q_R": -2.5054745320188685,
+            "seed": 110
+          },
+          {
+            "d_W": -0.05269600619848491,
+            "d_swap": -0.9134845454590215,
+            "final_I_swap": 0.0011873004883544269,
+            "final_L_W": 0.00014321545273668476,
+            "p_I_swap": 1.511294945410369,
+            "p_L_W": 2.3720834846709056,
+            "p_R": 2.4247794908693905,
+            "q_I_swap": -1.5326790549207268,
+            "q_L_W": -2.659083638193472,
+            "q_R": -2.695103836526939,
+            "seed": 111
+          }
+        ],
+        "stable_residual_gate_pass": false,
+        "stratum": {
+          "arm": "hard-factorized-cosine-6400",
+          "cohort": "discovery-remedy",
+          "config_hash": "14c47274dde1cf5ac4181e8062998998328bb2de6a5744f0306cb44b683ae602",
+          "schema_version": "phase2-results-v2",
+          "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+          "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+        },
+        "stratum_fields": [
+          "schema_version",
+          "study_id",
+          "study_config_hash",
+          "config_hash",
+          "cohort",
+          "arm"
+        ],
+        "tail_steps": [
+          800,
+          1600,
+          3200,
+          6400
+        ]
+      },
+      "arm": "hard-factorized-cosine-6400",
+      "cohort": "discovery-remedy",
+      "study_config_hash": "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    }
+  ]
+}

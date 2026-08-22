@@ -1,0 +1,136 @@
+{
+  "analysis_source_hashes": {
+    "reports/PHASE2_PROTOCOL.md": "7ba03a8f83dc6c299ec0d467bf876384fa3f1fe74740ad63347eaaf8ab2f93ea",
+    "src/routing_lab/phase2_analysis.py": "5999a0918719db97c24a08a1422371132f73e23f9bb69d7d4ff9ab360f13b57c",
+    "src/routing_lab/phase2_results.py": "21c33ab5dd9f557c699bd6097bfc00bf3d03de5fcdb8cb4dbe6cbef72af46d9f"
+  },
+  "cohort": "discovery-remedy",
+  "files": [
+    {
+      "bytes": 1947,
+      "relative_path": "REPORT.md",
+      "sha256": "3986f07190452c7ce3a760bec8dd8a9fe83d14850b28e2e4d951e11f6faa41f5"
+    },
+    {
+      "bytes": 94461,
+      "relative_path": "analysis_summary.json",
+      "sha256": "ca0d208ac68da691ed26c6be584ec06d932eba9666da667dfa13097026db11e2"
+    },
+    {
+      "bytes": 22906,
+      "relative_path": "factorization_contrasts.csv",
+      "sha256": "1fe4aca87ff9903497acc1547f03d1a2d973bb9f5d82c95d565a0b978cae57ac"
+    },
+    {
+      "bytes": 363631,
+      "relative_path": "figures/01_training_limit_same_rate.png",
+      "sha256": "45274b42f924547f9090f587e4268013c6620b7e37f766824cd4f60e311062f5"
+    },
+    {
+      "bytes": 107682,
+      "relative_path": "figures/01_training_limit_same_rate.svg",
+      "sha256": "7a2d3ce2ea042c7be2ca18957602ba79dbf45e1e0978cb5f29c7c06cb2775f01"
+    },
+    {
+      "bytes": 170839,
+      "relative_path": "figures/02_schedule_paired_slopes.png",
+      "sha256": "4ecf9f29096f11473dbed41bddd3a54efeb04510eb98a7effa45db2a429fe050"
+    },
+    {
+      "bytes": 72534,
+      "relative_path": "figures/02_schedule_paired_slopes.svg",
+      "sha256": "d16fc50de2d59128635949f19bd4ff2b7583c0df28450f8f69769aa094560218"
+    },
+    {
+      "bytes": 131272,
+      "relative_path": "figures/03_factorization_controls.png",
+      "sha256": "34c37859f63a75d53efd50021ba92cd68acff3595947cda6b3ab780c2cb45673"
+    },
+    {
+      "bytes": 85429,
+      "relative_path": "figures/03_factorization_controls.svg",
+      "sha256": "5b2c690cb21d485a57e6dc8a0d966f187225771166b8baf7aa40205951bfe6cd"
+    },
+    {
+      "bytes": 21306,
+      "relative_path": "figures/04_representation_geometry.png",
+      "sha256": "0bb7bbc9f4b8b63b4ee7f8dab199899d3d15905548fd532365c7aabb73cdf4df"
+    },
+    {
+      "bytes": 13900,
+      "relative_path": "figures/04_representation_geometry.svg",
+      "sha256": "67d3543a5413111f59d59235fa41e6622d3054e9186c1b8dc41ac37642aafb3e"
+    },
+    {
+      "bytes": 19620,
+      "relative_path": "figures/05_head_capacity_geometry.png",
+      "sha256": "3348cfd6617018493aaa90fd0c69b07eb3353171bbe3a0d22b037441e385694b"
+    },
+    {
+      "bytes": 15214,
+      "relative_path": "figures/05_head_capacity_geometry.svg",
+      "sha256": "9e65a1f449ee1248a8c584bae3d34774ba4b6ee40e3538574fdaed0a1da2f2f3"
+    },
+    {
+      "bytes": 115,
+      "relative_path": "head_factorial.csv",
+      "sha256": "bece0af9ae1b2a0a36fedf4009f4d50456a6b912013d51e4d0c759a98831bfd1"
+    },
+    {
+      "bytes": 115,
+      "relative_path": "representation_factorial.csv",
+      "sha256": "bece0af9ae1b2a0a36fedf4009f4d50456a6b912013d51e4d0c759a98831bfd1"
+    },
+    {
+      "bytes": 3113,
+      "relative_path": "schedule_paired_slopes.csv",
+      "sha256": "397cae97e3b226fcf49299a8b666cb0c549279390ae11dad86ab69dea24c35ba"
+    },
+    {
+      "bytes": 7488660,
+      "relative_path": "seed_endpoint_tidy.csv",
+      "sha256": "87e9be1ec488d8fe837ba891150edaf80d177c5003742ef1991b38e0e073df7a"
+    },
+    {
+      "bytes": 13044250,
+      "relative_path": "seed_endpoint_tidy.json",
+      "sha256": "a1b5e2e7842b80c000f8f1c9f14b8facee8a78a8c5d7db78e23e2f357444e4b2"
+    },
+    {
+      "bytes": 9037,
+      "relative_path": "tail_seed_estimates.csv",
+      "sha256": "3eb284c81a55beaaa667b3d0be5bc15df8873beb32190b37f3f7865f02dc36bd"
+    }
+  ],
+  "schema_version": "phase2-results-v2",
+  "source_provenance": [
+    {
+      "role": "source_study_manifest",
+      "sha256": "a49d36a868b7be3d0d0f9771dc1419f95251b2e185c8c6eea02fc48c446672f5",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    },
+    {
+      "role": "source_launch_contract",
+      "sha256": "c6e980f010a22c6c43cfa24714281e73798b520145f0d3f0e7218de77e7985fc",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    },
+    {
+      "role": "source_checkpoint_table",
+      "sha256": "ce1dde5d966bf43678d95cb045f2dc21f03c842a3c3a6910370a509eb7935abd",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    },
+    {
+      "role": "precision_audit_manifest",
+      "sha256": "206fad4ff6170b6113c5829933253fbed9b1509790ad383416d5c24dead2b3b8",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    },
+    {
+      "role": "precision_corrected_checkpoint_table",
+      "sha256": "a19a13fd7735e6784669419de679cdefec73805ce9970e941aa6175335d4b5be",
+      "study_id": "phase2-residual-factorization-noffn-discovery-remedy-v2"
+    }
+  ],
+  "source_study_hashes": [
+    "3d47161a33fa94b720ff22e2e1c761cc0999620b0ac8f7628e7ad9399bb033bf"
+  ]
+}

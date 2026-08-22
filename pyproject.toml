@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "transformer-routing-superposition-lab"
 version = "0.1.0"
-description = "Causal routing and compressed-concept compensation experiments"
+description = "Training-aware softmax Transformer interaction-kernel dynamics"
 requires-python = ">=3.11"
 dependencies = [
     "torch>=2.11,<3",
@@ -13,6 +13,13 @@ dependencies = [
     "scipy>=1.17,<2",
     "pandas>=2.3,<3",
     "matplotlib>=3.11,<4",
+]
+
+[project.optional-dependencies]
+# The toy-model laboratory does not require Hugging Face Transformers. Install
+# this extra for the Pythia bridge and for the complete test suite.
+pretrained = [
+    "transformers==5.8.0",
 ]
 
 [tool.setuptools]

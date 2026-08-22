@@ -1,0 +1,77 @@
+{
+  "checkpoint_config_hash": "e6b5ef82e2778998e52cfa9e6ca56c07cc8362ddc772e9d44bfdba70b80659fe",
+  "checkpoint_is_seed": false,
+  "device": "cuda",
+  "dtype": "float64",
+  "episode_layer_site_is_independent_n": false,
+  "estimand_grain": "episode_x_layer_x_registered_patch_site",
+  "execution_environment": {
+    "attention_backend": "eager",
+    "cuda_available": true,
+    "cuda_capability": [
+      12,
+      0
+    ],
+    "cuda_device_name": "NVIDIA GeForce RTX 5090",
+    "cuda_matmul_allow_tf32": false,
+    "cuda_runtime_version": "12.8",
+    "cudnn_allow_tf32": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "cudnn_version": 91900,
+    "deterministic_algorithms_enabled": false,
+    "deterministic_algorithms_warn_only": false,
+    "numpy_version": "2.4.4",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "python_implementation": "CPython",
+    "python_version": "3.11.15",
+    "requested_device": "cuda",
+    "requested_dtype": "float64",
+    "torch_version": "2.11.0+cu128",
+    "transformers_version": "5.8.0"
+  },
+  "fields": [
+    "base_score",
+    "delta",
+    "episode_index",
+    "layer",
+    "patched_score",
+    "role",
+    "site",
+    "skeleton_id",
+    "span_kind",
+    "template_id",
+    "template_index",
+    "value_assignment_json"
+  ],
+  "interpretation": {
+    "coherent_replay_gate": "residual-input replay with both parallel branches recomputed",
+    "decision_receiver_accumulation": "receiver branch accumulation evidence",
+    "source_span_transmission": "exploratory changed-concept-span transmission evidence; not the registered full-memory-card S_key intervention"
+  },
+  "measurement_contract_hash": "f376b5652d9d3bd708fd3a13efb952d65a9a739b9a895316a0569c5fddb187c8",
+  "measurement_source_hashes": {
+    "phase2_protocol": "7ba03a8f83dc6c299ec0d467bf876384fa3f1fe74740ad63347eaaf8ab2f93ea",
+    "pretrained_bridge": "fe55b37dfe6a1380c6c876840ce231b2f047376d212ad9eb232c1d7f14b4cf4a",
+    "pretrained_causal": "f067afe42d95960a91fdd6e339d8079468954ee6b6e0729832da6ba140cc48a2",
+    "pretrained_study": "7dab23a5b5e43a67aadc78456d9e3c8ca0a7745fe56f287f8f9b23c50491e085"
+  },
+  "n_rows": 24576,
+  "npz_sha256": "86a3dcc5f1d3e01fbc47a4e655d38abfb430bd2e253965285d0aa88e406d844b",
+  "prompt_population_hash": "580f33b45dc585881d7f7d6eba23ed86c577622eea21bec008107d3ef4cf0a8d",
+  "repo_id": "EleutherAI/pythia-70m-deduped",
+  "resolved_revision": "7764b56e8ccf9f01b30eb2e88d7a3cf398260a64",
+  "result_identity_hash": "dd742fb18ab04a9732ecdc85f450a479bd534ad8800deff22f8ae9611fe38732",
+  "revision": "step64000",
+  "roles": [
+    "source_span_transmission",
+    "decision_receiver_accumulation",
+    "coherent_replay_gate"
+  ],
+  "schema_version": "pretrained-study-v4",
+  "source_span_transmission_is_registered_s_key_source": false,
+  "statistical_scope": "descriptive_only",
+  "study_config_hash": "c92daf6ca856acc3e1b7c50f84aaa6440972665d1c00521b6b9ff26d1a590e4e",
+  "study_id": "pythia-70m-causal-routing-calibration-float64-v4",
+  "tokenizer_hash": "ec1545d285a5952b1bb4cbb6aa54bef956a72d2872f73f1179b5e12c82965ffb"
+}
