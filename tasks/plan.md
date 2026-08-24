@@ -22,6 +22,16 @@ factorized parameter updates, prove when the correct source margin and value tra
 emerge, and propagate that learned-kernel error through finite network depth. Adding
 heads, layers, datasets, or parameters is not completion.
 
+The immediate deliverable is a condition-discovery theorem. It must name measurable
+quantities for task identifiability $\kappa$, representability
+$\varepsilon_{\rm cap}$, and factor access.
+Use $(\mu_B,\mu_C)$ only as one sufficient certificate for factor access.
+Every additional constant must be derived from the chosen data and model, and each
+gate must have an exact failure witness. Each candidate condition must cite its
+data/model source, exact witness, experiment, and prior-theory boundary before it is
+generalized. The conditions may restrict a broad task class, but they may not assume
+the desired kernel.
+
 ## Gate 0: scope and prior art
 
 - [x] Locate the training gap in Section 10 of the current arXiv version of
@@ -67,7 +77,9 @@ $$
   barrier.
 - [x] Retain the signed-gain exact-softmax counterexample to internal route
   identifiability.
-- [ ] Extend beyond a radial learned dictionary to arbitrary embedding directions.
+- [ ] Lift the scalar proof to learned matrix-valued embedding directions under the
+  registered $\kappa,\varepsilon_{\rm cap},\mu_B,\mu_C$ gates, or produce an exact
+  counterexample to that condition set.
 
 The positive theorem and both obstructions are stated in
 reports/MQAR_KERNEL_LEARNING_THEOREM.md. Gate 1 is resolved for the registered
@@ -91,8 +103,10 @@ with replacement.
   encoding.
 - [x] Register the two required source clauses for each transition: the current
   predicate and the previous answer.
-- [ ] Derive the factorized population gradient equations for the one-step transition.
-- [ ] Prove a per-step kernel error bound.
+- [ ] Derive the factorized population gradient equations for one LEGO transition
+  using the same condition quantities as MQAR.
+- [ ] Prove or refute a per-step task-weighted kernel error bound with explicit
+  $\varepsilon_{\rm cap}$.
 - [ ] Compose the per-step bound through a chain of length L.
 - [ ] Separate the new training-to-depth statement from the existing LEGO
   learnability and length-generalization theorem.

@@ -15,7 +15,41 @@ The primary objective is to prove, under explicit data, initialization, and scal
 assumptions, that training creates a task-aligned interaction kernel and that the
 resulting finite-depth network implements the known task graph $G^*(X)$.
 
-The theorem must control
+The conclusion is conditional. The admissible task family has a known acyclic graph,
+maximum indegree $\Delta$, depth $D$, bounded states, and a matched parent-intervention
+effect $\kappa>0$. Only three candidate gate categories are currently admitted:
+
+1. **Task identifiability:** every declared parent changes the correct local output.
+2. **Representability:** the head-rank budget realizes a target message kernel up to
+   the explicit error $\varepsilon_{\rm cap}$.
+3. **Factor access:** factorization does not trap training away from every
+   task-equivalent kernel. A candidate sufficient certificate is coercivity on required
+   modes with constants $\mu_B,\mu_C>0$.
+
+They are promoted to a broader theorem only after the repository identifies their
+source in the data law or model equations, an exact positive result or failure witness,
+and the boundary relative to prior theory. They are not chosen for convenience.
+
+Population covariance, score-growth rates, and depth Lipschitz constants are proof
+quantities. They must be computed from the selected task distribution and exact model.
+They are not independent assumptions unless an impossibility result proves that they
+are necessary.
+
+Let $\mathcal A$ denote the fully specified Transformer architecture. For the
+task-weighted kernel error $\eta_\ell(s)$ defined in the research charter, the
+training theorem must derive
+
+$$
+\eta_\ell(s)
+\le
+r_\ell(s;\mathcal D,\mathcal A,\theta_0)
++\varepsilon_{\rm cap},
+\qquad
+\lim_{s\to\infty}r_\ell(s;\cdot)=0.
+$$
+
+Correct attention, correct kernel weights, and vanishing risk are conclusions, not
+allowed assumptions. For the MQAR instance, the theorem must also control
 
 $$
 \gamma_s(X)=u_{iJ^*}(s)-\max_{j\ne J^*}u_{ij}(s),
@@ -209,19 +243,22 @@ learnability and length-generalization results are prior art.
 ## 8. Training-to-depth bridge
 
 At fixed training time $s$, suppose layer $\ell$ approximates its target operator with
-error $\eta_\ell(s)$ and later target layers have Lipschitz constants
-$\Lambda_r$. The intended bound is
+message error $\eta_\ell(s)$. Let the target local update have state and message
+Lipschitz constants $\Lambda_\ell$ and $\Gamma_\ell$. The intended bound is
 
 $$
-\mathcal E_{\rm depth}(s,L)
+\left(
+\mathbb E\left\|\Phi_{\theta_s}^{L}(X)-\Phi^{*,L}(X)\right\|^2
+\right)^{1/2}
 \le
 \sum_{\ell=0}^{L-1}
+\Gamma_\ell
 \eta_\ell(s)
 \prod_{r=\ell+1}^{L-1}\Lambda_r.
 $$
 
-Every $\eta_\ell(s)$ must be derived from the training theorem. It cannot be assumed
-by postulating a correct kernel.
+Every $\eta_\ell(s)$ must be derived from the training theorem on the registered
+admissible states. It cannot be assumed by postulating a correct kernel.
 
 ## 9. Stop rules
 

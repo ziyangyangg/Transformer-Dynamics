@@ -86,6 +86,43 @@ class MarkdownPublicationTests(unittest.TestCase):
                 self.assertFalse(in_fence)
                 self.assertFalse(in_display)
 
+    def test_public_research_contract_is_explicitly_conditional(self) -> None:
+        """Prevent the public question from drifting back to an unconditional claim."""
+
+        readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+        charter = (PROJECT_ROOT / "reports" / "RESEARCH_CHARTER.md").read_text(
+            encoding="utf-8"
+        )
+        specification = (PROJECT_ROOT / "SPEC.md").read_text(encoding="utf-8")
+        literature = (PROJECT_ROOT / "reports" / "LITERATURE_MAP.md").read_text(
+            encoding="utf-8"
+        )
+        plan = (PROJECT_ROOT / "tasks" / "plan.md").read_text(encoding="utf-8")
+
+        self.assertIn("Under what explicit and checkable conditions", readme)
+        self.assertIn("## Structured task class", charter)
+        self.assertIn("## Conditions to be established", charter)
+        self.assertIn(r"\mathfrak K_\ell^*", charter)
+        self.assertIn(r"\varepsilon_{\rm cap}", charter)
+        self.assertIn("The conclusion is conditional", specification)
+        self.assertIn("condition-discovery theorem", plan)
+        self.assertIn("The current three categories come from the actual task", charter)
+        self.assertIn("task identifiability", charter)
+        self.assertIn("finite representability", charter)
+        self.assertIn("factor access", charter)
+        self.assertIn("Any additional constant must be derived", charter)
+        public_contract = f"{readme}\n{charter}\n{specification}"
+        self.assertNotIn("five condition", public_contract)
+        self.assertNotIn("all five condition", public_contract)
+        self.assertNotIn(r"\gamma_*", public_contract)
+        self.assertIn("only as one sufficient certificate", plan)
+        self.assertIn("does not prove that uniform coercivity", charter)
+        self.assertIn("The condition list is an evidence ledger", literature)
+        self.assertIn("not final universal assumptions", readme)
+
+        for document in (readme, charter, specification, plan):
+            self.assertNotIn("for every task distribution and initialization", document)
+
 
 if __name__ == "__main__":
     unittest.main()
