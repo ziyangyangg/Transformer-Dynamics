@@ -49,6 +49,7 @@ Authoritative documents:
 
 - [Research charter](reports/RESEARCH_CHARTER.md)
 - [MQAR kernel-learning theorem](reports/MQAR_KERNEL_LEARNING_THEOREM.md)
+- [Four-gate MQAR-to-LEGO status](reports/FOUR_GATE_STATUS.md)
 - [Literature and theory map](reports/LITERATURE_MAP.md)
 - [Method specification](SPEC.md)
 - [Experiment positioning](reports/EXPERIMENT_POSITIONING.md)
@@ -76,9 +77,12 @@ two-head construction has $R=0$ but $S_{\rm key}=0$. Initialization
 nondegeneracy and route identifiability are therefore necessary.
 
 The next data layer is the published LEGO state-tracking law. The repository now
-contains a complete finite cyclic-group population, the canonical five-token clauses,
-and the two required source clauses for each transition. No new model family was added;
-the LEGO training-to-depth theorem is not yet proved.
+contains the complete finite cyclic population, a learned local cyclic transition
+operator, and an exact finite-depth composition bound. Parent access is given in that
+local gate: the missing theorem is still that factorized exact-softmax attention learns
+the two required LEGO source edges and that the Transformer-local map implements the
+group action. The transition table is a local reference operator, not a new
+Transformer family.
 
 Earlier controlled evidence remains subordinate:
 
@@ -99,6 +103,7 @@ Earlier controlled evidence remains subordinate:
 |---|---|---|
 | Data/model | data, model, controlled_model, model_variants | MQAR/LEGO laws and exact-softmax $QK/OV$ models |
 | Training | controlled_training, phase2_study, population_gf | deterministic trajectories and exact population updates |
+| Four gates | kernel_capacity, mqar_matrix_gf, lego_single_step, lego_depth | capacity/access, matrix GF, local LEGO map, and depth composition |
 | Theory | mqar_kernel_theory, metrics, interventions, phase2_analysis | closed equations, risk, transport, and edge blocking |
 | External calibration | pretrained_bridge, pretrained_causal, pretrained_study, pretrained_analysis | audited Pythia checkpoint measurements |
 
