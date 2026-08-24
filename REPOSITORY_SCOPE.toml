@@ -14,6 +14,7 @@ active_modules = [
   "kernel_capacity.py",
   "metrics.py",
   "model.py",
+  "mqar_matrix_gf.py",
   "mqar_kernel_theory.py",
   "model_variants.py",
   "phase2_analysis.py",
