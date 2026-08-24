@@ -17,9 +17,10 @@
 - [x] Prove kernel learning for the registered positive role-tied parameterization.
 - [x] Refute the theorem for unrestricted initialization with the exact
   $Q=K=0$ factorization barrier.
-- [ ] Prove or refute matrix-valued kernel learning for arbitrary learned embedding
-  directions under the registered conditions; construct a counterexample if they are
-  insufficient.
+- [x] Refute unrestricted matrix-valued kernel learning with exact collapsed-
+  dictionary, factor-access, and value-path critical manifolds.
+- [ ] Derive a forward-invariant basin that supplies task-direction factor access and
+  excludes the exact self-only wrong boundary.
 
 ## Training-to-depth bridge
 

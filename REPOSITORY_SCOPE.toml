@@ -15,6 +15,8 @@ active_modules = [
   "lego_depth.py",
   "lego_single_step.py",
   "metrics.py",
+  "matrix_mqar.py",
+  "matrix_mqar_ode.py",
   "model.py",
   "mqar_matrix_gf.py",
   "mqar_kernel_theory.py",
@@ -32,6 +34,7 @@ active_modules = [
 ]
 
 active_configs = [
+  "matrix_mqar_c3m2_adaptive_v1.json",
   "phase2/discovery-remedy/residual-factorization-noffn.json",
   "pretrained_pythia70m_suite_a_calibration_float64_v4.json",
 ]
@@ -42,6 +45,8 @@ active_reports = [
   "EXPERIMENT_POSITIONING.md",
   "FOUR_GATE_STATUS.md",
   "LITERATURE_MAP.md",
+  "MATRIX_MQAR_C3M2_RESULT.md",
+  "MATRIX_MQAR_C3M2_SPEC.md",
   "MQAR_KERNEL_LEARNING_THEOREM.md",
   "PHASE2_PROTOCOL.md",
   "PYTHIA_CALIBRATION_ANALYSIS_SPEC.md",
@@ -50,6 +55,7 @@ active_reports = [
 
 active_result_directories = [
   "clustering-baseline-v1",
+  "matrix-mqar-c3m2-adaptive-v1",
   "phase2-residual-factorization-noffn-analysis-v3",
   "phase2-residual-factorization-noffn-discovery-remedy-v2",
   "phase2-residual-factorization-noffn-precision-audit-v2",

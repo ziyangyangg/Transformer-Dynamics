@@ -49,6 +49,8 @@ Authoritative documents:
 
 - [Research charter](reports/RESEARCH_CHARTER.md)
 - [MQAR kernel-learning theorem](reports/MQAR_KERNEL_LEARNING_THEOREM.md)
+- [Minimal matrix MQAR specification](reports/MATRIX_MQAR_C3M2_SPEC.md)
+- [Matrix MQAR critical-point result](reports/MATRIX_MQAR_C3M2_RESULT.md)
 - [Four-gate MQAR-to-LEGO status](reports/FOUR_GATE_STATUS.md)
 - [Literature and theory map](reports/LITERATURE_MAP.md)
 - [Method specification](SPEC.md)
@@ -73,6 +75,13 @@ $$
 
 The unrestricted claim is false. If both query and key factors are zero, the composite
 score gradient is nonzero but both factor gradients remain zero. A separate signed-gain
+
+The $C=3,m=2$ matrix lift gives a sharper boundary. The identifiable score/gain
+quotient has no finite critical point, but factorized training has exact collapsed-
+dictionary, zero-QK, dead-value, and zero-OV critical manifolds. It also has a wrong
+self-only asymptotic boundary. A positive matrix theorem therefore needs both a
+factor-access lower bound and a proof that the actual trajectory cannot escape to the
+wrong boundary.
 two-head construction has $R=0$ but $S_{\rm key}=0$. Initialization
 nondegeneracy and route identifiability are therefore necessary.
 
@@ -103,7 +112,7 @@ Earlier controlled evidence remains subordinate:
 |---|---|---|
 | Data/model | data, model, controlled_model, model_variants | MQAR/LEGO laws and exact-softmax $QK/OV$ models |
 | Training | controlled_training, phase2_study, population_gf | deterministic trajectories and exact population updates |
-| Four gates | kernel_capacity, mqar_matrix_gf, lego_single_step, lego_depth | capacity/access, matrix GF, local LEGO map, and depth composition |
+| Four gates | kernel_capacity, matrix_mqar, matrix_mqar_ode, mqar_matrix_gf, lego_single_step, lego_depth | exact matrix gradients/obstructions, adaptive ODE audit, capacity/access, local LEGO map, and depth composition |
 | Theory | mqar_kernel_theory, metrics, interventions, phase2_analysis | closed equations, risk, transport, and edge blocking |
 | External calibration | pretrained_bridge, pretrained_causal, pretrained_study, pretrained_analysis | audited Pythia checkpoint measurements |
 

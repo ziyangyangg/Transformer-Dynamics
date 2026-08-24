@@ -81,9 +81,11 @@ $$
   factor-access diagnostics on the complete MQAR population.
 - [x] Implement matched factorized/rank-matched/dense population-GF trajectories
   with aligned step-halving audits.
-- [ ] Lift the scalar proof to learned matrix-valued embedding directions under the
-  registered $\kappa,\varepsilon_{\rm cap},\mu_B,\mu_C$ gates, or produce an exact
-  counterexample to that condition set.
+- [x] Lift the scalar analysis to learned matrix-valued embedding directions and
+  produce exact non-aligned critical families showing that the original gate set is
+  insufficient without correct-boundary selection.
+- [ ] Prove or refute the resulting basin-conditional theorem: uniform task-direction
+  factor access plus a forward-invariant exclusion of the self-only boundary implies task-aligned kernel learning.
 
 The positive theorem and both obstructions are stated in
 reports/MQAR_KERNEL_LEARNING_THEOREM.md. Gate 1 is resolved for the registered
