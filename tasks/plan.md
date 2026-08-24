@@ -77,6 +77,10 @@ $$
   barrier.
 - [x] Retain the signed-gain exact-softmax counterexample to internal route
   identifiability.
+- [x] Implement exact full-matrix functional-kernel, capacity-upper-bound, and
+  factor-access diagnostics on the complete MQAR population.
+- [x] Implement matched factorized/rank-matched/dense population-GF trajectories
+  with aligned step-halving audits.
 - [ ] Lift the scalar proof to learned matrix-valued embedding directions under the
   registered $\kappa,\varepsilon_{\rm cap},\mu_B,\mu_C$ gates, or produce an exact
   counterexample to that condition set.
@@ -103,11 +107,17 @@ with replacement.
   encoding.
 - [x] Register the two required source clauses for each transition: the current
   predicate and the previous answer.
+- [x] Learn the complete cyclic local transition table from all $k^2$ parent pairs,
+  explicitly conditioning on parent access.
+- [x] Verify the exact telescoping depth bound for that local operator over every
+  state and action string up to finite depth.
 - [ ] Derive the factorized population gradient equations for one LEGO transition
   using the same condition quantities as MQAR.
 - [ ] Prove or refute a per-step task-weighted kernel error bound with explicit
   $\varepsilon_{\rm cap}$.
-- [ ] Compose the per-step bound through a chain of length L.
+- [ ] Compose a *learned attention-routing* error and the local-operator error through
+  a chain of length L. The local-operator-only telescope is complete; the routing term
+  is not.
 - [ ] Separate the new training-to-depth statement from the existing LEGO
   learnability and length-generalization theorem.
 
