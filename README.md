@@ -31,7 +31,8 @@ superposition, and module patches are not substitute research questions.
 
 The authoritative scope is:
 
-- [Research charter](reports/RESEARCH_CHARTER.md)
+- [Research charter: variables, theorems, data, completion](reports/RESEARCH_CHARTER.md)
+- [Source-verified literature and theory map](reports/LITERATURE_MAP.md)
 - [Method specification](SPEC.md)
 - [Experiment positioning](reports/EXPERIMENT_POSITIONING.md)
 - [Implementation plan](tasks/plan.md)
