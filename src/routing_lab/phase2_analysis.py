@@ -132,9 +132,9 @@ def walsh_error_partition(
     # predictions.  Keeping the optional fallback preserves the pure partition
     # helper for analytic use while making the provenance explicit.
     if direct_mse is None:
-        direct_rows = np.sum(spectrum**2, axis=1) + 1.0 - 2.0 * spectrum[
-            row, target_masks
-        ]
+        direct_rows = (
+            np.sum(spectrum**2, axis=1) + 1.0 - 2.0 * spectrum[row, target_masks]
+        )
         direct_mse_provided = False
     else:
         direct_rows = np.asarray(direct_mse, dtype=np.float64)
@@ -145,9 +145,7 @@ def walsh_error_partition(
         direct_mse_provided = True
     direct_mean = float(direct_rows.mean())
     direct_gap = direct_mean - two_risk
-    relative = abs(direct_gap) / max(
-        abs(direct_mean), abs(two_risk), 1.0e-15
-    )
+    relative = abs(direct_gap) / max(abs(direct_mean), abs(two_risk), 1.0e-15)
     return {
         "E_T": e_t,
         "L_D": l_d,

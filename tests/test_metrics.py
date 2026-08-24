@@ -34,7 +34,9 @@ class GeometryMetricTests(unittest.TestCase):
             algebraic_rank + 1.0e-10,
         )
         self.assertLessEqual(float(geometry.effective_rank), algebraic_rank + 1.0e-10)
-        self.assertGreaterEqual(float(geometry.coherence), geometry.welch_bound - 1.0e-10)
+        self.assertGreaterEqual(
+            float(geometry.coherence), geometry.welch_bound - 1.0e-10
+        )
 
     def test_token_geometry_uses_target_roles_and_centers_each_episode(self) -> None:
         """The final token is the query and every earlier token is real memory.
@@ -125,7 +127,9 @@ class CausalFourierMetricTests(unittest.TestCase):
             minus = 0.30 - 0.70 - 0.20 * other_v1 - 0.50 * other_v2
             finite_difference.append(0.5 * (plus - minus))
         self.assertAlmostEqual(
-            float(spectrum[1]), sum(finite_difference) / len(finite_difference), places=12
+            float(spectrum[1]),
+            sum(finite_difference) / len(finite_difference),
+            places=12,
         )
 
     def test_parseval_turns_low_risk_into_causal_routing_energy(self) -> None:
@@ -145,7 +149,9 @@ class CausalFourierMetricTests(unittest.TestCase):
         torch.testing.assert_close(
             mse, error_coefficients.square().sum(), atol=1.0e-12, rtol=0.0
         )
-        self.assertLess(float((spectrum[target_mask] - 1.0).square()), float(mse) + 1e-15)
+        self.assertLess(
+            float((spectrum[target_mask] - 1.0).square()), float(mse) + 1e-15
+        )
         distractor_main_energy = sum(
             spectrum[1 << index].square() for index in range(4) if index != target
         )

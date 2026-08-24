@@ -63,7 +63,9 @@ class InterventionTests(unittest.TestCase):
         ):
             patch = make_trace_patch(base_trace, swap_trace, site=site, scope="query")
             if patch.ndim == 4:  # [B,H,T,*]
-                torch.testing.assert_close(patch[:, :, :-1], base_trace[site][:, :, :-1])
+                torch.testing.assert_close(
+                    patch[:, :, :-1], base_trace[site][:, :, :-1]
+                )
                 torch.testing.assert_close(patch[:, :, -1], swap_trace[site][:, :, -1])
             else:  # [B,T,d]
                 torch.testing.assert_close(patch[:, :-1], base_trace[site][:, :-1])
@@ -79,7 +81,9 @@ class InterventionTests(unittest.TestCase):
         torch.testing.assert_close(
             result.patched_predictions["input_embeddings"], result.swapped_prediction
         )
-        self.assertEqual(set(result.mean_squared_effect), set(result.patched_predictions))
+        self.assertEqual(
+            set(result.mean_squared_effect), set(result.patched_predictions)
+        )
         for value in result.mean_squared_effect.values():
             self.assertTrue(torch.isfinite(value))
             self.assertGreaterEqual(float(value), 0.0)
@@ -99,7 +103,9 @@ class InterventionTests(unittest.TestCase):
         expected = torch.zeros_like(result.coefficients)
         expected[rows, target_masks] = 1.0
         torch.testing.assert_close(result.coefficients, expected, atol=0.0, rtol=0.0)
-        torch.testing.assert_close(result.parseval_mse, torch.zeros_like(result.parseval_mse))
+        torch.testing.assert_close(
+            result.parseval_mse, torch.zeros_like(result.parseval_mse)
+        )
 
     def test_target_key_effect_is_a_finite_path_specific_estimand(self) -> None:
         effect = target_key_path_effect(self.model, self.batch)

@@ -183,14 +183,16 @@ def _smoke_study(api):
 def _json_rows(path: Path) -> list[dict[str, object]]:
     rows = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(rows, list):
-        raise AssertionError(f"expected a JSON row list: {path}")
+        raise TypeError(f"expected a JSON row list: {path}")
     return rows
 
 
 class Phase2StudyConfigurationContractTests(unittest.TestCase):
     """Scientific identity contains every pairing and evaluation choice."""
 
-    def test_configs_are_frozen_and_require_cohort_checkpoints_and_streams(self) -> None:
+    def test_configs_are_frozen_and_require_cohort_checkpoints_and_streams(
+        self,
+    ) -> None:
         api = _study_api()
         cell = _cell(api, arm_name="constant-5")
         study = _study(api, cells=(cell,), seeds=(17, 19))
@@ -223,9 +225,9 @@ class Phase2StudyConfigurationContractTests(unittest.TestCase):
         for name in required_study_fields:
             self.assertIs(by_name[name].default, MISSING, name)
             self.assertIs(by_name[name].default_factory, MISSING, name)
-        checkpoint_field = {field.name: field for field in fields(api.Phase2CellConfig)}[
-            "checkpoint_steps"
-        ]
+        checkpoint_field = {
+            field.name: field for field in fields(api.Phase2CellConfig)
+        }["checkpoint_steps"]
         self.assertIs(checkpoint_field.default, MISSING)
 
         with self.assertRaisesRegex(ValueError, "seed.*unique|duplicate.*seed"):
@@ -242,7 +244,9 @@ class Phase2StudyConfigurationContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "branch|checkpoint"):
             replace(cell, checkpoint_steps=(0, 5))
 
-    def test_canonical_hashes_and_derived_streams_are_stable_and_cell_local(self) -> None:
+    def test_canonical_hashes_and_derived_streams_are_stable_and_cell_local(
+        self,
+    ) -> None:
         api = _study_api()
         cells = (
             _cell(api, arm_name="constant-5"),
@@ -265,7 +269,9 @@ class Phase2StudyConfigurationContractTests(unittest.TestCase):
         # content identity.  This permits the same arm to be compared across cohorts.
         confirmation = replace(study, cohort="untouched-confirmation", seeds=(1000,))
         confirmation_plan = api.plan_phase2_study(confirmation)
-        self.assertNotEqual(first.study_config_hash, confirmation_plan.study_config_hash)
+        self.assertNotEqual(
+            first.study_config_hash, confirmation_plan.study_config_hash
+        )
         self.assertEqual(
             expected_cell_hashes,
             tuple(dict.fromkeys(run.cell_hash for run in confirmation_plan.seed_runs)),
@@ -350,15 +356,22 @@ class Phase2StudyConfigurationContractTests(unittest.TestCase):
             {"factorized", "dense_direct", "rank_matched_direct"},
         )
         self.assertEqual(
-            {(cell.model_config.codebook.geometry, cell.model_config.codebook.trainable)
-             for cell in study.cells},
+            {
+                (
+                    cell.model_config.codebook.geometry,
+                    cell.model_config.codebook.trainable,
+                )
+                for cell in study.cells
+            },
             {
                 ("random_normalized", True),
                 ("low_coherence", False),
                 ("low_coherence", True),
             },
         )
-        self.assertEqual({cell.model_config.num_heads for cell in study.cells}, {1, 2, 4})
+        self.assertEqual(
+            {cell.model_config.num_heads for cell in study.cells}, {1, 2, 4}
+        )
         self.assertEqual(
             {cell.training_config.schedule.kind for cell in study.cells},
             {"constant", "cosine"},
@@ -503,7 +516,9 @@ class Phase2StudyConfigurationContractTests(unittest.TestCase):
 class Phase2StudyRunnerContractTests(unittest.TestCase):
     """Tiny real runs freeze artifacts and identities without GPU or network I/O."""
 
-    def test_five_step_smoke_writes_seed_checkpoint_metrics_and_hand_identities(self) -> None:
+    def test_five_step_smoke_writes_seed_checkpoint_metrics_and_hand_identities(
+        self,
+    ) -> None:
         api = _study_api()
         config = _smoke_study(api)
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -635,8 +650,7 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
                 self.assertTrue(
                     math.isclose(
                         row["s_key"],
-                        row["s_key_target_delta"]
-                        - row["s_key_mean_distractor_delta"],
+                        row["s_key_target_delta"] - row["s_key_mean_distractor_delta"],
                         rel_tol=1.0e-9,
                         abs_tol=1.0e-11,
                     )
@@ -648,23 +662,30 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
                 csv_rows = list(csv.DictReader(handle))
             self.assertEqual(set(csv_rows[0]), set(rows[0]))
             self.assertEqual(
-                {(row["cell_hash"], int(row["seed"]), int(row["step"])) for row in csv_rows},
+                {
+                    (row["cell_hash"], int(row["seed"]), int(row["step"]))
+                    for row in csv_rows
+                },
                 set(keys),
             )
-            self.assertEqual((output / "failures.jsonl").read_text(encoding="utf-8"), "")
+            self.assertEqual(
+                (output / "failures.jsonl").read_text(encoding="utf-8"), ""
+            )
 
-    def test_direct_composite_arms_start_from_the_factorized_function_exactly(self) -> None:
+    def test_direct_composite_arms_start_from_the_factorized_function_exactly(
+        self,
+    ) -> None:
         """A conditioning comparison may not smuggle in a new initialization."""
 
         api = _study_api()
-        common = dict(
-            geometry="random_normalized",
-            trainable_codebook=True,
-            d_model=4,
-            num_concepts=8,
-            num_heads=2,
-            attention_width=4,
-        )
+        common = {
+            "geometry": "random_normalized",
+            "trainable_codebook": True,
+            "d_model": 4,
+            "num_concepts": 8,
+            "num_heads": 2,
+            "attention_width": 4,
+        }
         cells = tuple(
             _cell(
                 api,
@@ -698,7 +719,9 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
             predictions = []
             composites = []
             for prefix in plan.prefix_runs:
-                directory = output / "prefixes" / prefix.prefix_hash / f"seed-{prefix.seed}"
+                directory = (
+                    output / "prefixes" / prefix.prefix_hash / f"seed-{prefix.seed}"
+                )
                 state = load_training_state(
                     directory / "checkpoint_states" / "step-0.pt",
                     device="cpu",
@@ -733,7 +756,9 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
                     self.assertLess(float((qk - qk_ref).abs().max()), 1.0e-6)
                     self.assertLess(float((ov - ov_ref).abs().max()), 1.0e-6)
 
-    def test_slot_and_head_sidecars_are_tidy_and_prefix_state_is_continuable(self) -> None:
+    def test_slot_and_head_sidecars_are_tidy_and_prefix_state_is_continuable(
+        self,
+    ) -> None:
         api = _study_api()
         config = _smoke_study(api)
         plan = api.plan_phase2_study(config)
@@ -798,8 +823,12 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
             slots_by_checkpoint = defaultdict(list)
             for row in slot_rows:
                 self.assertTrue(
-                    {"target_weight", "target_delta_mean", "mean_distractor_delta", "s_key"}
-                    .issubset(row)
+                    {
+                        "target_weight",
+                        "target_delta_mean",
+                        "mean_distractor_delta",
+                        "s_key",
+                    }.issubset(row)
                 )
                 self.assertTrue(
                     math.isclose(
@@ -809,7 +838,9 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
                         abs_tol=1.0e-11,
                     )
                 )
-                slots_by_checkpoint[(row["cell_hash"], row["seed"], row["step"])].append(row)
+                slots_by_checkpoint[
+                    (row["cell_hash"], row["seed"], row["step"])
+                ].append(row)
             for checkpoint in checkpoint_rows:
                 key = (checkpoint["cell_hash"], checkpoint["seed"], checkpoint["step"])
                 slots = slots_by_checkpoint[key]
@@ -822,7 +853,9 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
                         abs_tol=1.0e-12,
                     )
                 )
-                weighted_s_key = sum(row["target_weight"] * row["s_key"] for row in slots)
+                weighted_s_key = sum(
+                    row["target_weight"] * row["s_key"] for row in slots
+                )
                 self.assertTrue(
                     math.isclose(
                         checkpoint["s_key"],
@@ -835,7 +868,9 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
                 self.assertGreaterEqual(row["qk_frobenius_norm"], 0.0)
                 self.assertGreaterEqual(row["ov_frobenius_norm"], 0.0)
 
-            manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
+            manifest = json.loads(
+                (output / "manifest.json").read_text(encoding="utf-8")
+            )
             self.assertEqual(manifest["inference_unit"], "seed")
             self.assertEqual(manifest["independent_seed_count"], 1)
             self.assertNotIn("episode_id", checkpoint_rows[0])
@@ -897,8 +932,7 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
                     for checkpoint in (
                         row
                         for row in checkpoint_rows
-                        if row["cell_hash"] == run.cell_hash
-                        and row["seed"] == run.seed
+                        if row["cell_hash"] == run.cell_hash and row["seed"] == run.seed
                     ):
                         selected = causal["step"] == checkpoint["step"]
                         slots = causal["slot"][selected]
@@ -915,7 +949,9 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
                             )
                         )
 
-    def test_resume_is_byte_idempotent_and_rebuilds_only_an_uncommitted_seed(self) -> None:
+    def test_resume_is_byte_idempotent_and_rebuilds_only_an_uncommitted_seed(
+        self,
+    ) -> None:
         api = _study_api()
         config = _smoke_study(api)
         plan = api.plan_phase2_study(config)
@@ -961,10 +997,7 @@ class Phase2StudyRunnerContractTests(unittest.TestCase):
             # branch from the shared prefix and reconstructs aggregate tables.
             interrupted = plan.seed_runs[0]
             interrupted_directory = (
-                output
-                / "seeds"
-                / interrupted.cell_id
-                / f"seed-{interrupted.seed}"
+                output / "seeds" / interrupted.cell_id / f"seed-{interrupted.seed}"
             )
             (interrupted_directory / "_SUCCESS").unlink()
             (interrupted_directory / "checkpoint_metrics.json").write_text(

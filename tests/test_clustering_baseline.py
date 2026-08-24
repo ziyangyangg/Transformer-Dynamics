@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import csv
 import json
+import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
-import unittest
 
 import numpy as np
 
@@ -43,9 +43,7 @@ class ClusteringUpdateIdentityTests(unittest.TestCase):
         expected = z + dt * (attention @ z)
         expected /= np.linalg.norm(expected, axis=1, keepdims=True)
 
-        actual, actual_attention = normalized_softmax_euler_step(
-            z, beta=beta, dt=dt
-        )
+        actual, actual_attention = normalized_softmax_euler_step(z, beta=beta, dt=dt)
         np.testing.assert_allclose(actual_attention, attention, atol=1.0e-15, rtol=0.0)
         np.testing.assert_allclose(actual, expected, atol=1.0e-15, rtol=0.0)
         np.testing.assert_allclose(
@@ -67,7 +65,9 @@ class ClusteringSimulationTests(unittest.TestCase):
         np.testing.assert_array_equal(actual, expected)
 
     def test_seeded_run_is_deterministic_and_metrics_obey_gram_identities(self) -> None:
-        config = ClusteringConfig(n_particles=12, dimension=3, beta=1.0, T=0.3, dt=0.1, seed=19)
+        config = ClusteringConfig(
+            n_particles=12, dimension=3, beta=1.0, T=0.3, dt=0.1, seed=19
+        )
 
         first = run_clustering_baseline(config)
         second = run_clustering_baseline(config)
@@ -106,7 +106,9 @@ class ClusteringSimulationTests(unittest.TestCase):
 
     def test_trajectory_writers_are_machine_readable_and_agree(self) -> None:
         run = run_clustering_baseline(
-            ClusteringConfig(n_particles=8, dimension=3, beta=1.0, T=0.2, dt=0.1, seed=7)
+            ClusteringConfig(
+                n_particles=8, dimension=3, beta=1.0, T=0.2, dt=0.1, seed=7
+            )
         )
 
         with TemporaryDirectory() as temporary_directory:
@@ -133,7 +135,9 @@ class ClusteringSimulationTests(unittest.TestCase):
 
     def test_figure_writer_creates_vector_and_raster_versions(self) -> None:
         run = run_clustering_baseline(
-            ClusteringConfig(n_particles=8, dimension=3, beta=1.0, T=0.2, dt=0.1, seed=5)
+            ClusteringConfig(
+                n_particles=8, dimension=3, beta=1.0, T=0.2, dt=0.1, seed=5
+            )
         )
 
         with (
@@ -147,7 +151,9 @@ class ClusteringSimulationTests(unittest.TestCase):
                 run, Path(replay_directory)
             )
 
-            self.assertTrue(svg_path.read_text(encoding="utf-8").lstrip().startswith("<?xml"))
+            self.assertTrue(
+                svg_path.read_text(encoding="utf-8").lstrip().startswith("<?xml")
+            )
             self.assertEqual(png_path.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
             self.assertGreater(svg_path.stat().st_size, 10_000)
             self.assertGreater(png_path.stat().st_size, 10_000)

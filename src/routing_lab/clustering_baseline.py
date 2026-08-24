@@ -10,15 +10,14 @@ from __future__ import annotations
 
 import argparse
 import csv
-from dataclasses import asdict, dataclass
 import io
 import json
+from dataclasses import asdict, dataclass
 from math import isclose, log
 from pathlib import Path
 from typing import Any
 
 import numpy as np
-
 
 OFFICIAL_CODE_COMMIT = "538ba839f7fc03d042e03ad7b557c220defc4148"
 
@@ -463,7 +462,9 @@ def _argument_parser() -> argparse.ArgumentParser:
             "code without its nondeterministic 151-frame movie renderer."
         )
     )
-    parser.add_argument("--output", type=Path, default=Path("results/clustering-baseline-v1"))
+    parser.add_argument(
+        "--output", type=Path, default=Path("results/clustering-baseline-v1")
+    )
     parser.add_argument("--n-particles", type=int, default=64)
     parser.add_argument("--dimension", type=int, default=3)
     parser.add_argument("--beta", type=float, default=1.0)

@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import itertools
-from typing import Mapping, Sequence
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
 
 import torch
 from torch import nn
@@ -76,7 +76,9 @@ def make_trace_patch(
     elif patch.ndim == 1:
         patch = swapped.clone()
     else:
-        raise ValueError(f"query-row patching is undefined for rank-{patch.ndim} tensors")
+        raise ValueError(
+            f"query-row patching is undefined for rank-{patch.ndim} tensors"
+        )
     return patch
 
 
@@ -126,7 +128,9 @@ def paired_patch_effects(
 
 
 @torch.no_grad()
-def target_key_path_effect(model: nn.Module, batch: RetrievalBatch) -> TargetKeyPathEffect:
+def target_key_path_effect(
+    model: nn.Module, batch: RetrievalBatch
+) -> TargetKeyPathEffect:
     """Block the direct query-to-target attention edge and recompute the network."""
 
     base_prediction = model(batch)
@@ -138,10 +142,9 @@ def target_key_path_effect(model: nn.Module, batch: RetrievalBatch) -> TargetKey
     blocked[rows, batch.target_index] = True
     blocked_prediction = model(batch, query_key_mask=blocked)
     signed = ((base_prediction - blocked_prediction) * batch.label).mean()
-    delta_mse = (
-        (blocked_prediction - batch.label).square().mean()
-        - (base_prediction - batch.label).square().mean()
-    )
+    delta_mse = (blocked_prediction - batch.label).square().mean() - (
+        base_prediction - batch.label
+    ).square().mean()
     return TargetKeyPathEffect(
         base_prediction=base_prediction,
         blocked_prediction=blocked_prediction,
@@ -167,7 +170,9 @@ def exhaustive_value_spectrum(
 
     memory = skeletons.memory_size
     if memory > max_memory_size:
-        raise ValueError("exhaustive spectra are intentionally limited to small memories")
+        raise ValueError(
+            "exhaustive spectra are intentionally limited to small memories"
+        )
     signs = torch.tensor(
         list(itertools.product((-1.0, 1.0), repeat=memory)),
         dtype=skeletons.values.dtype,
@@ -205,4 +210,3 @@ def exhaustive_value_spectrum(
         parseval_mse=parseval_mse,
         direct_mse=direct_mse,
     )
-

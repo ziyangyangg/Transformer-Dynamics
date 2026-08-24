@@ -57,13 +57,21 @@ class RetrievalDataTest(unittest.TestCase):
         # Sorting turns pairwise distinctness into an adjacent-difference check.
         sorted_concepts = batch.concepts.sort(dim=1).values
         self.assertTrue(torch.all(sorted_concepts[:, 1:] != sorted_concepts[:, :-1]))
-        self.assertTrue(torch.all((0 <= batch.concepts) & (batch.concepts < num_concepts)))
+        self.assertTrue(
+            torch.all((0 <= batch.concepts) & (batch.concepts < num_concepts))
+        )
         self.assertTrue(torch.all((batch.values == -1) | (batch.values == 1)))
-        self.assertTrue(torch.all((0 <= batch.target_index) & (batch.target_index < memory_size)))
+        self.assertTrue(
+            torch.all((0 <= batch.target_index) & (batch.target_index < memory_size))
+        )
 
         rows = torch.arange(batch_size)
-        self.assertTrue(torch.equal(batch.query, batch.concepts[rows, batch.target_index]))
-        self.assertTrue(torch.equal(batch.label, batch.values[rows, batch.target_index]))
+        self.assertTrue(
+            torch.equal(batch.query, batch.concepts[rows, batch.target_index])
+        )
+        self.assertTrue(
+            torch.equal(batch.label, batch.values[rows, batch.target_index])
+        )
 
     def test_sample_is_determined_only_by_the_explicit_generator(self) -> None:
         """Equal generator states give equal episodes despite different global RNG states."""
@@ -151,20 +159,22 @@ class RetrievalDataTest(unittest.TestCase):
         self.assertEqual(swap.distractor_index.shape, (batch_size,))
         self.assertEqual(swap.new_concept.shape, (batch_size,))
         self.assertTrue(torch.all(swap.distractor_index != batch.target_index))
-        self.assertTrue(torch.all((0 <= swap.new_concept) & (swap.new_concept < num_concepts)))
+        self.assertTrue(
+            torch.all((0 <= swap.new_concept) & (swap.new_concept < num_concepts))
+        )
 
         # The replacement must not already occur anywhere in its original memory row.
         new_was_absent = ~(batch.concepts == swap.new_concept[:, None]).any(dim=1)
         self.assertTrue(torch.all(new_was_absent))
 
         changed_positions = swapped.concepts != batch.concepts
-        expected_changed_positions = torch.zeros_like(changed_positions, dtype=torch.bool)
+        expected_changed_positions = torch.zeros_like(
+            changed_positions, dtype=torch.bool
+        )
         expected_changed_positions[rows, swap.distractor_index] = True
         self.assertTrue(torch.equal(changed_positions, expected_changed_positions))
         self.assertTrue(
-            torch.equal(
-                swapped.concepts[rows, swap.distractor_index], swap.new_concept
-            )
+            torch.equal(swapped.concepts[rows, swap.distractor_index], swap.new_concept)
         )
 
         self.assertTrue(torch.equal(swapped.values, batch.values))

@@ -8,9 +8,9 @@ patching into an intervention on the computational graph rather than an edited l
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 from math import sqrt
-from typing import Mapping
 
 import torch
 from torch import nn
@@ -194,7 +194,7 @@ class RetrievalTransformer(nn.Module):
 
         layer = self.layers[layer_index]
         prefix = f"layers.{layer_index}"
-        batch_size, tokens, width = x.shape
+        batch_size, tokens, _width = x.shape
         heads, d_head = self.config.num_heads, self.config.d_head
         normalized = layer.attention_norm(x)
 
@@ -213,7 +213,9 @@ class RetrievalTransformer(nn.Module):
             if query_key_mask.shape != (batch_size, tokens):
                 raise ValueError("query_key_mask must have shape [batch,tokens]")
             if torch.any(query_key_mask[:, -1]):
-                raise ValueError("blocking query self is disallowed to keep softmax finite")
+                raise ValueError(
+                    "blocking query self is disallowed to keep softmax finite"
+                )
             scores = scores.clone()
             scores[:, :, -1, :] = scores[:, :, -1, :].masked_fill(
                 query_key_mask[:, None, :], -torch.inf
@@ -307,4 +309,3 @@ class RetrievalTransformer(nn.Module):
         if return_trace:
             return prediction, trace
         return prediction
-

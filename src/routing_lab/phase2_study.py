@@ -25,12 +25,12 @@ import json
 import os
 import re
 from dataclasses import asdict, dataclass, replace
+from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 import torch
-from hashlib import sha256
 
 from .control_config import CompositeConfig, canonical_sha256
 from .controlled_model import (
@@ -104,9 +104,13 @@ class Phase2CellConfig:
         if not steps or tuple(sorted(set(steps))) != steps:
             raise ValueError("checkpoint_steps must be strictly increasing")
         if steps[0] != 0 or steps[-1] != schedule.end_step:
-            raise ValueError("checkpoint_steps must include zero and the end checkpoint")
+            raise ValueError(
+                "checkpoint_steps must include zero and the end checkpoint"
+            )
         if schedule.branch_step not in steps:
-            raise ValueError("checkpoint_steps must include the registered branch checkpoint")
+            raise ValueError(
+                "checkpoint_steps must include the registered branch checkpoint"
+            )
         if any(step < 0 or step > schedule.end_step for step in steps):
             raise ValueError("checkpoint lies outside the registered training horizon")
 
@@ -141,12 +145,17 @@ class Phase2StudyConfig:
             raise ValueError("master seeds must be unique; duplicate seed detected")
         if any(seed < 0 for seed in self.seeds):
             raise ValueError("master seeds must be nonnegative")
-        if min(
-            self.evaluation_batch_size,
-            self.walsh_skeleton_count,
-            self.swap_pair_count,
-        ) < 1:
-            raise ValueError("evaluation, Walsh, and swap sample counts must be positive")
+        if (
+            min(
+                self.evaluation_batch_size,
+                self.walsh_skeleton_count,
+                self.swap_pair_count,
+            )
+            < 1
+        ):
+            raise ValueError(
+                "evaluation, Walsh, and swap sample counts must be positive"
+            )
         offsets = (
             self.init_seed_offset,
             self.train_seed_offset,
@@ -237,7 +246,8 @@ def derive_seed_streams(config: Phase2StudyConfig, *, seed: int) -> dict[str, in
         config.diag_seed_offset,
     )
     streams = {
-        name: int(offset + seed) for name, offset in zip(_STREAM_NAMES, offsets, strict=True)
+        name: int(offset + seed)
+        for name, offset in zip(_STREAM_NAMES, offsets, strict=True)
     }
     if len(set(streams.values())) != len(streams):
         raise ValueError("derived seed streams are not distinct")
@@ -278,7 +288,9 @@ def plan_phase2_study(config: Phase2StudyConfig) -> Phase2StudyPlan:
 
     study_hash = canonical_sha256(config)
     cell_hashes = tuple(canonical_sha256(cell) for cell in config.cells)
-    prefix_hashes = tuple(canonical_sha256(_prefix_identity(cell)) for cell in config.cells)
+    prefix_hashes = tuple(
+        canonical_sha256(_prefix_identity(cell)) for cell in config.cells
+    )
 
     seed_runs: list[Phase2SeedRun] = []
     for cell_index, (cell, cell_hash, prefix_hash) in enumerate(
@@ -302,7 +314,9 @@ def plan_phase2_study(config: Phase2StudyConfig) -> Phase2StudyPlan:
     unique_prefixes = tuple(dict.fromkeys(prefix_hashes))
     for prefix_hash in unique_prefixes:
         indices = tuple(
-            index for index, candidate in enumerate(prefix_hashes) if candidate == prefix_hash
+            index
+            for index, candidate in enumerate(prefix_hashes)
+            if candidate == prefix_hash
         )
         branch = config.cells[indices[0]].training_config.schedule.branch_step
         prefix_checkpoints = tuple(
@@ -331,7 +345,9 @@ def plan_phase2_study(config: Phase2StudyConfig) -> Phase2StudyPlan:
         study_config_hash=study_hash,
         seed_runs=tuple(seed_runs),
         prefix_runs=tuple(prefix_runs),
-        expected_checkpoint_rows=sum(len(cell.checkpoint_steps) for cell in config.cells)
+        expected_checkpoint_rows=sum(
+            len(cell.checkpoint_steps) for cell in config.cells
+        )
         * len(config.seeds),
     )
 
@@ -346,13 +362,16 @@ def _atomic_bytes(path: Path, content: bytes) -> None:
 
 
 def _write_json(path: Path, payload: Any) -> None:
-    encoded = json.dumps(
-        payload,
-        ensure_ascii=False,
-        sort_keys=True,
-        indent=2,
-        allow_nan=False,
-    ).encode("utf-8") + b"\n"
+    encoded = (
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+            allow_nan=False,
+        ).encode("utf-8")
+        + b"\n"
+    )
     _atomic_bytes(path, encoded)
 
 
@@ -401,7 +420,9 @@ def _new_model(
 
     cuda_devices: list[int] = []
     if device.type == "cuda":
-        cuda_devices = [device.index if device.index is not None else torch.cuda.current_device()]
+        cuda_devices = [
+            device.index if device.index is not None else torch.cuda.current_device()
+        ]
     with torch.random.fork_rng(devices=cuda_devices):
         torch.manual_seed(init_seed)
         if device.type == "cuda":
@@ -588,9 +609,7 @@ def _evaluate_checkpoint(
     cube = _expanded_value_cube(skeletons)
     cube_prediction = model(cube)
     flipped_cube_prediction = model(flip_target_value(cube))
-    xi_value = 0.5 * (
-        cube.label * (cube_prediction - flipped_cube_prediction)
-    ).mean()
+    xi_value = 0.5 * (cube.label * (cube_prediction - flipped_cube_prediction)).mean()
     skeleton_rows = torch.arange(
         skeletons.batch_size,
         device=spectrum.coefficients.device,
@@ -670,7 +689,9 @@ def _evaluate_checkpoint(
         weight = count / diag_batch.batch_size
         if count:
             slot_target = float(effects.target_delta[selected].mean().cpu())
-            slot_distractor = float(effects.mean_distractor_delta[selected].mean().cpu())
+            slot_distractor = float(
+                effects.mean_distractor_delta[selected].mean().cpu()
+            )
         else:
             # A zero-weight stratum has no influence on the registered aggregate.
             # Store finite zeros rather than a misleading NaN in strict JSON.
@@ -723,9 +744,7 @@ def _evaluate_checkpoint(
 
     memory = model_config.memory_size
     causal_slot_arrays = {
-        "step": np.full(
-            diag_batch.batch_size * memory, step, dtype=np.int64
-        ),
+        "step": np.full(diag_batch.batch_size * memory, step, dtype=np.int64),
         "checkpoint_index": np.full(
             diag_batch.batch_size * memory, checkpoint_index, dtype=np.int64
         ),
@@ -760,7 +779,9 @@ def _state_at_prefix_step(directory: Path, step: int) -> Path:
 
 def _prefix_is_committed(directory: Path, prefix: Phase2PrefixRun) -> bool:
     required = [directory / "continuation.pt", directory / "_SUCCESS"]
-    required.extend(_state_at_prefix_step(directory, step) for step in prefix.checkpoint_steps)
+    required.extend(
+        _state_at_prefix_step(directory, step) for step in prefix.checkpoint_steps
+    )
     return all(path.is_file() for path in required)
 
 
@@ -873,7 +894,9 @@ def _run_seed_branch(
     if not _prefix_is_committed(prefix_directory, prefix):
         raise RuntimeError("shared prefix is not durably committed")
 
-    branch_state = load_training_state(prefix_directory / "continuation.pt", device=device)
+    branch_state = load_training_state(
+        prefix_directory / "continuation.pt", device=device
+    )
     branch_state = fork_training_state(
         branch_state,
         schedule=cell.training_config.schedule,

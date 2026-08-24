@@ -55,16 +55,12 @@ class CausalRoutingBridgeTheoremTests(unittest.TestCase):
             effects.append(sum(aligned, Fraction(0)) / len(aligned))
 
         target_formula = sum(
-            gain * head[target + 1]
-            for gain, head in zip(gains, weights, strict=True)
+            gain * head[target + 1] for gain, head in zip(gains, weights, strict=True)
         )
         self.assertEqual(effects[target], target_formula)
         for slot in (0, 2):
             distractor_formula = -sum(
-                gain
-                * head[slot + 1]
-                * head[target + 1]
-                / (1 - head[slot + 1])
+                gain * head[slot + 1] * head[target + 1] / (1 - head[slot + 1])
                 for gain, head in zip(gains, weights, strict=True)
             )
             self.assertEqual(effects[slot], distractor_formula)

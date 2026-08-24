@@ -165,7 +165,9 @@ class InstrumentedRetrievalTransformerTests(unittest.TestCase):
         )
         torch.testing.assert_close(patched_prediction, swapped_prediction)
         for site_name in self._expected_trace_sites(model.config.num_layers):
-            torch.testing.assert_close(patched_trace[site_name], swapped_trace[site_name])
+            torch.testing.assert_close(
+                patched_trace[site_name], swapped_trace[site_name]
+            )
 
     def test_internal_patch_recomputes_every_descendant_but_not_ancestors(self) -> None:
         """A site intervention splices the swapped state into the base computation."""
@@ -242,15 +244,11 @@ class InstrumentedRetrievalTransformerTests(unittest.TestCase):
             query_attention = trace[f"{prefix}.attention_probs"][:, :, -1, :]
             target_scores = query_scores.gather(
                 dim=-1,
-                index=batch.target_index[:, None, None].expand(
-                    -1, config.num_heads, 1
-                ),
+                index=batch.target_index[:, None, None].expand(-1, config.num_heads, 1),
             )
             target_attention = query_attention.gather(
                 dim=-1,
-                index=batch.target_index[:, None, None].expand(
-                    -1, config.num_heads, 1
-                ),
+                index=batch.target_index[:, None, None].expand(-1, config.num_heads, 1),
             )
             self.assertTrue(torch.isneginf(target_scores).all())
             torch.testing.assert_close(
@@ -285,18 +283,10 @@ class InstrumentedRetrievalTransformerTests(unittest.TestCase):
         head_width = config.d_model // config.num_heads
         head_slice = slice(head_index * head_width, (head_index + 1) * head_width)
 
-        q_head = torch.tensor(
-            [[1.0, 2.0, -1.0, 0.5], [-2.0, 0.0, 3.0, 1.0]]
-        )
-        k_head = torch.tensor(
-            [[0.5, -1.0, 2.0, 1.5], [1.0, 4.0, -0.5, 2.0]]
-        )
-        v_head = torch.tensor(
-            [[2.0, -1.0, 0.0, 3.0], [0.5, 1.5, -2.0, 1.0]]
-        )
-        o_head = torch.tensor(
-            [[1.0, 2.0], [-1.0, 0.5], [3.0, -2.0], [0.25, 1.25]]
-        )
+        q_head = torch.tensor([[1.0, 2.0, -1.0, 0.5], [-2.0, 0.0, 3.0, 1.0]])
+        k_head = torch.tensor([[0.5, -1.0, 2.0, 1.5], [1.0, 4.0, -0.5, 2.0]])
+        v_head = torch.tensor([[2.0, -1.0, 0.0, 3.0], [0.5, 1.5, -2.0, 1.0]])
+        o_head = torch.tensor([[1.0, 2.0], [-1.0, 0.5], [3.0, -2.0], [0.25, 1.25]])
         layer = model.layers[0]
         with torch.no_grad():
             layer.q_proj.weight[head_slice].copy_(q_head)
