@@ -108,14 +108,19 @@ depth-dynamics 结论。
 
 ## Phase 4 — 公开任务与中模型验证
 
-- 理论任务优先使用公开、版本冻结、具有已知 interaction graph 的 algorithmic/state-tracking
-  generator；LEGO 可作为候选外部验证，但不重复其已证明的 CoT/长度外推结论。
-- 20M–70M 从头训练必须有多个独立 seeds，检验 Gate 1/2 的量而非只看 accuracy。
-- Pythia/OLMo checkpoint 只检验相同结构量是否在预训练轨迹出现；checkpoint 是 repeated
-  measure，不是 seed。
-- 自然文本通常没有唯一内部 interaction graph，只作外部描述性检验。
+数据顺序固定，不再临时换 benchmark：
 
-**Gate 3：**小模型定理预测在中模型多 seed 上方向一致；否则报告理论适用边界，不扩规模。
+1. MQAR-compatible generator：一步 \(q\to J\)，与 Gate 1 的概率律完全一致；
+2. LEGO state tracking：多步已知 interaction graph，只检验 Gate 2，不重复已有 CoT novelty；
+3. CLRS 的 search/graph 子集：只在 Gate 2 后检验跨生成器外推；
+4. PolyPythias：冻结指标后的多 seed 外部轨迹；单 seed Pythia 只保留校准作用。
+
+20M–70M 从头训练至少 10 个独立 seeds，记录同一组
+\(B,C,\gamma,\mathcal E_{\mathcal K},S_{\rm key},\mathcal E_{\rm depth}\)，不得只报 accuracy。
+checkpoint、template、layer 和 head 都不是独立样本。自然文本没有唯一 \(G^*\)，不承担
+首个结构定理。
+
+**Gate 3：**Gate 1/2 的定量预测在中模型多 seed 上方向一致；否则报告适用边界并停止扩规模。
 
 ## 不再执行
 
