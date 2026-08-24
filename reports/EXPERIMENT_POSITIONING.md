@@ -1,73 +1,76 @@
-# 既有实验在主问题中的位置
+# Position of Existing Experiments
 
-主问题只有一条链：
+The experiments are evidence for one fixed question:
 
-\[
+$$
 (\mathcal D,R,\theta_0)
-\xrightarrow{\mathrm{gradient\ flow}}
-\mathcal K_{\theta_s}
-\xrightarrow{\mathrm{depth}}
-\Phi_{\theta_s}^{L}(X).
-\]
+\xrightarrow{\text{training}}
+B_s,C_s
+\xrightarrow{\text{exact softmax}}
+\mathcal K_s
+\xrightarrow{\text{depth}}
+\Phi_{\theta_s}^{L}.
+$$
 
-下面按是否推进这条链分类。实验规模、代码量和运行成本不决定其理论地位。
+They are not independent research themes.
 
-## 核心基础：保留并直接复用
+## Core foundations
 
-| 内容 | 已经建立 | 下一步用途 |
-|---|---|---|
-| exact-softmax toy model、population law、训练与 checkpoint | 可重复观察 \(E,Q,K,V,O,w\) 的训练轨迹 | 推导并核对 \(B_s,C_s\) 的 gradient-flow 方程 |
-| \(B=Q^\top K,\ C=OV\) composites 与完整 trace | 避免 raw-factor gauge 误读，直接表示 interaction law | 定义 kernel order parameters |
-| Walsh/value-flip/逐 slot blocking | 区分输出正确与是否使用正确 source | 作为 identifiability 检验，不作为主问题 |
-| fixed-kernel clustering baseline | global collapse 可与均匀 attention 同时出现 | 证明 clustering 不能替代 task alignment |
-| causal-routing bridge 定理与 signed-gain 反例 | 可识别子类中低风险推出正确 blocking effect；一般模型中该命题无条件为假 | 固定主定理必须包含的 no-bypass/gain/cancellation 条件 |
+| Asset | Valid use |
+|---|---|
+| MQAR-compatible random-value retrieval | known one-step target graph and exact population law |
+| exact population enumeration | sampling-free risk and gradient-flow reference |
+| instrumented exact-softmax model | direct observation of $E,Q,K,V,O,B,C$ and kernel weights |
+| Walsh decomposition | exact functional separation of target, distractor, and interaction terms |
+| slot-edge blocking | direct-path intervention with descendant recomputation |
+| deterministic training/checkpoint system | paired, resumable, source-bound trajectories |
+| MQAR reduced equations | machine-checked oracle for the first positive theorem |
 
-这些代码和数学结果是当前项目真正的起点。
+These assets remain active because they directly measure theorem variables.
 
-## 次级证据：保留结论，不保留独立研究分支
+## Subordinate evidence
 
-| 实验 | 准确结论 | 地位 |
-|---|---|---|
-| Phase-II 12-seed training limit | constant/cosine 均未形成稳定不可消除 plateau；更长训练仍改善 | 排除“残差已是新 open problem” |
-| rank-matched vs dense composites | same-rank direct 没修复，dense upper bound 强烈改善 leakage | rank/function capacity 候选；不能称纯 factorization optimization |
-| high-\(N\) on-support swap | 干扰高度重尾，但 all-state precision gate 仍失败 | 只保留“稀有事件需要高精度采样”的方法警告 |
-| composite planes、NTK、gauge controls | 排除 raw-factor flatness 与纯 lazy 描述等普通误读 | 历史诊断，不再保留独立代码路径 |
-| representation/coherence statistics | 高 coherence 可与低 leakage 共存 | 只保留对简单几何解释的否定 |
+The controlled Phase-II study is retained as boundary evidence. Longer training and
+cosine scheduling continue to reduce risk and Walsh leakage, so the earlier residual is
+not a stable irreducible phenomenon. Dense direct composites reduce leakage strongly;
+rank-matched direct composites do not. This motivates a function-class condition but
+does not prove that per-head rank is the mechanism.
 
-活跃结果只保留前两项 Phase-II 证据链。其余代码、配置和派生表从当前树移除；只有当这些量
-进入 kernel-learning 定理的假设或误差项时，才从 Git 历史恢复。
+The high-sample swap study remains a warning about heavy-tailed evaluation. It preserves
+the dense-versus-rank-matched direction, but some checkpoint-level precision gates still
+fail. It cannot support a precise population tail law or a new collision theorem.
 
-## 外部校准：只证明工具可用
+## External calibration
 
-Pythia-70M float64-v4 完成 8/8 checkpoints、32/32 checkpoint-template rows，数值 closure
-通过。但它只有一条 pretraining trajectory，最终四模板 accuracy 约 \(0.53\)–\(0.56\)，
-direct-edge effect 非单调且模板异质。
+Pythia-70M float64-v4 validates token boundaries, exact answer scoring, direct-edge
+masking, head-level observations, finite patches, parallel-residual closure, and resume
+integrity across eight checkpoints.
 
-因此它只证明：
+It is one deduplicated pretraining trajectory. Checkpoints and templates are repeated
+measurements. Routing and direct-edge effects are nonmonotone and template-dependent.
+The data therefore reject the proposed universal
+diffuse-to-selective-to-sparse-collision narrative on this trajectory. Pythia remains
+instrumentation calibration, not a training-law estimate.
 
-- exact tokenization、逐 slot edge mask、head observation 与 finite patch 能在真实 GPT-NeoX
-  上一致运行；
-- attention mass selectivity 不等于输出对该 edge 的实际依赖；
-- 当前 calibration 没有支持
-  diffuse → selective → sparse collision → downstream reorganization 故事。
+## Quarantined interpretations
 
-它不能证明一般训练规律，也不支持把 Pythia 扩展到更多 sizes 作为当前优先事项。
+The following are explicitly excluded from scientific claims:
 
-## 隔离或停止：不进入科学结论
+- local module hybrids as an additive QK/OV/FFN attribution;
+- failed or incomplete localization runs;
+- raw-factor landscape flatness without quotienting gauge directions;
+- fixed-kernel clustering as evidence of trained task alignment;
+- attention mass as a substitute for transported value or edge blocking;
+- checkpoint, template, layer, head, prompt, or value assignment as an independent
+  training sample.
 
-| 内容 | 原因 | 处理 |
-|---|---|---|
-| localization-v2 的 62/72 complete cases | runner 把 row-wise 联合容差错误接成 max-relative gate；root 无 success marker | 禁止 complete-case inference；代码与结果退出活跃树 |
-| QK midpoint suppression 结论 | 与注册 asymmetric content/route/interaction estimand 不同 | 仅保留 protocol-deviation 记录 |
-| OV/FFN “compensator”命名 | local hybrid patches 不构成跨模块加法归因，FFN gates 未闭合 | confirmed compensator 仍为 0；停止命名 |
-| population-GF P39 closure | P38 数值收敛 gate 在 representation/functional coordinates 失败 | 记为 blocked；拟合、refinement 与 optimizer bridge 已退出活跃树 |
-| 大范围 architecture factorial patterns | 多数是选择后、探索性或改变多个因素的 contrasts | 不作为主结果，不继续扩 grid |
-| rare-collision 论文主线 | toy 有重尾线索，但 Pythia 未保存所需 episode-level tail，且没有跨模型确认 | 降为未来可能机制，不再作为标题 |
+Historical exploratory code remains available through Git history but is absent from
+the active tree.
 
-## 对已有仓库的处理原则
+## Current conclusion
 
-- 当前活跃树由 [REPOSITORY_SCOPE.toml](../REPOSITORY_SCOPE.toml) 精确约束。
-- 清理前的代码、配置和结果可从 Git commit 1f06157 完整恢复。
-- README 首先指向研究宪章、本文件和当前计划，而不是历史机制报告。
-- 新实验必须直接测量 \(B_s,C_s,\gamma_s,\mathcal E_{\rm transport}\) 或 depth error。
-- 与主定理链无关的指标不再新增；失败实验不通过换名字进入主结论。
+The experiments established reliable measurements, ruled out several ordinary
+explanations, and exposed necessary assumptions. They did not prove the main
+training-to-depth theorem. The first rigorous progress is now the MQAR role-tied
+kernel-learning theorem and its exact initialization barrier. The only active empirical
+extension is the published LEGO data law; no new model family is authorized.

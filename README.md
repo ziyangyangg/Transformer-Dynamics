@@ -2,118 +2,124 @@
 
 ## Research question
 
-Can we derive, from a task distribution and gradient flow, the \(QK/OV\) interaction
-kernel learned by a full softmax Transformer, then prove that its layer dynamics
-implement the interaction graph required by the task?
+Can one derive, from a task distribution and population gradient flow, the
+factorized $QK/OV$ interaction kernel learned by an exact-softmax Transformer and
+then prove that its layer dynamics implement the task-required interaction graph?
 
-\[
+$$
 (\mathcal D,R,\theta_0)
 \xrightarrow{\text{training time }s}
 \{B_{\ell h}(s),C_{\ell h}(s)\}
-\xrightarrow{\text{softmax}}
+\xrightarrow{\text{exact softmax}}
 \mathcal K_{\ell,s}
-\xrightarrow{\text{depth }\ell}
+\xrightarrow{\text{network depth}}
 \Phi_{\theta_s}^{L}(X),
-\]
+$$
 
-\[
+$$
 B_{\ell h}=Q_{\ell h}^{\top}K_{\ell h},
 \qquad
 C_{\ell h}=O_{\ell h}V_{\ell h},
 \qquad
 \mathcal K_{\ell,s}(i,j;X)
 =\sum_h a_{\ell h,ij}(s;X)C_{\ell h}(s).
-\]
+$$
 
-Training time and network depth are different variables. The project is complete only
-when one theorem connects both arrows. Attention heat maps, low rank, clustering,
-superposition, and module patches are not substitute research questions.
+Training time and network depth are different variables. Attention maps, low rank,
+clustering, superposition, and local patches are evidence or boundary conditions, not
+replacement research questions.
 
-The authoritative scope is:
+Authoritative documents:
 
-- [Research charter: variables, theorems, data, completion](reports/RESEARCH_CHARTER.md)
-- [Source-verified literature and theory map](reports/LITERATURE_MAP.md)
+- [Research charter](reports/RESEARCH_CHARTER.md)
+- [MQAR kernel-learning theorem](reports/MQAR_KERNEL_LEARNING_THEOREM.md)
+- [Literature and theory map](reports/LITERATURE_MAP.md)
 - [Method specification](SPEC.md)
 - [Experiment positioning](reports/EXPERIMENT_POSITIONING.md)
 - [Implementation plan](tasks/plan.md)
 - [Machine-checked repository scope](REPOSITORY_SCOPE.toml)
 
-## What is established
+## Established results
 
-The exact-softmax toy model provides a task with a known correct interaction graph and
-fully observable \(E,Q,K,V,O\) training trajectories. A conditional bridge theorem
-shows that low risk forces positive slot-blocking selectivity under value-blind scores,
-nonnegative gains, and no bypass; a signed-gain construction gives an exact counterexample
-when those assumptions are removed.
+On a one-layer, one-head, value-linear MQAR-compatible population, the exact risk
+closes in two composite variables: the target score margin $\delta$ and value gain
+$g$. For positive nondegenerate factor initialization on the registered symmetric
+role-tied parameterization, population gradient flow satisfies
 
-The multi-seed Phase-II experiment rules out a stable irreducible residual: longer or
-scheduled training continues to improve. Dense composites reduce leakage strongly,
-whereas rank-matched direct coordinates do not; this is evidence for a
-rank/function-class boundary, not a theorem about low-rank attention.
+$$
+\delta(s)\to+\infty,
+\qquad
+g(s)\to1,
+\qquad
+\mathcal E_{\mathcal K}(s)=2R(s)\to0.
+$$
 
-Pythia-70M float64-v4 passes all 8 checkpoint audits. It validates tokenization,
-edge-blocking, head observation, and finite-patch instrumentation. It is one pretraining
-trajectory, so it does not establish a population training law. Its routing effects are
-nonmonotone and template-dependent, and it does not support the proposed
-diffuse-to-selective-to-sparse-collision story.
+The unrestricted claim is false. If both query and key factors are zero, the composite
+score gradient is nonzero but both factor gradients remain zero. A separate signed-gain
+two-head construction has $R=0$ but $S_{\rm key}=0$. Initialization
+nondegeneracy and route identifiability are therefore necessary.
 
-## Active repository
+The next data layer is the published LEGO state-tracking law. The repository now
+contains a complete finite cyclic-group population, the canonical five-token clauses,
+and the two required source clauses for each transition. No new model family was added;
+the LEGO training-to-depth theorem is not yet proved.
 
-The active package contains four layers:
+Earlier controlled evidence remains subordinate:
 
-| Layer | Modules | Purpose |
+- Phase II rejects a stable irreducible residual. Longer or scheduled training
+  continues to improve. Dense composites reduce leakage, whereas rank-matched direct
+  coordinates do not; this is evidence for a rank/function-class boundary, not a new
+  low-rank theorem.
+- Pythia-70M float64-v4 passes all eight checkpoint integrity audits. It is one
+  pretraining trajectory. Its routing effects are nonmonotone and template-dependent,
+  so it does not establish a population training law or the proposed
+  diffuse-to-selective-to-sparse-collision narrative.
+- The fixed-kernel clustering baseline verifies the prescribed-kernel depth dynamics
+  only. It does not explain how training selects that kernel.
+
+## Repository structure
+
+| Layer | Main modules | Purpose |
 |---|---|---|
-| Task/model | data, model, controlled_model, model_variants | exact data law and full softmax \(QK/OV\) model |
-| Training | controlled_training, phase2_study | deterministic gradient-based trajectories and checkpoints |
-| Theory measurements | metrics, interventions, phase2_analysis, population_gf | risk, kernel alignment, blocking, exact population updates |
-| External validation | pretrained_bridge, pretrained_causal, pretrained_study, pretrained_analysis | audited Pythia checkpoint measurements |
+| Data/model | data, model, controlled_model, model_variants | MQAR/LEGO laws and exact-softmax $QK/OV$ models |
+| Training | controlled_training, phase2_study, population_gf | deterministic trajectories and exact population updates |
+| Theory | mqar_kernel_theory, metrics, interventions, phase2_analysis | closed equations, risk, transport, and edge blocking |
+| External calibration | pretrained_bridge, pretrained_causal, pretrained_study, pretrained_analysis | audited Pythia checkpoint measurements |
 
-Only two experiment configurations remain active:
-
-- configs/phase2/discovery-remedy/residual-factorization-noffn.json
-- configs/pretrained_pythia70m_suite_a_calibration_float64_v4.json
-
-Only six evidence directories remain under results. They are the fixed-kernel baseline,
-the Phase-II source/precision/analysis chain, and the Pythia-v4 source/analysis chain.
-The exact allowlist is enforced by tests/test_repository_scope.py.
-
-Historical scaling, NTK/landscape, localization, mechanism-attribution, and report-builder
-code was removed from the active tree. It remains recoverable at Git commit 1f06157.
+REPOSITORY_SCOPE.toml is fail-closed: an unclassified module, configuration, report, or
+result directory breaks the test suite. Historical exploratory work remains recoverable
+at commit 1f06157.
 
 ## Install and verify
 
 Python 3.11 is required.
 
-    python -m venv .venv
-    source .venv/bin/activate
-    python -m pip install -e ".[pretrained]"
-    PYTHONPATH=src python -m unittest discover -s tests -v
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[pretrained]"
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
 
-The CI additionally builds and imports a non-editable wheel.
-
-Useful read-only or reproducible entry points:
-
-    PYTHONPATH=src python -m routing_lab.clustering_baseline --help
-    PYTHONPATH=src python -m routing_lab.phase2_precision_audit --help
-    PYTHONPATH=src python -m routing_lab.phase2_results --help
-    PYTHONPATH=src python -m routing_lab.pretrained_analysis --help
+The CI also builds and imports a non-editable wheel.
 
 Pythia calibration is cache-only unless network access is explicitly requested:
 
-    PYTHONPATH=src python -m routing_lab.pretrained_study \
-      --config configs/pretrained_pythia70m_suite_a_calibration_float64_v4.json \
-      --output-directory results/pretrained-pythia70m-suite-a-calibration-float64-v4 \
-      --cache-directory /path/to/huggingface/cache
+```bash
+PYTHONPATH=src python -m routing_lab.pretrained_study \
+  --config configs/pretrained_pythia70m_suite_a_calibration_float64_v4.json \
+  --output-directory results/pretrained-pythia70m-suite-a-calibration-float64-v4 \
+  --cache-directory /path/to/huggingface/cache
+```
 
 ## Evidence rules
 
-- The independent inferential unit is a training seed.
-- Checkpoints, templates, layers, heads, and prompts are repeated measurements.
-- Accuracy alone does not identify an internal interaction kernel.
-- A causal statement requires an explicit intervention and descendant recomputation.
-- Local hybrid patches are not additive module attribution.
-- Failed numerical gates remain failures; thresholds are not relaxed after inspection.
-- New experiments must measure \(B_s,C_s,\gamma_s\), transport error, or depth error.
+- Independent training seeds are the inferential units.
+- Checkpoints, templates, layers, heads, clauses, and prompts are repeated measures.
+- Accuracy alone does not identify an interaction kernel.
+- A causal claim requires an explicit intervention and descendant recomputation.
+- Failed numerical gates remain failures; thresholds are not changed after inspection.
+- No model family or dataset is added before the active theorem gate closes.
 
-The repository currently grants no third-party reuse license. Public visibility does not
-by itself grant permission to copy, modify, run, or redistribute the work.
+The repository currently grants no third-party reuse license. Public visibility does
+not grant permission to copy, modify, run, or redistribute the work.

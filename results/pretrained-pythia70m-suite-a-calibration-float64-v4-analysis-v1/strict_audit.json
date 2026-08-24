@@ -46,6 +46,12 @@
     "pretrained_causal": "f067afe42d95960a91fdd6e339d8079468954ee6b6e0729832da6ba140cc48a2",
     "pretrained_study": "7dab23a5b5e43a67aadc78456d9e3c8ca0a7745fe56f287f8f9b23c50491e085"
   },
+  "measurement_source_paths": {
+    "phase2_protocol": "results/pretrained-pythia70m-suite-a-calibration-float64-v4/phase2_protocol.execution.snapshot",
+    "pretrained_bridge": "src/routing_lab/pretrained_bridge.py",
+    "pretrained_causal": "src/routing_lab/pretrained_causal.py",
+    "pretrained_study": "src/routing_lab/pretrained_study.py"
+  },
   "natural_swap_evidence": "aggregate_mse_only",
   "parallel_chord_rows_per_revision": 6144,
   "patch_rows_per_revision": 24576,
