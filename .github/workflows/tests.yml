@@ -34,10 +34,13 @@ jobs:
           cd /tmp
           PYTHONPATH=/tmp/transformer-wheel-site python - <<'PY'
           from routing_lab.control_config import canonical_sha256
+          from routing_lab.matrix_mqar import MatrixMQARSpec, enumerate_matrix_mqar_population
           from routing_lab.population_gf import PopulationStepConfig
 
           assert len(canonical_sha256({"scope": "training-aware-kernel"})) == 64
           assert PopulationStepConfig(step_size=0.1).step_size == 0.1
+          spec = MatrixMQARSpec()
+          assert enumerate_matrix_mqar_population(spec).size == 48
           PY
       - name: Run tests
         run: python -m unittest discover -s tests -v
