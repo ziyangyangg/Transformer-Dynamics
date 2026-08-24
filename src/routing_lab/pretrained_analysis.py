@@ -64,7 +64,10 @@ SIDECARS = (
     "parallel_residual_chords.json",
 )
 SOURCE_FILES = {
-    "phase2_protocol": Path("reports/PHASE2_PROTOCOL.md"),
+    "phase2_protocol": Path(
+        "results/pretrained-pythia70m-suite-a-calibration-float64-v4/"
+        "phase2_protocol.execution.snapshot"
+    ),
     "pretrained_study": Path("src/routing_lab/pretrained_study.py"),
     "pretrained_causal": Path("src/routing_lab/pretrained_causal.py"),
     "pretrained_bridge": Path("src/routing_lab/pretrained_bridge.py"),
@@ -1222,6 +1225,9 @@ def audit_calibration(
         "head_diagnostic_rows_per_revision": 196608,
         "patch_rows_per_revision": 24576,
         "parallel_chord_rows_per_revision": 6144,
+        "measurement_source_paths": {
+            name: str(relative) for name, relative in SOURCE_FILES.items()
+        },
         "prompt_population_hash": next(iter(population_hashes)),
         "measurement_contract_hash": measurement_contract_hash,
         "measurement_source_hashes": actual_source_hashes,
@@ -1494,13 +1500,13 @@ def _descriptive_trajectory_summary(
 
 
 def _format_scientific(value: float) -> str:
-    """Use compact decimal/scientific notation in the short Chinese report."""
+    """Use compact decimal or scientific notation in the short report."""
 
     return f"{value:.3g}" if abs(value) >= 1.0e-3 else f"{value:.2e}"
 
 
 def _report_text(summary: Mapping[str, Any], audit: Mapping[str, Any]) -> str:
-    """Render a deliberately short, number-first Chinese calibration report."""
+    """Render a deliberately short, number-first English calibration report."""
 
     max_accuracy = summary["max_accuracy"]
     min_risk = summary["min_risk"]
@@ -1517,20 +1523,20 @@ def _report_text(summary: Mapping[str, Any], audit: Mapping[str, Any]) -> str:
         f"S_key={_format_scientific(row['s_key'])}"
         for row in final
     )
-    stable_phrase = "通过" if story["stable_retrieval"] else "未通过"
-    return f"""# Pythia-70M float64 校准：阶段判断
+    stable_phrase = "passes" if story["stable_retrieval"] else "does not pass"
+    return f"""# Pythia-70M Float64 Calibration: Stage Decision
 
-审计：8/8 checkpoints、32 checkpoint×template rows 全部闭合；P10→P11 逐 slot 重构通过；最大 parallel-residual 误差 `{closure["value"]:.3e}`（阈值 `1e-5`）。统计单位只有 **1 条 pretraining trajectory**。
+Audit: all 8 checkpoints and all 32 checkpoint-template rows are complete; raw P10 slot interventions reconstruct P11 exactly. The maximum parallel-residual closure error is `{closure["value"]:.3e}` against the registered `1e-5` threshold. The statistical unit is **one pretraining trajectory**.
 
-定义：`f=tanh((log p(plus)-log p(minus))/2)`，`R=E[(f-y)^2]/2`，`S_key=E[δ_target-mean(δ_distractor)]`，其中 `δ_i=y(f-f^(-i))` 只阻断 final-prompt receiver→full-card 直接边。
+Definitions: $f=\\tanh((\\log p(\\text{{plus}})-\\log p(\\text{{minus}}))/2)$, $R=\\mathbb{{E}}[(f-Y)^2]/2$, and $S_{{\\mathrm{{key}}}}=\\mathbb{{E}}[\\delta_J-\\operatorname{{mean}}_{{i\\ne J}}\\delta_i]$, where $\\delta_i=Y(f-f^{{(-i)}})$ blocks only the direct edge from the final prompt receiver to memory card $i$.
 
-观察：最高 accuracy `{max_accuracy["value"]:.3f}`（{max_accuracy["revision"]}/{max_accuracy["template_id"]}），最低 risk `{min_risk["value"]:.3f}`；`S_key` 范围 `{min_s_key["value"]:.3e}` 到 `{max_s_key["value"]:.3e}`。最强 observation-only head selectivity `{best_head["value"]:.3e}`（{best_head["revision"]}/{best_head["template_id"]}/L{best_head["layer"]}H{best_head["head"]}）；最大自然 swap MSE `{max_swap["value"]:.3e}`。final：{final_text}。
+Observations: the maximum accuracy is `{max_accuracy["value"]:.3f}` ({max_accuracy["revision"]}/{max_accuracy["template_id"]}) and the minimum risk is `{min_risk["value"]:.3f}`. $S_{{\\mathrm{{key}}}}$ ranges from `{min_s_key["value"]:.3e}` to `{max_s_key["value"]:.3e}`. The largest observation-only head selectivity is `{best_head["value"]:.3e}` ({best_head["revision"]}/{best_head["template_id"]}/L{best_head["layer"]}H{best_head["head"]}); the maximum natural-swap MSE is `{max_swap["value"]:.3e}`. Final checkpoint: {final_text}.
 
-判断：`diffuse → selective routing → sparse collision/downstream reorganization` **不成立为当前结论**。最终四模板{stable_phrase}描述性稳定 retrieval screen；且未保存逐 episode 自然-swap 差值，不能检验 collision 稀疏/重尾。三类 finite patch 只能说明 nonlinear suffix 对 swap 有位置依赖重组，不能唯一归因于 QK、OV 或 FFN。
+Assessment: the proposed `diffuse -> selective routing -> sparse collision -> downstream reorganization` trajectory is **not supported**. The four final templates {stable_phrase} the descriptive stable-retrieval screen. Episode-level natural-swap deltas were not stored, so collision sparsity and tail behavior are not testable. The three finite-patch roles are overlapping nonlinear suffix interventions and do not identify QK, OV, or FFN as a unique compensator.
 
-边界：checkpoint/template/layer/head 均是 repeated measures；无 seed-level 推断。P10 不是 total mediation。Pythia 只验证 instrumentation 与弱、模板异质的 routing 信号；toy 的多-seed rank/collision 结果不能据此外推为 GPT 训练定律。
+Boundary: checkpoints, templates, layers, and heads are repeated measurements, not independent samples. P10 is not total mediation. These data validate the measurement pipeline and show weak, template-dependent routing signals; they do not establish a general law of GPT training.
 
-结论：完整故事支持=`{str(story["full_story_supported"]).lower()}`。论文主理论仍应留在 toy 可识别问题：在 learned compressed `E` 与 per-head rank 下，何种 margin/cover 条件使低风险强迫 `S_key>0`，以及何时存在低风险但 `S_key≤0` 的反例。
+Conclusion: `full_story_supported={str(story["full_story_supported"]).lower()}`. The theorem-facing target remains the full-matrix MQAR-to-LEGO problem: derive the gradient-flow dynamics of $B=Q^\\top K$ and $C=OV$, prove task-kernel alignment under explicit assumptions, and construct counterexamples when those assumptions are removed.
 """
 
 

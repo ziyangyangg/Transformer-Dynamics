@@ -1,14 +1,14 @@
 {
   "analysis_schema_version": "pretrained-analysis-v1",
-  "analysis_source_sha256": "996710201827f65f403030c5361daf72dfc33d2de27f518cd7e774ca833cedfa",
-  "analysis_spec_sha256": "896045a0992aba89cd9569daa2ac62f4b4c0905030d7f0d630fde0bf7bec1015",
+  "analysis_source_sha256": "8598a601b5d97516f2203681df11d3565b989914471aac2492f0a3a52a8feecc",
+  "analysis_spec_sha256": "45e44454ae85a772356c2f6d778245b12a34e9642825776ff881895d9c7bdbe0",
   "checkpoint_is_seed": false,
   "confidence_intervals_or_p_values": false,
   "figure_count": 4,
   "files": {
     "REPORT.md": {
-      "bytes": 1897,
-      "sha256": "81f3d22c9114f2d1687e6b2c0b66bcdcd3115075d30320c1572ca6e0a2eddb83"
+      "bytes": 2239,
+      "sha256": "6fd1950811704616dca3aa933699fd90f4978ee4e043e9ae089febefdf3633a7"
     },
     "checkpoint_template_summary.csv": {
       "bytes": 12577,
@@ -83,8 +83,8 @@
       "sha256": "31b4e54ad323df7f45af3ebd01ac8fef2fa433479e0680a2f736f222d9bb6daa"
     },
     "strict_audit.json": {
-      "bytes": 21528,
-      "sha256": "ac5779b77ba45c2c7be4bb867033bedcdad906c4020aa55f67266d0b284cbf3e"
+      "bytes": 21878,
+      "sha256": "10e0cf2a9e3cf0ce19f3ed3035a87cd552965ca7264a42a8a27b2648d73a8535"
     },
     "trajectory_summary.json": {
       "bytes": 4516,
@@ -98,7 +98,7 @@
   "statistical_scope": "descriptive_only",
   "statistical_unit": "one_pretraining_trajectory",
   "status": "passed",
-  "strict_input_audit_sha256": "ac5779b77ba45c2c7be4bb867033bedcdad906c4020aa55f67266d0b284cbf3e",
+  "strict_input_audit_sha256": "10e0cf2a9e3cf0ce19f3ed3035a87cd552965ca7264a42a8a27b2648d73a8535",
   "study_config_hash": "c92daf6ca856acc3e1b7c50f84aaa6440972665d1c00521b6b9ff26d1a590e4e",
   "study_id": "pythia-70m-causal-routing-calibration-float64-v4"
 }
