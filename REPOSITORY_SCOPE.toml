@@ -11,6 +11,7 @@ active_modules = [
   "data.py",
   "finite_localization_v2.py",
   "interventions.py",
+  "kernel_capacity.py",
   "metrics.py",
   "model.py",
   "mqar_kernel_theory.py",
