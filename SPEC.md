@@ -1,144 +1,231 @@
-# Method specification
+# Method Specification
 
 ## 1. Target theorem
 
-For \((X,Y)\sim\mathcal D\),
+For $(X,Y)\sim\mathcal D$,
 
-\[
-R(\theta)=\mathbb E_{\mathcal D}\,\ell(f_\theta(X),Y),
+$$
+R(\theta)=\frac12\mathbb E_{\mathcal D}
+\left(f_\theta(X)-Y\right)^2,
 \qquad
 \dot\theta_s=-\nabla_\theta R(\theta_s).
-\]
+$$
 
 The primary objective is to prove, under explicit data, initialization, and scale
 assumptions, that training creates a task-aligned interaction kernel and that the
-resulting finite-depth network implements the task interaction graph \(G^*(X)\).
+resulting finite-depth network implements the known task graph $G^*(X)$.
 
-The theorem must control three quantities:
+The theorem must control
 
-\[
-\gamma_s(X)
-=u_{iJ^*}(s)-\max_{j\ne J^*}u_{ij}(s),
-\]
+$$
+\gamma_s(X)=u_{iJ^*}(s)-\max_{j\ne J^*}u_{ij}(s),
+$$
 
-\[
+$$
 \mathcal E_{\rm transport}(s)
-=\left\|\mathcal K_s(i,J^*;X)z_{J^*}-m_i^*(X)\right\|
-+\sum_{j\ne J^*}\left\|\mathcal K_s(i,j;X)z_j\right\|,
-\]
+=
+\left\|\mathcal K_s(i,J^*;X)z_{J^*}-m_i^*(X)\right\|^2
++
+\sum_{j\ne J^*}
+\left\|\mathcal K_s(i,j;X)z_j\right\|^2,
+$$
 
-\[
+and
+
+$$
 \mathcal E_{\rm depth}(s,L)
-=\left\|\Phi_{\theta_s}^{L}(X)-\Phi^*(X)\right\|.
-\]
+=
+\left\|\Phi_{\theta_s}^{L}(X)-\Phi^*(X)\right\|.
+$$
 
-Risk reduction without these structural bounds is insufficient.
+Risk reduction without structural bounds is insufficient.
 
-## 2. Minimal identifiable task
+## 2. MQAR-compatible population
 
-The theorem-bearing task is a public deterministic generator, not an empirical claim
-about natural language. Each episode contains \(m\) distinct concept-value pairs,
+Let $N\ge m\ge2$. An episode contains distinct keys and fresh binary values:
 
-\[
-(c_1,v_1),\ldots,(c_m,v_m),q,
+$$
+c_1,\ldots,c_m\in[N],
 \qquad
-v_i\overset{\rm iid}{\sim}\mathrm{Unif}\{-1,+1\},
-\]
+v_i\overset{\rm iid}{\sim}\operatorname{Unif}\{-1,+1\},
+$$
 
-\[
-J\sim\mathrm{Unif}\{1,\ldots,m\},
-\qquad q=c_J,\qquad Y=v_J.
-\]
+$$
+J\sim\operatorname{Unif}[m],
+\qquad
+q=c_J,
+\qquad
+Y=v_J.
+$$
 
-Fresh random values prevent the concept embedding from memorizing labels. The known
-interaction graph contains one required edge, query \(\to J\). Position alone cannot
-solve the task because \(J\) changes independently across episodes.
+The target slot changes across episodes, so position cannot solve the task. Fresh
+values prevent concept identity from memorizing the label. This is a single-query,
+binary-value specialization of public MQAR, not the complete Zoology sequence law.
 
-This generator is used because \(G^*(X)\), the population law, and all counterfactuals
-are exact. Public algorithmic/state-tracking tasks may later test generalization, but
-they do not replace the minimal proof instance.
+## 3. Exact-softmax kernel
 
-## 3. Model and learned kernel
+For layer $\ell$ and head $h$,
 
-The active toy model is a finite causal pre-normalized Transformer with learned
-representations, factorized \(Q/K/O/V\), exact softmax, residual connections, and a
-trained readout. For layer \(\ell\), head \(h\),
-
-\[
+$$
 B_{\ell h}=Q_{\ell h}^{\top}K_{\ell h},
 \qquad
 C_{\ell h}=O_{\ell h}V_{\ell h},
-\]
+$$
 
-\[
+$$
 a_{\ell h,ij}
-=\frac{\exp\{(z_i^\ell)^\top B_{\ell h}z_j^\ell/\sqrt{d_h}\}}
-{\sum_{k\le i}\exp\{(z_i^\ell)^\top B_{\ell h}z_k^\ell/\sqrt{d_h}\}},
-\]
+=
+\frac{
+\exp\left\{
+\beta\nu(z_i^\ell)^{\top}B_{\ell h}\nu(z_j^\ell)/\sqrt{d_h}
+\right\}
+}{
+\sum_{k\le i}
+\exp\left\{
+\beta\nu(z_i^\ell)^{\top}B_{\ell h}\nu(z_k^\ell)/\sqrt{d_h}
+\right\}
+},
+$$
 
-\[
+$$
 \mathcal K_{\ell}(i,j;X)
-=\sum_h a_{\ell h,ij}(X)C_{\ell h},
+=
+\sum_h a_{\ell h,ij}(X)C_{\ell h}.
+$$
+
+$B$ selects a source. $C$ transports its content. Raw factors are gauge-dependent, so
+primary statements use $B$, $C$, $\mathcal K$, or function values.
+
+If the loss depends on the factors only through $B$ and $C$, then
+
+$$
+\dot B=-G_BK^{\top}K-Q^{\top}QG_B,
 \qquad
-m_i^\ell=\sum_{j\le i}\mathcal K_{\ell}(i,j;X)z_j^\ell.
-\]
+\dot C=-G_CV^{\top}V-OO^{\top}G_C,
+$$
 
-\(B\) chooses sources; \(C\) transports their content into the residual stream. Raw
-\(Q,K,V,O\) factors are gauge-dependent, so primary statements use \(B,C\) or function
-values.
+where $G_B=\partial R/\partial B$ and $G_C=\partial R/\partial C$. These identities
+are exact but not closed until the gradients are expressed through task statistics.
 
-## 4. Training method
+## 4. Identifiability
 
-The theory uses population gradient flow. Exact enumeration is required whenever the
-support is feasible; otherwise fresh counter-addressable batches approximate the same
-expectation. Experimental optimizers are robustness checks, not identities with
-gradient flow.
+Low risk and exact Walsh coefficients test functional dependence on the correct value.
+Direct source dependence is measured by blocking each query-to-memory score edge,
+renormalizing softmax, and recomputing every descendant:
 
-Every trajectory records:
+$$
+S_{\rm key}
+=
+\mathbb E\left[
+Y(f-f^{(-J)})
+-
+\frac1{m-1}
+\sum_{i\ne J}Y(f-f^{(-i)})
+\right].
+$$
 
-- complete model, optimizer, scheduler, and random-stream state;
-- \(R,B,C,\gamma,\mathcal E_{\rm transport}\) at fixed checkpoints;
-- immutable configuration, source hashes, and failure ledger;
-- independent training seeds as the only inferential units.
+Low risk implies positive direct-edge selectivity only under explicit value-path
+identifiability, gain-sign, and no-bypass conditions. Signed cancellation gives an
+exact zero-risk counterexample when these conditions are removed.
 
-## 5. Identifiability and interventions
+## 5. Registered MQAR theorem
 
-The output value coefficient is measured by value flips or exact Walsh coefficients.
-Direct source dependence is measured by blocking each query-to-memory edge, renormalizing
-softmax, and recomputing all descendants.
+In the permutation-symmetric one-head parameterization, the target score exceeds all
+distractor and zero-value query-self scores by $\delta$. Define
 
-These interventions answer different questions:
+$$
+a(\delta)=\frac{e^\delta}{e^\delta+m},
+\qquad
+b(\delta)=\frac1{e^\delta+m},
+$$
 
-- low risk and Walsh leakage test functional use of the correct value;
-- slot blocking tests a registered direct path;
-- neither proves that a particular head or module is uniquely responsible.
+$$
+f(v)=g\left(a v_J+b\sum_{i\ne J}v_i\right),
+$$
 
-Low risk implies positive blocking selectivity only under explicit value-path
-identifiability, gain-sign, and no-bypass assumptions. Signed cancellation provides a
-zero-risk counterexample without those assumptions.
+$$
+R_m(g,\delta)
+=
+\frac12\left[(ga-1)^2+(m-1)(gb)^2\right].
+$$
 
-## 6. Training-to-depth bridge
+Retain factorization and a learned radial dictionary scale:
 
-At frozen training time \(s\), the learned kernel is inserted into the layer recursion.
-The proof must derive softmax leakage from \(\gamma_s\), propagate transport error
-through residual layers, and bound \(\mathcal E_{\rm depth}(s,L)\). Training time \(s\)
-and layer depth \(\ell\) are never identified.
+$$
+\delta=qk\rho^2,
+\qquad
+g=ovw.
+$$
 
-## 7. Evidence hierarchy
+For positive factors and
 
-1. Exact theorem or counterexample.
-2. Multi-seed controlled evidence for theorem quantities.
-3. Single-trajectory checkpoint evidence, explicitly descriptive.
-4. Local diagnostics, used only to find assumptions or numerical failures.
+$$
+g_0
+\left[
+a(\delta_0)-\frac{m-1}{m}b(\delta_0)
+\right]
+<1,
+$$
 
-Low-rank attention, nonorthogonal embeddings, fixed-kernel clustering, attention maps,
-and local patch effects are prior knowledge or diagnostics. They are not contributions
-by themselves.
+the required conclusion is
 
-## 8. Stop rules
+$$
+\delta(s)\to+\infty,
+\qquad
+g(s)\to1,
+\qquad
+\mathcal E_{\mathcal K}(s)=2R_m(s)\to0.
+$$
 
-No new model family, dataset, grid, or diagnostic is added unless it tests a variable in
-Sections 1–6. A failed gate is reported and stopped. Pythia checkpoints are not seeds.
-Module attribution is not claimed without a common-base closed decomposition. Rare
-collisions remain a possible mechanism only if high-precision replicated evidence
-survives and known kernel geometry fails to explain them.
+The unrestricted initialization claim is refuted by $q_0=k_0=0$: the composite score
+gradient is nonzero while both score-factor gradients remain zero. The exact theorem
+and proof are in reports/MQAR_KERNEL_LEARNING_THEOREM.md.
+
+## 6. LEGO transition
+
+Only after the MQAR theorem is established does the data law change to the published
+LEGO state-tracking distribution. Variables are sampled without replacement, the
+initial state is uniform, actions are sampled with replacement, and
+
+$$
+y_t=g_t(y_{t-1}).
+$$
+
+For each transition, the task graph has two required sources: predicate clause $t$ and
+answer clause $t-1$. The next theorem must derive their kernel weights from training
+and propagate the resulting per-step error through a chain of length $L$. Existing LEGO
+learnability and length-generalization results are prior art.
+
+## 7. Training and evidence rules
+
+- Use exact population gradient flow whenever the support is feasible.
+- Otherwise use counter-addressable fresh batches that approximate the same law.
+- Record full state, source/configuration hashes, and a failure ledger.
+- Treat independent training seeds as the only inferential units.
+- Aggregate episodes, values, clauses, layers, heads, and checkpoints within seed.
+- Use interventions for causal claims; attention mass is descriptive.
+- Do not change a gate after inspecting its result.
+
+## 8. Training-to-depth bridge
+
+At fixed training time $s$, suppose layer $\ell$ approximates its target operator with
+error $\eta_\ell(s)$ and later target layers have Lipschitz constants
+$\Lambda_r$. The intended bound is
+
+$$
+\mathcal E_{\rm depth}(s,L)
+\le
+\sum_{\ell=0}^{L-1}
+\eta_\ell(s)
+\prod_{r=\ell+1}^{L-1}\Lambda_r.
+$$
+
+Every $\eta_\ell(s)$ must be derived from the training theorem. It cannot be assumed
+by postulating a correct kernel.
+
+## 9. Stop rules
+
+No new model family, dataset, grid, or diagnostic is added unless it tests an explicit
+quantity above. Pythia checkpoints are not seeds. Local hybrid patches are not additive
+module attribution. Rare collisions are not promoted to a mechanism before replicated
+high-precision evidence and a failed explanation by known kernel geometry.

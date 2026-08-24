@@ -2,35 +2,46 @@
 
 ## Repository foundation
 
-- [x] 冻结唯一研究问题和方法合同。
-- [x] 删除主依赖闭包之外的源码、专属测试、配置、报告和派生结果。
-- [x] 保留 Phase-II、Pythia-v4 与 fixed-kernel baseline 的直接证据；GF 保留核心引擎。
-- [x] 增加机器可检查的活跃树 allowlist。
+- [x] Freeze one research question and one methodological contract.
+- [x] Remove source, tests, configurations, reports, and derived artifacts outside
+  the theorem-facing dependency closure.
+- [x] Retain the direct Phase-II, Pythia-v4, and fixed-kernel evidence.
+- [x] Enforce a machine-checkable active-tree allowlist.
 
-## Theory first
+## Gate 1: MQAR-compatible kernel learning
 
-- [ ] 冻结一个具有已知 \(G^*(X)\) 的公开生成任务及 population law。
-- [ ] 写出完整 \(E,Q,K,V,O,w\) gradient-flow 方程。
-- [ ] 推导 \(B=Q^\top K\)、\(C=OV\) 与 margin/transport order parameters。
-- [ ] 证明 order-parameter closure，或给出不闭合反例。
-- [ ] 证明 kernel-alignment 定理，或构造完整 exact-softmax 反例。
+- [x] Freeze an exact MQAR-compatible population with known target interaction.
+- [x] Derive the exact six-factor population gradient flow.
+- [x] Prove kernel learning for the registered positive role-tied parameterization.
+- [x] Refute the theorem for unrestricted initialization with the exact
+  $Q=K=0$ factorization barrier.
+- [ ] Extend the theorem to arbitrary learned embedding directions and full matrix
+  factors, or construct a counterexample.
 
 ## Training-to-depth bridge
 
-- [ ] 从 learned score margin 推出 softmax leakage 界。
-- [ ] 从 learned \(C\) 推出 value-transport 误差界。
-- [ ] 把单层误差传播到有限深度任务误差。
-- [ ] 明确 training time 与 depth time，不混用两类极限。
+- [x] Convert the learned score margin into the exact softmax leakage.
+- [x] Convert the learned value gain into the exact one-layer transport error.
+- [ ] Propagate learned-kernel error through a finite-depth task graph.
+- [ ] Keep training time and depth time as distinct variables and limits.
 
-## Evidence
+## Gate 2: published LEGO population
 
-- [ ] 用已有 toy 轨迹重算上述理论变量；不新增无关指标。
-- [ ] 在新独立 seeds 上验证定理方向与有限宽度误差。
-- [ ] 只有 Gate 1/2 通过后，运行公开任务与 20M–70M 多-seed 验证。
-- [ ] 将 Pythia 仅作为 single-trajectory descriptive boundary。
+- [x] Implement exact finite populations for the published cyclic LEGO law.
+- [x] Encode the two required incoming edges of every answer node.
+- [ ] Derive or refute a closed training law for the learned LEGO interaction kernel.
+- [ ] Compare only after the theorem fixes the required order parameters.
+
+## Evidence boundary
+
+- [ ] Recompute only theorem variables on existing toy trajectories.
+- [ ] Validate finite-width error on independent training seeds.
+- [ ] Run no additional model family before the MQAR and LEGO gates are resolved.
+- [x] Treat Pythia as a single-trajectory descriptive boundary only.
 
 ## Publication
 
-- [ ] 每项主张标注 theorem / counterexample / multi-seed evidence / descriptive。
-- [ ] 文献表逐条说明已解决内容、明确缺口和本工作新增内容。
-- [ ] README、计划、报告与图表只使用研究宪章中的统一对象。
+- [ ] Label every claim as theorem, counterexample, multi-seed evidence, or
+  descriptive evidence.
+- [ ] State precisely what each cited result proves and what remains open.
+- [ ] Keep all active documentation in formal English with GitHub-renderable math.

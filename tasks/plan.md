@@ -1,131 +1,124 @@
-# Current plan: learning task-aligned interaction kernels
+# Implementation Plan: Learning Task-Aligned Interaction Kernels
 
-> 本文件是当前唯一实施计划。历史 toy-to-Pythia 计划保存在 Git 历史与对应 protocol/result
-> manifests 中，不再规定下一阶段方向。
+This is the only active plan. Historical toy-to-Pythia plans remain in Git history and
+immutable result manifests.
 
-## 成功标准
+## Success criterion
 
-项目必须闭合下面的定理链：
+The project must close the chain
 
-\[
+$$
 (\mathcal D,R,\theta_0)
-\xrightarrow{\mathrm{gradient\ flow}}
+\xrightarrow{\text{population gradient flow}}
 \{B_{\ell h}(s),C_{\ell h}(s)\}
-\xrightarrow{\mathrm{exact\ softmax}}
+\xrightarrow{\text{exact softmax}}
 \mathcal K_{\ell,s}
-\xrightarrow{\mathrm{depth}}
+\xrightarrow{\text{network depth}}
 \Phi_{\theta_s}^{L}(X).
-\]
+$$
 
-最终结果必须说明：
+A valid result must identify which statistics of the task distribution drive the
+factorized parameter updates, prove when the correct source margin and value transport
+emerge, and propagate that learned-kernel error through finite network depth. Adding
+heads, layers, datasets, or parameters is not completion.
 
-1. 任务分布的什么结构驱动 \(QK/OV\) 参数更新；
-2. 梯度流何时形成正确 source margin 与 value transport；
-3. learned kernel 为什么在有限深度内实现目标 interaction operator；
-4. 哪些条件不可缺少，并给出 bypass/cancellation/不可识别性的反例。
+## Gate 0: scope and prior art
 
-只增加层数、heads、数据集或模型大小不构成完成。
+- [x] Locate the training gap in Section 10 of the current arXiv version of
+  *A Mathematical Perspective on Transformers*.
+- [x] Separate fixed-kernel depth dynamics from parameter-training dynamics.
+- [x] Record prior results on max-margin token selection, co-occurrence gradient flow,
+  induction heads, multi-head ICL, and LEGO state tracking.
+- [x] Treat retrieval, rank, collisions, and patching as subordinate diagnostics.
 
-## Phase 0 — 冻结问题与 prior-art 边界
+A novelty statement must exceed both a training-only special case and a fixed-kernel
+dynamics result.
 
-- [x] 把 Perspective 的训练缺口准确定位为当前 v5 的 §10，而不是 §3.4 或编号 Problem。
-- [x] 区分 fixed-kernel depth dynamics 与 parameter-training dynamics。
-- [x] 记录已解决的特殊情形：max-margin selection、Scan-and-Snap、co-occurrence GF、
-  multi-head ICL allocation、LEGO/CoT training。
-- [x] 将 retrieval、rank、collision、causal routing 和 module localization 降为从属对象。
+## Repository gate
 
-**Gate 0：**任何 novelty statement 必须指出它同时超出哪个 training-only 特例和哪个
-fixed-kernel dynamics 结果。
+- [x] Retain only the theorem-facing model, training, measurement, and audited evidence
+  dependency closure.
+- [x] Remove exploratory scaling, landscape, localization, and report-builder branches
+  from the active tree.
+- [x] Enforce the allowlist in REPOSITORY_SCOPE.toml.
 
-## Repository gate — 保持研究对象唯一
+The pre-cleanup state remains recoverable at commit 1f06157.
 
-- [x] 以依赖闭包保留 toy/GF/Phase-II/Pythia 的 20 个核心模块。
-- [x] 从活跃树移除旧 scaling、NTK/landscape、localization、mechanism 与报告打包分支。
-- [x] 只保留两份有效配置和六套直接证据。
-- [x] 用 REPOSITORY_SCOPE.toml 与单测阻止未分类模块、配置、报告或结果重新进入。
+## Gate 1: exact MQAR kernel learning
 
-清理前完整状态固定在 Git commit 1f06157。恢复历史内容必须先说明它检验 Gate 1/2 的
-哪个变量；否则不得重新加入活跃树。
+The data are the single-query, binary-value specialization of MQAR. The first model is
+one layer, one head, exact softmax, factorized Q/K/O/V, a trained readout, and no FFN.
 
-## Phase 1 — 最小完整 softmax 训练定理
+- [x] Derive the closed population risk for the permutation-symmetric parameterization.
+- [x] Verify the equations against the complete value cube and automatic
+  differentiation.
+- [x] Prove that positive nondegenerate factors satisfying the alignment condition
+  yield
 
-冻结一个公开、可枚举且具有已知正确 interaction graph \(G^*(X)\) 的生成任务。模型保留：
-learned representation、factorized \(Q/K/O/V\)、exact softmax 和训练 readout；先从单层、
-单头、无 FFN 的最小标准子类开始。
+$$
+\delta(s)\to+\infty,
+\qquad
+g(s)\to1,
+\qquad
+\mathcal E_{\mathcal K}(s)=2R(s)\to0.
+$$
 
-### 1.1 精确训练方程
+- [x] Refute the unrestricted initialization claim with the exact Q=K=0 factorization
+  barrier.
+- [x] Retain the signed-gain exact-softmax counterexample to internal route
+  identifiability.
+- [ ] Extend beyond a radial learned dictionary to arbitrary embedding directions.
 
-- 推导 population gradient flow 的 \(Q,K,O,V,E,w\) 方程。
-- 同时跟踪 gauge-invariant \(B=Q^\top K\)、\(C=OV\) 与任务定义的 order parameters。
-- 证明所选 order parameters 是否闭合；若不闭合，构造相同低阶状态、不同导数的反例。
+The positive theorem and both obstructions are stated in
+reports/MQAR_KERNEL_LEARNING_THEOREM.md. Gate 1 is resolved for the registered
+reduced parameterization, not for a general Transformer.
 
-### 1.2 Kernel alignment
+## Gate 2: LEGO training-to-depth bridge
 
-- 定义正确 source margin \(\gamma_s\)。
-- 定义正确 value transport error \(\mathcal E_{\rm transport}(s)\)。
-- 证明或反驳
+The next and only active extension changes the data, not the model family. It uses the
+published LEGO law:
 
-\[
-R(\theta_s)\downarrow0,\qquad
-\gamma_s\uparrow,\qquad
-\mathcal E_{\rm transport}(s)\downarrow0.
-\]
+$$
+x_t=g_t(x_{t-1}),
+\qquad
+y_t=g_t(y_{t-1}),
+$$
 
-- 明确 norm、gain、initialization、separability、no-bypass 和 signed-cancellation 条件。
+with variables sampled without replacement, initial state uniform, and actions sampled
+with replacement.
 
-### 1.3 实验职责
+- [x] Implement the complete finite cyclic-group population and five-token clause
+  encoding.
+- [x] Register the two required source clauses for each transition: the current
+  predicate and the previous answer.
+- [ ] Derive the factorized population gradient equations for the one-step transition.
+- [ ] Prove a per-step kernel error bound.
+- [ ] Compose the per-step bound through a chain of length L.
+- [ ] Separate the new training-to-depth statement from the existing LEGO
+  learnability and length-generalization theorem.
 
-- 枚举 population 或使用可验证的高精度近似，逐步记录理论中的同一变量。
-- 至少 10 个独立训练 seeds；seed 是推断单位。
-- 实验只判断假设是否合理、有限宽度误差多大、是否存在反例；不替代理论。
+Gate 2 passes only when the same theorem derives a kernel condition from gradient flow
+and uses that condition to bound finite-depth state-tracking error.
 
-**Gate 1：**得到一个 kernel-learning 定理或一个能推翻拟议定理的完整 exact-softmax 反例。
+## Later architecture changes
 
-## Phase 2 — Training-to-depth bridge
+No architecture change is active. A component may be added only when Gate 2 exposes a
+specific failed assumption:
 
-固定若干训练时间 \(s\)，把学出的 \(B_s,C_s\) 代回 layer/depth dynamics：
+1. multiple heads, only for signed allocation or cancellation;
+2. residual depth, only for operator composition and identifiability;
+3. RMSNorm or FFN, only if it changes a proved bound;
+4. finite rank, only if an explicit capacity term enters the theorem.
 
-- 证明 softmax leakage 如何由训练产生的 margin 控制；
-- 证明单层 message error 如何在有限深度内传播；
-- 给出到任务目标算子/目标表示集合的误差界；
-- 分清任务对齐 transport、局部 clustering 与全局 collapse。
+Each change must reuse the same data law, metrics, paired initialization, and
+independent training seeds.
 
-训练时间 \(s\) 和深度时间 \(t\) 不得混写。
+## Stop rules
 
-**Gate 2：**同一个定理同时出现由 gradient flow 得到的 kernel 条件，以及该条件推出的
-depth-dynamics 结论。
-
-## Phase 3 — 必要的架构扩展
-
-按理论障碍一次加入一个组件：
-
-1. multi-head：只研究 head 分工或 cancellation 是否改变 Gate 1/2；
-2. multi-layer/residual：只研究 interaction operator 的组合与 identifiability；
-3. RMSNorm/FFN：只研究它们是否破坏或恢复已有界；
-4. finite width/rank：只在定理中出现明确容量项时研究。
-
-每次扩展必须沿用同一任务、相同指标、配对初始化和独立 seeds。若只是新增现象，不晋级。
-
-## Phase 4 — 公开任务与中模型验证
-
-数据顺序固定，不再临时换 benchmark：
-
-1. MQAR-compatible generator：一步 \(q\to J\)，与 Gate 1 的概率律完全一致；
-2. LEGO state tracking：多步已知 interaction graph，只检验 Gate 2，不重复已有 CoT novelty；
-3. CLRS 的 search/graph 子集：只在 Gate 2 后检验跨生成器外推；
-4. PolyPythias：冻结指标后的多 seed 外部轨迹；单 seed Pythia 只保留校准作用。
-
-20M–70M 从头训练至少 10 个独立 seeds，记录同一组
-\(B,C,\gamma,\mathcal E_{\mathcal K},S_{\rm key},\mathcal E_{\rm depth}\)，不得只报 accuracy。
-checkpoint、template、layer 和 head 都不是独立样本。自然文本没有唯一 \(G^*\)，不承担
-首个结构定理。
-
-**Gate 3：**Gate 1/2 的定量预测在中模型多 seed 上方向一致；否则报告适用边界并停止扩规模。
-
-## 不再执行
-
-- 围绕单个 \(C=32,d=8\) cell 无限调参；
-- 把 low rank、非正交 embedding、fixed-QKV clustering 重新包装为创新；
-- 从 attention heatmap、单条 Pythia trajectory 或局部 patch 命名普遍机制；
-- 在 Gate 1/2 前继续扩展模型家族、数据集和诊断模块；
-- 与主式无关的“有趣现象”进入论文主线。
+- Do not tune one C=32, d=8 cell indefinitely.
+- Do not present low rank, nonorthogonal embeddings, or fixed-QKV clustering as new.
+- Do not infer a kernel from accuracy or an attention map.
+- Do not treat checkpoints, templates, layers, heads, or prompts as independent
+  samples.
+- Do not add another model family or dataset before the LEGO theorem either closes or
+  fails with an exact counterexample.
