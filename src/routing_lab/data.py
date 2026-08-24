@@ -195,7 +195,11 @@ class CyclicLEGOChainBatch:
 
 @dataclass(frozen=True)
 class ExactCyclicLEGOPopulation:
-    """Complete finite cyclic-LEGO support with uniform probability weights."""
+    """Complete finite cyclic-LEGO support with uniform probability weights.
+
+    This object fixes the data law only. It contains no claim that gradient training
+    learns the registered interaction graph.
+    """
 
     batch: CyclicLEGOChainBatch
     weights: torch.Tensor

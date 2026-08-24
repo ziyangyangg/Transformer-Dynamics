@@ -70,7 +70,11 @@ the active tree.
 ## Current conclusion
 
 The experiments established reliable measurements, ruled out several ordinary
-explanations, and exposed necessary assumptions. They did not prove the main
-training-to-depth theorem. The first rigorous progress is now the MQAR role-tied
-kernel-learning theorem and its exact initialization barrier. The only active empirical
-extension is the published LEGO data law; no new model family is authorized.
+explanations, and exposed necessary assumptions. In particular, the exact $Q=K=0$
+barrier proves that factor access is necessary; signed cancellation proves that low
+risk alone does not identify a direct route; and dense-versus-rank-matched controls
+motivate, but do not prove, a capacity condition. No experiment yet proves that the
+registered conditions are jointly sufficient.
+
+The first rigorous result is the role-tied MQAR slice. The only active extension is the
+published LEGO law, used to test depth composition. No new model family is authorized.

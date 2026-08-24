@@ -11,9 +11,10 @@ nondegenerate positive factor initialization. Two obstructions are exact:
 2. signed multi-head value gains can achieve zero risk without identifiable
    direct-edge routing.
 
-Thus this report closes Gate 1 only for the stated identifiable reduced model. It does not
-prove kernel learning for an arbitrary learned dictionary or a general residual
-Transformer.
+This is the first condition-discovery slice of the larger program. It proves one
+sufficient set of assumptions and shows that factor access and route identifiability
+cannot be omitted without replacement. It does not show that the same conditions are
+sufficient for an arbitrary learned dictionary or a general residual Transformer.
 
 ## 1. Population and reduced Transformer
 

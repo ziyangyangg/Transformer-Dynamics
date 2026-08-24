@@ -13,6 +13,11 @@ value gain is g = o * v * w.
 
 All formulas below are exact population quantities after averaging over IID
 Rademacher values. They are used both by tests and by the proof report.
+
+The module is intentionally small: it isolates the first setting in which task
+identifiability, exact representability, and nonzero factor access can all be checked.
+Its positivity assumptions are theorem hypotheses, not defaults for a general
+Transformer.
 """
 
 from __future__ import annotations

@@ -22,6 +22,27 @@ dynamics. Within the primary sources and their reference chains reviewed here, n
 single theorem closes this full map for a factorized, identifiable exact-softmax task.
 This is a scoped literature statement, not a logical claim about every publication.
 
+The target is conditional, not universal. The missing result is a theorem that starts
+from an identifiable structured task, finite representability, and factor access, then
+derives both a task-weighted kernel error and the constants needed to propagate it
+through depth. Assuming an already aligned attention map would leave the training gap
+untouched.
+
+## Evidence basis for candidate conditions
+
+The condition list is an evidence ledger, not a menu of convenient assumptions:
+
+| Candidate | Extracted from | Supporting evidence | What is not yet known |
+|---|---|---|---|
+| task identifiability | the repeated-key edge in MQAR and the two-parent LEGO transition | the published task laws make the required source intervention explicit; the finite support makes its matched effect exactly enumerable | the weakest identifiability condition for general structured tasks |
+| representability | the exact bounds $\operatorname{rank}(B_h),\operatorname{rank}(C_h)\le d_h$ | the ICML 2020 low-rank theorem establishes the architectural bottleneck; the paired dense and rank-matched controls distinguish a full-rank capacity upper bound from a coordinate control | a sharp task-dependent rank or approximation threshold |
+| factor access | the exact composite preconditioners induced by $B=Q^{\top}K$ and $C=OV$ | matrix-factorization theory motivates balancing; the repository proves the $Q=K=0$ trap and a positive role-tied MQAR trajectory | a minimal matrix-valued accessibility condition |
+| depth stability | the exact target update for the published LEGO recurrence | fixed-kernel Transformer dynamics and the LEGO theorem supply comparison objects | constants must be derived for the learned exact-softmax model; they are not a fourth assumption |
+
+A candidate becomes a theorem hypothesis only if its mathematical necessity or
+sufficiency is established in the specified task/model class. Toy and Pythia
+measurements can reject or motivate a candidate, but cannot create one by themselves.
+
 ## Fixed-kernel depth dynamics
 
 [A Mathematical Perspective on

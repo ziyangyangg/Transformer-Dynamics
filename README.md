@@ -1,10 +1,11 @@
 # Training-Aware Transformer Dynamics
 
-## Research question
+## Conditional research question
 
-Can one derive, from a task distribution and population gradient flow, the
-factorized $QK/OV$ interaction kernel learned by an exact-softmax Transformer and
-then prove that its layer dynamics implement the task-required interaction graph?
+Under what explicit and checkable conditions does population gradient flow in a
+factorized exact-softmax Transformer learn a task-aligned $QK/OV$ interaction kernel,
+and when does that learned kernel implement the task-required interaction graph through
+network depth?
 
 $$
 (\mathcal D,R,\theta_0)
@@ -25,9 +26,24 @@ C_{\ell h}=O_{\ell h}V_{\ell h},
 =\sum_h a_{\ell h,ij}(s;X)C_{\ell h}(s).
 $$
 
+This is not a claim for arbitrary data or initialization. The program seeks conditions
+that are broad enough to cover more than one task but concrete enough to test:
+
+| Condition | Plain meaning |
+|---|---|
+| identifiable task graph | changing a required source changes the correct answer |
+| finite representability | the available head ranks can express the required messages |
+| nondegenerate factor access | factorization does not trap training away from every task-equivalent kernel |
+
+These are the three current candidate gate categories, not final universal assumptions.
+Each is extracted from a concrete failure mode in the registered task or model: an
+unidentifiable edge, an unattainable task message, or an invariant factorization trap.
+Any covariance, margin, or stability constant must be derived from the exact data law
+and architecture. MQAR is the one-step proof slice; LEGO tests depth composition.
+
 Training time and network depth are different variables. Attention maps, low rank,
-clustering, superposition, and local patches are evidence or boundary conditions, not
-replacement research questions.
+clustering, superposition, and local patches remain evidence or boundary conditions,
+not replacement research questions.
 
 Authoritative documents:
 
