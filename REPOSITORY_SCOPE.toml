@@ -12,6 +12,7 @@ active_modules = [
   "finite_localization_v2.py",
   "interventions.py",
   "kernel_capacity.py",
+  "lego_single_step.py",
   "metrics.py",
   "model.py",
   "mqar_matrix_gf.py",
