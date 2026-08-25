@@ -48,8 +48,10 @@ not replacement research questions.
 Authoritative documents:
 
 - [Research charter](reports/RESEARCH_CHARTER.md)
-- [Formal matrix-MQAR proof decomposition](reports/MATRIX_MQAR_PROOF_DECOMPOSITION.md)
-- [Main theorem and literature roadmap](reports/MAIN_THEOREM_ROADMAP.md)
+- [Current single-layer theorem boundary](reports/SINGLE_LAYER_THEORY_STATUS.md)
+- [M1 experiment result](reports/MQAR_M1_BOUNDARY_RESULT.md)
+- [Historical matrix-MQAR proof decomposition](reports/MATRIX_MQAR_PROOF_DECOMPOSITION.md)
+- [Historical theorem and literature roadmap](reports/MAIN_THEOREM_ROADMAP.md)
 - [MQAR kernel-learning theorem](reports/MQAR_KERNEL_LEARNING_THEOREM.md)
 - [Minimal matrix MQAR specification](reports/MATRIX_MQAR_C3M2_SPEC.md)
 - [Matrix MQAR critical-point result](reports/MATRIX_MQAR_C3M2_RESULT.md)
@@ -81,12 +83,12 @@ and route identifiability cannot be omitted.
 
 The $C=3,m=2$ matrix lift is sharper. Correct retrieval forces
 $S_{qq}-S_{qd}\to+\infty$, so boundedness of $(S,g)$ and compact LaSalle are
-impossible. Balanced full-rank initialization is also insufficient: the invariant
-branch $K=-Q$ cannot retrieve every ordered concept pair. Its canonical uniform wrong
-boundary is nevertheless a saddle with four analytically certified unstable modes.
-The current target is therefore almost-everywhere boundary selection: classify every
-wrong access-singular family, prove its attracting set has measure zero, and exclude
-unclassified escape in compactified coordinates.
+impossible. More importantly, two externally verified open-basin counterexamples
+refute both the all-regular-initialization theorem and its small-initialization density
+repair. One wrong basin has $R\to1/2$; a positive-density basin at the origin has
+$ga_{qd}=gb_{qd}\to1/2$ and $R\to1/4$. Full rank, balance, nonzero initial access, and
+small norm do not select the task orientation of $Q^\top K$. The active theorem is now
+a success/failure classification over normalized initialization directions.
 The general matrix task identifies the delivered coefficients $g a_i$, not $g$
 alone; zero-risk sequences can have $g\to\infty$.
 
@@ -98,6 +100,11 @@ local gate: the missing theorem is still that factorized exact-softmax attention
 the two required LEGO source edges and that the Transformer-local map implements the
 group action. The transition table is a local reference operator, not a new
 Transformer family.
+
+The M1 bridge adds a standard four-layer result: across 20 paired seeds, exact
+$Q=K=0$ remains invariant and fails, whereas a $2^{-8}$ nonzero Q/K scale escapes and
+learns. This is finite-step AdamW evidence for the access boundary, not a gradient-flow
+theorem.
 
 Earlier controlled evidence remains subordinate:
 
@@ -120,6 +127,7 @@ Earlier controlled evidence remains subordinate:
 | Training | controlled_training, phase2_study, population_gf | deterministic trajectories and exact population updates |
 | Four gates | kernel_capacity, matrix_mqar, matrix_mqar_ode, mqar_matrix_gf, lego_single_step, lego_depth | exact matrix gradients/obstructions, adaptive ODE audit, capacity/access, local LEGO map, and depth composition |
 | Theory | mqar_kernel_theory, metrics, interventions, phase2_analysis | closed equations, risk, transport, and edge blocking |
+| M1 bridge | mqar_m1, mqar_m1_study, mqar_m1_analysis | official-compatible MQAR, paired boundary interventions, and seed-grain evidence |
 | External calibration | pretrained_bridge, pretrained_causal, pretrained_study, pretrained_analysis | audited Pythia checkpoint measurements |
 
 REPOSITORY_SCOPE.toml is fail-closed: an unclassified module, configuration, report, or
@@ -138,6 +146,19 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
 The CI also builds and imports a non-editable wheel.
+
+Reproduce and analyze M1:
+
+```bash
+PYTHONPATH=src python -m routing_lab.mqar_m1_study \
+  --config configs/mqar_m1_boundary_v1.json \
+  --output-directory results/mqar-m1-boundary-v1 --device cuda
+PYTHONPATH=src python -m routing_lab.mqar_m1_analysis \
+  --source-directory results/mqar-m1-boundary-v1 \
+  --output-directory results/mqar-m1-boundary-v1-analysis \
+  --report-path reports/MQAR_M1_BOUNDARY_RESULT.md
+python tools/n0_small_initialization_audit.py
+```
 
 Pythia calibration is cache-only unless network access is explicitly requested:
 

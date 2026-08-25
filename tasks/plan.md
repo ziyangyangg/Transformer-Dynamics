@@ -1,93 +1,49 @@
-# Implementation Plan: Matrix MQAR Boundary Selection
+# Active plan: classify single-layer kernel-selection basins
 
-This is the only active plan. The detailed theorem and literature dependencies are in
-[`reports/MAIN_THEOREM_ROADMAP.md`](../reports/MAIN_THEOREM_ROADMAP.md).
-The proof-sized statements and their dependencies are in
-[`reports/MATRIX_MQAR_PROOF_DECOMPOSITION.md`](../reports/MATRIX_MQAR_PROOF_DECOMPOSITION.md).
+## Fixed objective
 
-## Fixed success criterion
-
-For the complete $C=3,m=2,d=3$ MQAR population and the frozen one-head,
-exact-softmax, factorized model, prove or refute
+For the complete $C=d=3,m=2$ matrix-MQAR population, write
+$\theta_0=\varepsilon\xi$ with $\xi\in\mathbb S^{41}$. Construct a checkable
+success region $\mathcal G$ and explicit failure regions $\mathcal F_j$ so that,
+up to a null remainder, gradient flow either learns
 
 $$
-\Pr_{\theta_0\sim\nu}\left[
-\max_{\omega\in\Omega}\max_{i\in\{1,2\}}\left|g(s)a_i(s;\omega)-\mathbf 1\{i=J\}\right|\to0
-\right]=1,
+\kappa^*=((1,0))_{q\ne d}
 $$
 
-where $\nu$ is an explicitly stated continuous random initialization with full score
-and value access almost surely. The basin must be derived, not assumed.
+or enters one certified wrong boundary. The region definitions must follow from the
+data signal and factor dynamics. They may not assume aligned attention, $K=Q$, a
+positive gain, exact balance, or a uniform pullback constant.
 
-The task does not identify $g$ separately. Target-kernel convergence can occur with
-$g\to\infty$; a claim about $g\to1$ is an optional implicit-bias problem, not part
-of the fixed success criterion.
+This remains a condition-discovery theorem: the conditions are the output of the
+classification, not premises chosen to force convergence. A pullback lower bound may
+be used only as one sufficient certificate; it cannot replace basin derivation.
 
-This is a condition-discovery theorem. A pullback constant may be used
-only as one sufficient certificate for factor access; it cannot replace the derivation of the
-actual basin or be assumed uniformly positive.
+## Completed
 
-## Dependency-ordered gates
+- Exact population risk, raw gradients, balance tensors, and kernel-access identity.
+- Positive convergence theorem on the role-tied positive branch.
+- Finite quotient critical-point and raw access-singularity analysis.
+- Verified open large-norm wrong basin with $R\to1/2$.
+- Verified positive-density small-initialization basin with $R\to1/4$.
+- M1 standard-Transformer boundary study: 60 RTX 5090 trajectories, 20 paired seeds,
+  exact-zero and $2^{-8}$ Q/K interventions.
 
-### Gate A: exact functional problem — complete
+## Next proof gates
 
-- [x] Freeze the 48-episode population, model, gauges, and target kernel.
-- [x] Verify exact factor gradients against enumeration and autograd.
-- [x] Prove $2R$ equals target-kernel transport error.
-- [x] Prove that correct retrieval forces every directed score margin to diverge.
-- [x] Refute bounded-quotient LaSalle and unrestricted balanced initialization.
-
-### Gate B: compactified boundary — active
-
-- [ ] Express the risk on the attention simplex and classify its zero-risk face.
-- [ ] Separate margin magnitude from margin direction.
-- [ ] Derive a boundary-regular compactified flow, with time rescaling if required.
-- [ ] Prove that normalized finite-risk trajectories have nonempty limit sets.
-
-### Gate C: exhaustive singular-set classification — active after B.1
-
-- [ ] Decompose the $C=3$ concept space into trivial and contrast $S_3$ modes.
-- [ ] Stratify score factors by rank and relative orientation; stratify value access.
-- [ ] Solve every parameter-stationary family modulo gauge and concept permutation.
-- [ ] Certify exhaustiveness symbolically and with interval-checked witnesses.
-
-### Gate D: local boundary selection — depends on C
-
-- [x] Certify four unstable normal modes at the canonical uniform wrong boundary.
-- [ ] Remove gauge-tangent directions from every P2 stratum.
-- [ ] Prove an unstable normal mode for each wrong stratum or produce an attracting
-  counterexample.
-- [ ] Bound each wrong center-stable set under the initialization law.
-
-### Gate E: global boundary selection — depends on B and C
-
-- [ ] Prove global existence and normalized-factor precompactness.
-- [ ] Derive integrated task-direction factor access from invariants and initialization.
-- [ ] Show every limit set lies on the correct face or a classified wrong stratum.
-- [ ] Exclude escape through a descending chain of access-singular strata.
-
-### Gate F: minimal theorem — depends on B--E
-
-- [ ] Combine compactification, stability, and global exclusion into the
-  almost-everywhere theorem.
-- [ ] State one exact counterexample for every necessary hypothesis.
-- [ ] Re-run float64 adaptive ODE only as an adversarial audit of proved identities.
-
-### Gate G: general MQAR — locked until F
-
-- [ ] Derive the minimum task-dependent score/value rank for general $C,m,d$.
-- [ ] Extend the singular-mode analysis from $S_3$ to $S_C$.
-- [ ] Prove the finite-sample/SGD bridge without changing the task family.
-
-### Gate H: LEGO depth composition — locked until F
-
-- [ ] Derive the two-parent local kernel and its factorized learning law.
-- [ ] Compose learned routing error and local-operator error through depth.
-- [ ] Separate the result from the published LEGO learnability theorem.
+1. Classify contrast-orientation flow at the score origin.
+2. Prove retained contrast access on a candidate success region.
+3. Search its complement for further scale-uniform open failure basins.
+4. Prove exhaustion: every remaining trajectory learns $\kappa^*$ or enters a listed
+   failure basin.
+5. Only then lift the classification to general finite structured-selection
+   populations, followed by LEGO one-step routing and depth composition.
 
 ## Stop rules
 
-- Do not add a model family, dataset, head, layer, FFN, or normalization before Gate F.
-- Do not assume aligned attention, $K=Q$, exact symmetry, or uniform pullback access.
-- Do not interpret numerical trajectories when the adaptive-step audit fails.
-- If a wrong stratum has a positive-measure basin, stop and state the missing condition.
+- M1 uses AdamW and cannot certify continuous-time gradient flow.
+- Accuracy, attention mass, and full-card blocking are not interchangeable with a
+  learned selective score kernel.
+- Do not add another model family or dataset before the basin classification closes.
+- Any open wrong basin is retained as a necessary-condition witness, not discarded as
+  an optimization failure.

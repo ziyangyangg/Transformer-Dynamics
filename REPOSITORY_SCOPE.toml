@@ -32,12 +32,16 @@ active_modules = [
   "pretrained_bridge.py",
   "pretrained_causal.py",
   "pretrained_study.py",
+  "mqar_m1.py",
+  "mqar_m1_study.py",
+  "mqar_m1_analysis.py",
 ]
 
 active_configs = [
   "matrix_mqar_c3m2_adaptive_v1.json",
   "phase2/discovery-remedy/residual-factorization-noffn.json",
   "pretrained_pythia70m_suite_a_calibration_float64_v4.json",
+  "mqar_m1_boundary_v1.json",
 ]
 
 active_reports = [
@@ -56,6 +60,8 @@ active_reports = [
   "PHASE2_PROTOCOL.md",
   "PYTHIA_CALIBRATION_ANALYSIS_SPEC.md",
   "RESEARCH_CHARTER.md",
+  "MQAR_M1_BOUNDARY_RESULT.md",
+  "SINGLE_LAYER_THEORY_STATUS.md",
 ]
 
 active_result_directories = [
@@ -66,4 +72,6 @@ active_result_directories = [
   "phase2-residual-factorization-noffn-precision-audit-v2",
   "pretrained-pythia70m-suite-a-calibration-float64-v4",
   "pretrained-pythia70m-suite-a-calibration-float64-v4-analysis-v1",
+  "mqar-m1-boundary-v1",
+  "mqar-m1-boundary-v1-analysis",
 ]

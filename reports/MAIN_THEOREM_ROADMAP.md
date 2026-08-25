@@ -1,5 +1,12 @@
 # Main Theorem Roadmap: From Task Law to Learned Interaction Kernel
 
+> **Superseded target.** The all-regular-initialization and small-initialization
+> density conjectures described below were refuted by verified open-basin
+> counterexamples. The active theorem is the initialization-direction basin
+> classification in [SINGLE_LAYER_THEORY_STATUS.md](SINGLE_LAYER_THEORY_STATUS.md).
+> The dependency analysis below is retained as a record, not as a valid convergence
+> claim.
+
 Last primary-source audit: 2026-08-25.
 
 ## 1. The fixed problem

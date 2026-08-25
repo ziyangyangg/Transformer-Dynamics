@@ -1,1 +1,4 @@
-results/pretrained-pythia70m-suite-a-calibration-float64-v4/phase2_protocol.execution.snapshot -whitespace linguist-generated=true
+# Generated evidence is content-addressed by its manifests.  Suppress line-oriented
+# diffs for CSV/SVG/JSON bundles so CRLF CSV records and SVG path whitespace do not
+# create false whitespace failures; the files remain ordinary readable repository data.
+results/** -diff

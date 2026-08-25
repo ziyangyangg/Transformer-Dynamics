@@ -1,5 +1,11 @@
 # Matrix MQAR Boundary Selection: Formal Proof Decomposition
 
+> **Superseded target.** Theorem T in this document is false. A verified large-norm
+> open basin and a verified positive-density small-initialization basin converge to
+> wrong kernels. Use [SINGLE_LAYER_THEORY_STATUS.md](SINGLE_LAYER_THEORY_STATUS.md)
+> for the active success/failure classification problem. This document remains only
+> the historical lemma decomposition.
+
 ## 1. Purpose and scope
 
 This document turns the active research question into proof-sized mathematical
