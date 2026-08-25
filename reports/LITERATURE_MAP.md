@@ -1,6 +1,7 @@
 # Literature, Mathematical Tools, and Open-Theorem Map
 
-Last source audit: 2026-08-24.
+Last source audit: 2026-08-25. The dependency-level reading list is maintained in
+[the main theorem roadmap](MAIN_THEOREM_ROADMAP.md).
 
 ## Target joint statement
 
@@ -125,12 +126,13 @@ recursively. The active code implements the cyclic simply-transitive specializat
 
 | Category | Exact status |
 |---|---|
-| Solved | prescribed-kernel clustering/PDE; several special training-selection theorems; low-rank expressivity; the restricted direct-edge bridge |
-| Approximate theory available | Transformer DMFT, neural mean field, matrix-factor balancing, max-margin implicit bias |
+| Solved | prescribed-kernel clustering/PDE; several special training-selection theorems; low-rank expressivity; exact $C=3,m=2$ quotient/risk; bounded-quotient impossibility; balanced full-rank wrong branch; four unstable modes at one wrong boundary |
+| Existing tools requiring new verification | max-margin direction, matrix-factor balancing, equivariant mode decomposition, center-stable-manifold avoidance, stochastic approximation |
 | Experimental fact without general theory | dense composite controls reduce toy leakage while rank-matched controls do not; Pythia routing is nonmonotone and template-dependent |
-| Current theorem target | derive factorized QK/OV margin and transport from the task law, then propagate the learned operator error through depth |
+| Current theorem target | almost-everywhere correct-boundary selection for factorized matrix MQAR; only afterward, learned-kernel error propagation through LEGO depth |
 
-The new MQAR result proves the positive statement on a nondegenerate one-head radial
-parameterization and refutes the unrestricted initialization statement. The remaining central
-gap is arbitrary representation geometry followed by the LEGO training-to-depth
-composition. Additional model scale does not close that gap.
+The new MQAR results prove the positive radial statement and refute both bounded
+quotient dynamics and unrestricted balanced initialization. The immediate gap is now
+precise: compactify the diverging score margin, classify all factor-access singular
+families, determine their center-stable sets, and exclude unclassified escape for
+almost every natural initialization. Additional model scale does not close this gap.

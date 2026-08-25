@@ -7,7 +7,11 @@ import unittest
 
 import numpy as np
 
-from routing_lab.matrix_mqar import MatrixMQARSpec, enumerate_matrix_mqar_population
+from routing_lab.matrix_mqar import (
+    MatrixMQARSpec,
+    enumerate_matrix_mqar_population,
+    quotient_risk_gradient,
+)
 from routing_lab.matrix_mqar_basin import (
     audit_orientation_branch,
     audit_uniform_boundary_instability,
@@ -21,6 +25,29 @@ from routing_lab.matrix_mqar_ode import AdaptiveODEConfig, run_adaptive_ode_audi
 
 
 class MatrixMQARBoundaryTests(unittest.TestCase):
+    def test_correct_delivered_kernel_does_not_identify_gain(self) -> None:
+        spec = MatrixMQARSpec()
+        risks: list[float] = []
+
+        for gain in (3.0, 10.0, 100.0, 1000.0):
+            target_mass = 1.0 / gain
+            distractor_mass = 1.0 / gain**2
+            self_mass = 1.0 - target_mass - distractor_mass
+            score = np.full(
+                (spec.num_concepts, spec.num_concepts),
+                np.log(distractor_mass / self_mass),
+                dtype=np.float64,
+            )
+            np.fill_diagonal(score, np.log(target_mass / self_mass))
+
+            quotient = quotient_risk_gradient(spec, score, gain)
+            risks.append(quotient.risk)
+
+            self.assertAlmostEqual(quotient.risk, 0.5 / gain**2, places=14)
+
+        self.assertTrue(all(right < left for left, right in itertools.pairwise(risks)))
+        self.assertLess(risks[-1], 1.0e-6)
+
     def test_correct_kernel_limit_forces_unbounded_score_margin(self) -> None:
         spec = MatrixMQARSpec()
         margins = (1.0, 4.0, 8.0, 16.0)

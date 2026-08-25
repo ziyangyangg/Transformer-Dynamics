@@ -1,150 +1,93 @@
-# Implementation Plan: Learning Task-Aligned Interaction Kernels
+# Implementation Plan: Matrix MQAR Boundary Selection
 
-This is the only active plan. Historical toy-to-Pythia plans remain in Git history and
-immutable result manifests.
+This is the only active plan. The detailed theorem and literature dependencies are in
+[`reports/MAIN_THEOREM_ROADMAP.md`](../reports/MAIN_THEOREM_ROADMAP.md).
+The proof-sized statements and their dependencies are in
+[`reports/MATRIX_MQAR_PROOF_DECOMPOSITION.md`](../reports/MATRIX_MQAR_PROOF_DECOMPOSITION.md).
 
-## Success criterion
+## Fixed success criterion
 
-The project must close the chain
-
-$$
-(\mathcal D,R,\theta_0)
-\xrightarrow{\text{population gradient flow}}
-\{B_{\ell h}(s),C_{\ell h}(s)\}
-\xrightarrow{\text{exact softmax}}
-\mathcal K_{\ell,s}
-\xrightarrow{\text{network depth}}
-\Phi_{\theta_s}^{L}(X).
-$$
-
-A valid result must identify which statistics of the task distribution drive the
-factorized parameter updates, prove when the correct source margin and value transport
-emerge, and propagate that learned-kernel error through finite network depth. Adding
-heads, layers, datasets, or parameters is not completion.
-
-The immediate deliverable is a condition-discovery theorem. It must name measurable
-quantities for task identifiability $\kappa$, representability
-$\varepsilon_{\rm cap}$, and factor access.
-Use $(\mu_B,\mu_C)$ only as one sufficient certificate for factor access.
-Every additional constant must be derived from the chosen data and model, and each
-gate must have an exact failure witness. Each candidate condition must cite its
-data/model source, exact witness, experiment, and prior-theory boundary before it is
-generalized. The conditions may restrict a broad task class, but they may not assume
-the desired kernel.
-
-## Gate 0: scope and prior art
-
-- [x] Locate the training gap in Section 10 of the current arXiv version of
-  *A Mathematical Perspective on Transformers*.
-- [x] Separate fixed-kernel depth dynamics from parameter-training dynamics.
-- [x] Record prior results on max-margin token selection, co-occurrence gradient flow,
-  induction heads, multi-head ICL, and LEGO state tracking.
-- [x] Treat retrieval, rank, collisions, and patching as subordinate diagnostics.
-
-A novelty statement must exceed both a training-only special case and a fixed-kernel
-dynamics result.
-
-## Repository gate
-
-- [x] Retain only the theorem-facing model, training, measurement, and audited evidence
-  dependency closure.
-- [x] Remove exploratory scaling, landscape, localization, and report-builder branches
-  from the active tree.
-- [x] Enforce the allowlist in REPOSITORY_SCOPE.toml.
-
-The pre-cleanup state remains recoverable at commit 1f06157.
-
-## Gate 1: exact MQAR kernel learning
-
-The data are the single-query, binary-value specialization of MQAR. The first model is
-one layer, one head, exact softmax, factorized Q/K/O/V, a trained readout, and no FFN.
-
-- [x] Derive the closed population risk for the permutation-symmetric parameterization.
-- [x] Verify the equations against the complete value cube and automatic
-  differentiation.
-- [x] Prove that positive nondegenerate factors satisfying the alignment condition
-  yield
+For the complete $C=3,m=2,d=3$ MQAR population and the frozen one-head,
+exact-softmax, factorized model, prove or refute
 
 $$
-\delta(s)\to+\infty,
-\qquad
-g(s)\to1,
-\qquad
-\mathcal E_{\mathcal K}(s)=2R(s)\to0.
+\Pr_{\theta_0\sim\nu}\left[
+\max_{\omega\in\Omega}\max_{i\in\{1,2\}}\left|g(s)a_i(s;\omega)-\mathbf 1\{i=J\}\right|\to0
+\right]=1,
 $$
 
-- [x] Refute the unrestricted initialization claim with the exact Q=K=0 factorization
-  barrier.
-- [x] Retain the signed-gain exact-softmax counterexample to internal route
-  identifiability.
-- [x] Implement exact full-matrix functional-kernel, capacity-upper-bound, and
-  factor-access diagnostics on the complete MQAR population.
-- [x] Implement matched factorized/rank-matched/dense population-GF trajectories
-  with aligned step-halving audits.
-- [x] Lift the scalar analysis to learned matrix-valued embedding directions and
-  produce exact non-aligned critical families showing that the original gate set is
-  insufficient without correct-boundary selection.
-- [ ] Prove or refute the resulting basin-conditional theorem: uniform task-direction
-  factor access plus a forward-invariant exclusion of the self-only boundary implies task-aligned kernel learning.
+where $\nu$ is an explicitly stated continuous random initialization with full score
+and value access almost surely. The basin must be derived, not assumed.
 
-The positive theorem and both obstructions are stated in
-reports/MQAR_KERNEL_LEARNING_THEOREM.md. Gate 1 is resolved for the registered
-reduced parameterization, not for a general Transformer.
+The task does not identify $g$ separately. Target-kernel convergence can occur with
+$g\to\infty$; a claim about $g\to1$ is an optional implicit-bias problem, not part
+of the fixed success criterion.
 
-## Gate 2: LEGO training-to-depth bridge
+This is a condition-discovery theorem. A pullback constant may be used
+only as one sufficient certificate for factor access; it cannot replace the derivation of the
+actual basin or be assumed uniformly positive.
 
-The next and only active extension changes the data, not the model family. It uses the
-published LEGO law:
+## Dependency-ordered gates
 
-$$
-x_t=g_t(x_{t-1}),
-\qquad
-y_t=g_t(y_{t-1}),
-$$
+### Gate A: exact functional problem — complete
 
-with variables sampled without replacement, initial state uniform, and actions sampled
-with replacement.
+- [x] Freeze the 48-episode population, model, gauges, and target kernel.
+- [x] Verify exact factor gradients against enumeration and autograd.
+- [x] Prove $2R$ equals target-kernel transport error.
+- [x] Prove that correct retrieval forces every directed score margin to diverge.
+- [x] Refute bounded-quotient LaSalle and unrestricted balanced initialization.
 
-- [x] Implement the complete finite cyclic-group population and five-token clause
-  encoding.
-- [x] Register the two required source clauses for each transition: the current
-  predicate and the previous answer.
-- [x] Learn the complete cyclic local transition table from all $k^2$ parent pairs,
-  explicitly conditioning on parent access.
-- [x] Verify the exact telescoping depth bound for that local operator over every
-  state and action string up to finite depth.
-- [ ] Derive the factorized population gradient equations for one LEGO transition
-  using the same condition quantities as MQAR.
-- [ ] Prove or refute a per-step task-weighted kernel error bound with explicit
-  $\varepsilon_{\rm cap}$.
-- [ ] Compose a *learned attention-routing* error and the local-operator error through
-  a chain of length L. The local-operator-only telescope is complete; the routing term
-  is not.
-- [ ] Separate the new training-to-depth statement from the existing LEGO
-  learnability and length-generalization theorem.
+### Gate B: compactified boundary — active
 
-Gate 2 passes only when the same theorem derives a kernel condition from gradient flow
-and uses that condition to bound finite-depth state-tracking error.
+- [ ] Express the risk on the attention simplex and classify its zero-risk face.
+- [ ] Separate margin magnitude from margin direction.
+- [ ] Derive a boundary-regular compactified flow, with time rescaling if required.
+- [ ] Prove that normalized finite-risk trajectories have nonempty limit sets.
 
-## Later architecture changes
+### Gate C: exhaustive singular-set classification — active after B.1
 
-No architecture change is active. A component may be added only when Gate 2 exposes a
-specific failed assumption:
+- [ ] Decompose the $C=3$ concept space into trivial and contrast $S_3$ modes.
+- [ ] Stratify score factors by rank and relative orientation; stratify value access.
+- [ ] Solve every parameter-stationary family modulo gauge and concept permutation.
+- [ ] Certify exhaustiveness symbolically and with interval-checked witnesses.
 
-1. multiple heads, only for signed allocation or cancellation;
-2. residual depth, only for operator composition and identifiability;
-3. RMSNorm or FFN, only if it changes a proved bound;
-4. finite rank, only if an explicit capacity term enters the theorem.
+### Gate D: local boundary selection — depends on C
 
-Each change must reuse the same data law, metrics, paired initialization, and
-independent training seeds.
+- [x] Certify four unstable normal modes at the canonical uniform wrong boundary.
+- [ ] Remove gauge-tangent directions from every P2 stratum.
+- [ ] Prove an unstable normal mode for each wrong stratum or produce an attracting
+  counterexample.
+- [ ] Bound each wrong center-stable set under the initialization law.
+
+### Gate E: global boundary selection — depends on B and C
+
+- [ ] Prove global existence and normalized-factor precompactness.
+- [ ] Derive integrated task-direction factor access from invariants and initialization.
+- [ ] Show every limit set lies on the correct face or a classified wrong stratum.
+- [ ] Exclude escape through a descending chain of access-singular strata.
+
+### Gate F: minimal theorem — depends on B--E
+
+- [ ] Combine compactification, stability, and global exclusion into the
+  almost-everywhere theorem.
+- [ ] State one exact counterexample for every necessary hypothesis.
+- [ ] Re-run float64 adaptive ODE only as an adversarial audit of proved identities.
+
+### Gate G: general MQAR — locked until F
+
+- [ ] Derive the minimum task-dependent score/value rank for general $C,m,d$.
+- [ ] Extend the singular-mode analysis from $S_3$ to $S_C$.
+- [ ] Prove the finite-sample/SGD bridge without changing the task family.
+
+### Gate H: LEGO depth composition — locked until F
+
+- [ ] Derive the two-parent local kernel and its factorized learning law.
+- [ ] Compose learned routing error and local-operator error through depth.
+- [ ] Separate the result from the published LEGO learnability theorem.
 
 ## Stop rules
 
-- Do not tune one C=32, d=8 cell indefinitely.
-- Do not present low rank, nonorthogonal embeddings, or fixed-QKV clustering as new.
-- Do not infer a kernel from accuracy or an attention map.
-- Do not treat checkpoints, templates, layers, heads, or prompts as independent
-  samples.
-- Do not add another model family or dataset before the LEGO theorem either closes or
-  fails with an exact counterexample.
+- Do not add a model family, dataset, head, layer, FFN, or normalization before Gate F.
+- Do not assume aligned attention, $K=Q$, exact symmetry, or uniform pullback access.
+- Do not interpret numerical trajectories when the adaptive-step audit fails.
+- If a wrong stratum has a positive-measure basin, stop and state the missing condition.

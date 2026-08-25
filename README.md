@@ -48,6 +48,8 @@ not replacement research questions.
 Authoritative documents:
 
 - [Research charter](reports/RESEARCH_CHARTER.md)
+- [Formal matrix-MQAR proof decomposition](reports/MATRIX_MQAR_PROOF_DECOMPOSITION.md)
+- [Main theorem and literature roadmap](reports/MAIN_THEOREM_ROADMAP.md)
 - [MQAR kernel-learning theorem](reports/MQAR_KERNEL_LEARNING_THEOREM.md)
 - [Minimal matrix MQAR specification](reports/MATRIX_MQAR_C3M2_SPEC.md)
 - [Matrix MQAR critical-point result](reports/MATRIX_MQAR_C3M2_RESULT.md)
@@ -73,19 +75,23 @@ g(s)\to1,
 \mathcal E_{\mathcal K}(s)=2R(s)\to0.
 $$
 
-The unrestricted claim is false. If both query and key factors are zero, the composite
-score gradient is nonzero but both factor gradients remain zero. A separate signed-gain
+The unrestricted claim is false. Zero query/key factors form an exact access barrier.
+A signed-gain two-head construction has $R=0$ but $S_{\rm key}=0$. Thus factor access
+and route identifiability cannot be omitted.
 
-The $C=3,m=2$ matrix lift gives a sharper boundary. The identifiable score/gain
-quotient has no finite critical point, but factorized training has exact collapsed-
-dictionary, zero-QK, dead-value, and zero-OV critical manifolds. It also has a wrong
-self-only asymptotic boundary. A positive matrix theorem therefore needs both a
-factor-access lower bound and a proof that the actual trajectory cannot escape to the
-wrong boundary.
-two-head construction has $R=0$ but $S_{\rm key}=0$. Initialization
-nondegeneracy and route identifiability are therefore necessary.
+The $C=3,m=2$ matrix lift is sharper. Correct retrieval forces
+$S_{qq}-S_{qd}\to+\infty$, so boundedness of $(S,g)$ and compact LaSalle are
+impossible. Balanced full-rank initialization is also insufficient: the invariant
+branch $K=-Q$ cannot retrieve every ordered concept pair. Its canonical uniform wrong
+boundary is nevertheless a saddle with four analytically certified unstable modes.
+The current target is therefore almost-everywhere boundary selection: classify every
+wrong access-singular family, prove its attracting set has measure zero, and exclude
+unclassified escape in compactified coordinates.
+The general matrix task identifies the delivered coefficients $g a_i$, not $g$
+alone; zero-risk sequences can have $g\to\infty$.
 
-The next data layer is the published LEGO state-tracking law. The repository now
+Only after that theorem closes does the project enter the published LEGO
+state-tracking law. The repository now
 contains the complete finite cyclic population, a learned local cyclic transition
 operator, and an exact finite-depth composition bound. Parent access is given in that
 local gate: the missing theorem is still that factorized exact-softmax attention learns
