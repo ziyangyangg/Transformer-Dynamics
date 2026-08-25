@@ -75,7 +75,7 @@ class M1ArmConfig:
 
 @dataclass(frozen=True)
 class M1TrainingConfig:
-    """Constant-step SGD contract used to approximate a gradient-flow bridge."""
+    """Frozen finite-step optimizer contract for the M1 bridge."""
 
     optimizer: str
     learning_rate: float
@@ -84,8 +84,8 @@ class M1TrainingConfig:
     checkpoint_steps: tuple[int, ...]
 
     def __post_init__(self) -> None:
-        if self.optimizer.lower() != "sgd":
-            raise ValueError("M1-v1 registers plain SGD without momentum")
+        if self.optimizer.lower() not in {"sgd", "adamw"}:
+            raise ValueError("optimizer must be sgd or adamw")
         if not isfinite(self.learning_rate) or self.learning_rate <= 0.0:
             raise ValueError("learning_rate must be positive and finite")
         if self.steps < 1 or self.batch_tokens < 1:
@@ -131,6 +131,8 @@ class M1StudyConfig:
             raise ValueError("seeds must be nonnegative")
         if not set(self.step_halving_seeds).issubset(self.seeds):
             raise ValueError("step_halving_seeds must be a subset of seeds")
+        if self.step_halving_seeds and self.training.optimizer.lower() != "sgd":
+            raise ValueError("step halving is registered only for plain SGD")
         if min(self.evaluation_examples, self.causal_examples) < 1:
             raise ValueError("evaluation sample sizes must be positive")
         all_populations = (*self.train_populations, *self.evaluation_populations)
@@ -415,8 +417,8 @@ def _metric_row(
     if include_gradients:
         qk_gradient, ov_gradient = _gradient_norms(model, batch)
     else:
-        qk_gradient = float("nan")
-        ov_gradient = float("nan")
+        qk_gradient = None
+        ov_gradient = None
     return {
         "arm": arm_name,
         "seed": seed,
@@ -448,7 +450,14 @@ def _train_one(
         if resolved_device.type == "cuda":
             torch.cuda.manual_seed_all(_seed_key(config.study_id, "init", spec.seed))
         model = M1Transformer(model_config).to(resolved_device)
-    optimizer = torch.optim.SGD(model.parameters(), lr=spec.learning_rate)
+    if config.training.optimizer.lower() == "sgd":
+        optimizer: torch.optim.Optimizer = torch.optim.SGD(
+            model.parameters(), lr=spec.learning_rate
+        )
+    else:
+        optimizer = torch.optim.AdamW(
+            model.parameters(), lr=spec.learning_rate, weight_decay=0.0
+        )
     checkpoints = set(spec.actual_checkpoints)
     metrics: list[dict[str, Any]] = []
     routing: list[dict[str, Any]] = []

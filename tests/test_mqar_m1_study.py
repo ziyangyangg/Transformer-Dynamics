@@ -28,7 +28,7 @@ class M1StudyTests(unittest.TestCase):
             upstream_source_sha256="test-fixture",
             model=M1ModelConfig(64, 16, 16, 1, 2, 32),
             train_populations=(data,),
-            evaluation_populations=(data,),
+            evaluation_populations=(data, data),
             arms=(
                 M1ArmConfig("standard", 1.0),
                 M1ArmConfig("qk-zero", 0.0),
@@ -64,7 +64,13 @@ class M1StudyTests(unittest.TestCase):
                 (output / "runs" / "qk-zero" / "seed-7" / "metrics.json").read_text()
             )
             self.assertTrue(all(row["qk_factor_norm"] == 0.0 for row in qk_zero))
-            self.assertTrue(all(row["qk_gradient_norm"] == 0.0 for row in qk_zero))
+            measured = [
+                row["qk_gradient_norm"]
+                for row in qk_zero
+                if row["qk_gradient_norm"] is not None
+            ]
+            self.assertTrue(measured)
+            self.assertTrue(all(value == 0.0 for value in measured))
 
     def test_validator_rejects_tampered_seed_metrics(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -86,6 +92,13 @@ class M1StudyTests(unittest.TestCase):
         self.assertEqual(config.model.ffn_width, 512)
         self.assertEqual(config.model.max_sequence_length, 1024)
         self.assertEqual(len(config.seeds), 20)
+        self.assertEqual(config.training.optimizer, "adamw")
+        self.assertEqual(config.training.learning_rate, 0.001)
+        self.assertEqual(config.training.steps, 3200)
+        self.assertEqual(
+            config.training.checkpoint_steps, (0, 200, 400, 800, 1600, 3200)
+        )
+        self.assertEqual(config.step_halving_seeds, ())
         self.assertEqual(
             {arm.name: arm.qk_initial_scale for arm in config.arms},
             {"standard": 1.0, "qk-small": 2.0**-8, "qk-zero": 0.0},

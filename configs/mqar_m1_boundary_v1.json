@@ -32,13 +32,13 @@
   ],
   "seeds": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119],
   "training": {
-    "optimizer": "sgd",
-    "learning_rate": 0.1,
-    "steps": 1600,
+    "optimizer": "adamw",
+    "learning_rate": 0.001,
+    "steps": 3200,
     "batch_tokens": 8192,
-    "checkpoint_steps": [0, 100, 200, 400, 800, 1600]
+    "checkpoint_steps": [0, 200, 400, 800, 1600, 3200]
   },
   "evaluation_examples": 64,
   "causal_examples": 8,
-  "step_halving_seeds": [100, 101, 102]
+  "step_halving_seeds": []
 }
