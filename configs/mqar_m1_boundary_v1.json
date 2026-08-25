@@ -1,0 +1,44 @@
+{
+  "schema_version": "mqar-m1-boundary-study-v1",
+  "study_id": "mqar-m1-boundary-v1",
+  "upstream_commit": "1ad20d193b6113cae1e8f3c655c300d7b4b3f4bb",
+  "upstream_source_sha256": "c53c345895a1c153df5461a5f4a812f507d4f7f3894b391028e3a467e3fe6bf3",
+  "model": {
+    "vocab_size": 8192,
+    "max_sequence_length": 1024,
+    "d_model": 128,
+    "num_layers": 4,
+    "num_heads": 4,
+    "ffn_width": 512,
+    "qk_initial_scale": 1.0,
+    "rms_epsilon": 1e-6,
+    "rope_base": 10000.0
+  },
+  "train_populations": [
+    {"vocab_size": 8192, "sequence_length": 64, "num_kv_pairs": 4, "power_a": 0.01, "random_non_queries": true},
+    {"vocab_size": 8192, "sequence_length": 128, "num_kv_pairs": 8, "power_a": 0.01, "random_non_queries": true},
+    {"vocab_size": 8192, "sequence_length": 256, "num_kv_pairs": 16, "power_a": 0.01, "random_non_queries": true}
+  ],
+  "evaluation_populations": [
+    {"vocab_size": 8192, "sequence_length": 64, "num_kv_pairs": 4, "power_a": 0.01, "random_non_queries": true},
+    {"vocab_size": 8192, "sequence_length": 256, "num_kv_pairs": 16, "power_a": 0.01, "random_non_queries": true},
+    {"vocab_size": 8192, "sequence_length": 512, "num_kv_pairs": 16, "power_a": 0.01, "random_non_queries": true},
+    {"vocab_size": 8192, "sequence_length": 1024, "num_kv_pairs": 32, "power_a": 0.01, "random_non_queries": true}
+  ],
+  "arms": [
+    {"name": "standard", "qk_initial_scale": 1.0},
+    {"name": "qk-small", "qk_initial_scale": 0.00390625},
+    {"name": "qk-zero", "qk_initial_scale": 0.0}
+  ],
+  "seeds": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119],
+  "training": {
+    "optimizer": "sgd",
+    "learning_rate": 0.1,
+    "steps": 1600,
+    "batch_tokens": 8192,
+    "checkpoint_steps": [0, 100, 200, 400, 800, 1600]
+  },
+  "evaluation_examples": 64,
+  "causal_examples": 8,
+  "step_halving_seeds": [100, 101, 102]
+}
