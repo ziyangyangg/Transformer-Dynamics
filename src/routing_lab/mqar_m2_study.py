@@ -126,15 +126,17 @@ class M2StudyConfig:
         if len(names) != 5 or len(set(names)) != 5:
             raise ValueError("M2 requires exactly five uniquely named arms")
         expected = {
-            ("independent", 1.0),
-            ("tied-positive", 1.0),
-            ("tied-negative", 1.0),
-            ("tied-positive", 2.0**-8),
-            ("tied-negative", 2.0**-8),
+            "independent": ("independent", 1.0),
+            "positive": ("tied-positive", 1.0),
+            "negative": ("tied-negative", 1.0),
+            "positive-small": ("tied-positive", 2.0**-8),
+            "negative-small": ("tied-negative", 2.0**-8),
         }
-        observed = {(arm.relation, arm.qk_initial_scale) for arm in self.arms}
+        observed = {arm.name: (arm.relation, arm.qk_initial_scale) for arm in self.arms}
         if observed != expected:
-            raise ValueError("M2 arms do not form the frozen sign-by-scale design")
+            raise ValueError(
+                "M2 arms are not correctly named for the frozen sign-by-scale design"
+            )
         if self.evaluation_examples < 1 or self.routing_examples < 1:
             raise ValueError("evaluation and routing example counts must be positive")
         all_populations = (*self.train_populations, *self.evaluation_populations)
@@ -215,7 +217,11 @@ def _config_from_payload(payload: dict[str, Any]) -> M2StudyConfig:
 def load_m2_study_config(path: Path) -> M2StudyConfig:
     """Load the immutable JSON design into validated dataclasses."""
 
-    return _config_from_payload(json.loads(path.read_text()))
+    payload = json.loads(path.read_text())
+    if payload.get("schema_version") != SCHEMA_VERSION:
+        raise ValueError("M2 config schema mismatch")
+    payload = {key: value for key, value in payload.items() if key != "schema_version"}
+    return _config_from_payload(payload)
 
 
 def _run_specs(config: M2StudyConfig) -> tuple[_RunSpec, ...]:

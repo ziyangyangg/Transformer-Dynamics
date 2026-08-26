@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 from routing_lab.mqar_m1 import M1ModelConfig, ZoologyMQARConfig
@@ -98,6 +99,36 @@ class M2StudyTests(unittest.TestCase):
             path.write_text(json.dumps(payload))
             with self.assertRaisesRegex(ValueError, "receipt|geometry"):
                 validate_m2_artifact(output)
+
+    def test_arm_names_and_json_schema_are_part_of_the_frozen_design(self) -> None:
+        study = self._study()
+        swapped = tuple(
+            M2ArmConfig(
+                (
+                    "negative"
+                    if arm.name == "positive"
+                    else "positive"
+                    if arm.name == "negative"
+                    else arm.name
+                ),
+                arm.relation,
+                arm.qk_initial_scale,
+            )
+            for arm in study.arms
+        )
+        with self.assertRaisesRegex(ValueError, "named"):
+            replace(study, arms=swapped)
+
+        root = Path(__file__).resolve().parents[1]
+        payload = json.loads(
+            (root / "configs" / "mqar_m2_orientation_v1.json").read_text()
+        )
+        payload["schema_version"] = "wrong-schema"
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "config.json"
+            path.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, "schema"):
+                load_m2_study_config(path)
 
     def test_frozen_production_config_matches_the_m2_specification(self) -> None:
         root = Path(__file__).resolve().parents[1]
