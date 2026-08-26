@@ -47,6 +47,7 @@ not replacement research questions.
 
 Authoritative documents:
 
+- [Current theory--experiment status](reports/CURRENT_RESEARCH_STATUS.md)
 - [Research charter](reports/RESEARCH_CHARTER.md)
 - [Current single-layer theorem boundary](reports/SINGLE_LAYER_THEORY_STATUS.md)
 - [M1 experiment result](reports/MQAR_M1_BOUNDARY_RESULT.md)
@@ -65,6 +66,13 @@ Authoritative documents:
 - [Machine-checked repository scope](REPOSITORY_SCOPE.toml)
 
 ## Established results
+
+The shortest current synthesis is
+[Current Theory--Experiment Status](reports/CURRENT_RESEARCH_STATUS.md). It records
+the exact cumulative-access law, the certified success and failure mechanisms, the
+latest partial singular-boundary classification, the experiment-to-theory comparison,
+and the five remaining proof gates. Older reports and artifacts are retained as the
+auditable evidence trail.
 
 On a one-layer, one-head, value-linear MQAR-compatible population, the exact risk
 closes in two composite variables: the target score margin $\delta$ and value gain

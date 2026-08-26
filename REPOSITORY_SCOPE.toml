@@ -51,6 +51,7 @@ active_configs = [
 active_reports = [
   "CAUSAL_ROUTING_BRIDGE_THEOREM.md",
   "CLUSTERING_BASELINE.md",
+  "CURRENT_RESEARCH_STATUS.md",
   "EXPERIMENT_POSITIONING.md",
   "FOUR_GATE_STATUS.md",
   "LITERATURE_MAP.md",
