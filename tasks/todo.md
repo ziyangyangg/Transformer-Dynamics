@@ -15,7 +15,8 @@
 - [x] Complete 20 paired seeds for standard, $2^{-8}$ Q/K, and exact-zero Q/K arms.
 - [x] Reconstruct all seed artifacts, run 20,000 whole-seed bootstrap intervals, and
   record the direct-path measurement boundary.
-- [ ] After the next theorem condition is frozen, run one signed-orientation M2 test.
+- [ ] Run the frozen signed-orientation M2 test and reconcile it with the verified
+  single-layer failure basins.
 
 ## Locked
 
