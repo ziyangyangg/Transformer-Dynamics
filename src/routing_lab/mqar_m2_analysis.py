@@ -328,7 +328,11 @@ def _plot_endpoints(endpoints: list[dict[str, Any]], output: Path) -> None:
     axis.set_title("MQAR M2: each dot is one training seed")
     axis.grid(axis="y", alpha=0.25)
     for suffix in ("png", "svg"):
-        fig.savefig(output / f"endpoint_accuracy.{suffix}", dpi=180)
+        fig.savefig(
+            output / f"endpoint_accuracy.{suffix}",
+            dpi=180,
+            metadata={"Date": None} if suffix == "svg" else None,
+        )
     plt.close(fig)
 
 
@@ -367,7 +371,11 @@ def _plot_trajectory(rows: list[dict[str, Any]], output: Path) -> None:
         axis.grid(alpha=0.25)
     axes[0].legend(frameon=False, fontsize=8)
     for suffix in ("png", "svg"):
-        fig.savefig(output / f"orientation_trajectory.{suffix}", dpi=180)
+        fig.savefig(
+            output / f"orientation_trajectory.{suffix}",
+            dpi=180,
+            metadata={"Date": None} if suffix == "svg" else None,
+        )
     plt.close(fig)
 
 

@@ -100,6 +100,17 @@ class M2AnalysisTests(unittest.TestCase):
                 (first / "analysis_summary.json").read_bytes(),
                 (second / "analysis_summary.json").read_bytes(),
             )
+            for name in (
+                "endpoint_accuracy.png",
+                "endpoint_accuracy.svg",
+                "orientation_trajectory.png",
+                "orientation_trajectory.svg",
+                "manifest.json",
+            ):
+                with self.subTest(name=name):
+                    self.assertEqual(
+                        (first / name).read_bytes(), (second / name).read_bytes()
+                    )
 
     def test_evidence_classifier_preserves_the_registered_claim_boundary(self) -> None:
         classifications = classify_m2_evidence(
