@@ -1,0 +1,5 @@
+comparison,estimate,standard_error,lower,upper,confidence_level,family,family_size,bootstrap_unit,bootstrap_resamples
+standard_accuracy,-0.0023681640625,0.0029593641108033373,-0.011412188439630908,0.006675860314630908,0.95,two_scales_by_accuracy_and_score_margin,4,training_seed,20000
+standard_score_margin,-5.184200115501881,3.4288961846301196,-15.663147456668302,5.2947472256645405,0.95,two_scales_by_accuracy_and_score_margin,4,training_seed,20000
+small_accuracy,-0.009814453125,0.008654098704398532,-0.03626198601186434,0.01663307976186434,0.95,two_scales_by_accuracy_and_score_margin,4,training_seed,20000
+small_score_margin,-1.3359248876571654,3.3591181957640894,-11.601625798623337,8.929776023309005,0.95,two_scales_by_accuracy_and_score_margin,4,training_seed,20000

@@ -1,0 +1,1 @@
+{"cuda_matmul_allow_tf32":false,"cuda_runtime":"12.8","cudnn_benchmark":false,"cudnn_deterministic":false,"deterministic_algorithms":false,"device_type":"cuda","gpu_capability":[12,0],"gpu_name":"NVIDIA GeForce RTX 5090","python_version":"3.11.15","torch_version":"2.11.0+cu128"}
