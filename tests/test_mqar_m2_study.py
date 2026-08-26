@@ -86,6 +86,7 @@ class M2StudyTests(unittest.TestCase):
             audit = manifest["initialization_pairing_audit"]["7"]
             self.assertTrue(audit["pairing_pass"])
             self.assertEqual(audit["max_relation_error"], 0.0)
+            self.assertEqual(audit["max_scale_error"], 0.0)
 
     def test_validator_rejects_tampered_geometry(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

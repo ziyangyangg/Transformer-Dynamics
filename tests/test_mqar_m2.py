@@ -84,6 +84,7 @@ class M2InitializationTests(unittest.TestCase):
 
         for name, initialized_model in initialized.items():
             self.assertLessEqual(initialized_model.audit.max_relation_error, 1.0e-12)
+            self.assertLessEqual(initialized_model.audit.max_scale_error, 1.0e-12)
             if name == "independent":
                 self.assertIsNone(initialized_model.audit.expected_sign)
             else:

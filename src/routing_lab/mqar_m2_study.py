@@ -593,6 +593,8 @@ def _validate_run(
     initialization_audit = manifest["initialization_audit"]
     if initialization_audit["max_relation_error"] > 1.0e-12:
         raise ValueError("M2 initialization relation audit failed")
+    if initialization_audit["max_scale_error"] > 1.0e-12:
+        raise ValueError("M2 initialization scale audit failed")
     if spec.relation != "independent":
         sign = 1.0 if spec.relation == "tied-positive" else -1.0
         step_zero = [row for row in geometry if row["step"] == 0]
@@ -623,10 +625,12 @@ def _pairing_audit(
             == by_name["negative-small"]["initialized_q_sha256"]
         )
         max_error = max(row["max_relation_error"] for row in rows)
+        max_scale_error = max(row["max_scale_error"] for row in rows)
         pairing_pass = (
             len(base_q) == len(base_k) == len(non_qk) == 1
             and q_pairing
             and max_error <= 1.0e-12
+            and max_scale_error <= 1.0e-12
         )
         if not pairing_pass:
             raise ValueError(f"M2 initialization pairing failed for seed {seed}")
@@ -636,6 +640,7 @@ def _pairing_audit(
             "base_k_sha256": next(iter(base_k)),
             "non_qk_sha256": next(iter(non_qk)),
             "max_relation_error": max_error,
+            "max_scale_error": max_scale_error,
         }
     return output
 

@@ -58,6 +58,7 @@ class M2InitializationAudit:
     initialized_q_sha256: str
     initialized_k_sha256: str
     max_relation_error: float
+    max_scale_error: float
 
 
 @dataclass(frozen=True)
@@ -143,6 +144,7 @@ def initialize_m2_model(
     non_qk_hash = _tensor_bundle_sha256(other_parameters)
 
     expected_sign: int | None
+    max_scale_error = 0.0
     with torch.no_grad():
         for (_q_name, query), (_k_name, key) in zip(
             q_parameters, k_parameters, strict=True
@@ -150,8 +152,16 @@ def initialize_m2_model(
             base_query = query.detach().clone()
             base_key = key.detach().clone()
             query.copy_(arm.qk_initial_scale * base_query)
+            max_scale_error = max(
+                max_scale_error,
+                float((query - arm.qk_initial_scale * base_query).abs().max().cpu()),
+            )
             if arm.relation == "independent":
                 key.copy_(arm.qk_initial_scale * base_key)
+                max_scale_error = max(
+                    max_scale_error,
+                    float((key - arm.qk_initial_scale * base_key).abs().max().cpu()),
+                )
             elif arm.relation == "tied-positive":
                 key.copy_(arm.qk_initial_scale * base_query)
             else:
@@ -187,6 +197,7 @@ def initialize_m2_model(
             initialized_q_sha256=initialized_q_hash,
             initialized_k_sha256=initialized_k_hash,
             max_relation_error=max_relation_error,
+            max_scale_error=max_scale_error,
         ),
     )
 
