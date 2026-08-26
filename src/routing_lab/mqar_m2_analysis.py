@@ -373,6 +373,8 @@ def _plot_trajectory(rows: list[dict[str, Any]], output: Path) -> None:
 
 def _report(summary: dict[str, Any]) -> str:
     endpoint = summary["endpoint_means"]
+    longest_key = summary["longest_evaluation_population"]
+    longest = summary["final_accuracy_by_evaluation_population"][longest_key]
     effects = summary["paired_effects"]
     classification = summary["classification"]
     return rf"""# MQAR M2 signed-orientation result
@@ -414,6 +416,17 @@ The registered labels are standard:
 `{classification["standard"]["negative_arm_status"]}`; small:
 `{classification["small"]["sign_effect"]}` /
 `{classification["small"]["negative_arm_status"]}`.
+
+The initial factor sign is not conserved: mean $Q/K$ cosine moves from $+1$ to
+{endpoint["positive"]["mean_qk_factor_cosine"]:.4f} in the positive arm and from
+$-1$ to {endpoint["negative"]["mean_qk_factor_cosine"]:.4f} in the negative arm.
+On the longest configured evaluation population ({longest_key}), final accuracy is
+{longest["independent"]:.4f} (independent),
+{longest["positive"]:.4f} (positive),
+{longest["negative"]:.4f} (negative),
+{longest["positive-small"]:.4f} (positive-small), and
+{longest["negative-small"]:.4f} (negative-small). Therefore M2 does not establish
+length extrapolation beyond the training support.
 
 ## Theory boundary
 
@@ -479,6 +492,27 @@ def analyze_m2_study(
         }
         for arm, rows in sorted(by_arm.items())
     }
+    final_populations = sorted(
+        {
+            (int(row["sequence_length"]), int(row["num_kv_pairs"]))
+            for row in metrics
+            if int(row["step"]) == checkpoints[-1]
+        }
+    )
+    final_accuracy_by_population = {
+        f"L{length}_m{pairs}": {
+            arm: _mean(
+                float(row["accuracy"])
+                for row in metrics
+                if int(row["step"]) == checkpoints[-1]
+                and int(row["sequence_length"]) == length
+                and int(row["num_kv_pairs"]) == pairs
+                and row["arm"] == arm
+            )
+            for arm in arms
+        }
+        for length, pairs in final_populations
+    }
     classification = classify_m2_evidence(
         paired_effects=paired,
         negative_endpoints={
@@ -523,6 +557,10 @@ def analyze_m2_study(
         "simultaneous_family_size": len(names),
         "max_t_critical_value": critical,
         "endpoint_means": endpoint_means,
+        "final_accuracy_by_evaluation_population": final_accuracy_by_population,
+        "longest_evaluation_population": (
+            f"L{final_populations[-1][0]}_m{final_populations[-1][1]}"
+        ),
         "paired_effects": paired,
         "classification": classification,
         "decision_sentence": decision,

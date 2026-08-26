@@ -50,6 +50,8 @@ Authoritative documents:
 - [Research charter](reports/RESEARCH_CHARTER.md)
 - [Current single-layer theorem boundary](reports/SINGLE_LAYER_THEORY_STATUS.md)
 - [M1 experiment result](reports/MQAR_M1_BOUNDARY_RESULT.md)
+- [M2 signed-orientation specification](reports/MQAR_M2_ORIENTATION_SPEC.md)
+- [M2 signed-orientation result](reports/MQAR_M2_ORIENTATION_RESULT.md)
 - [Historical matrix-MQAR proof decomposition](reports/MATRIX_MQAR_PROOF_DECOMPOSITION.md)
 - [Historical theorem and literature roadmap](reports/MAIN_THEOREM_ROADMAP.md)
 - [MQAR kernel-learning theorem](reports/MQAR_KERNEL_LEARNING_THEOREM.md)
@@ -106,6 +108,13 @@ $Q=K=0$ remains invariant and fails, whereas a $2^{-8}$ nonzero Q/K scale escape
 learns. This is finite-step AdamW evidence for the access boundary, not a gradient-flow
 theorem.
 
+M2 holds non-QK initialization and data streams fixed while setting $K(0)=\pm Q(0)$
+at two access scales. Both negative arms recover to about $96\%$ accuracy at
+$L=256,m=16$, all four simultaneous signed contrasts include zero, and their final
+mean Q/K cosine is positive. Raw initial sign is therefore not a standalone boundary
+in the standard architecture. This does not refute the reduced gradient-flow
+counterexamples or establish length extrapolation.
+
 Earlier controlled evidence remains subordinate:
 
 - Phase II rejects a stable irreducible residual. Longer or scheduled training
@@ -127,7 +136,7 @@ Earlier controlled evidence remains subordinate:
 | Training | controlled_training, phase2_study, population_gf | deterministic trajectories and exact population updates |
 | Four gates | kernel_capacity, matrix_mqar, matrix_mqar_ode, mqar_matrix_gf, lego_single_step, lego_depth | exact matrix gradients/obstructions, adaptive ODE audit, capacity/access, local LEGO map, and depth composition |
 | Theory | mqar_kernel_theory, metrics, interventions, phase2_analysis | closed equations, risk, transport, and edge blocking |
-| M1 bridge | mqar_m1, mqar_m1_study, mqar_m1_analysis | official-compatible MQAR, paired boundary interventions, and seed-grain evidence |
+| M1/M2 bridge | mqar_m1, mqar_m2, study and analysis modules | official-compatible MQAR, paired access/orientation interventions, and seed-grain evidence |
 | External calibration | pretrained_bridge, pretrained_causal, pretrained_study, pretrained_analysis | audited Pythia checkpoint measurements |
 
 REPOSITORY_SCOPE.toml is fail-closed: an unclassified module, configuration, report, or
@@ -158,6 +167,18 @@ PYTHONPATH=src python -m routing_lab.mqar_m1_analysis \
   --output-directory results/mqar-m1-boundary-v1-analysis \
   --report-path reports/MQAR_M1_BOUNDARY_RESULT.md
 python tools/n0_small_initialization_audit.py
+```
+
+Reproduce and analyze M2:
+
+```bash
+PYTHONPATH=src python -m routing_lab.mqar_m2_study \
+  --config configs/mqar_m2_orientation_v1.json \
+  --output-directory results/mqar-m2-orientation-v1 --device cuda
+PYTHONPATH=src python -m routing_lab.mqar_m2_analysis \
+  --source-directory results/mqar-m2-orientation-v1 \
+  --output-directory results/mqar-m2-orientation-v1-analysis \
+  --report-path reports/MQAR_M2_ORIENTATION_RESULT.md
 ```
 
 Pythia calibration is cache-only unless network access is explicitly requested:

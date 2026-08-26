@@ -77,6 +77,18 @@ class M2AnalysisTests(unittest.TestCase):
             self.assertEqual(summary["bootstrap_unit"], "training_seed")
             self.assertEqual(summary["simultaneous_family_size"], 4)
             self.assertEqual(
+                set(summary["final_accuracy_by_evaluation_population"]),
+                {"L64_m4", "L256_m16"},
+            )
+            self.assertIn(
+                "longest configured evaluation population",
+                (first / "REPORT.md").read_text(),
+            )
+            self.assertIn(
+                "initial factor sign is not conserved",
+                (first / "REPORT.md").read_text(),
+            )
+            self.assertEqual(
                 (first / "seed_endpoints.csv").read_bytes(),
                 (second / "seed_endpoints.csv").read_bytes(),
             )

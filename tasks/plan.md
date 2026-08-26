@@ -39,13 +39,17 @@ be used only as one sufficient certificate; it cannot replace basin derivation.
 5. Only then lift the classification to general finite structured-selection
    populations, followed by LEGO one-step routing and depth composition.
 
-## Active experiment: M2 signed orientation
+## Completed architecture bridge: M2 signed orientation
 
 M2 is the one permitted architecture bridge before further model expansion. It
 holds Q/K access magnitude and all non-QK parameters fixed while replacing
 $K(0)$ by $+Q(0)$ or $-Q(0)$ at scales $1$ and $2^{-8}$. The registered
 data-defined estimand is the target-minus-distractor score margin, not the raw
 factor sign. See [the frozen M2 specification](../reports/MQAR_M2_ORIENTATION_SPEC.md).
+Both negative arms learn and all four simultaneous signed contrasts cross zero.
+Therefore raw initial sign is not the remaining theorem condition; the proof must
+classify a data-defined kernel orientation coupled to retained factor access. See
+[the M2 result](../reports/MQAR_M2_ORIENTATION_RESULT.md).
 
 ## Stop rules
 

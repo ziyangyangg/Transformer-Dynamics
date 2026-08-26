@@ -15,8 +15,10 @@
 - [x] Complete 20 paired seeds for standard, $2^{-8}$ Q/K, and exact-zero Q/K arms.
 - [x] Reconstruct all seed artifacts, run 20,000 whole-seed bootstrap intervals, and
   record the direct-path measurement boundary.
-- [ ] Run the frozen signed-orientation M2 test and reconcile it with the verified
+- [x] Run the frozen signed-orientation M2 test and reconcile it with the verified
   single-layer failure basins.
+- [x] Reject raw $K(0)=\pm Q(0)$ sign as a standalone standard-architecture boundary;
+  retain data-defined kernel orientation plus factor access as the theorem object.
 
 ## Locked
 

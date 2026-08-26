@@ -112,3 +112,20 @@ Transformer. Across 20 paired seeds, exact $Q=K=0$ remains invariant and fails, 
 a $2^{-8}$ nonzero Q/K scale escapes and learns. This validates the exact access
 barrier in a less reduced architecture. It does not test the continuous-time basin
 classification, and its AdamW trajectory is not evidence for gradient-flow convergence.
+
+## What M2 adds
+
+M2 holds every non-QK initialization and every data stream fixed within seed, then
+sets $K(0)=+Q(0)$ or $K(0)=-Q(0)$ at scales $1$ and $2^{-8}$. Across 20 paired seeds,
+all four signed arms reach mean $L=256,m=16$ accuracy between $0.9504$ and $0.9602$.
+The four registered positive-minus-negative simultaneous intervals (two scales by
+accuracy and best-head target score margin) all contain zero. Both negative arms are
+therefore classified as finite-horizon architectural repairs, not persistent failures.
+
+The raw sign is also not dynamically preserved: mean Q/K cosine starts at $-1$ in
+the negative arm and ends at $0.0976$; the corresponding positive arm ends at
+$0.2125$. Thus the exact reduced negative branch cannot be transferred to a standard
+four-layer Transformer as a standalone condition on $K(0)=\pm Q(0)$. This does not
+invalidate either verified reduced-gradient-flow counterexample: layers, heads,
+normalization, residual paths, and AdamW change the factor dynamics and need not
+preserve that branch. The remaining theorem must classify data-defined delivered

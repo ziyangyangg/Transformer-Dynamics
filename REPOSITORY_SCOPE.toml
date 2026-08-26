@@ -35,6 +35,9 @@ active_modules = [
   "mqar_m1.py",
   "mqar_m1_study.py",
   "mqar_m1_analysis.py",
+  "mqar_m2.py",
+  "mqar_m2_study.py",
+  "mqar_m2_analysis.py",
 ]
 
 active_configs = [
@@ -42,6 +45,7 @@ active_configs = [
   "phase2/discovery-remedy/residual-factorization-noffn.json",
   "pretrained_pythia70m_suite_a_calibration_float64_v4.json",
   "mqar_m1_boundary_v1.json",
+  "mqar_m2_orientation_v1.json",
 ]
 
 active_reports = [
@@ -61,6 +65,8 @@ active_reports = [
   "PYTHIA_CALIBRATION_ANALYSIS_SPEC.md",
   "RESEARCH_CHARTER.md",
   "MQAR_M1_BOUNDARY_RESULT.md",
+  "MQAR_M2_ORIENTATION_SPEC.md",
+  "MQAR_M2_ORIENTATION_RESULT.md",
   "SINGLE_LAYER_THEORY_STATUS.md",
 ]
 
@@ -74,4 +80,6 @@ active_result_directories = [
   "pretrained-pythia70m-suite-a-calibration-float64-v4-analysis-v1",
   "mqar-m1-boundary-v1",
   "mqar-m1-boundary-v1-analysis",
+  "mqar-m2-orientation-v1",
+  "mqar-m2-orientation-v1-analysis",
 ]
